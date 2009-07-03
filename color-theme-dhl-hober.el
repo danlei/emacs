@@ -40,7 +40,7 @@
 (defvar max-lisp-eval-depth)
 (defvar max-specpdl-size)
 
-(defun hober2-use-underline-p (&optional display)
+(defun dhl-hober-use-underline-p (&optional display)
   "Non-nil if DISPLAY supports underlining.
 This is only sometimes accurate."
   (if (fboundp 'display-supports-face-attributes-p)
@@ -48,25 +48,25 @@ This is only sometimes accurate."
     window-system))
 
 
-(defvar hober2-insignificant-face
+(defvar dhl-hober-insignificant-face
   (if window-system
      '(:foreground "gray30")
    '()))
 
 ;; Ensuring `max-lisp-eval-depth' and `max-specpdl-size' are big enough
-;; for the backquote in `color-theme-hober2', as well as for running
+;; for the backquote in `color-theme-dhl-hober', as well as for running
 ;; `elint-current-buffer' on this file.
 (when (< max-lisp-eval-depth 1500)
   (setq max-lisp-eval-depth 1500))
 (when (< max-specpdl-size 3000)
   (setq max-specpdl-size 3000))
 
-(defun color-theme-hober2 ()
+(defun color-theme-dhl-hober ()
   "Color theme by Edward O'Connor <ted@oconnor.cx>.
 
 Like my previous theme, I've attempted to make sure things look
 reasonably similar under console or window system. The colors of
-`color-theme-hober2' are often washed-out variants of the colors
+`color-theme-dhl-hober' are often washed-out variants of the colors
 of `color-theme-hober'.
 
 Includes antlr, apropos, AUCTeX (font-latex), bbdb, Buffer-menu,
@@ -78,7 +78,7 @@ multi-region, nxml, psvn, sgml, sh, show-paren, show-tabs, slime, sldb,
 speedbar, tex, view, viper, w3m, widget, woman"
   (interactive)
   (color-theme-install
-   `(color-theme-hober2
+   `(color-theme-dhl-hober
      ;; Frame parameters
      ((foreground-color . "light gray")
       (background-color . "gray4")
@@ -254,11 +254,11 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (dired-directory ((t (:foreground "cornflower blue"))))
      (dired-face-directory ((t (:foreground "cornflower blue"))))
      (dired-face-executable ((t (:foreground "turquoise"))))
-     (dired-ignored ((t ,hober2-insignificant-face)))
-     (dired-face-boring ((t ,hober2-insignificant-face)))
-     (dired-face-permissions ((t ,hober2-insignificant-face)))
+     (dired-ignored ((t ,dhl-hober-insignificant-face)))
+     (dired-face-boring ((t ,dhl-hober-insignificant-face)))
+     (dired-face-permissions ((t ,dhl-hober-insignificant-face)))
      (dired-face-setuid ((t (:bold t :foreground "medium sea green"))))
-     (dired-face-socket ((t ,hober2-insignificant-face)))
+     (dired-face-socket ((t ,dhl-hober-insignificant-face)))
      (dired-symlink ((t (:foreground "cadet blue"))))
      (dired-face-symlink ((t (:foreground "cadet blue"))))
      (ediff-current-diff-face-A ((t (:background "cadet blue" :foreground "gray4"))))
@@ -298,7 +298,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (erc-default-face ((t ())))
      (erc-direct-msg-face ((t (:foreground "cadet blue")))) ;%
      (erc-error-face ((t (:background "indian red" :foreground "white" :bold t))))
-     (erc-fool-face ((t ,hober2-insignificant-face)))
+     (erc-fool-face ((t ,dhl-hober-insignificant-face)))
      (erc-input-face ((t (:foreground "lemon chiffon"))))
      (erc-inverse-face ((t (:inverse-video t))))
      (erc-keyword-face ((t (:foreground "medium orchid" :bold t))))
@@ -310,7 +310,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (erc-timestamp-face ((t (:foreground "medium sea green")))) ;%
      (erc-underline-face ((t nil))) ;%
 
-     (escape-glyph ((t ,hober2-insignificant-face)))
+     (escape-glyph ((t ,dhl-hober-insignificant-face)))
      (eshell-prompt-face ((t (:foreground "pale violet red"))))
      (eshell-prompt ((t (:foreground "pale violet red"))))
 
@@ -326,10 +326,10 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (eshell-ls-executable ((t (:foreground "turquoise"))))
      (eshell-ls-missing-face ((t (:background "indian red" :foreground "white" :bold t))))
      (eshell-ls-missing ((t (:background "indian red" :foreground "white" :bold t))))
-     (eshell-ls-product-face ((t ,hober2-insignificant-face)))
-     (eshell-ls-product ((t ,hober2-insignificant-face)))
-     (eshell-ls-readonly-face ((t ,hober2-insignificant-face)))
-     (eshell-ls-readonly ((t ,hober2-insignificant-face)))
+     (eshell-ls-product-face ((t ,dhl-hober-insignificant-face)))
+     (eshell-ls-product ((t ,dhl-hober-insignificant-face)))
+     (eshell-ls-readonly-face ((t ,dhl-hober-insignificant-face)))
+     (eshell-ls-readonly ((t ,dhl-hober-insignificant-face)))
      (eshell-ls-special-face ((t (:foreground "pale violet red")))) ;%
      (eshell-ls-special ((t (:foreground "pale violet red")))) ;%
      (eshell-ls-symlink-face ((t (:foreground "cadet blue"))))
@@ -354,7 +354,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (fg:erc-color-face14 ((t (:foreground "gray50"))))
      (fg:erc-color-face15 ((t (:foreground "gray90"))))
 
-     (file-name-shadow ((t ,hober2-insignificant-face)))
+     (file-name-shadow ((t ,dhl-hober-insignificant-face)))
      (font-latex-bold-face ((t (:bold t :foreground "medium sea green"))));%
      (font-latex-italic-face ((t (:slant italic :foreground "medium sea green"))));%
      (font-latex-math-face ((t (:foreground "sandy brown"))))
@@ -363,7 +363,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (font-latex-sectioning-2-face ((t (:foreground "khaki"))))
      (font-latex-sectioning-3-face ((t (:foreground "khaki"))))
      (font-latex-sectioning-4-face ((t (:foreground "khaki"))))
-;;   (font-latex-sedate-face ((t ,hober2-insignificant-face)))
+;;   (font-latex-sedate-face ((t ,dhl-dhl-hober-insignificant-face)))
      (font-latex-sedate-face ((t (:foreground "steel blue"))))
      (font-latex-string-face ((t (:foreground "lemon chiffon"))))
      (font-latex-subscript-face ((t ())))
@@ -428,8 +428,8 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (gnus-emphasis-underline-bold-italic ((t (:italic t :bold t :underline t))))
      (gnus-emphasis-underline-italic ((t (:italic t :underline t))))
 
-     (gnus-header-content-face ((t ,hober2-insignificant-face)))
-     (gnus-header-content ((t ,hober2-insignificant-face)))
+     (gnus-header-content-face ((t ,dhl-hober-insignificant-face)))
+     (gnus-header-content ((t ,dhl-hober-insignificant-face)))
      (gnus-header-from-face ((t (:height 1.2 :foreground "DarkSeaGreen2"))))
      (gnus-header-from ((t (:height 1.2 :foreground "DarkSeaGreen2"))))
      (gnus-header-name-face ((t (:foreground "cadet blue")))) ;%
@@ -438,8 +438,8 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (gnus-header-newsgroups ((t (:foreground "medium sea green"))))
      (gnus-header-subject-face ((t (:height 1.2 :foreground "lemon chiffon"))))
      (gnus-header-subject ((t (:height 1.2 :foreground "lemon chiffon"))))
-     (gnus-signature-face ((t ,hober2-insignificant-face)))
-     (gnus-signature ((t ,hober2-insignificant-face)))
+     (gnus-signature-face ((t ,dhl-hober-insignificant-face)))
+     (gnus-signature ((t ,dhl-hober-insignificant-face)))
      (gnus-summary-cancelled-face ((t (:foreground "khaki"))))
      (gnus-summary-cancelled ((t (:foreground "khaki"))))
      (gnus-summary-high-read-face ((t (:foreground "khaki"))))
@@ -541,7 +541,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (js2-function-param-face ((t (:foreground "IndianRed1"))))
      (js2-instance-member-face ((t (:foreground "IndianRed1"))))
      ;; Copied from `nxml-tag-delimiter'
-     (js2-jsdoc-html-tag-delimiter-face ((t ,hober2-insignificant-face)))
+     (js2-jsdoc-html-tag-delimiter-face ((t ,dhl-hober-insignificant-face)))
      ;; Copied from `nxml-element-local-name'
      (js2-jsdoc-html-tag-name-face ((t (:foreground "cadet blue"))))
      (js2-jsdoc-tag-face ((t (:foreground "medium orchid"))))
@@ -616,18 +616,18 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (nxml-text ((t ())))
      (nxml-comment-content ((t (:foreground "indian red"))))
      (nxml-comment-delimiter ((t (:foreground "indian red"))))
-     (nxml-processing-instruction-delimiter ((t ,hober2-insignificant-face)))
+     (nxml-processing-instruction-delimiter ((t ,dhl-hober-insignificant-face)))
      (nxml-processing-instruction-target ((t (:foreground "steel blue"))))
      (nxml-processing-instruction-content ((t ())))
-     (nxml-cdata-section-delimiter ((t ,hober2-insignificant-face)))
+     (nxml-cdata-section-delimiter ((t ,dhl-hober-insignificant-face)))
      (nxml-cdata-section-CDATA ((t (:foreground "cadet blue"))))
      (nxml-cdata-section-content ((t ())))
      (nxml-char-ref-number ((t (:foreground "IndianRed1"))))
      (nxml-char-ref-delimiter ((t (:foreground "IndianRed1"))))
      (nxml-entity-ref-name ((t (:foreground "IndianRed1"))))
      (nxml-entity-ref-delimiter ((t (:foreground "IndianRed1"))))
-     (nxml-tag-delimiter ((t ,hober2-insignificant-face)))
-     (nxml-tag-slash ((t ,hober2-insignificant-face)))
+     (nxml-tag-delimiter ((t ,dhl-hober-insignificant-face)))
+     (nxml-tag-slash ((t ,dhl-hober-insignificant-face)))
      (nxml-element-prefix ((t (:foreground "steel blue")))) ;%
      (nxml-element-colon ((t (:foreground "steel blue"))))
      (nxml-element-local-name ((t (:foreground "cadet blue"))))
@@ -644,7 +644,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (nxml-prolog-literal-delimiter ((t (:foreground "lemon chiffon"))))
      (nxml-prolog-literal-content ((t (:foreground "lemon chiffon"))))
      (nxml-prolog-keyword ((t (:foreground "cadet blue"))))
-     (nxml-markup-declaration-delimiter ((t ,hober2-insignificant-face)))
+     (nxml-markup-declaration-delimiter ((t ,dhl-hober-insignificant-face)))
      ;; (nxml-hash ((t ())))
      ;; (nxml-glyph ((t ())))
 
@@ -652,7 +652,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (paren-face-mismatch ((t (:background "indian red" :foreground "white" :bold t))))
      (paren-face-no-match ((t (:background "indian red" :foreground "white" :bold t))))
 
-     (paren-face ((t ,hober2-insignificant-face)))
+     (paren-face ((t ,dhl-hober-insignificant-face)))
 
      (primary-selection ((t (:background "dark slate blue" :foreground "white"))))
      (svn-status-marked-face ((t (:background "cadet blue" :foreground "gray4"))))
@@ -675,7 +675,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (rcirc-prompt ((t (:foreground "pale violet red")))) ;%
 
      (region ((t (:background "dark slate blue" :foreground "white"))))
-     (rng-error ((t ,(if (hober2-use-underline-p)
+     (rng-error ((t ,(if (dhl-hober-use-underline-p)
                          '(:underline "red")
                        '(:background "indian red" :foreground "white" :bold t)))))
 
@@ -686,7 +686,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
 
      (sgml-namespace-face ((t (:foreground "steel blue")))) ;%
 
-     (shadow ((t ,hober2-insignificant-face)))
+     (shadow ((t ,dhl-hober-insignificant-face)))
      (sh-heredoc-face ((t (:foreground "khaki"))))
      (sh-quoted-exec ((t (:foreground "khaki"))))
 
@@ -728,7 +728,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (slime-inspector-action-face ((t (:foreground "turquoise"))))
      (slime-inspector-type-face ((t (:foreground "turquoise")))) ;%
 
-     (slime-reader-conditional-face ((t ,hober2-insignificant-face)))
+     (slime-reader-conditional-face ((t ,dhl-hober-insignificant-face)))
 
      (speedbar-button-face ((t (:foreground "medium sea green"))))
      (speedbar-directory-face ((t (:foreground "cornflower blue"))))
@@ -787,7 +787,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (widget-button-pressed-face ((t (:bold t :underline t))))
      (widget-documentation-face ((t (:foreground "medium sea green")))) ;%
      (widget-field-face ((t (:background "gray30" :foreground "white"))))
-     (widget-inactive-face ((t ,hober2-insignificant-face)))
+     (widget-inactive-face ((t ,dhl-hober-insignificant-face)))
      (widget-single-line-field-face ((t (:background "gray30" :foreground "white"))))
 
      (woman-italic ((t (:foreground "medium sea green"))))
