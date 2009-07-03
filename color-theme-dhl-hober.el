@@ -1,7 +1,7 @@
 ;;;;;
-;;;;; dhl-hober.el
+;;;;; color-theme-dhl-hober.el
 ;;;;;
-;;;;; Time-stamp: <2009-07-03 20:44:25 danlei>
+;;;;; Time-stamp: <2009-07-03 20:46:33 danlei>
 ;;;;;
 ;;;;; dhl-hober is a customization of Edward O'Connor's hober2
 ;;;;;
