@@ -1,18 +1,20 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-02 01:28:29 danlei>
+;;;;; Time-stamp: <2009-07-03 19:54:44 danlei>
 ;;;;;
 
-(add-to-list 'load-path "/usr/local/emacs/share/emacs/22.3/lisp/")
-(add-to-list 'load-path "~/.emacs.d/")
-(add-to-list 'load-path "~/.emacs.d/erc-5.3-extras/")
-(add-to-list 'load-path "~/.emacs.d/slime/")
-(add-to-list 'load-path "~/.emacs.d/slime/contrib/")
-(add-to-list 'load-path "~/.emacs.d/clojure-mode/")
-(add-to-list 'load-path "~/.emacs.d/swank-clojure/")
-(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
-(add-to-list 'load-path "~/.emacs.d/smex/")
+(mapcar (lambda (path) (add-to-list 'load-path path))
+	'("/usr/local/emacs/share/emacs/22.3/lisp/"
+	  "~/.emacs.d/"
+	  "~/.emacs.d/erc-5.3-extras/"
+	  "~/.emacs.d/slime/"
+	  "~/.emacs.d/slime/contrib/"
+	  "~/.emacs.d/clojure-mode/"
+	  "~/.emacs.d/swank-clojure/"
+	  "~/.emacs.d/color-theme-6.6.0/"
+	  "~/.emacs.d/smex/"
+	  ))
 
 ;;;;
 ;;;; color-theme
@@ -30,11 +32,11 @@
 
 (require 'slime)
 
-(slime-setup '(slime-fancy slime-asdf slime-references slime-indentation))
-(setq slime-enable-evaluate-in-emacs t)
-(setq slime-net-coding-system 'utf-8-unix)
-
-(setq lisp-indent-function 'cl-indent:function)
+(setq slime-setup '(slime-fancy slime-asdf slime-references slime-indentation)
+      slime-enable-evaluate-in-emacs t
+      slime-net-coding-system 'utf-8-unix
+      lisp-indent-function 'cl-indent:function
+      ))
 
 (setq slime-lisp-implementations
       '(
@@ -120,11 +122,9 @@
 ;;;;
 
 (setq swank-clojure-jar-path
-      "e:/cygwin/home/danlei/build/clojure/trunk/clojure.jar")
-
-(setq swank-clojure-extra-classpaths
-      (list "e:/cygwin/home/danlei/coding/lisp/clojure/"
-	    ))
+      "e:/cygwin/home/danlei/build/clojure/trunk/clojure.jar"
+      swank-clojure-extra-classpaths
+      '("e:/cygwin/home/danlei/coding/lisp/clojure/"))
 
 (require 'swank-clojure-autoload)
 (require 'swank-clojure)
@@ -216,9 +216,11 @@
 (when (eq system-type 'cygwin)
   (add-hook 'inferior-tcl-mode-hook
 	    (lambda ()
-	      (tcl-send-string (inferior-tcl-proc) "set ::tcl_interactive 1\n")
-	      (tcl-send-string (inferior-tcl-proc)
-			       "namespace path {::tcl::mathop ::tcl::mathfunc}\n"))))
+	      (tcl-send-string
+	       (inferior-tcl-proc) "set ::tcl_interactive 1\n")
+	      (tcl-send-string
+	       (inferior-tcl-proc)
+	       "namespace path {::tcl::mathop ::tcl::mathfunc}\n"))))
 
 ;;;;
 ;;;; maxima
@@ -308,7 +310,9 @@
 	"/cygdrive/e/Programme/Mozilla Firefox/firefox.exe"
 	common-lisp-hyperspec-root
 	"file:///e:/cygwin/home/danlei/doc/HyperSpec/"
-	cltl2-root-url "file:///e:/cygwin/home/danlei/doc/cltl2/"))
+	cltl2-root-url
+	"file:///e:/cygwin/home/danlei/doc/cltl2/"
+	))
 
 (setq browse-url-browser-function 'browse-url-generic)
 
@@ -334,29 +338,33 @@
 (require 'erc-list-old)
 
 (erc-scrolltobottom-mode 1)
-(setq erc-keywords '())
-(setq erc-pals '())
-(setq erc-fools '())
-(setq erc-current-nick-highlight-type 'nick-or-keyword)
-(setq erc-notice-highlight-type 'prefix)
-(setq erc-auto-query 'nil)
-(setq erc-fill-function 'erc-fill-static)
+
+(setq erc-keywords '()
+      erc-pals '()
+      erc-fools '()
+      erc-current-nick-highlight-type 'nick-or-keyword
+      erc-notice-highlight-type 'prefix
+      erc-auto-query 'nil
+      erc-fill-function 'erc-fill-static
+      erc-user-full-name "Daniel H. Leidisch"
+      erc-track-exclude-server-buffer t
+      erc-fill-static-center 16
+      erc-fill-column 100
+      erc-kill-buffer-on-part t
+      erc-kill-queries-on-quit t
+      erc-kill-server-buffer-on-quit t
+      )
+
 (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
                                 "324" "329" "332" "333" "353" "477"))
-(setq erc-track-exclude-server-buffer t)
+
 (erc-spelling-mode 1)
 (setq erc-spelling-dictionaries '(("#bsdforen.de" "/dev/null"))) ; FIXME
+
 (add-to-list 'load-path "/home/danlei/.emacs.d/erc-5.3-extras/")
 (erc-list-mode 1)
 (erc-timestamp-mode -1)
 (erc-smiley-mode 1)
-(setq erc-user-full-name "Daniel H. Leidisch")
-
-(setq erc-fill-static-center 16
-      erc-fill-column 100
-      erc-kill-buffer-on-part t
-      erc-kill-queries-on-quit t
-      erc-kill-server-buffer-on-quit t)
 
 (setq erc-part-reason (lambda (x)
                         (or x "Ein guter Abgang ziert die Übung.")))
@@ -627,13 +635,13 @@
 ;;;; gnus
 ;;;;
 
-(setq gnus-select-method '(nntp "news.t-online.de"))
+(setq gnus-select-method '(nntp "news.t-online.de")
+      gnus-group-line-format "%2{%M%S%p%} %0{%5y%} %P%1{%G%}\n"
+      gnus-topic-line-format "%i%3{[ %n -- %A ]%}%v\n"
+      gnus-summary-line-format "%U%R%z %3{%u%}: %1{%B%-23,23n%} %s\n"
+      gnus-summary-line-format "%[%U%R%] %30a %[%6d%] %B %s\n")
 
-(setq gnus-group-line-format "%2{%M%S%p%} %0{%5y%} %P%1{%G%}\n")
-(setq gnus-topic-line-format "%i%3{[ %n -- %A ]%}%v\n")
-;(setq gnus-summary-line-format "%U%R%z %3{%u%}: %1{%B%-23,23n%} %s\n")
-(setq gnus-summary-line-format "%[%U%R%] %30a %[%6d%] %B %s\n")
-
+;;; pseudo-graphical threading tree
 (setq
  gnus-sum-thread-tree-single-indent   "◎ "
  gnus-sum-thread-tree-false-root      " ◯ "
@@ -726,11 +734,11 @@
 ;;;
 (setq gnus-secondary-select-methods
       '((nnimap "imap.gmail.com"
-               (nnimap-stream ssl)
-               (nnimap-authenticator login))
+	 (nnimap-stream ssl)
+	 (nnimap-authenticator login))
 	(nntp "news.gmane.org"
-	      (nntp-address "news.gmane.org")
-	      (nntp-port-number 119))))
+	 (nntp-address "news.gmane.org")
+	 (nntp-port-number 119))))
 
 ;; (setq smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
 ;;       smtpmail-smtp-server "smtp.gmail.com"
