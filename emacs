@@ -39,7 +39,7 @@
 (setq slime-enable-evaluate-in-emacs t
       slime-net-coding-system 'utf-8-unix
       lisp-indent-function 'cl-indent:function
-      ))
+      )
 
 (setq slime-lisp-implementations
       '(
