@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-03 20:46:19 danlei>
+;;;;; Time-stamp: <2009-07-04 01:52:33 danlei>
 ;;;;;
 
 
@@ -493,9 +493,18 @@ prevents using commands with prefix arguments."
       (smex)
       (smex-major-mode-commands)))
 
+;;; desktop
+(desktop-save-mode 1)
+(add-hook 'auto-save-hook
+	  (lambda () (desktop-save-in-desktop-dir)))
+(mapc (lambda (variable)
+	(add-to-list 'desktop-globals-to-save variable))
+      '(
+	))
+
 
 ;;;;
-;;;; independent functions
+;;;; misc functions
 ;;;;
 
 (defun insert-date (prefix)
@@ -520,6 +529,11 @@ prevents using commands with prefix arguments."
   (interactive)
   (let ((inhibit-read-only t))
     (erase-buffer)))
+
+
+;;;;
+;;;; advice
+;;;;
 
 (defadvice split-window-vertically
     (after my-window-splitting-advice first () activate)
