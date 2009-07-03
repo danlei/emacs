@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-03 20:24:20 danlei>
+;;;;; Time-stamp: <2009-07-03 20:46:19 danlei>
 ;;;;;
 
 
@@ -23,9 +23,9 @@
 ;;;;
 
 (require 'color-theme)
-(require 'color-theme-hober2)
+(require 'color-theme-dhl-hober)
 (color-theme-initialize)
-(color-theme-hober2)
+(color-theme-dhl-hober)
 
 
 ;;;;
