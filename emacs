@@ -1,8 +1,9 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-03 19:54:44 danlei>
+;;;;; Time-stamp: <2009-07-03 20:24:20 danlei>
 ;;;;;
+
 
 (mapcar (lambda (path) (add-to-list 'load-path path))
 	'("/usr/local/emacs/share/emacs/22.3/lisp/"
@@ -15,6 +16,7 @@
 	  "~/.emacs.d/color-theme-6.6.0/"
 	  "~/.emacs.d/smex/"
 	  ))
+
 
 ;;;;
 ;;;; color-theme
@@ -32,8 +34,9 @@
 
 (require 'slime)
 
-(setq slime-setup '(slime-fancy slime-asdf slime-references slime-indentation)
-      slime-enable-evaluate-in-emacs t
+(slime-setup '(slime-fancy slime-asdf slime-references slime-indentation))
+
+(setq slime-enable-evaluate-in-emacs t
       slime-net-coding-system 'utf-8-unix
       lisp-indent-function 'cl-indent:function
       ))
@@ -367,9 +370,10 @@
 (erc-smiley-mode 1)
 
 (setq erc-part-reason (lambda (x)
-                        (or x "Ein guter Abgang ziert die Übung.")))
-(setq erc-quit-reason erc-part-reason)
+                        (or x "Ein guter Abgang ziert die Übung."))
+      erc-quit-reason erc-part-reason)
 
+;;; ~/.emacs-auth now takes care of this
 ;; (add-hook 'erc-after-connect
 ;; 	  (lambda (SERVER NICK)
 ;; 	    (cond ((string-match "freenode\\.net" SERVER)
@@ -377,37 +381,60 @@
 
 
 ;;;;
+;;;; dired
+;;;;
+
+(setq dired-recursive-deletes 'top)
+(put 'dired-find-alternate-file 'disabled nil)
+
+(add-hook 'dired-mode-hook
+          '(lambda ()
+	     (define-key dired-mode-map (kbd "e")
+	       #'wdired-change-to-wdired-mode)
+	     (define-key dired-mode-map (kbd "C-c o")
+	       #'dired-open-mac)))
+
+;; (defun dired-open-mac ()
+;;   (interactive)
+;;   (let ((file-name (dired-get-file-for-visit)))
+;;     (if (file-exists-p file-name)
+;; 	(shell-command (concat "open '" file-name "'" nil )))))
+
+
+;;;;
 ;;;; misc
 ;;;;
 
-;;; various configurations
+(setq inhibit-splash-screen t
+      ring-bell-function (lambda ())
+      scroll-conservatively 1
+      require-final-newline t
+      ispell-personal-dictionary "~/.ispell-emacs"
+      ispell-dictionary "american"
+      woman-use-own-frame nil
+      sentence-end-double-space nil
+      )
+
+(setq-default cursor-type 'bar)
+
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (toggle-scroll-bar -1)
-(setq inhibit-splash-screen t)
 (column-number-mode t)
 (line-number-mode t)
 (display-time-mode -1)
 (show-paren-mode 1)
-(setq ring-bell-function (lambda ()))
 (partial-completion-mode t)
-(setq scroll-conservatively 1)
-(setq require-final-newline t)
 (blink-cursor-mode -1)
-(setq-default cursor-type 'bar)
-(setq ispell-personal-dictionary "~/.ispell-emacs")
-(setq ispell-dictionary "american")
 (add-hook 'emacs-lisp-mode-hook (lambda () (eldoc-mode 1)))
-(put 'dired-find-alternate-file 'disabled nil)
 (add-hook 'write-file-hooks #'time-stamp)
-(setq woman-use-own-frame nil)
-;; (setq sentence-end "[.?!][]\"')]*\\($\\|\t\\| \\)[ \t\n]*")
-(setq sentence-end-double-space nil)
-;; (setq visible-bell t)
-;; (cua-mode 0)
-;; (delete-selection-mode -1)
-;; (transient-mark-mode 1)
+
+(when (eq system-type 'darwin)
+  (cua-mode 0)
+  (delete-selection-mode -1)
+  (transient-mark-mode 1))
+
 ;; (set-face-font 'default
 ;;                "-xos4-terminus-medium-r-normal--14-140-72-72-c-80-utf-8")
 ;; (setq special-display-regexps
@@ -426,7 +453,6 @@
 (set-keyboard-coding-system 'utf-8)
 (set-language-environment   'utf-8)
 
-
 (setq tramp-syntax 'url)
 ;(setq tramp-default-method "ftp")
 
@@ -436,7 +462,6 @@
 ;; (require 'git)
 ;; (autoload 'git-blame-mode "git-blame"
 ;;    "Minor mode for incremental blame for Git." t)
-
 
 ;;; expansion
 (setq hippie-expand-try-functions-list
@@ -460,6 +485,9 @@
 (smex-auto-update)
 
 (defun dhl-invoke-smex (x)
+  "Invokes smex, if called without a prefix argument,
+smex-major-mode-commands otherwise. Note that this
+prevents using commands with prefix arguments."
   (interactive "p")
   (if (= x 1)
       (smex)
@@ -467,7 +495,7 @@
 
 
 ;;;;
-;;;; functions
+;;;; independent functions
 ;;;;
 
 (defun insert-date (prefix)
@@ -496,20 +524,6 @@
 (defadvice split-window-vertically
     (after my-window-splitting-advice first () activate)
   (set-window-buffer (next-window) (other-buffer)))
-
-(setq dired-recursive-deletes 'top)
-(add-hook 'dired-mode-hook
-          '(lambda ()
-	     (define-key dired-mode-map (kbd "e")
-	       #'wdired-change-to-wdired-mode)
-	     (define-key dired-mode-map (kbd "C-c o")
-	       #'dired-open-mac)))
-
-;; (defun dired-open-mac ()
-;;   (interactive)
-;;   (let ((file-name (dired-get-file-for-visit)))
-;;     (if (file-exists-p file-name)
-;; 	(shell-command (concat "open '" file-name "'" nil )))))
 
 
 ;;;;
@@ -618,30 +632,30 @@
 		    PC-lisp-complete-symbol
 		    ))))
 
-(mapcar (lambda (keybinding)
-	  (global-set-key (car keybinding)
-			  (cadr keybinding)))
-	`(
-	  (,(kbd "C-c i d") insert-date)
-	  (,(kbd "C-c l") mark-line)
-	  (,(kbd "C-x C-b") buffer-menu)
-	  (,(kbd "M-/") hippie-expand)
-	  (,(kbd "C-c s") slime-selector)
-	  (,(kbd "C-x r v") view-register)
-	  (,(kbd "M-X") dhl-invoke-smex)
-	  ))
+(mapc (lambda (keybinding)
+	(global-set-key (car keybinding)
+			(cadr keybinding)))
+      `(
+	(,(kbd "C-c i d") insert-date)
+	(,(kbd "C-c l") mark-line)
+	(,(kbd "C-x C-b") buffer-menu)
+	(,(kbd "M-/") hippie-expand)
+	(,(kbd "C-c s") slime-selector)
+	(,(kbd "C-x r v") view-register)
+	(,(kbd "M-X") dhl-invoke-smex)
+	))
 
 ;;;;
 ;;;; gnus
 ;;;;
 
-(setq gnus-select-method '(nntp "news.t-online.de")
-      gnus-group-line-format "%2{%M%S%p%} %0{%5y%} %P%1{%G%}\n"
+(setq gnus-select-method '(nntp "news.t-online.de"))
+
+(setq gnus-group-line-format "%2{%M%S%p%} %0{%5y%} %P%1{%G%}\n"
       gnus-topic-line-format "%i%3{[ %n -- %A ]%}%v\n"
       gnus-summary-line-format "%U%R%z %3{%u%}: %1{%B%-23,23n%} %s\n"
       gnus-summary-line-format "%[%U%R%] %30a %[%6d%] %B %s\n")
 
-;;; pseudo-graphical threading tree
 (setq
  gnus-sum-thread-tree-single-indent   "◎ "
  gnus-sum-thread-tree-false-root      " ◯ "
@@ -650,7 +664,6 @@
  gnus-sum-thread-tree-leaf-with-other "├─► "
  gnus-sum-thread-tree-single-leaf     "╰─► "
  gnus-sum-thread-tree-indent          " ")
-
 
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
 
@@ -662,14 +675,13 @@
 
 (setq gnus-sorted-header-list gnus-visible-headers)
 
-;(setq gnus-auto-select-first 'unseen-or-unread)
+;; (setq gnus-auto-select-first 'unseen-or-unread)
 (add-hook 'gnus-summary-prepared-hook 'gnus-summary-hide-all-threads)
 (add-hook 'gnus-summary-mode-hook (lambda ()
 				    (hl-line-mode 1)
 				    (setq cursor-type nil)
 				    (set-face-background 'hl-line "#ee3b3b")
 				    (set-face-foreground 'hl-line "#191970")))
-
 
 ;;;
 ;;; scoring/threading
@@ -691,7 +703,6 @@
       '(gnus-thread-sort-by-subject
         (not gnus-thread-sort-by-date)
         gnus-thread-sort-by-total-score))
-
 
 ;;;
 ;;; misc
@@ -727,7 +738,6 @@
       gnus-treat-translate nil
       gnus-cache-enter-articles '(ticked)
       )
-
 
 ;;;
 ;;; gmail, gmane
