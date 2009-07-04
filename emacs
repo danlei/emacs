@@ -1,9 +1,11 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-04 18:12:53 danlei>
+;;;;; Time-stamp: <2009-07-04 19:33:43 danlei>
 ;;;;;
 
+
+(require 'cl)
 
 (mapcar (lambda (path) (add-to-list 'load-path path))
 	'("/usr/local/emacs/share/emacs/22.3/lisp/"
@@ -56,30 +58,22 @@
 (add-hook 'slime-mode-hook
 	  (lambda ()
 	    (paredit-mode 1)
-	    (define-key slime-mode-map
-	      (kbd "C-c s") #'slime-selector)
-;; 	    (define-key slime-mode-map
-;; 	      (kbd "RET") #'newline-and-indent)
-	    (define-key slime-mode-map
-	      (kbd "C-j") #'newline-and-indent)
-	    (define-key slime-mode-map
-	      (kbd "TAB") #'slime-indent-and-complete-symbol)
-	    (define-key slime-mode-map
-	      (kbd "C-RET") #'slime-close-all-sexp)
-	    (define-key slime-mode-map
-	      (kbd "C-c C-d c") #'cltl2-lookup)
-	    ))
+	    (define-keys slime-mode-map
+		'(("C-c s" slime-selector)
+		  ("C-j" newline-and-indent)
+		  ("TAB" slime-indent-and-complete-symbol)
+		  ("C-c C-d c" cltl2-lookup)
+		  ))))
 
 (add-hook 'slime-repl-mode-hook
 	  (lambda ()
 	    (paredit-mode 1)
-	    (define-key slime-repl-mode-map
-	      (kbd "C-c s") #'slime-selector)
-	    (define-key slime-repl-mode-map
-	      (kbd "C-c C-d c") #'cltl2-lookup)
-	    ))
+	    (define-keys slime-repl-mode-map
+		'(("C-c s" slime-selector)
+		  ("C-c C-d c" cltl2-lookup)
+		  ))))
 
-;; nyefs pathname fix for cygwin
+;;; nyef's pathname fix for cygwin
 (when (eq system-type 'cygwin)
   ;; FIXME: It turns out that the slime-tramp contrib wraps over this
   ;; to produce the interface I used when first I did this.
@@ -107,59 +101,37 @@
 
 (add-hook 'paredit-mode-hook
 	  (lambda ()
-	    (define-key paredit-mode-map
-	      (kbd ")") #'paredit-close-parenthesis-and-newline)
-	    (define-key paredit-mode-map
-	      (kbd "M-)") 'paredit-close-brace)
-	    (define-key paredit-mode-map
-	      (kbd "}") 'paredit-close-parenthesis)
-	    (define-key paredit-mode-map
-	      (kbd "M-{") 'paredit-brace-wrap-sexp)
-	    (define-key paredit-mode-map
-	      (kbd "{") 'paredit-open-brace)
-	    (define-key paredit-mode-map
-	      (kbd "M-f") #'paredit-forward)
-	    (define-key paredit-mode-map
-	      (kbd "C-M-f") #'forward-word)
-	    (define-key paredit-mode-map
-	      (kbd "M-b") #'paredit-backward)
-	    (define-key paredit-mode-map
-	      (kbd "C-M-b") #'forward-word)
-	    (define-key paredit-mode-map
-	      (kbd "M-u") #'backward-up-list)
-	    (define-key paredit-mode-map
-	      (kbd "C-M-u") #'upcase-word)
-;; 	    (define-key paredit-mode-map
-;; 	      (kbd "M-d") #'down-list)
-;; 	    (define-key paredit-mode-map
-;; 	      (kbd "C-M-d") #'paredit-forward-kill-word)
-;; 	    (define-key paredit-mode-map
-;; 	      (kbd "C-k") #'kill-sexp)
-	    (define-key paredit-mode-map
-	      (kbd "C-ö") #'paredit-backward-slurp-sexp)
-	    (define-key paredit-mode-map
-	      (kbd "M-ä") #'paredit-forward-barf-sexp)
-	    (define-key paredit-mode-map
-	      (kbd "M-ö") #'paredit-backward-barf-sexp)
-	    (define-key paredit-mode-map
-	      (kbd "M-ü") #'down-list)
-	    (define-key paredit-mode-map
-	      (kbd "M-t") #'transpose-sexps)
-	    (define-key paredit-mode-map
-	      (kbd "C-M-t") #'transpose-words)
-	    (define-key paredit-mode-map
-	      (kbd "<M-backspace>") #'paredit-backward-kill-word)
-	    ))
+	    (define-keys paredit-mode-map
+		'((")" paredit-close-parenthesis-and-newline)
+		  ("M-)" paredit-close-brace)
+		  ("}" paredit-close-parenthesis)
+		  ("M-{" paredit-brace-wrap-sexp)
+		  ("{" paredit-open-brace)
+		  ("M-f" paredit-forward)
+		  ("C-M-f" forward-word)
+		  ("M-b" paredit-backward)
+		  ("C-M-b" forward-word)
+		  ("M-u" backward-up-list)
+		  ("C-M-u" upcase-word)
+		  ("C-ö" paredit-backward-slurp-sexp)
+		  ("M-ä" paredit-forward-barf-sexp)
+		  ("M-ö" paredit-backward-barf-sexp)
+		  ("M-ü" down-list)
+		  ("M-t" transpose-sexps)
+		  ("C-M-t" transpose-words)
+		  ("<M-backspace>" paredit-backward-kill-word)
+		  ))))
 
 
 ;;;;
 ;;;; clojure
 ;;;;
 
-(setq swank-clojure-jar-path
-      "e:/cygwin/home/danlei/build/clojure/trunk/clojure.jar"
-      swank-clojure-extra-classpaths
-      '("e:/cygwin/home/danlei/coding/lisp/clojure/"))
+(when (eq system-type 'cygwin)
+  (setq swank-clojure-jar-path
+	"e:/cygwin/home/danlei/build/clojure/trunk/clojure.jar"
+	swank-clojure-extra-classpaths
+	'("e:/cygwin/home/danlei/coding/lisp/clojure/")))
 
 (require 'swank-clojure-autoload)
 (require 'swank-clojure)
@@ -202,11 +174,12 @@
 	  (lambda ()
 	    (interactive)
 	    (require 'clojure-mode)
-	    (define-key slime-mode-map (kbd "C-c d") 'slime-java-describe)
-	    (define-key slime-repl-mode-map (kbd "C-c d") 'slime-java-describe)
-	    (define-key slime-mode-map (kbd "C-c D") 'slime-javadoc)
-	    (define-key slime-repl-mode-map (kbd "C-c D") 'slime-javadoc)
-	    ))
+	    (define-keys slime-mode-map
+		'(("C-c d" slime-java-describe)
+		  ("C-c d" slime-java-describe)
+		  ("C-c D" slime-javadoc)
+		  ("C-c D" slime-javadoc)
+		  ))))
 
 
 ;;;;
@@ -225,8 +198,10 @@
 (add-hook
  'inferior-scheme-mode-hook
  (lambda ()
-   (define-key inferior-scheme-mode-map (kbd "M-TAB") 'hippie-expand)
-   (define-key scheme-mode-map (kbd "M-TAB") 'hippie-expand)))
+   (define-keys inferior-scheme-mode-map
+       '(("M-TAB" hippie-expand)
+	 ("M-TAB" 'hippie-expand)
+	 ))))
 
 ;(require 'quack)
 
@@ -583,6 +558,26 @@ prevents using commands with prefix arguments."
   (let ((inhibit-read-only t))
     (erase-buffer)))
 
+(defun define-keys (mode-map keybindings)
+  "Takes a mode map, and a list of (key function-designator)
+lists. The functions are bound to the keys in the given mode-map.
+Keys are in kbd format."
+  (mapc (lambda (keybinding)
+	  (let ((key (car keybinding))
+		(function (symbol-function (cadr keybinding))))
+	    (define-key mode-map (read-kbd-macro key) function)))
+	keybindings))
+
+(defun global-set-keys (keybindings)
+  "Takes a list of (key function-designator) lists.
+The functions are globally bound to the keys. Keys
+are in kbd format."
+  (mapc (lambda (keybinding)
+	  (let ((key (car keybinding))
+		(function (symbol-function (cadr keybinding))))
+	    (global-set-key (read-kbd-macro key) function)))
+	keybindings))
+
 
 ;;;;
 ;;;; advice
@@ -596,16 +591,6 @@ prevents using commands with prefix arguments."
 ;;;;
 ;;;; global keybindings
 ;;;;
-
-(defun global-set-keys (keybindings)
-  "Takes a list of keychord (in kbd format)
-and function designator pairs, and binds each
-globally."
-  (mapc (lambda (keybinding)
-	  (let ((key (car keybinding))
-		(function (symbol-function (cadr keybinding))))
-	    (global-set-key (read-kbd-macro key) function)))
-	keybindings))
 
 (global-set-keys '(("C-c i d" insert-date)
 		   ("C-c l" mark-line)
