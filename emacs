@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-04 02:36:39 danlei>
+;;;;; Time-stamp: <2009-07-04 18:12:53 danlei>
 ;;;;;
 
 
@@ -246,7 +246,9 @@
 ;;;;
 
 (require 'tcl)
-(setq tcl-application "/cygdrive/e/Tcl/bin/tclsh85.exe")
+
+(when (eq system-type 'cygwin)
+  (setq tcl-application "/cygdrive/e/Tcl/bin/tclsh85.exe"))
 
 (when (eq system-type 'cygwin)
   (add-hook 'inferior-tcl-mode-hook
@@ -329,7 +331,7 @@
 
 
 ;;;;
-;;;; w3m
+;;;; browsing
 ;;;;
 
 ;; (require 'w3m)
@@ -396,7 +398,7 @@
 (erc-spelling-mode 1)
 (setq erc-spelling-dictionaries '(("#bsdforen.de" "/dev/null"))) ; FIXME
 
-(add-to-list 'load-path "/home/danlei/.emacs.d/erc-5.3-extras/")
+(add-to-list 'load-path "~/.emacs.d/erc-5.3-extras/")
 (erc-list-mode 1)
 (erc-timestamp-mode -1)
 (erc-smiley-mode 1)
@@ -423,14 +425,16 @@
           '(lambda ()
 	     (define-key dired-mode-map (kbd "e")
 	       #'wdired-change-to-wdired-mode)
-	     (define-key dired-mode-map (kbd "C-c o")
-	       #'dired-open-mac)))
+	    (when (eq system-type 'darwin)
+	      (define-key dired-mode-map (kbd "C-c o")
+		'dired-open-mac))))
 
-;; (defun dired-open-mac ()
-;;   (interactive)
-;;   (let ((file-name (dired-get-file-for-visit)))
-;;     (if (file-exists-p file-name)
-;; 	(shell-command (concat "open '" file-name "'" nil )))))
+(when (eq system-type 'darwin)
+  (defun dired-open-mac ()
+    (interactive)
+    (let ((file-name (dired-get-file-for-visit)))
+      (if (file-exists-p file-name)
+	  (shell-command (concat "open '" file-name "'" nil ))))))
 
 
 ;;;;
@@ -482,20 +486,17 @@
 (when (eq system-type 'darwin)
   (cua-mode 0)
   (delete-selection-mode -1)
-  (transient-mark-mode 1))
-
-;; (set-face-font 'default
-;;                "-xos4-terminus-medium-r-normal--14-140-72-72-c-80-utf-8")
-;; (setq special-display-regexps
-;;       (remove "[ ]?\\*[hH]elp.*" special-display-regexps))
-;; (setq special-display-regexps nil)
+  (set-face-font 'default
+		 "-xos4-terminus-medium-r-normal--14-140-72-72-c-80-utf-8")
+  (setq special-display-regexps
+	(remove "[ ]?\\*[hH]elp.*" special-display-regexps))
+  (setq special-display-regexps nil))
 
 ;; (setq time-stamp-format "%:y-%02m-%02d %02H:%02M:%02S")
 
 ;;; lpc:
 ;; (modify-syntax-entry ?' "'" c-mode-syntax-table)
 
-;;; unicode
 (prefer-coding-system       'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
@@ -517,18 +518,18 @@
       '(try-expand-dabbrev
 	try-expand-dabbrev-all-buffers
 	try-expand-dabbrev-from-kill
-        try-complete-file-name-partially
-        try-complete-file-name
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol
+        try-complete-file-name-partially
+        try-complete-file-name
         try-expand-whole-kill
 	ispell-complete-word
 	))
 
 ;;; ido
 (require 'ido)
-(ido-mode t)
 (require 'smex)
+(ido-mode t)
 (smex-initialize)
 (setq smex-save-file "~/.smex")
 (smex-auto-update)
@@ -596,17 +597,24 @@ prevents using commands with prefix arguments."
 ;;;; global keybindings
 ;;;;
 
-(mapc (lambda (keybinding)
-	(global-set-key (car keybinding)
-			(cadr keybinding)))
-      `((,(kbd "C-c i d") insert-date)
-	(,(kbd "C-c l") mark-line)
-	(,(kbd "C-x C-b") buffer-menu)
-	(,(kbd "M-/") hippie-expand)
-	(,(kbd "C-c s") slime-selector)
-	(,(kbd "C-x r v") view-register)
-	(,(kbd "M-X") dhl-invoke-smex)
-	))
+(defun global-set-keys (keybindings)
+  "Takes a list of keychord (in kbd format)
+and function designator pairs, and binds each
+globally."
+  (mapc (lambda (keybinding)
+	  (let ((key (car keybinding))
+		(function (symbol-function (cadr keybinding))))
+	    (global-set-key (read-kbd-macro key) function)))
+	keybindings))
+
+(global-set-keys '(("C-c i d" insert-date)
+		   ("C-c l" mark-line)
+		   ("C-x C-b" buffer-menu)
+		   ("M-/" hippie-expand)
+		   ("C-c s" slime-selector)
+		   ("C-x r v" view-register)
+		   ("M-X" dhl-invoke-smex)
+		   ))
 
 
 ;;;;
