@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-04 19:33:43 danlei>
+;;;;; Time-stamp: <2009-07-04 19:51:28 danlei>
 ;;;;;
 
 
@@ -323,8 +323,7 @@
 	common-lisp-hyperspec-root
 	"file:///e:/cygwin/home/danlei/doc/HyperSpec/"
 	cltl2-root-url
-	"file:///e:/cygwin/home/danlei/doc/cltl2/"
-	))
+	"file:///e:/cygwin/home/danlei/doc/cltl2/"))
 
 (setq browse-url-browser-function 'browse-url-generic)
 
@@ -397,9 +396,10 @@
 (put 'dired-find-alternate-file 'disabled nil)
 
 (add-hook 'dired-mode-hook
-          '(lambda ()
-	     (define-key dired-mode-map (kbd "e")
-	       #'wdired-change-to-wdired-mode)
+          (lambda ()
+	    (define-keys dired-mode-map
+		'(("e" wdired-change-to-wdired-mode)
+		  ))
 	    (when (eq system-type 'darwin)
 	      (define-key dired-mode-map (kbd "C-c o")
 		'dired-open-mac))))
@@ -410,6 +410,17 @@
     (let ((file-name (dired-get-file-for-visit)))
       (if (file-exists-p file-name)
 	  (shell-command (concat "open '" file-name "'" nil ))))))
+
+
+;;;;
+;;;; elisp
+;;;;
+
+(add-hook 'emacs-lisp-mode-hook
+	  (lambda ()
+	    (eldoc-mode 1)
+	    (paredit-mode 1)
+	    ))
 
 
 ;;;;
@@ -427,6 +438,64 @@
 		    ielm-complete-symbol
 		    PC-lisp-complete-symbol
 		    ))))
+
+;;;;
+;;;; hippie-expansion
+;;;;
+
+(setq hippie-expand-try-functions-list
+      '(try-expand-dabbrev
+	try-expand-dabbrev-all-buffers
+	try-expand-dabbrev-from-kill
+        try-complete-lisp-symbol-partially
+        try-complete-lisp-symbol
+        try-complete-file-name-partially
+        try-complete-file-name
+        try-expand-whole-kill
+	ispell-complete-word
+	))
+
+
+;;;;
+;;;; ido
+;;;;
+
+(require 'ido)
+(require 'smex)
+
+(ido-mode t)
+
+(smex-initialize)
+(setq smex-save-file "~/.smex")
+(smex-auto-update)
+
+(defun dhl-invoke-smex (x)
+  "Invokes smex, if called without a prefix argument,
+smex-major-mode-commands otherwise. Note that this
+prevents using commands with prefix arguments."
+  (interactive "p")
+  (if (= x 1)
+      (smex)
+      (smex-major-mode-commands)))
+
+
+;;;;
+;;;; desktop
+;;;;
+
+(desktop-save-mode 1)
+
+(setq desktop-modes-not-to-save
+      '(
+	))
+
+(mapc (lambda (variable)
+	(add-to-list 'desktop-globals-to-save variable))
+      '(
+	))
+
+(add-hook 'auto-save-hook
+	  (lambda () (desktop-save-in-desktop-dir)))
 
 
 ;;;;
@@ -449,23 +518,13 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (toggle-scroll-bar -1)
-(column-number-mode t)
-(line-number-mode t)
+(column-number-mode 1)
+(line-number-mode 1)
 (display-time-mode -1)
 (show-paren-mode 1)
-(partial-completion-mode t)
+(partial-completion-mode 1)
 (blink-cursor-mode -1)
-(add-hook 'emacs-lisp-mode-hook (lambda () (eldoc-mode 1)))
 (add-hook 'write-file-hooks #'time-stamp)
-
-(when (eq system-type 'darwin)
-  (cua-mode 0)
-  (delete-selection-mode -1)
-  (set-face-font 'default
-		 "-xos4-terminus-medium-r-normal--14-140-72-72-c-80-utf-8")
-  (setq special-display-regexps
-	(remove "[ ]?\\*[hH]elp.*" special-display-regexps))
-  (setq special-display-regexps nil))
 
 ;; (setq time-stamp-format "%:y-%02m-%02d %02H:%02M:%02S")
 
@@ -488,47 +547,14 @@
 ;; (autoload 'git-blame-mode "git-blame"
 ;;    "Minor mode for incremental blame for Git." t)
 
-;;; expansion
-(setq hippie-expand-try-functions-list
-      '(try-expand-dabbrev
-	try-expand-dabbrev-all-buffers
-	try-expand-dabbrev-from-kill
-        try-complete-lisp-symbol-partially
-        try-complete-lisp-symbol
-        try-complete-file-name-partially
-        try-complete-file-name
-        try-expand-whole-kill
-	ispell-complete-word
-	))
-
-;;; ido
-(require 'ido)
-(require 'smex)
-(ido-mode t)
-(smex-initialize)
-(setq smex-save-file "~/.smex")
-(smex-auto-update)
-
-(defun dhl-invoke-smex (x)
-  "Invokes smex, if called without a prefix argument,
-smex-major-mode-commands otherwise. Note that this
-prevents using commands with prefix arguments."
-  (interactive "p")
-  (if (= x 1)
-      (smex)
-      (smex-major-mode-commands)))
-
-;;; desktop
-(desktop-save-mode 1)
-(setq desktop-modes-not-to-save
-      '(
-	))
-(add-hook 'auto-save-hook
-	  (lambda () (desktop-save-in-desktop-dir)))
-(mapc (lambda (variable)
-	(add-to-list 'desktop-globals-to-save variable))
-      '(
-	))
+(when (eq system-type 'darwin)
+  (cua-mode 0)
+  (delete-selection-mode -1)
+  (set-face-font 'default
+		 "-xos4-terminus-medium-r-normal--14-140-72-72-c-80-utf-8")
+  (setq special-display-regexps
+	(remove "[ ]?\\*[hH]elp.*" special-display-regexps))
+  (setq special-display-regexps nil))
 
 
 ;;;;
