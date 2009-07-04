@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-04 01:52:33 danlei>
+;;;;; Time-stamp: <2009-07-04 02:08:07 danlei>
 ;;;;;
 
 
@@ -52,6 +52,56 @@
 ;; 	(abcl ("/home/danlei/build/abcl/j/abcl"))
 	))
 
+
+(add-hook 'slime-mode-hook
+	  (lambda ()
+	    (paredit-mode 1)
+	    (define-key slime-mode-map
+	      (kbd "C-c s") #'slime-selector)
+;; 	    (define-key slime-mode-map
+;; 	      (kbd "RET") #'newline-and-indent)
+	    (define-key slime-mode-map
+	      (kbd "C-j") #'newline-and-indent)
+	    (define-key slime-mode-map
+	      (kbd "TAB") #'slime-indent-and-complete-symbol)
+	    (define-key slime-mode-map
+	      (kbd "C-RET") #'slime-close-all-sexp)
+	    (define-key slime-mode-map
+	      (kbd "C-c C-d c") #'cltl2-lookup)
+	    ))
+
+(add-hook 'slime-repl-mode-hook
+	  (lambda ()
+	    (paredit-mode 1)
+	    (define-key slime-repl-mode-map
+	      (kbd "C-c s") #'slime-selector)
+	    (define-key slime-repl-mode-map
+	      (kbd "C-c C-d c") #'cltl2-lookup)
+	    ))
+
+;; nyefs pathname fix for cygwin
+(when (eq system-type 'cygwin)
+  ;; FIXME: It turns out that the slime-tramp contrib wraps over this
+  ;; to produce the interface I used when first I did this.
+  (setq slime-to-lisp-filename-function
+        (lambda (filename)
+          (replace-regexp-in-string "\n" ""
+                                    (shell-command-to-string
+                                     (concat "cygpath -m " filename)))))
+  (setq slime-from-lisp-filename-function
+        (lambda (filename)
+          (replace-regexp-in-string "\n" ""
+                                    (shell-command-to-string
+                                     (concat "cygpath "
+                                             (replace-regexp-in-string
+                                              "\\\\" "/" filename))))))
+  (setq slime-backend (concat "/cygwin" slime-path slime-backend)))
+
+
+;;;;
+;;;; paredit
+;;;;
+
 (autoload 'paredit-mode "paredit"
   "Minor mode for pseudo-structurally editing Lisp code." t)
 
@@ -100,24 +150,6 @@
 	    (define-key paredit-mode-map
 	      (kbd "<M-backspace>") #'paredit-backward-kill-word)
 	    ))
-
-;; nyefs pathname fix for cygwin
-(when (eq system-type 'cygwin)
-  ;; FIXME: It turns out that the slime-tramp contrib wraps over this
-  ;; to produce the interface I used when first I did this.
-  (setq slime-to-lisp-filename-function
-        (lambda (filename)
-          (replace-regexp-in-string "\n" ""
-                                    (shell-command-to-string
-                                     (concat "cygpath -m " filename)))))
-  (setq slime-from-lisp-filename-function
-        (lambda (filename)
-          (replace-regexp-in-string "\n" ""
-                                    (shell-command-to-string
-                                     (concat "cygpath "
-                                             (replace-regexp-in-string
-                                              "\\\\" "/" filename))))))
-  (setq slime-backend (concat "/cygwin" slime-path slime-backend)))
 
 
 ;;;;
@@ -402,6 +434,23 @@
 
 
 ;;;;
+;;;; ielm
+;;;;
+
+(add-hook 'ielm-mode-hook
+	  (lambda ()
+	    (paredit-mode 1)
+	    (eldoc-mode 1)
+	    (setq comint-dynamic-complete-functions
+		  '(ielm-tab
+		    comint-replace-by-expanded-history
+		    ielm-complete-filename
+		    ielm-complete-symbol
+		    PC-lisp-complete-symbol
+		    ))))
+
+
+;;;;
 ;;;; misc
 ;;;;
 
@@ -541,116 +590,13 @@ prevents using commands with prefix arguments."
 
 
 ;;;;
-;;;; hooks
+;;;; global keybindings
 ;;;;
-
-(add-hook 'slime-mode-hook
-	  (lambda ()
-	    (paredit-mode 1)
-	    (define-key slime-mode-map
-	      (kbd "C-c s") #'slime-selector)
-;; 	    (define-key slime-mode-map
-;; 	      (kbd "RET") #'newline-and-indent)
-	    (define-key slime-mode-map
-	      (kbd "C-j") #'newline-and-indent)
-	    (define-key slime-mode-map
-	      (kbd "TAB") #'slime-indent-and-complete-symbol)
-	    (define-key slime-mode-map
-	      (kbd "C-RET") #'slime-close-all-sexp)
-	    (define-key slime-mode-map
-	      (kbd "C-c C-d c") #'cltl2-lookup)
-	    (define-key slime-mode-map
-	      (kbd "M-f") #'paredit-forward)
-	    (define-key slime-mode-map
-	      (kbd "C-M-f") #'forward-word)
-	    (define-key slime-mode-map
-	      (kbd "M-b") #'paredit-backward)
-	    (define-key slime-mode-map
-	      (kbd "C-M-b") #'forward-word)
-	    (define-key slime-mode-map
-	      (kbd "M-u") #'backward-up-list)
-	    (define-key slime-mode-map
-	      (kbd "C-M-u") #'upcase-word)
-;; 	    (define-key slime-mode-map
-;; 	      (kbd "M-d") #'down-list)
-;; 	    (define-key slime-mode-map
-;; 	      (kbd "C-M-d") #'paredit-forward-kill-word)
-;; 	    (define-key slime-mode-map
-;; 	      (kbd "C-k") #'kill-sexp)
-	    (define-key slime-mode-map
-	      (kbd "C-ö") #'paredit-backward-slurp-sexp)
-	    (define-key slime-mode-map
-	      (kbd "M-ä") #'paredit-forward-barf-sexp)
-	    (define-key slime-mode-map
-	      (kbd "M-ö") #'paredit-backward-barf-sexp)
-	    (define-key slime-mode-map
-	      (kbd "M-ü") #'down-list)
-	    (define-key slime-mode-map
-	      (kbd "M-t") #'transpose-sexps)
-	    (define-key slime-mode-map
-	      (kbd "C-M-t") #'transpose-words)
-	    (define-key slime-mode-map
-	      (kbd "<M-backspace>") #'paredit-backward-kill-word)
-	    ))
-
-(add-hook 'slime-repl-mode-hook
-	  (lambda ()
-	    (paredit-mode 1)
-	    (define-key slime-repl-mode-map
-	      (kbd "C-c s") #'slime-selector)
-	    (define-key slime-repl-mode-map
-	      (kbd "C-c C-d c") #'cltl2-lookup)
-	    (define-key slime-repl-mode-map
-	      (kbd "M-f") #'paredit-forward)
-	    (define-key slime-repl-mode-map
-	      (kbd "C-M-f") #'forward-word)
-	    (define-key slime-repl-mode-map
-	      (kbd "M-b") #'paredit-backward)
-	    (define-key slime-repl-mode-map
-	      (kbd "C-M-b") #'forward-word)
-	    (define-key slime-repl-mode-map
-	      (kbd "M-u") #'backward-up-list)
-	    (define-key slime-repl-mode-map
-	      (kbd "C-M-u") #'upcase-word)
-;; 	    (define-key slime-repl-mode-map
-;; 	      (kbd "M-d") #'down-list)
-;; 	    (define-key slime-repl-mode-map
-;; 	      (kbd "C-M-d") #'paredit-forward-kill-word)
-	    (define-key slime-repl-mode-map
-	      (kbd "C-ä") #'paredit-forward-slurp-sexp)
-	    (define-key slime-repl-mode-map
-	      (kbd "C-ö") #'paredit-backward-slurp-sexp)
-	    (define-key slime-repl-mode-map
-	      (kbd "M-ä") #'paredit-forward-barf-sexp)
-	    (define-key slime-repl-mode-map
-	      (kbd "M-ö") #'paredit-backward-barf-sexp)
-	    (define-key slime-repl-mode-map
-	      (kbd "M-ü") #'down-list)
-	    (define-key slime-repl-mode-map
-	      (kbd "M-t") #'transpose-sexps)
-	    (define-key slime-repl-mode-map
-	      (kbd "C-M-t") #'transpose-words)
-	    (define-key slime-repl-mode-map
-	      (kbd "<M-backspace>") #'paredit-backward-kill-word)
-	    ))
-
-(add-hook 'ielm-mode-hook
-	  (lambda ()
-	    (paredit-mode 1)
-	    (eldoc-mode 1)
-	    (setq comint-dynamic-complete-functions
-		  '(ielm-tab
-		    comint-replace-by-expanded-history
-		    ielm-complete-filename
-		    ielm-complete-symbol
-		    PC-lisp-complete-symbol
-		    ))))
 
 (mapc (lambda (keybinding)
 	(global-set-key (car keybinding)
 			(cadr keybinding)))
-      `(
-	(,(kbd "C-c i d") insert-date)
+      `((,(kbd "C-c i d") insert-date)
 	(,(kbd "C-c l") mark-line)
 	(,(kbd "C-x C-b") buffer-menu)
 	(,(kbd "M-/") hippie-expand)
@@ -658,6 +604,7 @@ prevents using commands with prefix arguments."
 	(,(kbd "C-x r v") view-register)
 	(,(kbd "M-X") dhl-invoke-smex)
 	))
+
 
 ;;;;
 ;;;; gnus
