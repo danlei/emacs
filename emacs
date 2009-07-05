@@ -1,23 +1,23 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-04 19:51:28 danlei>
+;;;;; Time-stamp: <2009-07-05 03:09:47 danlei>
 ;;;;;
 
 
 (require 'cl)
 
-(mapcar (lambda (path) (add-to-list 'load-path path))
-	'("/usr/local/emacs/share/emacs/22.3/lisp/"
-	  "~/.emacs.d/"
-	  "~/.emacs.d/erc-5.3-extras/"
-	  "~/.emacs.d/slime/"
-	  "~/.emacs.d/slime/contrib/"
-	  "~/.emacs.d/clojure-mode/"
-	  "~/.emacs.d/swank-clojure/"
-	  "~/.emacs.d/color-theme-6.6.0/"
-	  "~/.emacs.d/smex/"
-	  ))
+(mapc (lambda (path) (add-to-list 'load-path path))
+      '("/usr/local/emacs/share/emacs/22.3/lisp/"
+	"~/.emacs.d/"
+	"~/.emacs.d/erc-5.3-extras/"
+	"~/.emacs.d/slime/"
+	"~/.emacs.d/slime/contrib/"
+	"~/.emacs.d/clojure-mode/"
+	"~/.emacs.d/swank-clojure/"
+	"~/.emacs.d/color-theme-6.6.0/"
+	"~/.emacs.d/smex/"
+	))
 
 
 ;;;;
@@ -480,7 +480,7 @@ prevents using commands with prefix arguments."
 
 
 ;;;;
-;;;; desktop
+;;;; session management
 ;;;;
 
 (desktop-save-mode 1)
@@ -497,6 +497,15 @@ prevents using commands with prefix arguments."
 (add-hook 'auto-save-hook
 	  (lambda () (desktop-save-in-desktop-dir)))
 
+(savehist-mode 1)
+(setq savehist-additional-variables
+      '(search-ring
+	regexp-search-ring
+	global-mark-ring
+	mark-ring
+	kmacro-ring
+	kill-ring
+	))
 
 ;;;;
 ;;;; misc
