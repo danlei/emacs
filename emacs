@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-05 03:09:47 danlei>
+;;;;; Time-stamp: <2009-07-05 03:14:54 danlei>
 ;;;;;
 
 
@@ -506,6 +506,10 @@ prevents using commands with prefix arguments."
 	kmacro-ring
 	kill-ring
 	))
+
+(require 'saveplace)
+(setq-default save-place t)
+
 
 ;;;;
 ;;;; misc
