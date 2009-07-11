@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-11 10:54:31 danlei>
+;;;;; Time-stamp: <2009-07-11 10:57:03 danlei>
 ;;;;;
 
 
@@ -525,6 +525,7 @@ prevents using commands with prefix arguments."
       sentence-end-double-space nil
       make-backup-files 1
       default-major-mode 'text-mode
+      undo-limit 100000
       )
 
 (setq-default cursor-type 'bar
