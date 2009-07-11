@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-11 11:00:49 danlei>
+;;;;; Time-stamp: <2009-07-11 11:11:03 danlei>
 ;;;;;
 
 
@@ -526,6 +526,7 @@ prevents using commands with prefix arguments."
       make-backup-files 1
       default-major-mode 'text-mode
       undo-limit 100000
+      apropos-do-all 1
       )
 
 (setq-default cursor-type 'bar
@@ -543,6 +544,7 @@ prevents using commands with prefix arguments."
 (blink-cursor-mode -1)
 (auto-compression-mode 1)
 (auto-image-file-mode 1)
+(winner-mode 1)
 
 (add-hook 'write-file-hooks #'time-stamp)
 
