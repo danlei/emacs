@@ -1,7 +1,8 @@
+;;;;; -*- emacs-lisp -*-
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-11 13:29:57 danlei>
+;;;;; Time-stamp: <2009-07-11 13:34:06 danlei>
 ;;;;;
 
 
