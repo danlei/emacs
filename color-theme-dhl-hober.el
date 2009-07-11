@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; color-theme-dhl-hober.el
 ;;;;;
-;;;;; Time-stamp: <2009-07-03 20:46:33 danlei>
+;;;;; Time-stamp: <2009-07-11 13:41:36 danlei>
 ;;;;;
 ;;;;; dhl-hober is a customization of Edward O'Connor's hober2
 ;;;;;
@@ -200,7 +200,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (change-log-acknowledgement-face ((t (:background "cadet blue" :foreground "gray4"))))
 
      (comint-highlight-input ((t (:bold t))))
-     (comint-highlight-prompt ((t (:foreground "pale violet red"))))
+     (comint-highlight-prompt ((t (:foreground "turquoise"))))
 
      (compilation-warning-face ((t (:foreground "indian red"))))
      (compilation-warning ((t (:foreground "indian red"))))
@@ -311,8 +311,8 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (erc-underline-face ((t nil))) ;%
 
      (escape-glyph ((t ,dhl-hober-insignificant-face)))
-     (eshell-prompt-face ((t (:foreground "pale violet red"))))
-     (eshell-prompt ((t (:foreground "pale violet red"))))
+     (eshell-prompt-face ((t (:foreground "turquoise"))))
+     (eshell-prompt ((t (:foreground "turquoise"))))
 
      (eshell-ls-archive-face ((t (:foreground "indian red")))) ;%
      (eshell-ls-archive ((t (:foreground "indian red")))) ;%
