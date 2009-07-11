@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-11 13:34:06 danlei>
+;;;;; Time-stamp: <2009-07-11 13:35:06 danlei>
 ;;;;;
 
 
@@ -448,10 +448,10 @@
       '(try-expand-dabbrev
 	try-expand-dabbrev-all-buffers
 	try-expand-dabbrev-from-kill
-        try-complete-file-name-partially
-        try-complete-file-name
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol
+        try-complete-file-name-partially
+        try-complete-file-name
         try-expand-whole-kill
 	ispell-complete-word
 	))
