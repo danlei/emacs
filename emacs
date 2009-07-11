@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-11 11:17:42 danlei>
+;;;;; Time-stamp: <2009-07-11 13:29:57 danlei>
 ;;;;;
 
 
@@ -447,10 +447,10 @@
       '(try-expand-dabbrev
 	try-expand-dabbrev-all-buffers
 	try-expand-dabbrev-from-kill
-        try-complete-lisp-symbol-partially
-        try-complete-lisp-symbol
         try-complete-file-name-partially
         try-complete-file-name
+        try-complete-lisp-symbol-partially
+        try-complete-lisp-symbol
         try-expand-whole-kill
 	ispell-complete-word
 	))
@@ -618,7 +618,7 @@ lists. The functions are bound to the keys in the given mode-map.
 Keys are in kbd format."
   (mapc (lambda (keybinding)
 	  (let ((key (car keybinding))
-		(function (symbol-function (cadr keybinding))))
+		(function (cadr keybinding)))
 	    (define-key mode-map (read-kbd-macro key) function)))
 	keybindings))
 
@@ -628,7 +628,7 @@ The functions are globally bound to the keys. Keys
 are in kbd format."
   (mapc (lambda (keybinding)
 	  (let ((key (car keybinding))
-		(function (symbol-function (cadr keybinding))))
+		(function (cadr keybinding)))
 	    (global-set-key (read-kbd-macro key) function)))
 	keybindings))
 
