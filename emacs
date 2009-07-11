@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-11 13:35:06 danlei>
+;;;;; Time-stamp: <2009-07-11 16:07:55 danlei>
 ;;;;;
 
 
@@ -427,6 +427,8 @@
 ;;;;
 ;;;; ielm
 ;;;;
+
+(setq ielm-prompt "elisp> ")
 
 (add-hook 'ielm-mode-hook
 	  (lambda ()
