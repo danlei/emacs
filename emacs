@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-11 10:51:02 danlei>
+;;;;; Time-stamp: <2009-07-11 10:52:40 danlei>
 ;;;;;
 
 
@@ -523,6 +523,7 @@ prevents using commands with prefix arguments."
       ispell-dictionary "american"
       woman-use-own-frame nil
       sentence-end-double-space nil
+      make-backup-files 1
       )
 
 (setq-default cursor-type 'bar
