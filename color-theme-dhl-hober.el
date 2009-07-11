@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; color-theme-dhl-hober.el
 ;;;;;
-;;;;; Time-stamp: <2009-07-11 13:54:42 danlei>
+;;;;; Time-stamp: <2009-07-11 15:44:40 danlei>
 ;;;;;
 ;;;;; dhl-hober is a customization of Edward O'Connor's hober2
 ;;;;;
@@ -45,13 +45,13 @@
 This is only sometimes accurate."
   (if (fboundp 'display-supports-face-attributes-p)
       (display-supports-face-attributes-p '(:underline) display)
-    window-system))
+      window-system))
 
 
 (defvar dhl-hober-insignificant-face
   (if window-system
-     '(:foreground "gray30")
-   '()))
+      '(:foreground "gray30")
+      '()))
 
 ;; Ensuring `max-lisp-eval-depth' and `max-specpdl-size' are big enough
 ;; for the backquote in `color-theme-dhl-hober', as well as for running
@@ -62,11 +62,16 @@ This is only sometimes accurate."
   (setq max-specpdl-size 3000))
 
 (defun color-theme-dhl-hober ()
-  "Color theme by Edward O'Connor <ted@oconnor.cx>.
+  "Color theme by Daniel H. Leidisch, based on Edward O'Connor's hober2.
+
+I have added customizations for SLIME and ERC, as well as various
+minor color tweaks.
+
+Edward O'Connors original description:
 
 Like my previous theme, I've attempted to make sure things look
 reasonably similar under console or window system. The colors of
-`color-theme-dhl-hober' are often washed-out variants of the colors
+`color-theme-hober2' are often washed-out variants of the colors
 of `color-theme-hober'.
 
 Includes antlr, apropos, AUCTeX (font-latex), bbdb, Buffer-menu,
@@ -139,15 +144,15 @@ speedbar, tex, view, viper, w3m, widget, woman"
       (view-highlight-face . highlight)
 
       (viper-replace-overlay-cursor-color . "pale violet red") ;%
-      (viper-insert-state-cursor-color    . "light pink") ;%
+      (viper-insert-state-cursor-color    . "light pink")      ;%
       (viper-vi-state-cursor-color        . "khaki")
 
       (widget-mouse-face . highlight))
      ;; Faces
      (default ((t (:background "gray4" :foreground "light gray"
-                   :stipple nil :box nil :strike-through nil :overline nil
-                   :underline nil :slant normal :weight normal
-                   :inverse-video nil))))
+                                       :stipple nil :box nil :strike-through nil :overline nil
+                                       :underline nil :slant normal :weight normal
+                                       :inverse-video nil))))
 
      (antlr-font-lock-keyword-face ((t (:foreground "steel blue")))) ;%
      (antlr-font-lock-literal-face ((t (:foreground "pale violet red"))))
@@ -210,7 +215,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (compilation-error ((t (:foreground "dark orchid"))))
 
      (cperl-array-face ((t (:foreground "pale violet red")))) ;%
-     (cperl-array ((t (:foreground "pale violet red")))) ;%
+     (cperl-array ((t (:foreground "pale violet red"))))      ;%
      (cperl-nonoverridable-face ((t (:foreground "sandy brown"))))
      (cperl-nonoverridable ((t (:foreground "sandy brown"))))
      (cperl-hash-face ((t (:foreground "medium orchid"))))
@@ -223,7 +228,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
 
      (custom-button-face ((t (:foreground "gray4" :background "light gray" :bold t :underline t))))
      (custom-button-pressed-face ((t (:foreground "gray4" :background "light gray" :bold t
-                                      :underline t))))
+                                                                                   :underline t))))
      (custom-face-tag-face ((t (:bold t))))
      (custom-variable-tag-face ((t (:bold t))))
      (custom-state-face ((t (:foreground "medium sea green"))))
@@ -272,9 +277,9 @@ speedbar, tex, view, viper, w3m, widget, woman"
                                          :foreground "light gray"
                                          :bold t))))
      (ediff-even-diff-face-B ((t (:background "lemon chiffon" :foreground "gray30"
-                                  :bold t))))
+                                                              :bold t))))
      (ediff-even-diff-face-C ((t (:background "medium sea green" :foreground "light gray"
-                                  :bold t))))
+                                                                 :bold t))))
      (ediff-fine-diff-face-A ((t (:background "steel blue" :foreground "gray4"))))
      (ediff-fine-diff-face-Ancestor ((t (:background "orange red"
                                          :foreground "gray4"))))
@@ -282,7 +287,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (ediff-fine-diff-face-C ((t (:background "DarkGreen"
                                   :foreground "gray4"))))
      (ediff-odd-diff-face-A ((t (:background "steel blue" :foreground "gray4"
-                                 :bold t))))
+                                                          :bold t))))
      (ediff-odd-diff-face-Ancestor ((t (:background "orange red"
                                         :foreground "gray4"
                                         :bold t))))
@@ -306,16 +311,16 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (erc-nick-msg-face ((t (:foreground "pale violet red" :bold t))))
      (erc-notice-face ((t (:foreground "steel blue"))))
      (erc-pal-face ((t (:foreground "pale violet red"))))
-     (erc-prompt-face ((t (:foreground "pale violet red")))) ;%
+     (erc-prompt-face ((t (:foreground "pale violet red"))))     ;%
      (erc-timestamp-face ((t (:foreground "medium sea green")))) ;%
-     (erc-underline-face ((t nil))) ;%
+     (erc-underline-face ((t nil)))                              ;%
 
      (escape-glyph ((t ,dhl-hober-insignificant-face)))
      (eshell-prompt-face ((t (:foreground "dark turquoise"))))
      (eshell-prompt ((t (:foreground "dark turquoise"))))
 
      (eshell-ls-archive-face ((t (:foreground "indian red")))) ;%
-     (eshell-ls-archive ((t (:foreground "indian red")))) ;%
+     (eshell-ls-archive ((t (:foreground "indian red"))))      ;%
      (eshell-ls-backup-face ((t (:foreground "LightSteelBlue4"))))
      (eshell-ls-backup ((t (:foreground "LightSteelBlue4"))))
      (eshell-ls-clutter-face ((t (:background "indian red" :foreground "white"))))
@@ -331,7 +336,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (eshell-ls-readonly-face ((t ,dhl-hober-insignificant-face)))
      (eshell-ls-readonly ((t ,dhl-hober-insignificant-face)))
      (eshell-ls-special-face ((t (:foreground "pale violet red")))) ;%
-     (eshell-ls-special ((t (:foreground "pale violet red")))) ;%
+     (eshell-ls-special ((t (:foreground "pale violet red"))))      ;%
      (eshell-ls-symlink-face ((t (:foreground "cadet blue"))))
      (eshell-ls-symlink ((t (:foreground "cadet blue"))))
      (eshell-ls-unreadable-face ((t (:background "indian red" :foreground "white" :bold t))))
@@ -345,7 +350,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (fg:erc-color-face5 ((t (:foreground "sandy brown"))))
      (fg:erc-color-face6 ((t (:foreground "medium orchid"))))
      (fg:erc-color-face7 ((t (:foreground "orange red"))))
-     (fg:erc-color-face8 ((t (:foreground "lemon chiffon")))) ;%
+     (fg:erc-color-face8 ((t (:foreground "lemon chiffon"))))    ;%
      (fg:erc-color-face9 ((t (:foreground "medium sea green")))) ;%
      (fg:erc-color-face10 ((t (:foreground "LightSteelBlue4"))))
      (fg:erc-color-face11 ((t (:foreground "cadet blue"))))
@@ -355,27 +360,27 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (fg:erc-color-face15 ((t (:foreground "gray90"))))
 
      (file-name-shadow ((t ,dhl-hober-insignificant-face)))
-     (font-latex-bold-face ((t (:bold t :foreground "medium sea green"))));%
-     (font-latex-italic-face ((t (:slant italic :foreground "medium sea green"))));%
+     (font-latex-bold-face ((t (:bold t :foreground "medium sea green")))) ;%
+     (font-latex-italic-face ((t (:slant italic :foreground "medium sea green")))) ;%
      (font-latex-math-face ((t (:foreground "sandy brown"))))
      (font-latex-sectioning-0-face ((t (:foreground "khaki"))))
      (font-latex-sectioning-1-face ((t (:foreground "khaki"))))
      (font-latex-sectioning-2-face ((t (:foreground "khaki"))))
      (font-latex-sectioning-3-face ((t (:foreground "khaki"))))
      (font-latex-sectioning-4-face ((t (:foreground "khaki"))))
-;;   (font-latex-sedate-face ((t ,dhl-dhl-hober-insignificant-face)))
+     ;;   (font-latex-sedate-face ((t ,dhl-dhl-hober-insignificant-face)))
      (font-latex-sedate-face ((t (:foreground "steel blue"))))
      (font-latex-string-face ((t (:foreground "lemon chiffon"))))
      (font-latex-subscript-face ((t ())))
      (font-latex-title-1-face ((t (:foreground "LightSteelBlue4"))))
-     (font-latex-title-2-face ((t (:foreground "LightSteelBlue4"))));%
+     (font-latex-title-2-face ((t (:foreground "LightSteelBlue4")))) ;%
      (font-latex-title-3-face ((t (:foreground "LightSteelBlue4"))))
      (font-latex-title-4-face ((t (:foreground "LightSteelBlue4"))))
      (font-latex-verbatim-face ((t ())))
      (font-latex-warning-face ((t (:background "indian red" :foreground "white"))))
 
 
-     (font-lock-builtin-face ((t (:foreground "sandy brown")))) ;%
+     (font-lock-builtin-face ((t (:foreground "sandy brown"))))  ;%
      (font-lock-color-constant-face ((t (:foreground "khaki")))) ;%
      (font-lock-comment-face ((t (:foreground "indian red"))))
      (font-lock-comment-delimiter-face ((t (:foreground "indian red"))))
@@ -383,7 +388,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (font-lock-doc-face ((t (:foreground "khaki")))) ;%
      (font-lock-doc-string-face ((t ,(if (featurep 'xemacs)
                                          '(:foreground "khaki")
-                                       '(:foreground "medium orchid")))))
+                                         '(:foreground "medium orchid")))))
      (font-lock-function-name-face ((t (:foreground "cadet blue"))))
      (font-lock-keyword-face ((t (:foreground "steel blue"))))
      (font-lock-preprocessor-face ((t (:foreground "khaki"))))
@@ -565,7 +570,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (menu ((t (:background "light gray" :foreground "gray4"))))
 
      (message-cited-text-face ((t (:foreground "indian red")))) ;%
-     (message-cited-text ((t (:foreground "indian red")))) ;%
+     (message-cited-text ((t (:foreground "indian red"))))      ;%
 
      (message-header-cc-face ((t (:foreground "medium sea green"))))
      (message-header-cc ((t (:foreground "medium sea green"))))
@@ -595,9 +600,9 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (mode-line ((t (:foreground "light gray" :background "dark slate blue" :inverse-video nil :box (:line-width 2 :style released-button)))))
      (modeline ((t (:foreground "light gray" :background "dark slate blue" :inverse-video nil :box (:line-width 2 :style released-button)))))
      (mode-line-inactive ((t (:foreground "light gray" :background "gray30"
-                              :inverse-video nil :box (:line-width 2 :style released-button)))))
+                                                       :inverse-video nil :box (:line-width 2 :style released-button)))))
      (mode-line-highlight ((t (:foreground "black" :background "light sky blue"
-                               :inverse-video nil :box (:line-width 2 :style released-button)))))
+                                                   :inverse-video nil :box (:line-width 2 :style released-button)))))
      (modeline-buffer-id ((t (:foreground "khaki" :background "dark slate blue" :inverse-video nil :box (:line-width 2 :style released-button)))))
      (modeline-mousable ((t (:foreground "khaki" :background "dark slate blue" :inverse-video nil :box (:line-width 2 :style released-button)))))
      (modeline-mousable-minor-mode ((t (:foreground "khaki" :background "dark slate blue" :inverse-video nil :box (:line-width 2 :style released-button)))))
@@ -677,7 +682,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (region ((t (:background "dark slate blue" :foreground "white"))))
      (rng-error ((t ,(if (dhl-hober-use-underline-p)
                          '(:underline "red")
-                       '(:background "indian red" :foreground "white" :bold t)))))
+                         '(:background "indian red" :foreground "white" :bold t)))))
 
 
      (scroll-bar ((t (:background "light gray" :foreground "gray4"))))
@@ -755,7 +760,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
 
      (viper-search-face ((t (:background "steel blue" :foreground "lemon chiffon"))))
      (viper-replace-overlay-face ((t (:foreground "gray4" :bold t
-                                      :background "light pink"))))
+                                                          :background "light pink"))))
      (viper-minibuffer-emacs-face ((t (:foreground "gray4"
                                        :background "DarkSeaGreen2"))))
      (viper-minibuffer-insert-face ((t (:foreground "gray4" ;%
@@ -769,7 +774,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
                                  :background "white"))))
      (w3m-bold-face ((t (:foreground "medium sea green"))))
      (w3m-current-anchor-face ((t (:foreground "light sea green" :bold t
-                                   :underline t))))
+                                                                 :underline t))))
      (w3m-form-button-face ((t (:foreground "gray4" :background "light gray" :bold t :underline t))))
      (w3m-form-button-mouse-face ((t (:background "DarkGreen" :foreground "light gray" :underline t))))
      (w3m-form-button-pressed-face ((t (:foreground "gray4" :background "light gray" :bold t :underline t))))
