@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-11 10:58:46 danlei>
+;;;;; Time-stamp: <2009-07-11 11:00:49 danlei>
 ;;;;;
 
 
@@ -542,6 +542,7 @@ prevents using commands with prefix arguments."
 (partial-completion-mode 1)
 (blink-cursor-mode -1)
 (auto-compression-mode 1)
+(auto-image-file-mode 1)
 
 (add-hook 'write-file-hooks #'time-stamp)
 
