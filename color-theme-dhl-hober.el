@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; color-theme-dhl-hober.el
 ;;;;;
-;;;;; Time-stamp: <2009-07-11 13:41:36 danlei>
+;;;;; Time-stamp: <2009-07-11 13:54:42 danlei>
 ;;;;;
 ;;;;; dhl-hober is a customization of Edward O'Connor's hober2
 ;;;;;
@@ -200,7 +200,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (change-log-acknowledgement-face ((t (:background "cadet blue" :foreground "gray4"))))
 
      (comint-highlight-input ((t (:bold t))))
-     (comint-highlight-prompt ((t (:foreground "turquoise"))))
+     (comint-highlight-prompt ((t (:foreground "dark turquoise"))))
 
      (compilation-warning-face ((t (:foreground "indian red"))))
      (compilation-warning ((t (:foreground "indian red"))))
@@ -253,7 +253,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
 
      (dired-directory ((t (:foreground "cornflower blue"))))
      (dired-face-directory ((t (:foreground "cornflower blue"))))
-     (dired-face-executable ((t (:foreground "turquoise"))))
+     (dired-face-executable ((t (:foreground "dark turquoise"))))
      (dired-ignored ((t ,dhl-hober-insignificant-face)))
      (dired-face-boring ((t ,dhl-hober-insignificant-face)))
      (dired-face-permissions ((t ,dhl-hober-insignificant-face)))
@@ -311,8 +311,8 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (erc-underline-face ((t nil))) ;%
 
      (escape-glyph ((t ,dhl-hober-insignificant-face)))
-     (eshell-prompt-face ((t (:foreground "turquoise"))))
-     (eshell-prompt ((t (:foreground "turquoise"))))
+     (eshell-prompt-face ((t (:foreground "dark turquoise"))))
+     (eshell-prompt ((t (:foreground "dark turquoise"))))
 
      (eshell-ls-archive-face ((t (:foreground "indian red")))) ;%
      (eshell-ls-archive ((t (:foreground "indian red")))) ;%
@@ -322,8 +322,8 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (eshell-ls-clutter ((t (:background "indian red" :foreground "white"))))
      (eshell-ls-directory-face ((t (:foreground "cornflower blue"))))
      (eshell-ls-directory ((t (:foreground "cornflower blue"))))
-     (eshell-ls-executable-face ((t (:foreground "turquoise"))))
-     (eshell-ls-executable ((t (:foreground "turquoise"))))
+     (eshell-ls-executable-face ((t (:foreground "dark turquoise"))))
+     (eshell-ls-executable ((t (:foreground "dark turquoise"))))
      (eshell-ls-missing-face ((t (:background "indian red" :foreground "white" :bold t))))
      (eshell-ls-missing ((t (:background "indian red" :foreground "white" :bold t))))
      (eshell-ls-product-face ((t ,dhl-hober-insignificant-face)))
@@ -705,28 +705,28 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (sldb-catch-tag-face ((t (:foreground "khaki")))) ;%
      (sldb-condition-face ((t (:foreground "steel blue"))))
      (sldb-detailed-frame-line-face ((t ())))
-     (sldb-frame-label-face ((t (:foreground "turquoise"))))
+     (sldb-frame-label-face ((t (:foreground "dark turquoise"))))
      (sldb-frame-line-face ((t ())))
      (sldb-local-name-face ((t (:foreground "IndianRed1"))))
      (sldb-local-value-face ((t (:foreground "lemon chiffon"))))
      (sldb-reference-face ((t (:background "cyan"))))
-     (sldb-restart-type-face ((t (:foreground "turquoise"))))
+     (sldb-restart-type-face ((t (:foreground "dark turquoise"))))
      (sldb-restart-face ((t (:foreground "grey"))))
-     (sldb-restart-number-face ((t (:foreground "turquoise"))))
+     (sldb-restart-number-face ((t (:foreground "dark turquoise"))))
      (sldb-section-face ((t (:foreground "grey"))))
      (sldb-topline-face ((t (:foreground "IndianRed1"))))
 
-     (slime-repl-prompt-face ((t (:foreground "turquoise"))))
+     (slime-repl-prompt-face ((t (:foreground "dark turquoise"))))
      (slime-repl-output-face ((t (:foreground "lemon chiffon"))))
      (slime-repl-input-face ((t (:foreground "gray"))))
      (slime-repl-result-face ((t (:foreground "gray"))))
      (slime-repl-inputed-output-face ((t (:foreground "steel blue"))))
 
      (slime-inspector-topline-face ((t (:foreground "IndianRed1"))))
-     (slime-inspector-label-face ((t (:foreground "turquoise")))) ;%
+     (slime-inspector-label-face ((t (:foreground "dark turquoise")))) ;%
      (slime-inspector-value-face ((t (:foreground "steel blue"))))
-     (slime-inspector-action-face ((t (:foreground "turquoise"))))
-     (slime-inspector-type-face ((t (:foreground "turquoise")))) ;%
+     (slime-inspector-action-face ((t (:foreground "dark turquoise"))))
+     (slime-inspector-type-face ((t (:foreground "dark turquoise")))) ;%
 
      (slime-reader-conditional-face ((t ,dhl-hober-insignificant-face)))
 
@@ -797,7 +797,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
 
      (zmacs-region ((t (:background "dark slate blue" :foreground "white"))))
 
-     (ido-subdir ((((min-colors 88) (class color)) (:foreground "turquoise"))))
+     (ido-subdir ((((min-colors 88) (class color)) (:foreground "dark turquoise"))))
      )))
 
 (provide 'color-theme-dhl-hober)
