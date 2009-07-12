@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; color-theme-dhl-hober.el
 ;;;;;
-;;;;; Time-stamp: <2009-07-11 15:44:40 danlei>
+;;;;; Time-stamp: <2009-07-12 15:22:22 danlei>
 ;;;;;
 ;;;;; dhl-hober is a customization of Edward O'Connor's hober2
 ;;;;;
@@ -487,21 +487,22 @@ speedbar, tex, view, viper, w3m, widget, woman"
 
      (holiday-face ((t (:foreground "pale violet red"))))
 
-     (Info-title-1-face ((t (:foreground "IndianRed1"))))
-     (Info-title-2-face ((t (:foreground "IndianRed1"))))
-     (Info-title-3-face ((t (:foreground "IndianRed1"))))
-     (Info-title-4-face ((t (:foreground "IndianRed1"))))
-     (info-header-node ((t (:foreground "IndianRed1"))))
+     (Info-title-1-face ((t (:foreground "white"))))
+     (Info-title-2-face ((t (:foreground "white"))))
+     (Info-title-3-face ((t (:foreground "white"))))
+     (Info-title-4-face ((t (:foreground "white"))))
+     (info-header-node ((t (:foreground "cadet blue"))))
      (info-header-xref ((t (:foreground "cadet blue"))))
      (info-menu-5 ((t ())))
      (info-menu-star ((t ())))
-     (info-menu-header ((t (:foreground "IndianRed1"))))
-     (info-node ((t (:foreground "IndianRed1"))))
-     (info-title-1 ((t (:foreground "IndianRed1"))))
-     (info-title-2 ((t (:foreground "IndianRed1"))))
-     (info-title-3 ((t (:foreground "IndianRed1"))))
-     (info-title-4 ((t (:foreground "IndianRed1"))))
+     (info-menu-header ((t (:foreground "cadet blue"))))
+     (info-node ((t (:foreground "cadet blue"))))
+     (info-title-1 ((t (:foreground "white"))))
+     (info-title-2 ((t (:foreground "white"))))
+     (info-title-3 ((t (:foreground "white"))))
+     (info-title-4 ((t (:foreground "white"))))
      (info-xref ((t (:foreground "cadet blue"))))
+     (info-xref-visited ((t (:foreground "steel blue"))))
 
      (isearch ((t (:background "steel blue" :foreground "lemon chiffon"))))
      (isearch-lazy-highlight-face ((t (:background "DarkGreen"
