@@ -1,0 +1,5 @@
+alias view view-file $1
+alias emacs find-file $1
+alias ed find-file $1
+alias ll ls -l $*
+alias la ls -la $*
