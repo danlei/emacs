@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-11 16:07:55 danlei>
+;;;;; Time-stamp: <2009-07-12 12:05:59 danlei>
 ;;;;;
 
 
@@ -656,6 +656,8 @@ are in kbd format."
 		   ("C-c s" slime-selector)
 		   ("C-x r v" view-register)
 		   ("M-X" dhl-invoke-smex)
+                   ("C-^" winner-undo)
+                   ("C-°" winner-redo)
 		   ))
 
 
