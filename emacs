@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-12 12:05:59 danlei>
+;;;;; Time-stamp: <2009-07-12 14:15:06 danlei>
 ;;;;;
 
 
@@ -443,6 +443,38 @@
 		    ))))
 
 ;;;;
+;;;; eshell
+;;;;
+
+(push 'eshell-postoutput-scroll-to-bottom eshell-output-filter-functions)
+
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (define-keys eshell-mode-map
+                '(("C-a" eshell-maybe-bol)
+                  ))))
+
+(defun eshell-maybe-bol ()
+  (interactive)
+  (let ((p (point)))
+    (eshell-bol)
+    (when (= p (point))
+      (beginning-of-line))))
+
+(defun eshell/clear ()
+  "Clears the eshell buffer."
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)))
+
+(defun eshell/info (subject)
+  "Shows the Info manual on subject."
+  (let ((buf (current-buffer)))
+    (Info-directory)
+    (Info-menu subject)))
+
+
+;;;;
 ;;;; hippie-expansion
 ;;;;
 
@@ -608,12 +640,6 @@ prevents using commands with prefix arguments."
   (interactive "p")
   (back-to-indentation)
   (end-of-line-mark arg))
-
-(defun eshell/clear ()
-  "clears the eshell buffer"
-  (interactive)
-  (let ((inhibit-read-only t))
-    (erase-buffer)))
 
 (defun define-keys (mode-map keybindings)
   "Takes a mode map, and a list of (key function-designator)
