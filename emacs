@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-12 14:15:06 danlei>
+;;;;; Time-stamp: <2009-07-12 14:15:27 danlei>
 ;;;;;
 
 
@@ -487,7 +487,7 @@
         try-complete-file-name-partially
         try-complete-file-name
         try-expand-whole-kill
-	ispell-complete-word
+;	ispell-complete-word
 	))
 
 
