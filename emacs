@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-14 02:13:08 danlei>
+;;;;; Time-stamp: <2009-07-14 02:17:58 danlei>
 ;;;;;
 
 
@@ -807,7 +807,7 @@ are in kbd format."
 
 (load "~/.emacs-auth")
 
-(server-start)
+;; (server-start)
 
 
 ;;;;
