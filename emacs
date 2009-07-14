@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-12 14:15:27 danlei>
+;;;;; Time-stamp: <2009-07-14 02:13:08 danlei>
 ;;;;;
 
 
@@ -446,32 +446,32 @@
 ;;;; eshell
 ;;;;
 
-(push 'eshell-postoutput-scroll-to-bottom eshell-output-filter-functions)
+;; (push 'eshell-postoutput-scroll-to-bottom eshell-output-filter-functions)
 
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            (define-keys eshell-mode-map
-                '(("C-a" eshell-maybe-bol)
-                  ))))
+;; (add-hook 'eshell-mode-hook
+;;           (lambda ()
+;;             (define-keys eshell-mode-map
+;;                 '(("C-a" eshell-maybe-bol)
+;;                   ))))
 
-(defun eshell-maybe-bol ()
-  (interactive)
-  (let ((p (point)))
-    (eshell-bol)
-    (when (= p (point))
-      (beginning-of-line))))
+;; (defun eshell-maybe-bol ()
+;;   (interactive)
+;;   (let ((p (point)))
+;;     (eshell-bol)
+;;     (when (= p (point))
+;;       (beginning-of-line))))
 
-(defun eshell/clear ()
-  "Clears the eshell buffer."
-  (interactive)
-  (let ((inhibit-read-only t))
-    (erase-buffer)))
+;; (defun eshell/clear ()
+;;   "Clears the eshell buffer."
+;;   (interactive)
+;;   (let ((inhibit-read-only t))
+;;     (erase-buffer)))
 
-(defun eshell/info (subject)
-  "Shows the Info manual on subject."
-  (let ((buf (current-buffer)))
-    (Info-directory)
-    (Info-menu subject)))
+;; (defun eshell/info (subject)
+;;   "Shows the Info manual on subject."
+;;   (let ((buf (current-buffer)))
+;;     (Info-directory)
+;;     (Info-menu subject)))
 
 
 ;;;;
