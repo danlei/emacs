@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-12 14:15:27 danlei>
+;;;;; Time-stamp: <2009-07-17 07:14:36 danlei>
 ;;;;;
 
 
@@ -283,15 +283,18 @@
 ;;;; prolog
 ;;;;
 
-;; (autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
-;; (autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
-;; (autoload 'mercury-mode "prolog" "Major mode for editing Mercury programs." t)
+(autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
+(autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
+(autoload 'mercury-mode "prolog" "Major mode for editing Mercury programs." t)
 
-;; (require 'prolog)
+(require 'prolog)
 
-;; (setq prolog-system 'swi)
+(setq prolog-system 'swi)
 
-;; (add-to-list 'auto-mode-alist '("\.pl$" . prolog-mode))
+(if (eq system-type 'cygwin)
+    (setq prolog-program-name "/usr/bin/pl"))
+
+(add-to-list 'auto-mode-alist '("\.pl$" . prolog-mode))
 
 
 ;;;;
