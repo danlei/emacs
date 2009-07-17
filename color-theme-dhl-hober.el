@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; color-theme-dhl-hober.el
 ;;;;;
-;;;;; Time-stamp: <2009-07-12 15:22:22 danlei>
+;;;;; Time-stamp: <2009-07-17 03:22:39 danlei>
 ;;;;;
 ;;;;; dhl-hober is a customization of Edward O'Connor's hober2
 ;;;;;
@@ -231,7 +231,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
                                                                                    :underline t))))
      (custom-face-tag-face ((t (:bold t))))
      (custom-variable-tag-face ((t (:bold t))))
-     (custom-state-face ((t (:foreground "medium sea green"))))
+     (custom-state-face ((t (:foreground "light sea green"))))
 
      (darcsum-header-face ((t (:foreground "lemon chiffon")))) ;%
      (darcsum-marked-face ((t (:bold t))))
@@ -249,8 +249,8 @@ speedbar, tex, view, viper, w3m, widget, woman"
 
      (dired-flagged ((t (:background "indian red" :foreground "white"))))
      (dired-face-flagged ((t (:background "indian red" :foreground "white"))))
-     (dired-header ((t (:foreground "medium sea green"))))
-     (dired-face-header ((t (:foreground "medium sea green"))))
+     (dired-header ((t (:foreground "light sea green"))))
+     (dired-face-header ((t (:foreground "light sea green"))))
      (dired-mark ((t (:foreground "khaki"))))
      (dired-marked ((t (:background "cadet blue" :foreground "gray4"))))
      (dired-face-marked ((t (:background "cadet blue" :foreground "gray4"))))
@@ -332,9 +332,9 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (eshell-ls-missing-face ((t (:background "indian red" :foreground "white" :bold t))))
      (eshell-ls-missing ((t (:background "indian red" :foreground "white" :bold t))))
      (eshell-ls-product-face ((t ,dhl-hober-insignificant-face)))
-     (eshell-ls-product ((t ,dhl-hober-insignificant-face)))
-     (eshell-ls-readonly-face ((t ,dhl-hober-insignificant-face)))
-     (eshell-ls-readonly ((t ,dhl-hober-insignificant-face)))
+     (eshell-ls-product (((t ,dhl-hober-insignificant-face))))
+     (eshell-ls-readonly-face ((t (:foreground "light gray"))))
+     (eshell-ls-readonly ((t (:foreground "light gray"))))
      (eshell-ls-special-face ((t (:foreground "pale violet red")))) ;%
      (eshell-ls-special ((t (:foreground "pale violet red"))))      ;%
      (eshell-ls-symlink-face ((t (:foreground "cadet blue"))))
