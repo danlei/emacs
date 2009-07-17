@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-17 04:49:51 danlei>
+;;;;; Time-stamp: <2009-07-17 16:09:56 danlei>
 ;;;;;
 
 
@@ -455,6 +455,8 @@
                   ))))
 
 (defun eshell-maybe-bol ()
+  "Moves point behind the eshell prompt, or
+at the beginning of line, if already there."
   (interactive)
   (let ((p (point)))
     (eshell-bol)
