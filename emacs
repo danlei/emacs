@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-15 18:57:00 danlei>
+;;;;; Time-stamp: <2009-07-17 03:16:01 danlei>
 ;;;;;
 
 
@@ -576,6 +576,7 @@ prevents using commands with prefix arguments."
 (line-number-mode 1)
 (display-time-mode -1)
 (show-paren-mode 1)
+(transient-mark-mode -1)
 (partial-completion-mode 1)
 (blink-cursor-mode -1)
 (auto-compression-mode 1)
