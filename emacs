@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-17 03:16:01 danlei>
+;;;;; Time-stamp: <2009-07-17 04:49:51 danlei>
 ;;;;;
 
 
@@ -550,7 +550,8 @@ prevents using commands with prefix arguments."
 ;;;; misc
 ;;;;
 
-(setq inhibit-splash-screen t
+(setq inhibit-startup-screen t
+      initial-scratch-message nil
       ring-bell-function (lambda ())
       scroll-conservatively 1
       require-final-newline t
