@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-17 16:09:56 danlei>
+;;;;; Time-stamp: <2009-07-17 17:32:47 danlei>
 ;;;;;
 
 
@@ -468,12 +468,6 @@ at the beginning of line, if already there."
   (interactive)
   (let ((inhibit-read-only t))
     (erase-buffer)))
-
-(defun eshell/info (subject)
-  "Shows the Info manual on subject."
-  (let ((buf (current-buffer)))
-    (Info-directory)
-    (Info-menu subject)))
 
 
 ;;;;
