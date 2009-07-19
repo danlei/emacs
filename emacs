@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-17 17:32:47 danlei>
+;;;;; Time-stamp: <2009-07-19 10:40:32 danlei>
 ;;;;;
 
 
@@ -254,28 +254,32 @@
 ;;;; haskell-mode
 ;;;;
 
-;; (add-to-list 'load-path
-;;	     "/usr/share/emacs/site-lisp/haskell-mode/")
+(add-to-list 'load-path "~/.emacs.d/haskell-mode/")
 
-;; (require 'inf-haskell)
-;; (require 'haskell-indent)
+(require 'inf-haskell)
+(require 'haskell-indent)
 
-;; (setq auto-mode-alist (append auto-mode-alist '(("\\.hs$" . haskell-mode))))
+(when (eq system-type 'cygwin)
+  (setq haskell-program-name "/cygdrive/e/ghc/ghc-6.4.2/bin/ghci.exe"))
 
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
+(add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
 
-;; (add-hook
-;; 'haskell-mode-hook
-;;  (lambda ()
-;;    (define-key haskell-mode-map "\r" 'newline)
-;;    (define-key haskell-mode-map "\t" 'haskell-indent-cycle)
-;;    (define-key haskell-mode-map "\C-c=" 'haskell-indent-insert-equal)
-;;    (define-key haskell-mode-map "\C-c|" 'haskell-indent-insert-guard)
-;;    (define-key haskell-mode-map "\C-co" 'haskell-indent-insert-otherwise)
-;;    (define-key haskell-mode-map "\C-cw" 'haskell-indent-insert-where)
-;;    (define-key haskell-mode-map "\C-c." 'haskell-indent-align-guards-and-rhs)))
+(add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+
+(add-hook
+ 'haskell-mode-hook
+ (lambda ()
+   (define-key haskell-mode-map "\r" 'newline)
+   (define-key haskell-mode-map "\t" 'haskell-indent-cycle)
+   (define-key haskell-mode-map "\C-c=" 'haskell-indent-insert-equal)
+   (define-key haskell-mode-map "\C-c|" 'haskell-indent-insert-guard)
+   (define-key haskell-mode-map "\C-co" 'haskell-indent-insert-otherwise)
+   (define-key haskell-mode-map "\C-cw" 'haskell-indent-insert-where)
+   (define-key haskell-mode-map "\C-c." 'haskell-indent-align-guards-and-rhs)))
 
 
 ;;;;
