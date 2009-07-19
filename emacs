@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-19 11:11:57 danlei>
+;;;;; Time-stamp: <2009-07-19 12:38:55 danlei>
 ;;;;;
 
 
@@ -264,7 +264,6 @@
 
 (add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
 
-(add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
