@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-19 10:40:32 danlei>
+;;;;; Time-stamp: <2009-07-19 11:11:57 danlei>
 ;;;;;
 
 
@@ -273,13 +273,16 @@
 (add-hook
  'haskell-mode-hook
  (lambda ()
-   (define-key haskell-mode-map "\r" 'newline)
-   (define-key haskell-mode-map "\t" 'haskell-indent-cycle)
-   (define-key haskell-mode-map "\C-c=" 'haskell-indent-insert-equal)
-   (define-key haskell-mode-map "\C-c|" 'haskell-indent-insert-guard)
-   (define-key haskell-mode-map "\C-co" 'haskell-indent-insert-otherwise)
-   (define-key haskell-mode-map "\C-cw" 'haskell-indent-insert-where)
-   (define-key haskell-mode-map "\C-c." 'haskell-indent-align-guards-and-rhs)))
+   (define-keys haskell-mode-map
+       '(("RET" newline)
+         ("TAB" haskell-indent-cycle)
+         ("C-c =" haskell-indent-insert-equal)
+         ("C-c |" haskell-indent-insert-guard)
+         ("C-c o" haskell-indent-insert-otherwise)
+         ("C-c w" haskell-indent-insert-where)
+         ("C-c ." haskell-indent-align-guards-and-rhs)
+         ("C-c t" inferior-haskell-type)
+         ("C-c i" inferior-haskell-info)))))
 
 
 ;;;;
