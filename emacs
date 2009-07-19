@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-19 12:38:55 danlei>
+;;;;; Time-stamp: <2009-07-19 14:01:32 danlei>
 ;;;;;
 
 
@@ -566,6 +566,7 @@ prevents using commands with prefix arguments."
       undo-limit 100000
       apropos-do-all 1
       line-move-visual nil
+      help-window-select t
       )
 
 (setq-default cursor-type 'bar
