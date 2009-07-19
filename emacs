@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-19 14:01:32 danlei>
+;;;;; Time-stamp: <2009-07-19 14:54:09 danlei>
 ;;;;;
 
 
@@ -268,6 +268,8 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+
+(add-hook 'inferior-haskell-mode-hook 'turn-on-haskell-doc-mode)
 
 (add-hook
  'haskell-mode-hook
