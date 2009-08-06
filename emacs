@@ -610,8 +610,8 @@ prevents using commands with prefix arguments."
 (set-keyboard-coding-system 'utf-8)
 (set-language-environment   'utf-8)
 
-(setq tramp-syntax 'url)
-;(setq tramp-default-method "ftp")
+(setq tramp-syntax 'ftp)
+(setq tramp-default-method "ftp")
 
 ;;; git
 (require 'vc-git)
