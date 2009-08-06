@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-19 14:54:09 danlei>
+;;;;; Time-stamp: <2009-08-06 19:59:14 danlei>
 ;;;;;
 
 
@@ -360,6 +360,7 @@
 (require 'erc-list-old)
 
 (erc-scrolltobottom-mode 1)
+(erc-truncate-mode 1)
 
 (setq erc-keywords '()
       erc-pals '()
@@ -375,6 +376,7 @@
       erc-kill-buffer-on-part t
       erc-kill-queries-on-quit t
       erc-kill-server-buffer-on-quit t
+      erc-max-buffer-size 100000
       )
 
 (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
