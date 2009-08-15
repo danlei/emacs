@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-08-06 19:59:14 danlei>
+;;;;; Time-stamp: <2009-08-15 12:03:07 danlei>
 ;;;;;
 
 
@@ -214,6 +214,22 @@
 ;; 	     (expand-file-name "/usr/share/emacs/site-lisp/newlisp-mode"))
 ;; (add-to-list 'auto-mode-alist '("\\.lsp\\'" . newlisp-mode))
 ;; (autoload 'newlisp-mode "newlisp" t)
+
+
+;;;;
+;;;; j-mode
+;;;;
+
+(autoload 'j-mode "j-mode.el"  "Major mode for J." t)
+(autoload 'j-shell "j-mode.el" "Run J from emacs." t)
+(setq auto-mode-alist
+      (cons '("\\.ij[rstp]" . j-mode) auto-mode-alist))
+
+(setq j-path "/cygdrive/e/Dokumente und Einstellungen/danlei/j602/bin/")
+(setq j-dictionary-url "http://www.jsoftware.com/help/dictionary/")
+
+(when (ignore-errors (require 'which-func))
+  (which-func-mode 1))
 
 
 ;;;;
@@ -831,7 +847,7 @@ are in kbd format."
   ;; If there is more than one, they won't work right.
  '(quack-browse-url-browser-function (quote w3m-browse-url))
  '(quack-pretty-lambda-p t)
- '(safe-local-variable-values (quote ((Package . ccl) (Package . CL-FAD) (Syntax . COMMON-LISP) (Package . CCL) (Base . 10) (Package . LISP-UNIT) (syntax . ANSI-COMMON-LISP) (Package SERIES :use "COMMON-LISP" :colon-mode :external)))))
+ '(safe-local-variable-values (quote ((Package . Demos) (Syntax . ANSI-Common-Lisp) (Package . CLIM-DEMO) (Lowercase . Yes) (Package . CLIMACS-COMMANDS) (Package . CLIMACS-JAVA-SYNTAX) (Package . CLIMACS-C-SYNTAX) (Package . CLIMACS-CORE) (Package . CLIMACS-GUI) (Package . CLIMACS-PROLOG-SYNTAX) (Package . CLIM-NULL) (show-trailing-whitespace . t) (indent-tabs) (Package . DREI-CORE) (Package . DREI-LISP-SYNTAX) (Package . DREI-LR-SYNTAX) (Package . DREI-FUNDAMENTAL-SYNTAX) (Package . DREI-MOTION) (Package . DREI-SYNTAX) (Package . DREI) (Package . DREI-BUFFER) (Package . ESA-IO) (Package . ESA) (Package . ESA-UTILS) (Package . GOATEE) (Package . CLIM-POSTSCRIPT) (Package . CLIM-INTERNALS) (Package . gui-geometry) (Syntax . Common-Lisp) (Package . cells) (Package . ccl) (Package . CL-FAD) (Syntax . COMMON-LISP) (Package . CCL) (Base . 10) (Package . LISP-UNIT) (syntax . ANSI-COMMON-LISP) (Package SERIES :use "COMMON-LISP" :colon-mode :external)))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
