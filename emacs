@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-08-15 12:03:07 danlei>
+;;;;; Time-stamp: <2009-08-15 12:03:42 danlei>
 ;;;;;
 
 
@@ -566,6 +566,25 @@ prevents using commands with prefix arguments."
 
 (require 'saveplace)
 (setq-default save-place t)
+
+
+;;;;
+;;;; whitespace-mode
+;;;;
+
+(setq whitespace-style
+      '(spaces tabs newline space-mark tab-mark newline-mark))
+
+(setq whitespace-display-mappings
+      '((space-mark 32 [183] [46])
+        (space-mark 160 [164] [95])
+        (space-mark 2208 [2212] [95])
+        (space-mark 2336 [2340] [95])
+        (space-mark 3616 [3620] [95])
+        (space-mark 3872 [3876] [95])
+        (newline-mark 10 [182 10])
+        (tab-mark 9 [8677 9] [92 9])
+        ))
 
 
 ;;;;
