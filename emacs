@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-08-21 15:37:45 danlei>
+;;;;; Time-stamp: <2009-08-21 18:27:27 danlei>
 ;;;;;
 
 
@@ -730,6 +730,9 @@ are in kbd format."
 		   ("M-X" dhl-invoke-smex)
                    ("C-^" winner-undo)
                    ("C-°" winner-redo)
+                   ("C-x 8 l" (lambda ()
+                                (interactive)
+                                (insert "λ")))
 		   ))
 
 
