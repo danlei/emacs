@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-08-21 21:29:52 danlei>
+;;;;; Time-stamp: <2009-08-22 09:25:41 danlei>
 ;;;;;
 
 
@@ -414,8 +414,8 @@
 
 ;;; ~/.emacs-auth now takes care of this
 ;; (add-hook 'erc-after-connect
-;; 	  (lambda (SERVER NICK)
-;; 	    (cond ((string-match "freenode\\.net" SERVER)
+;; 	  (lambda (server nick)
+;; 	    (cond ((string-match "freenode\\.net" server)
 ;; 		   (erc-message "PRIVMSG" "NickServ identify <password>")))))
 
 
