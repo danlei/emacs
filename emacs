@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-08-22 09:25:41 danlei>
+;;;;; Time-stamp: <2009-08-24 16:45:38 danlei>
 ;;;;;
 
 
@@ -200,7 +200,6 @@
  (lambda ()
    (define-keys inferior-scheme-mode-map
        '(("M-TAB" hippie-expand)
-	 ("M-TAB" 'hippie-expand)
 	 ))))
 
 ;(require 'quack)
@@ -379,7 +378,7 @@
 (erc-truncate-mode 1)
 
 (setq erc-keywords '()
-      erc-pals '()
+      erc-pals '("rhickey")
       erc-fools '()
       erc-current-nick-highlight-type 'nick-or-keyword
       erc-notice-highlight-type 'prefix
