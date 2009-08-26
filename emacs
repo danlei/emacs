@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-08-24 16:45:38 danlei>
+;;;;; Time-stamp: <2009-08-25 01:12:37 danlei>
 ;;;;;
 
 
@@ -411,12 +411,23 @@
                         (or x "Ein guter Abgang ziert die Übung."))
       erc-quit-reason erc-part-reason)
 
-;;; ~/.emacs-auth now takes care of this
-;; (add-hook 'erc-after-connect
-;; 	  (lambda (server nick)
-;; 	    (cond ((string-match "freenode\\.net" server)
-;; 		   (erc-message "PRIVMSG" "NickServ identify <password>")))))
+;; (defvar *erc-auth*
+;;   '(freenode (:name "<irc-nick>" :password "<password>")))
 
+(defun erc-nick (server)
+  (getf (getf *erc-auth* server) :name))
+
+(defun erc-password (server)
+  (getf (getf *erc-auth* server) :password))
+
+(add-hook 'erc-after-connect
+	  (lambda (SERVER NICK)
+	    (cond ((string-match "freenode\\.net" SERVER)
+		   (erc-message "PRIVMSG" (concat "NickServ identify "
+                                                  (erc-password 'freenode)))
+                   (erc-message "PRIVMSG" (concat "NickServ ghost "
+                                                  (erc-nick 'freenode)))
+                   (erc-message "NICK" (erc-nick 'freenode))))))
 
 ;;;;
 ;;;; dired
