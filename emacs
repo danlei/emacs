@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-09-02 12:29:39 danlei>
+;;;;; Time-stamp: <2009-09-02 12:30:46 danlei>
 ;;;;;
 
 
@@ -563,6 +563,8 @@ prevents using commands with prefix arguments."
 ;;;;
 
 (desktop-save-mode 1)
+
+(setq desktop-dirname "~/")
 
 (setq desktop-modes-not-to-save
       '(
