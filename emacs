@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-08-25 01:12:37 danlei>
+;;;;; Time-stamp: <2009-09-02 12:29:39 danlei>
 ;;;;;
 
 
@@ -127,11 +127,21 @@
 ;;;; clojure
 ;;;;
 
-(when (eq system-type 'cygwin)
-  (setq swank-clojure-jar-path
-	"e:/cygwin/home/danlei/build/clojure/trunk/clojure.jar"
-	swank-clojure-extra-classpaths
-	'("e:/cygwin/home/danlei/coding/lisp/clojure/")))
+;; (when (eq system-type 'cygwin)
+;;   (setq swank-clojure-jar-path
+;; 	"e:/cygwin/home/danlei/build/clojure/trunk/clojure.jar"
+;; 	swank-clojure-extra-classpaths
+;; 	'("e:/cygwin/home/danlei/coding/lisp/clojure/")))
+
+(case system-type
+  (cygwin (setq swank-clojure-jar-path
+		"e:/cygwin/home/danlei/build/clojure/trunk/clojure.jar"
+		swank-clojure-extra-classpaths
+		'("e:/cygwin/home/danlei/coding/lisp/clojure/")))
+  (windows-nt (setq swank-clojure-jar-path
+		    "c:/Dokumente und Einstellungen/danlei/Clojure/clojure/clojure.jar"
+		    swank-clojure-extra-classpaths
+		    '("c:/Dokumente und Einstellungen/danlei/Clojure/clojure-contrib/clojure-contrib.jar"))))
 
 (require 'swank-clojure-autoload)
 (require 'swank-clojure)
