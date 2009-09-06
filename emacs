@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-09-06 20:38:52 danlei>
+;;;;; Time-stamp: <2009-09-06 21:30:15 danlei>
 ;;;;;
 
 
@@ -231,8 +231,7 @@
 
 (autoload 'j-mode "j-mode.el"  "Major mode for J." t)
 (autoload 'j-shell "j-mode.el" "Run J from emacs." t)
-(setq auto-mode-alist
-      (cons '("\\.ij[rstp]" . j-mode) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.ij[rstp]" . j-mode))
 
 (setq j-path "/cygdrive/e/Dokumente und Einstellungen/danlei/j602/bin/")
 (setq j-dictionary-url "http://www.jsoftware.com/help/dictionary/")
@@ -672,6 +671,8 @@ prevents using commands with prefix arguments."
 
 (setq tramp-syntax 'ftp)
 (setq tramp-default-method "ftp")
+
+(add-to-list 'auto-mode-alist '("\\.xml\\'" . nxml-mode))
 
 ;;; git
 (require 'vc-git)
