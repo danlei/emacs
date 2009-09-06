@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-09-02 12:30:46 danlei>
+;;;;; Time-stamp: <2009-09-06 20:38:52 danlei>
 ;;;;;
 
 
@@ -397,7 +397,7 @@
       erc-user-full-name "Daniel H. Leidisch"
       erc-track-exclude-server-buffer t
       erc-fill-static-center 16
-      erc-fill-column 100
+      erc-fill-column 90
       erc-kill-buffer-on-part t
       erc-kill-queries-on-quit t
       erc-kill-server-buffer-on-quit t
@@ -438,6 +438,7 @@
                    (erc-message "PRIVMSG" (concat "NickServ ghost "
                                                   (erc-nick 'freenode)))
                    (erc-message "NICK" (erc-nick 'freenode))))))
+
 
 ;;;;
 ;;;; dired
