@@ -2,15 +2,14 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-07-17 16:18:39 danlei>
+;;;;; Time-stamp: <2009-09-06 21:30:15 danlei>
 ;;;;;
 
 
 (require 'cl)
 
 (mapc (lambda (path) (add-to-list 'load-path path))
-      '("/usr/local/emacs/share/emacs/22.3/lisp/"
-	"~/.emacs.d/"
+      '("~/.emacs.d/"
 	"~/.emacs.d/erc-5.3-extras/"
 	"~/.emacs.d/slime/"
 	"~/.emacs.d/slime/contrib/"
@@ -128,11 +127,21 @@
 ;;;; clojure
 ;;;;
 
-(when (eq system-type 'cygwin)
-  (setq swank-clojure-jar-path
-	"e:/cygwin/home/danlei/build/clojure/trunk/clojure.jar"
-	swank-clojure-extra-classpaths
-	'("e:/cygwin/home/danlei/coding/lisp/clojure/")))
+;; (when (eq system-type 'cygwin)
+;;   (setq swank-clojure-jar-path
+;; 	"e:/cygwin/home/danlei/build/clojure/trunk/clojure.jar"
+;; 	swank-clojure-extra-classpaths
+;; 	'("e:/cygwin/home/danlei/coding/lisp/clojure/")))
+
+(case system-type
+  (cygwin (setq swank-clojure-jar-path
+		"e:/cygwin/home/danlei/build/clojure/trunk/clojure.jar"
+		swank-clojure-extra-classpaths
+		'("e:/cygwin/home/danlei/coding/lisp/clojure/")))
+  (windows-nt (setq swank-clojure-jar-path
+		    "c:/Dokumente und Einstellungen/danlei/Clojure/clojure/clojure.jar"
+		    swank-clojure-extra-classpaths
+		    '("c:/Dokumente und Einstellungen/danlei/Clojure/clojure-contrib/clojure-contrib.jar"))))
 
 (require 'swank-clojure-autoload)
 (require 'swank-clojure)
@@ -201,7 +210,6 @@
  (lambda ()
    (define-keys inferior-scheme-mode-map
        '(("M-TAB" hippie-expand)
-	 ("M-TAB" 'hippie-expand)
 	 ))))
 
 ;(require 'quack)
@@ -215,6 +223,21 @@
 ;; 	     (expand-file-name "/usr/share/emacs/site-lisp/newlisp-mode"))
 ;; (add-to-list 'auto-mode-alist '("\\.lsp\\'" . newlisp-mode))
 ;; (autoload 'newlisp-mode "newlisp" t)
+
+
+;;;;
+;;;; j-mode
+;;;;
+
+(autoload 'j-mode "j-mode.el"  "Major mode for J." t)
+(autoload 'j-shell "j-mode.el" "Run J from emacs." t)
+(add-to-list 'auto-mode-alist '("\\.ij[rstp]" . j-mode))
+
+(setq j-path "/cygdrive/e/Dokumente und Einstellungen/danlei/j602/bin/")
+(setq j-dictionary-url "http://www.jsoftware.com/help/dictionary/")
+
+(when (ignore-errors (require 'which-func))
+  (which-func-mode 1))
 
 
 ;;;;
@@ -255,28 +278,36 @@
 ;;;; haskell-mode
 ;;;;
 
-;; (add-to-list 'load-path
-;;	     "/usr/share/emacs/site-lisp/haskell-mode/")
+(add-to-list 'load-path "~/.emacs.d/haskell-mode/")
 
-;; (require 'inf-haskell)
-;; (require 'haskell-indent)
+(require 'inf-haskell)
+(require 'haskell-indent)
 
-;; (setq auto-mode-alist (append auto-mode-alist '(("\\.hs$" . haskell-mode))))
+(when (eq system-type 'cygwin)
+  (setq haskell-program-name "/cygdrive/e/ghc/ghc-6.4.2/bin/ghci.exe"))
 
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-ghci)
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
+(add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
 
-;; (add-hook
-;; 'haskell-mode-hook
-;;  (lambda ()
-;;    (define-key haskell-mode-map "\r" 'newline)
-;;    (define-key haskell-mode-map "\t" 'haskell-indent-cycle)
-;;    (define-key haskell-mode-map "\C-c=" 'haskell-indent-insert-equal)
-;;    (define-key haskell-mode-map "\C-c|" 'haskell-indent-insert-guard)
-;;    (define-key haskell-mode-map "\C-co" 'haskell-indent-insert-otherwise)
-;;    (define-key haskell-mode-map "\C-cw" 'haskell-indent-insert-where)
-;;    (define-key haskell-mode-map "\C-c." 'haskell-indent-align-guards-and-rhs)))
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+
+(add-hook 'inferior-haskell-mode-hook 'turn-on-haskell-doc-mode)
+
+(add-hook
+ 'haskell-mode-hook
+ (lambda ()
+   (define-keys haskell-mode-map
+       '(("RET" newline)
+         ("TAB" haskell-indent-cycle)
+         ("C-c =" haskell-indent-insert-equal)
+         ("C-c |" haskell-indent-insert-guard)
+         ("C-c o" haskell-indent-insert-otherwise)
+         ("C-c w" haskell-indent-insert-where)
+         ("C-c ." haskell-indent-align-guards-and-rhs)
+         ("C-c t" inferior-haskell-type)
+         ("C-c i" inferior-haskell-info)))))
 
 
 ;;;;
@@ -353,9 +384,10 @@
 (require 'erc-list-old)
 
 (erc-scrolltobottom-mode 1)
+(erc-truncate-mode 1)
 
 (setq erc-keywords '()
-      erc-pals '()
+      erc-pals '("rhickey")
       erc-fools '()
       erc-current-nick-highlight-type 'nick-or-keyword
       erc-notice-highlight-type 'prefix
@@ -364,10 +396,13 @@
       erc-user-full-name "Daniel H. Leidisch"
       erc-track-exclude-server-buffer t
       erc-fill-static-center 16
-      erc-fill-column 100
+      erc-fill-column 90
       erc-kill-buffer-on-part t
       erc-kill-queries-on-quit t
       erc-kill-server-buffer-on-quit t
+      erc-max-buffer-size 100000
+      erc-hide-list '("JOIN" "PART" "QUIT" "NICK")
+      erc-auto-query 'window-noselect
       )
 
 (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
@@ -385,11 +420,23 @@
                         (or x "Ein guter Abgang ziert die Übung."))
       erc-quit-reason erc-part-reason)
 
-;;; ~/.emacs-auth now takes care of this
-;; (add-hook 'erc-after-connect
-;; 	  (lambda (SERVER NICK)
-;; 	    (cond ((string-match "freenode\\.net" SERVER)
-;; 		   (erc-message "PRIVMSG" "NickServ identify <password>")))))
+;; (defvar *erc-auth*
+;;   '(freenode (:name "<irc-nick>" :password "<password>")))
+
+(defun erc-nick (server)
+  (getf (getf *erc-auth* server) :name))
+
+(defun erc-password (server)
+  (getf (getf *erc-auth* server) :password))
+
+(add-hook 'erc-after-connect
+	  (lambda (SERVER NICK)
+	    (cond ((string-match "freenode\\.net" SERVER)
+		   (erc-message "PRIVMSG" (concat "NickServ identify "
+                                                  (erc-password 'freenode)))
+                   (erc-message "PRIVMSG" (concat "NickServ ghost "
+                                                  (erc-nick 'freenode)))
+                   (erc-message "NICK" (erc-nick 'freenode))))))
 
 
 ;;;;
@@ -449,8 +496,6 @@
 ;;;; eshell
 ;;;;
 
-(push 'eshell-postoutput-scroll-to-bottom eshell-output-filter-functions)
-
 (add-hook 'eshell-mode-hook
           (lambda ()
             (define-keys eshell-mode-map
@@ -471,12 +516,6 @@ at the beginning of line, if already there."
   (interactive)
   (let ((inhibit-read-only t))
     (erase-buffer)))
-
-(defun eshell/info (subject)
-  "Shows the Info manual on subject."
-  (let ((buf (current-buffer)))
-    (Info-directory)
-    (Info-menu subject)))
 
 
 ;;;;
@@ -525,6 +564,8 @@ prevents using commands with prefix arguments."
 
 (desktop-save-mode 1)
 
+(setq desktop-dirname "~/")
+
 (setq desktop-modes-not-to-save
       '(
 	))
@@ -552,10 +593,30 @@ prevents using commands with prefix arguments."
 
 
 ;;;;
+;;;; whitespace-mode
+;;;;
+
+(setq whitespace-style
+      '(spaces tabs newline space-mark tab-mark newline-mark))
+
+(setq whitespace-display-mappings
+      '((space-mark 32 [183] [46])
+        (space-mark 160 [164] [95])
+        (space-mark 2208 [2212] [95])
+        (space-mark 2336 [2340] [95])
+        (space-mark 3616 [3620] [95])
+        (space-mark 3872 [3876] [95])
+        (newline-mark 10 [182 10])
+        (tab-mark 9 [8677 9] [92 9])
+        ))
+
+
+;;;;
 ;;;; misc
 ;;;;
 
-(setq inhibit-splash-screen t
+(setq inhibit-startup-screen t
+      initial-scratch-message nil
       ring-bell-function (lambda ())
       scroll-conservatively 1
       require-final-newline t
@@ -567,6 +628,8 @@ prevents using commands with prefix arguments."
       default-major-mode 'text-mode
       undo-limit 100000
       apropos-do-all 1
+      line-move-visual nil
+      help-window-select t
       )
 
 (setq-default cursor-type 'bar
@@ -580,6 +643,7 @@ prevents using commands with prefix arguments."
 (line-number-mode 1)
 (display-time-mode -1)
 (show-paren-mode 1)
+(transient-mark-mode -1)
 (partial-completion-mode 1)
 (blink-cursor-mode -1)
 (auto-compression-mode 1)
@@ -605,8 +669,10 @@ prevents using commands with prefix arguments."
 (set-keyboard-coding-system 'utf-8)
 (set-language-environment   'utf-8)
 
-(setq tramp-syntax 'url)
-;(setq tramp-default-method "ftp")
+(setq tramp-syntax 'ftp)
+(setq tramp-default-method "ftp")
+
+(add-to-list 'auto-mode-alist '("\\.xml\\'" . nxml-mode))
 
 ;;; git
 (require 'vc-git)
@@ -689,6 +755,9 @@ are in kbd format."
 		   ("M-X" dhl-invoke-smex)
                    ("C-^" winner-undo)
                    ("C-°" winner-redo)
+                   ("C-x 8 l" (lambda ()
+                                (interactive)
+                                (insert "λ")))
 		   ))
 
 
@@ -812,7 +881,7 @@ are in kbd format."
 
 (load "~/.emacs-auth")
 
-(server-start)
+;; (server-start)
 
 
 ;;;;
@@ -826,7 +895,7 @@ are in kbd format."
   ;; If there is more than one, they won't work right.
  '(quack-browse-url-browser-function (quote w3m-browse-url))
  '(quack-pretty-lambda-p t)
- '(safe-local-variable-values (quote ((Package . ccl) (Package . CL-FAD) (Syntax . COMMON-LISP) (Package . CCL) (Base . 10) (Package . LISP-UNIT) (syntax . ANSI-COMMON-LISP) (Package SERIES :use "COMMON-LISP" :colon-mode :external)))))
+ '(safe-local-variable-values (quote ((Package . utils-kt) (Package . Demos) (Syntax . ANSI-Common-Lisp) (Package . CLIM-DEMO) (Lowercase . Yes) (Package . CLIMACS-COMMANDS) (Package . CLIMACS-JAVA-SYNTAX) (Package . CLIMACS-C-SYNTAX) (Package . CLIMACS-CORE) (Package . CLIMACS-GUI) (Package . CLIMACS-PROLOG-SYNTAX) (Package . CLIM-NULL) (show-trailing-whitespace . t) (indent-tabs) (Package . DREI-CORE) (Package . DREI-LISP-SYNTAX) (Package . DREI-LR-SYNTAX) (Package . DREI-FUNDAMENTAL-SYNTAX) (Package . DREI-MOTION) (Package . DREI-SYNTAX) (Package . DREI) (Package . DREI-BUFFER) (Package . ESA-IO) (Package . ESA) (Package . ESA-UTILS) (Package . GOATEE) (Package . CLIM-POSTSCRIPT) (Package . CLIM-INTERNALS) (Package . gui-geometry) (Syntax . Common-Lisp) (Package . cells) (Package . ccl) (Package . CL-FAD) (Syntax . COMMON-LISP) (Package . CCL) (Base . 10) (Package . LISP-UNIT) (syntax . ANSI-COMMON-LISP) (Package SERIES :use "COMMON-LISP" :colon-mode :external)))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
