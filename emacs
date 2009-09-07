@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-09-06 21:30:15 danlei>
+;;;;; Time-stamp: <2009-09-06 22:14:09 danlei>
 ;;;;;
 
 
@@ -612,6 +612,20 @@ prevents using commands with prefix arguments."
 
 
 ;;;;
+;;;; git
+;;;;
+
+;; (require 'vc-git)
+;; (when (featurep 'vc-git) (add-to-list 'vc-handled-backends 'git))
+;; (require 'git)
+;; (autoload 'git-blame-mode "git-blame"
+;;    "Minor mode for incremental blame for Git." t)
+
+(add-to-list 'load-path "~/.emacs.d/egg/")
+(require 'egg)
+
+
+;;;;
 ;;;; misc
 ;;;;
 
@@ -673,13 +687,6 @@ prevents using commands with prefix arguments."
 (setq tramp-default-method "ftp")
 
 (add-to-list 'auto-mode-alist '("\\.xml\\'" . nxml-mode))
-
-;;; git
-(require 'vc-git)
-(when (featurep 'vc-git) (add-to-list 'vc-handled-backends 'git))
-;; (require 'git)
-;; (autoload 'git-blame-mode "git-blame"
-;;    "Minor mode for incremental blame for Git." t)
 
 (when (eq system-type 'darwin)
   (cua-mode 0)
