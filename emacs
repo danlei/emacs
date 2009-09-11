@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-09-06 22:14:09 danlei>
+;;;;; Time-stamp: <2009-09-11 16:18:43 danlei>
 ;;;;;
 
 
@@ -233,7 +233,7 @@
 (autoload 'j-shell "j-mode.el" "Run J from emacs." t)
 (add-to-list 'auto-mode-alist '("\\.ij[rstp]" . j-mode))
 
-(setq j-path "/cygdrive/e/Dokumente und Einstellungen/danlei/j602/bin/")
+(setq j-path "/cygdrive/c/Dokumente und Einstellungen/danlei/j602/bin/")
 (setq j-dictionary-url "http://www.jsoftware.com/help/dictionary/")
 
 (when (ignore-errors (require 'which-func))
@@ -247,7 +247,7 @@
 (require 'tcl)
 
 (when (eq system-type 'cygwin)
-  (setq tcl-application "/cygdrive/e/Tcl/bin/tclsh85.exe"))
+  (setq tcl-application "/cygdrive/c/Tcl/bin/tclsh85.exe"))
 
 (when (eq system-type 'cygwin)
   (add-hook 'inferior-tcl-mode-hook
@@ -284,7 +284,7 @@
 (require 'haskell-indent)
 
 (when (eq system-type 'cygwin)
-  (setq haskell-program-name "/cygdrive/e/ghc/ghc-6.4.2/bin/ghci.exe"))
+  (setq haskell-program-name "/cygdrive/c/ghc/ghc-6.4.2/bin/ghci.exe"))
 
 (add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
 
@@ -348,13 +348,13 @@
 ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/w3m/")
 ;; (setq browse-url-browser-function 'w3m-browse-url)
 
-;; (add-to-list 'exec-path "/cygdrive/e/Programme/Mozilla Firefox/")
-;; (setq browse-url-firefox-program "/cygdrive/e/Programme/Mozilla Firefox/firefox.exe")
+;; (add-to-list 'exec-path "/cygdrive/c/Programme/Mozilla Firefox/")
+;; (setq browse-url-firefox-program "/cygdrive/c/Programme/Mozilla Firefox/firefox.exe")
 ;; (setq browse-url-browser-function 'browse-url-firefox)
 
 (when (eq system-type 'cygwin)
   (setq browse-url-generic-program
-	"/cygdrive/e/Programme/Mozilla Firefox/firefox.exe"
+	"/cygdrive/c/Programme/Mozilla Firefox/firefox.exe"
 	common-lisp-hyperspec-root
 	"file:///e:/cygwin/home/danlei/doc/HyperSpec/"
 	cltl2-root-url
@@ -765,6 +765,21 @@ are in kbd format."
                    ("C-x 8 l" (lambda ()
                                 (interactive)
                                 (insert "λ")))
+                   ("C-x 8 _ A" (lambda ()
+                                (interactive)
+                                (insert "ā")))
+                   ("C-x 8 _ E" (lambda ()
+                                (interactive)
+                                (insert "ē")))
+                   ("C-x 8 _ I" (lambda ()
+                                (interactive)
+                                (insert "ī")))
+                   ("C-x 8 _ O" (lambda ()
+                                (interactive)
+                                (insert "ō")))
+                   ("C-x 8 _ U" (lambda ()
+                                (interactive)
+                                (insert "ū")))
 		   ))
 
 
