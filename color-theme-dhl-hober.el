@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; color-theme-dhl-hober.el
 ;;;;;
-;;;;; Time-stamp: <2009-08-15 16:35:08 danlei>
+;;;;; Time-stamp: <2009-09-11 15:26:59 danlei>
 ;;;;;
 ;;;;; dhl-hober is a customization of Edward O'Connor's hober2
 ;;;;;
@@ -805,9 +805,9 @@ speedbar, tex, view, viper, w3m, widget, woman"
 
      (ido-subdir ((((min-colors 88) (class color)) (:foreground "dark turquoise"))))
 
-     (whitespace-space ((t (:background "grey20"))))
-     (whitespace-tab ((t (:background "grey20"))))
-     (whitespace-newline ((t (:background "grey20"))))
+     (whitespace-space ((t (:foreground "grey40"))))
+     (whitespace-tab ((t (:foreground "grey40"))))
+     (whitespace-newline ((t (:foreground "grey40"))))
      )))
 
 (provide 'color-theme-dhl-hober)
