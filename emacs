@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-09-11 16:18:43 danlei>
+;;;;; Time-stamp: <2009-09-13 08:23:43 danlei>
 ;;;;;
 
 
@@ -17,6 +17,8 @@
 	"~/.emacs.d/swank-clojure/"
 	"~/.emacs.d/color-theme-6.6.0/"
 	"~/.emacs.d/smex/"
+        "~/.emacs.d/newlisp-mode/"
+        "~/.emacs.d/egg/"
 	))
 
 
@@ -24,19 +26,18 @@
 ;;;; color-theme
 ;;;;
 
-(require 'color-theme)
-(require 'color-theme-dhl-hober)
-(color-theme-initialize)
-(color-theme-dhl-hober)
+(when (require 'color-theme "color-theme" t)
+  (color-theme-initialize)
+  (and (require 'color-theme-dhl-hober "color-theme-dhl-hober" t)
+       (color-theme-dhl-hober)))
 
 
 ;;;;
 ;;;; slime
 ;;;;
 
-(require 'slime)
-
-(slime-setup '(slime-fancy slime-asdf slime-references slime-indentation))
+(when (require 'slime "slime" t)
+  (slime-setup '(slime-fancy slime-asdf slime-references slime-indentation)))
 
 (setq slime-enable-evaluate-in-emacs t
       slime-net-coding-system 'utf-8-unix
@@ -57,7 +58,6 @@
 
 (add-hook 'slime-mode-hook
 	  (lambda ()
-	    (paredit-mode 1)
 	    (define-keys slime-mode-map
 		'(("C-c s" slime-selector)
 		  ("C-j" newline-and-indent)
@@ -67,7 +67,6 @@
 
 (add-hook 'slime-repl-mode-hook
 	  (lambda ()
-	    (paredit-mode 1)
 	    (define-keys slime-repl-mode-map
 		'(("C-c s" slime-selector)
 		  ("C-c C-d c" cltl2-lookup)
@@ -96,8 +95,21 @@
 ;;;; paredit
 ;;;;
 
-(autoload 'paredit-mode "paredit"
-  "Minor mode for pseudo-structurally editing Lisp code." t)
+(when (require 'paredit-mode "paredit-mode" t)
+  (add-hook 'slime-mode-hook
+            (lambda ()
+              (paredit-mode 1)))
+  (add-hook 'slime-repl-mode-hook
+            (lambda ()
+              (paredit-mode 1)))
+  (setq clojure-enable-paredit t)
+  (add-hook 'emacs-lisp-mode-hook
+            (lambda ()
+              (paredit-mode 1)))
+  (add-hook 'ielm-mode-hook
+            (lambda ()
+              (paredit-mode 1)))
+  )
 
 (add-hook 'paredit-mode-hook
 	  (lambda ()
@@ -143,11 +155,10 @@
 		    swank-clojure-extra-classpaths
 		    '("c:/Dokumente und Einstellungen/danlei/Clojure/clojure-contrib/clojure-contrib.jar"))))
 
-(require 'swank-clojure-autoload)
-(require 'swank-clojure)
-(require 'clojure-mode)
-
-(setq clojure-enable-paredit t)
+(require 'swank-clojure-autoload "swank-clojure-autoload" t)
+(require 'swank-clojure "swank-clojure" t)
+(autoload 'clojure-mode "clojure-mode"
+  "Mode for clojure file editing." t)
 
 ;;; bill clementson
 (defun slime-java-describe (symbol-name)
@@ -196,7 +207,7 @@
 ;;;; qi
 ;;;;
 
-;(require 'qi-mode)
+(require 'qi-mode "qi-mode" t)
 
 
 ;;;;
@@ -212,17 +223,16 @@
        '(("M-TAB" hippie-expand)
 	 ))))
 
-;(require 'quack)
+(require 'quack "quack" t)
 
 
 ;;;;
 ;;;; newlisp
 ;;;;
 
-;; (add-to-list 'load-path
-;; 	     (expand-file-name "/usr/share/emacs/site-lisp/newlisp-mode"))
-;; (add-to-list 'auto-mode-alist '("\\.lsp\\'" . newlisp-mode))
-;; (autoload 'newlisp-mode "newlisp" t)
+(add-to-list 'auto-mode-alist '("\\.lsp\\'" . newlisp-mode))
+(autoload 'newlisp-mode "newlisp"
+  "Newlisp editing mode." t)
 
 
 ;;;;
@@ -231,12 +241,13 @@
 
 (autoload 'j-mode "j-mode.el"  "Major mode for J." t)
 (autoload 'j-shell "j-mode.el" "Run J from emacs." t)
+
 (add-to-list 'auto-mode-alist '("\\.ij[rstp]" . j-mode))
 
 (setq j-path "/cygdrive/c/Dokumente und Einstellungen/danlei/j602/bin/")
 (setq j-dictionary-url "http://www.jsoftware.com/help/dictionary/")
 
-(when (ignore-errors (require 'which-func))
+(when (require 'which-func "which-func" t)
   (which-func-mode 1))
 
 
@@ -244,7 +255,7 @@
 ;;;; tcl
 ;;;;
 
-(require 'tcl)
+(require 'tcl "tcl" t)
 
 (when (eq system-type 'cygwin)
   (setq tcl-application "/cygdrive/c/Tcl/bin/tclsh85.exe"))
@@ -280,8 +291,8 @@
 
 (add-to-list 'load-path "~/.emacs.d/haskell-mode/")
 
-(require 'inf-haskell)
-(require 'haskell-indent)
+(and (require 'inf-haskell "inf-haskell" t)
+     (require 'haskell-indent "haskell-indent" t))
 
 (when (eq system-type 'cygwin)
   (setq haskell-program-name "/cygdrive/c/ghc/ghc-6.4.2/bin/ghci.exe"))
@@ -318,7 +329,7 @@
 (autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
 (autoload 'mercury-mode "prolog" "Major mode for editing Mercury programs." t)
 
-(require 'prolog)
+(require 'prolog "prolog" t)
 
 (setq prolog-system 'swi)
 
@@ -344,9 +355,8 @@
 ;;;; browsing
 ;;;;
 
-;; (require 'w3m)
-;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/w3m/")
-;; (setq browse-url-browser-function 'w3m-browse-url)
+(when (require 'w3m "w3m" t)
+  (setq browse-url-browser-function 'w3m-browse-url))
 
 ;; (add-to-list 'exec-path "/cygdrive/c/Programme/Mozilla Firefox/")
 ;; (setq browse-url-firefox-program "/cygdrive/c/Programme/Mozilla Firefox/firefox.exe")
@@ -362,7 +372,7 @@
 
 (setq browse-url-browser-function 'browse-url-generic)
 
-(require 'cltl2)
+(require 'cltl2 "cltl2" t)
 
 (defun random-hyperspec ()
   (interactive)
@@ -379,12 +389,16 @@
 ;;;; erc
 ;;;;
 
-(require 'erc)
-(require 'erc-match)
-(require 'erc-list-old)
-
-(erc-scrolltobottom-mode 1)
-(erc-truncate-mode 1)
+(when (require 'erc "erc" t)
+  (require 'erc-match "erc-match" t)
+  (require 'erc-list-old "erc-list-old" t)
+  (erc-spelling-mode 1)
+  (erc-list-mode 1)
+  (erc-timestamp-mode -1)
+  (erc-smiley-mode 1)
+  (erc-scrolltobottom-mode 1)
+  (erc-truncate-mode 1)
+  )
 
 (setq erc-keywords '()
       erc-pals '("rhickey")
@@ -408,20 +422,18 @@
 (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
                                 "324" "329" "332" "333" "353" "477"))
 
-(erc-spelling-mode 1)
 (setq erc-spelling-dictionaries '(("#bsdforen.de" "/dev/null"))) ; FIXME
 
-(add-to-list 'load-path "~/.emacs.d/erc-5.3-extras/")
-(erc-list-mode 1)
-(erc-timestamp-mode -1)
-(erc-smiley-mode 1)
 
 (setq erc-part-reason (lambda (x)
                         (or x "Ein guter Abgang ziert die Übung."))
       erc-quit-reason erc-part-reason)
 
-;; (defvar *erc-auth*
-;;   '(freenode (:name "<irc-nick>" :password "<password>")))
+(defvar *erc-auth*
+  '(;freenode (:name "<irc-nick>" :password "<password>")
+    ))
+
+(load "~/.emacs-auth" t)
 
 (defun erc-nick (server)
   (getf (getf *erc-auth* server) :name))
@@ -464,17 +476,6 @@
 
 
 ;;;;
-;;;; elisp
-;;;;
-
-(add-hook 'emacs-lisp-mode-hook
-	  (lambda ()
-	    (eldoc-mode 1)
-	    (paredit-mode 1)
-	    ))
-
-
-;;;;
 ;;;; ielm
 ;;;;
 
@@ -482,7 +483,6 @@
 
 (add-hook 'ielm-mode-hook
 	  (lambda ()
-	    (paredit-mode 1)
 	    (eldoc-mode 1)
 	    (setq comint-dynamic-complete-functions
 		  '(ielm-tab
@@ -539,14 +539,12 @@ at the beginning of line, if already there."
 ;;;; ido
 ;;;;
 
-(require 'ido)
-(require 'smex)
-
-(ido-mode t)
-
-(smex-initialize)
-(setq smex-save-file "~/.smex")
-(smex-auto-update)
+(and (require 'ido "ido" t)
+     (ido-mode t)
+     (require 'smex "smex" t)
+     (smex-initialize)
+     (setq smex-save-file "~/.smex")
+     (smex-auto-update))
 
 (defun dhl-invoke-smex (x)
   "Invokes smex, if called without a prefix argument,
@@ -588,8 +586,8 @@ prevents using commands with prefix arguments."
 	kill-ring
 	))
 
-(require 'saveplace)
-(setq-default save-place t)
+(when (require 'saveplace "saveplace" t)
+  (setq-default save-place t))
 
 
 ;;;;
@@ -621,8 +619,19 @@ prevents using commands with prefix arguments."
 ;; (autoload 'git-blame-mode "git-blame"
 ;;    "Minor mode for incremental blame for Git." t)
 
-(add-to-list 'load-path "~/.emacs.d/egg/")
-(require 'egg)
+(require 'egg "egg" t)
+
+
+;;;;
+;;;; elisp
+;;;;
+
+          
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (eldoc-mode 1)
+            ))
+
 
 
 ;;;;
@@ -901,9 +910,8 @@ are in kbd format."
 ;;;; epilogue
 ;;;;
 
-(load "~/.emacs-auth")
 
-;; (server-start)
+(server-start)
 
 
 ;;;;
