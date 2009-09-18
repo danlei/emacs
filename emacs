@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-09-13 08:23:43 danlei>
+;;;;; Time-stamp: <2009-09-16 21:18:03 danlei>
 ;;;;;
 
 
@@ -789,6 +789,12 @@ are in kbd format."
                    ("C-x 8 _ U" (lambda ()
                                 (interactive)
                                 (insert "ū")))
+                   ("C-x 8 a e" (lambda ()
+                                  (interactive)
+                                  (insert "æ")))
+                   ("C-x 8 o e" (lambda ()
+                                  (interactive)
+                                  (insert "œ")))
 		   ))
 
 
