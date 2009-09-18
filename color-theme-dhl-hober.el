@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; color-theme-dhl-hober.el
 ;;;;;
-;;;;; Time-stamp: <2009-09-11 15:26:59 danlei>
+;;;;; Time-stamp: <2009-09-18 22:06:54 danlei>
 ;;;;;
 ;;;;; dhl-hober is a customization of Edward O'Connor's hober2
 ;;;;;
@@ -435,14 +435,14 @@ speedbar, tex, view, viper, w3m, widget, woman"
 
      (gnus-header-content-face ((t ,dhl-hober-insignificant-face)))
      (gnus-header-content ((t ,dhl-hober-insignificant-face)))
-     (gnus-header-from-face ((t (:height 1.2 :foreground "DarkSeaGreen2"))))
-     (gnus-header-from ((t (:height 1.2 :foreground "DarkSeaGreen2"))))
+     (gnus-header-from-face ((t (:foreground "DarkSeaGreen2"))))
+     (gnus-header-from ((t (:foreground "DarkSeaGreen2"))))
      (gnus-header-name-face ((t (:foreground "cadet blue")))) ;%
      (gnus-header-name ((t (:foreground "cadet blue"))))
      (gnus-header-newsgroups-face ((t (:foreground "medium sea green"))))
      (gnus-header-newsgroups ((t (:foreground "medium sea green"))))
-     (gnus-header-subject-face ((t (:height 1.2 :foreground "lemon chiffon"))))
-     (gnus-header-subject ((t (:height 1.2 :foreground "lemon chiffon"))))
+     (gnus-header-subject-face ((t (:foreground "lemon chiffon"))))
+     (gnus-header-subject ((t (:foreground "lemon chiffon"))))
      (gnus-signature-face ((t ,dhl-hober-insignificant-face)))
      (gnus-signature ((t ,dhl-hober-insignificant-face)))
      (gnus-summary-cancelled-face ((t (:foreground "khaki"))))
@@ -581,8 +581,8 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (message-header-newsgroups ((t (:foreground "medium sea green"))))
      (message-header-other-face ((t (:foreground "cadet blue"))))
      (message-header-other ((t (:foreground "cadet blue"))))
-     (message-header-subject-face ((t (:height 1.2 :foreground "lemon chiffon"))))
-     (message-header-subject ((t (:height 1.2 :foreground "lemon chiffon"))))
+     (message-header-subject-face ((t (:foreground "lemon chiffon"))))
+     (message-header-subject ((t (:foreground "lemon chiffon"))))
      (message-header-to-face ((t (:foreground "cadet blue"))))
      (message-header-to ((t (:foreground "cadet blue"))))
      (message-header-xheader-face ((t (:foreground "cadet blue"))))
