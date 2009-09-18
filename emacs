@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-09-18 19:16:47 danlei>
+;;;;; Time-stamp: <2009-09-18 21:29:26 danlei>
 ;;;;;
 
 
@@ -95,7 +95,7 @@
 ;;;; paredit
 ;;;;
 
-(when (require 'paredit "paredit-mode" t)
+(when (require 'paredit "paredit" t)
   (add-hook 'slime-mode-hook
             (lambda ()
               (paredit-mode 1)))
