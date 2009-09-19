@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-09-18 21:29:26 danlei>
+;;;;; Time-stamp: <2009-09-19 08:32:25 danlei>
 ;;;;;
 
 
@@ -405,10 +405,10 @@
       erc-fools '()
       erc-current-nick-highlight-type 'nick-or-keyword
       erc-notice-highlight-type 'prefix
-      erc-auto-query 'nil
-      erc-fill-function 'erc-fill-static
+      erc-auto-query 'window-noselect
       erc-user-full-name "Daniel H. Leidisch"
       erc-track-exclude-server-buffer t
+      erc-fill-function 'erc-fill-static
       erc-fill-static-center 16
       erc-fill-column 90
       erc-kill-buffer-on-part t
@@ -416,7 +416,6 @@
       erc-kill-server-buffer-on-quit t
       erc-max-buffer-size 100000
       erc-hide-list '("JOIN" "PART" "QUIT" "NICK")
-      erc-auto-query 'window-noselect
       )
 
 (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
