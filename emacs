@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-09-19 08:32:25 danlei>
+;;;;; Time-stamp: <2009-09-19 23:00:19 danlei>
 ;;;;;
 
 
@@ -141,15 +141,15 @@
 
 ;; (when (eq system-type 'cygwin)
 ;;   (setq swank-clojure-jar-path
-;; 	"e:/cygwin/home/danlei/build/clojure/trunk/clojure.jar"
+;; 	"c:/cygwin/home/danlei/build/clojure/trunk/clojure.jar"
 ;; 	swank-clojure-extra-classpaths
-;; 	'("e:/cygwin/home/danlei/coding/lisp/clojure/")))
+;; 	'("c:/cygwin/home/danlei/coding/lisp/clojure/")))
 
 (case system-type
   (cygwin (setq swank-clojure-jar-path
-		"e:/cygwin/home/danlei/build/clojure/trunk/clojure.jar"
+		"c:/cygwin/home/danlei/build/clojure/trunk/clojure.jar"
 		swank-clojure-extra-classpaths
-		'("e:/cygwin/home/danlei/coding/lisp/clojure/")))
+		'("c:/cygwin/home/danlei/coding/lisp/clojure/")))
   (windows-nt (setq swank-clojure-jar-path
 		    "c:/Dokumente und Einstellungen/danlei/Clojure/clojure/clojure.jar"
 		    swank-clojure-extra-classpaths
@@ -366,9 +366,9 @@
   (setq browse-url-generic-program
 	"/cygdrive/c/Programme/Mozilla Firefox/firefox.exe"
 	common-lisp-hyperspec-root
-	"file:///e:/cygwin/home/danlei/doc/HyperSpec/"
+	"file:///c:/cygwin/home/danlei/doc/HyperSpec/"
 	cltl2-root-url
-	"file:///e:/cygwin/home/danlei/doc/cltl2/"))
+	"file:///c:/cygwin/home/danlei/doc/cltl2/"))
 
 (setq browse-url-browser-function 'browse-url-generic)
 
