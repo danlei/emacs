@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-09-19 23:00:19 danlei>
+;;;;; Time-stamp: <2009-09-27 20:10:53 danlei>
 ;;;;;
 
 
@@ -414,7 +414,7 @@
       erc-kill-buffer-on-part t
       erc-kill-queries-on-quit t
       erc-kill-server-buffer-on-quit t
-      erc-max-buffer-size 100000
+      erc-max-buffer-size 50000
       erc-hide-list '("JOIN" "PART" "QUIT" "NICK")
       )
 
