@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-10-01 19:23:00 danlei>
+;;;;; Time-stamp: <2009-10-01 19:39:26 danlei>
 ;;;;;
 
 
@@ -228,7 +228,10 @@
    (define-keys inferior-scheme-mode-map
        '(("M-TAB" hippie-expand)))))
 
-(require 'quack "quack" t)
+(when (require 'quack "quack" t)
+  (setq quack-remap-find-file-bindings-p nil)
+	(setq quack-pretty-lambda-p t))
+
 
 (when (require 'scheme-complete "scheme-complete" t)
   (add-hook
@@ -358,7 +361,7 @@
 
 (setq prolog-system 'swi)
 
-(if (eq system-type 'cygwin)
+(when (eq system-type 'cygwin)
     (setq prolog-program-name "/usr/bin/pl"))
 
 (add-to-list 'auto-mode-alist '("\.pl$" . prolog-mode))
@@ -953,8 +956,8 @@ are in kbd format."
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(quack-browse-url-browser-function (quote w3m-browse-url))
- '(quack-pretty-lambda-p t)
+ '(quack-default-program "mzscheme")
+ '(quack-fontify-style nil)
  '(quack-programs (quote ("swindle" "MzScheme" "MzScheme.exe" "bigloo" "csi" "csi -hygienic" "gosh" "gsi" "gsi ~~/syntax-case.scm -" "guile" "kawa" "mit-scheme" "mred -z" "mzscheme" "mzscheme -M errortrace" "mzscheme -il r6rs" "mzscheme -il typed-scheme" "mzscheme.exe" "mzscheme3m" "mzschemecgc" "rs" "scheme" "scheme48" "scsh" "sisc" "stklos" "sxi")))
  '(safe-local-variable-values (quote ((Package . utils-kt) (Package . Demos) (Syntax . ANSI-Common-Lisp) (Package . CLIM-DEMO) (Lowercase . Yes) (Package . CLIMACS-COMMANDS) (Package . CLIMACS-JAVA-SYNTAX) (Package . CLIMACS-C-SYNTAX) (Package . CLIMACS-CORE) (Package . CLIMACS-GUI) (Package . CLIMACS-PROLOG-SYNTAX) (Package . CLIM-NULL) (show-trailing-whitespace . t) (indent-tabs) (Package . DREI-CORE) (Package . DREI-LISP-SYNTAX) (Package . DREI-LR-SYNTAX) (Package . DREI-FUNDAMENTAL-SYNTAX) (Package . DREI-MOTION) (Package . DREI-SYNTAX) (Package . DREI) (Package . DREI-BUFFER) (Package . ESA-IO) (Package . ESA) (Package . ESA-UTILS) (Package . GOATEE) (Package . CLIM-POSTSCRIPT) (Package . CLIM-INTERNALS) (Package . gui-geometry) (Syntax . Common-Lisp) (Package . cells) (Package . ccl) (Package . CL-FAD) (Syntax . COMMON-LISP) (Package . CCL) (Base . 10) (Package . LISP-UNIT) (syntax . ANSI-COMMON-LISP) (Package SERIES :use "COMMON-LISP" :colon-mode :external)))))
 (custom-set-faces
