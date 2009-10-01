@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-09-27 20:10:53 danlei>
+;;;;; Time-stamp: <2009-10-01 18:02:14 danlei>
 ;;;;;
 
 
@@ -221,7 +221,13 @@
  (lambda ()
    (define-keys inferior-scheme-mode-map
        '(("M-TAB" hippie-expand)
-	 ))))
+	 ))
+   (paredit-mode 1)))
+
+(add-hook
+ 'scheme-mode-hook
+ (lambda ()
+   (paredit-mode 1)))
 
 (require 'quack "quack" t)
 
