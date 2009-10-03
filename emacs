@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-10-03 18:37:21 danlei>
+;;;;; Time-stamp: <2009-10-03 18:54:42 danlei>
 ;;;;;
 
 
@@ -502,6 +502,21 @@
 
 
 ;;;;
+;;;; elisp
+;;;;
+          
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (eldoc-mode 1)
+            (define-key emacs-lisp-mode-map
+                (kbd "TAB") (lambda (n)
+                              (interactive "p")
+                              (indent-for-tab-command)
+                              (PC-lisp-complete-symbol)))
+            ))
+
+
+;;;;
 ;;;; ielm
 ;;;;
 
@@ -646,18 +661,6 @@ prevents using commands with prefix arguments."
 ;;    "Minor mode for incremental blame for Git." t)
 
 (require 'egg "egg" t)
-
-
-;;;;
-;;;; elisp
-;;;;
-
-          
-(add-hook 'emacs-lisp-mode-hook
-          (lambda ()
-            (eldoc-mode 1)
-            ))
-
 
 
 ;;;;
