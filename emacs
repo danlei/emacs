@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-10-03 18:54:42 danlei>
+;;;;; Time-stamp: <2009-10-03 19:10:58 danlei>
 ;;;;;
 
 
@@ -671,7 +671,7 @@ prevents using commands with prefix arguments."
       initial-scratch-message nil
       ring-bell-function (lambda ())
       scroll-conservatively 1
-      require-final-newline t
+      require-final-newline nil
       ispell-personal-dictionary "~/.ispell-emacs"
       ispell-dictionary "american"
       woman-use-own-frame nil
@@ -682,6 +682,7 @@ prevents using commands with prefix arguments."
       apropos-do-all 1
       line-move-visual nil
       help-window-select t
+      enable-recursive-minibuffers t
       )
 
 (setq-default cursor-type 'bar
