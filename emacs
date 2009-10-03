@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-10-03 19:10:58 danlei>
+;;;;; Time-stamp: <2009-10-03 19:13:17 danlei>
 ;;;;;
 
 
@@ -707,9 +707,14 @@ prevents using commands with prefix arguments."
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(put 'eval-expression 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+(put 'narrow-to-page 'disabled nil)
 (put 'erase-buffer 'disabled nil)
 (put 'overwrite-mode 'disabled nil)
+(put 'set-goal-column 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
 
 ;; (setq time-stamp-format "%:y-%02m-%02d %02H:%02M:%02S")
 
