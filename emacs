@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-10-01 19:39:26 danlei>
+;;;;; Time-stamp: <2009-10-03 18:37:21 danlei>
 ;;;;;
 
 
@@ -120,10 +120,10 @@
 (add-hook 'paredit-mode-hook
 	  (lambda ()
 	    (define-keys paredit-mode-map
-		'((")" paredit-close-parenthesis-and-newline)
-		  ("M-)" paredit-close-brace)
+		'((")" paredit-close-brace)
+                  ("M-)" paredit-close-parenthesis-and-newline)
 		  ("}" paredit-close-parenthesis)
-		  ("M-{" paredit-brace-wrap-sexp)
+                  ("M-{" paredit-brace-wrap-sexp)
 		  ("{" paredit-open-brace)
 		  ("M-f" paredit-forward)
 		  ("C-M-f" forward-word)
@@ -131,13 +131,12 @@
 		  ("C-M-b" forward-word)
 		  ("M-u" backward-up-list)
 		  ("C-M-u" upcase-word)
-		  ("C-ö" paredit-backward-slurp-sexp)
-		  ("M-ä" paredit-forward-barf-sexp)
-		  ("M-ö" paredit-backward-barf-sexp)
-		  ("M-ü" down-list)
+		  ("M-ö" down-list)
 		  ("M-t" transpose-sexps)
 		  ("C-M-t" transpose-words)
-		  ("<M-backspace>" paredit-backward-kill-word)
+		  ("<C-backspace>" paredit-backward-kill-word)
+                  ("<M-backspace>" backward-kill-sexp)
+                  ("M-k" kill-sexp)
 		  ))))
 
 
