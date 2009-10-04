@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-10-03 19:13:17 danlei>
+;;;;; Time-stamp: <2009-10-04 14:59:59 danlei>
 ;;;;;
 
 
@@ -14,7 +14,7 @@
 	"~/.emacs.d/slime/"
 	"~/.emacs.d/slime/contrib/"
 	"~/.emacs.d/clojure-mode/"
-	"~/.emacs.d/swank-clojure/"
+	"~/.emacs.d/swank-clojure/src/emacs"
 	"~/.emacs.d/color-theme-6.6.0/"
 	"~/.emacs.d/smex/"
         "~/.emacs.d/newlisp-mode/"
@@ -160,10 +160,9 @@
 		    swank-clojure-extra-classpaths
 		    '("c:/Dokumente und Einstellungen/danlei/Clojure/clojure-contrib/clojure-contrib.jar"))))
 
-(require 'swank-clojure-autoload "swank-clojure-autoload" t)
+(require 'clojure-mode "clojure-mode" t)
 (require 'swank-clojure "swank-clojure" t)
-(autoload 'clojure-mode "clojure-mode"
-  "Mode for clojure file editing." t)
+(require 'swank-clojure-autoload "swank-clojure-autoload" t)
 
 ;;; bill clementson
 (defun slime-java-describe (symbol-name)
@@ -230,7 +229,6 @@
 (when (require 'quack "quack" t)
   (setq quack-remap-find-file-bindings-p nil)
 	(setq quack-pretty-lambda-p t))
-
 
 (when (require 'scheme-complete "scheme-complete" t)
   (add-hook
