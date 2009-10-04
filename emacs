@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-10-04 16:33:24 danlei>
+;;;;; Time-stamp: <2009-10-04 17:01:52 danlei>
 ;;;;;
 
 
@@ -618,8 +618,7 @@ prevents using commands with prefix arguments."
 (add-hook 'auto-save-hook
 	  (lambda () (desktop-save-in-desktop-dir)))
 
-(when (require 'saveplace "saveplace" t)
-  (setq-default save-place t))
+(savehist-mode 1)
 
 
 ;;;;
