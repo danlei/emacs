@@ -2,25 +2,25 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-10-04 17:01:52 danlei>
+;;;;; Time-stamp: <2009-10-04 17:12:12 danlei>
 ;;;;;
 
 
 (require 'cl)
 
-(setq load-path
-      (append load-path
-              '("~/.emacs.d/"
-                "~/.emacs.d/erc-5.3-extras/"
-                "~/.emacs.d/slime/"
-                "~/.emacs.d/slime/contrib/"
-                "~/.emacs.d/clojure-mode/"
-                "~/.emacs.d/swank-clojure/src/emacs"
-                "~/.emacs.d/color-theme-6.6.0/"
-                "~/.emacs.d/smex/"
-                "~/.emacs.d/newlisp-mode/"
-                "~/.emacs.d/egg/"
-                )))
+
+(mapc (lambda (path) (add-to-list 'load-path path))
+      '("~/.emacs.d/"
+        "~/.emacs.d/erc-5.3-extras/"
+        "~/.emacs.d/slime/"
+        "~/.emacs.d/slime/contrib/"
+        "~/.emacs.d/clojure-mode/"
+        "~/.emacs.d/swank-clojure/src/emacs"
+        "~/.emacs.d/color-theme-6.6.0/"
+        "~/.emacs.d/smex/"
+        "~/.emacs.d/newlisp-mode/"
+        "~/.emacs.d/egg/"
+        ))
 
 
 ;;;;
@@ -605,15 +605,15 @@ prevents using commands with prefix arguments."
 (setq desktop-dirname "~/"
       history-length 250)
 
-(setq desktop-globals-to-save
-      (append desktop-globals-to-save
-              '(global-mark-ring
-                mark-ring
-                kmacro-ring
-                kill-ring
-                file-name-history
-                register-alist
-                )))
+(mapc (lambda (global)
+        (add-to-list 'desktop-globals-to-save global))
+      '(global-mark-ring
+        mark-ring
+        kmacro-ring
+        kill-ring
+        file-name-history
+        register-alist
+        ))
 
 (add-hook 'auto-save-hook
 	  (lambda () (desktop-save-in-desktop-dir)))
