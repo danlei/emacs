@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-10-04 17:12:12 danlei>
+;;;;; Time-stamp: <2009-10-05 22:16:30 danlei>
 ;;;;;
 
 
@@ -758,8 +758,7 @@ prevents using commands with prefix arguments."
 lists. The functions are bound to the keys in the given mode-map.
 Keys are in kbd format."
   (mapc (lambda (keybinding)
-	  (let ((key (car keybinding))
-		(function (cadr keybinding)))
+	  (destructuring-bind (key function) keybinding
 	    (define-key mode-map (read-kbd-macro key) function)))
 	keybindings))
 
@@ -768,8 +767,7 @@ Keys are in kbd format."
 The functions are globally bound to the keys. Keys
 are in kbd format."
   (mapc (lambda (keybinding)
-	  (let ((key (car keybinding))
-		(function (cadr keybinding)))
+	  (destructuring-bind (key function) keybinding
 	    (global-set-key (read-kbd-macro key) function)))
 	keybindings))
 
