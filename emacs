@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-10-05 22:16:30 danlei>
+;;;;; Time-stamp: <2009-10-06 15:40:55 danlei>
 ;;;;;
 
 
@@ -673,6 +673,8 @@ prevents using commands with prefix arguments."
       line-move-visual nil
       help-window-select t
       enable-recursive-minibuffers t
+      max-specpdl-size 10000
+      max-lisp-eval-depth 5000
       )
 
 (setq-default cursor-type 'bar
