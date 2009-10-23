@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-10-06 15:40:55 danlei>
+;;;;; Time-stamp: <2009-10-23 16:14:06 danlei>
 ;;;;;
 
 
@@ -16,6 +16,7 @@
         "~/.emacs.d/slime/contrib/"
         "~/.emacs.d/clojure-mode/"
         "~/.emacs.d/swank-clojure/src/emacs"
+        "~/.emacs.d/swank-clojure/"
         "~/.emacs.d/color-theme-6.6.0/"
         "~/.emacs.d/smex/"
         "~/.emacs.d/newlisp-mode/"
@@ -135,8 +136,8 @@
 		  ("M-ö" down-list)
 		  ("M-t" transpose-sexps)
 		  ("C-M-t" transpose-words)
-		  ("<C-backspace>" paredit-backward-kill-word)
-                  ("<M-backspace>" backward-kill-sexp)
+		  ("<M-backspace>" paredit-backward-kill-word)
+                  ("<C-backspace>" backward-kill-sexp)
                   ("M-k" kill-sexp)
 		  ))))
 
@@ -145,24 +146,25 @@
 ;;;; clojure
 ;;;;
 
-;; (when (eq system-type 'cygwin)
-;;   (setq swank-clojure-jar-path
-;; 	"c:/cygwin/home/danlei/build/clojure/trunk/clojure.jar"
-;; 	swank-clojure-extra-classpaths
-;; 	'("c:/cygwin/home/danlei/coding/lisp/clojure/")))
-
+;; this stuff is broken, since jochu's swank-clojure is ... a mess
 (case system-type
-  (cygwin (setq swank-clojure-jar-path
-		"c:/cygwin/home/danlei/build/clojure/trunk/clojure.jar"
-		swank-clojure-extra-classpaths
-		'("c:/cygwin/home/danlei/coding/lisp/clojure/")))
-  (windows-nt (setq swank-clojure-jar-path
-		    "c:/Dokumente und Einstellungen/danlei/Clojure/clojure/clojure.jar"
-		    swank-clojure-extra-classpaths
-		    '("c:/Dokumente und Einstellungen/danlei/Clojure/clojure-contrib/clojure-contrib.jar"))))
+  (cygwin
+     (setq swank-clojure-jar-path
+           ;; even slime-connect needs this
+	   "c:/cygwin/home/danlei/build/clojure/clojure.jar"))
+  (windows-nt
+     (setq swank-clojure-path
+           "c:/cygwin/home/danlei/.emacs.d/swank-clojure/classes/"
+           swank-clojure-jar-path
+           "c:/cygwin/home/danlei/build/clojure/clojure.jar"
+           swank-clojure-extra-classpaths
+           '("c:/cygwin/home/danlei/Clojure/clojure-contrib/clojure-contrib.jar"
+             "c:/cygwin/home/danlei/Clojure/swank-clojure/src/")
+           swank-clojure-java-path
+           "c:/Programme/Java/jdk1.6.0_16/bin/java.exe"
+           swank-clojure-extra-vm-args (list "-server"))))
 
 (require 'clojure-mode "clojure-mode" t)
-(require 'swank-clojure "swank-clojure" t)
 (require 'swank-clojure-autoload "swank-clojure-autoload" t)
 
 ;;; bill clementson
@@ -202,8 +204,6 @@
 	    (require 'clojure-mode)
 	    (define-keys slime-mode-map
 		'(("C-c d" slime-java-describe)
-		  ("C-c d" slime-java-describe)
-		  ("C-c D" slime-javadoc)
 		  ("C-c D" slime-javadoc)
 		  ))))
 
