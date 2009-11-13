@@ -841,7 +841,7 @@ are in kbd format."
 ;;;; gnus
 ;;;;
 
-(setq gnus-select-method '(nntp "news.t-online.de"))
+(setq gnus-select-method '(nntp "news.albasani.net"))
 
 (setq gnus-group-line-format "%2{%M%S%p%} %0{%5y%} %P%1{%G%}\n"
       gnus-topic-line-format "%i%3{[ %n -- %A ]%}%v\n"
