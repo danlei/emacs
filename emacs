@@ -725,6 +725,8 @@ prevents using commands with prefix arguments."
 ;;; lpc:
 ;; (modify-syntax-entry ?' "'" c-mode-syntax-table)
 
+(setq-default c-basic-offset 2)
+
 (prefer-coding-system       'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
