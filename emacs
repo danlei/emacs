@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-10-23 16:14:06 danlei>
+;;;;; Time-stamp: <2009-11-13 20:32:46 danlei>
 ;;;;;
 
 
@@ -675,7 +675,7 @@ prevents using commands with prefix arguments."
       scroll-conservatively 1
       require-final-newline nil
       ispell-personal-dictionary "~/.ispell-emacs"
-      ispell-dictionary "american"
+      ispell-dictionary "german"
       woman-use-own-frame nil
       sentence-end-double-space nil
       make-backup-files 1
