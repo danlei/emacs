@@ -364,6 +364,18 @@
 
 (add-to-list 'auto-mode-alist '("\.pl$" . prolog-mode))
 
+;;;;
+;;;; java
+;;;;
+
+(require 'javarun "javarun" t)
+
+(setq *javarun-cygdir* "c:/cygwin/")
+
+(add-hook 'java-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c c") 'javarun)))
+
 
 ;;;;
 ;;;; auctex
