@@ -432,7 +432,7 @@
 (when (require 'erc "erc" t)
   (require 'erc-match "erc-match" t)
   (require 'erc-list-old "erc-list-old" t)
-  (erc-spelling-mode 1)
+  (erc-spelling-mode -1)
   (erc-list-mode 1)
   (erc-timestamp-mode -1)
   (erc-smiley-mode 1)
