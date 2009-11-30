@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-11-13 20:32:46 danlei>
+;;;;; Time-stamp: <2009-11-30 08:18:28 danlei>
 ;;;;;
 
 
@@ -374,7 +374,9 @@
 
 (add-hook 'java-mode-hook
           (lambda ()
-            (local-set-key (kbd "C-c c") 'javarun)))
+            (local-set-key (kbd "C-c c") 'javarun)
+            (c-subword-mode 1))
+          )
 
 
 ;;;;
