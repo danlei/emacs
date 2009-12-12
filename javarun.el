@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; javarun.el
 ;;;;;
-;;;;; Time-stamp: <2009-11-13 21:03:05 danlei>
+;;;;; Time-stamp: <2009-11-17 03:38:44 danlei>
 ;;;;;
 ;;;;; License: LLGPL
 ;;;;;
@@ -47,7 +47,7 @@ The window can be closed (and the buffer buried} by typing \"q\".
                 (concat "(" (read-input "Command line arguments: ") ")")))))
 
 (defun javarun (argsp)
-  "Compiles and (if successful) runs a Java file.
+  "Compiles, and (if successful) runs a Java file.
 If a positive prefix arg is given, reads a string
 of command-line args interactively. Compile errors
 or the program's output are shown in a popup window."
