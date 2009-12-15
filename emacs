@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-11-30 08:18:28 danlei>
+;;;;; Time-stamp: <2009-12-15 18:41:03 danlei>
 ;;;;;
 
 
@@ -919,6 +919,7 @@ are in kbd format."
       gnus-treat-display-x-face t
       gnus-treat-emphasize t
       gnus-treat-fill-long-lines nil
+      gnus-treat-fill-article t
       gnus-treat-hide-signature nil
       gnus-treat-overstrike nil
       gnus-treat-play-sounds nil
