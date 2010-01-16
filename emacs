@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2009-12-15 18:41:03 danlei>
+;;;;; Time-stamp: <2010-01-16 15:39:26 danlei>
 ;;;;;
 
 
@@ -271,7 +271,8 @@
 (add-to-list 'auto-mode-alist '("\\.ij[rstp]" . j-mode))
 
 (setq j-path "/cygdrive/c/Dokumente und Einstellungen/danlei/j602/bin/")
-(setq j-dictionary-url "http://www.jsoftware.com/help/dictionary/")
+;(setq j-dictionary-url "http://www.jsoftware.com/help/dictionary/")
+(setq j-dictionary-url "file:///C:/Dokumente und Einstellungen/danlei/j602/help/dictionary/")
 
 (when (require 'which-func "which-func" t)
   (which-func-mode 1))
@@ -430,7 +431,7 @@
 ;;;;
 
 (when (require 'erc "erc" t)
-  (require 'erc-match "erc-match" t)
+; (require 'erc-match "erc-match" t)
   (require 'erc-list-old "erc-list-old" t)
   (erc-spelling-mode -1)
   (erc-list-mode 1)
@@ -441,8 +442,8 @@
   )
 
 (setq erc-keywords '()
-      erc-pals '("rhickey")
-      erc-fools '()
+;     erc-pals '("rhickey")
+;     erc-fools '()
       erc-current-nick-highlight-type 'nick-or-keyword
       erc-notice-highlight-type 'prefix
       erc-auto-query 'window-noselect
@@ -689,6 +690,8 @@ prevents using commands with prefix arguments."
       enable-recursive-minibuffers t
       max-specpdl-size 10000
       max-lisp-eval-depth 5000
+      user-full-name "Daniel H. Leidisch"
+      user-mail-address "public@leidisch.net"
       )
 
 (setq-default cursor-type 'bar
@@ -919,7 +922,7 @@ are in kbd format."
       gnus-treat-display-x-face t
       gnus-treat-emphasize t
       gnus-treat-fill-long-lines nil
-      gnus-treat-fill-article t
+      gnus-treat-fill-article nil
       gnus-treat-hide-signature nil
       gnus-treat-overstrike nil
       gnus-treat-play-sounds nil
@@ -933,6 +936,12 @@ are in kbd format."
       gnus-treat-translate nil
       gnus-cache-enter-articles '(ticked)
       )
+
+;;;
+;;; posting styles
+;;;
+(setq gnus-posting-styles
+      '((message-news-p (address "news@leidisch.net"))))
 
 ;;;
 ;;; gmail, gmane
@@ -982,6 +991,8 @@ are in kbd format."
   ;; If there is more than one, they won't work right.
  '(buffer-menu-buffer ((t (:foreground "indian red"))))
  '(erc-underline-face ((t nil)))
+ '(gnus-header-subject ((t (:foreground "lemon chiffon"))))
  '(ido-only-match ((((class color)) (:foreground "turquoise"))))
  '(ido-subdir ((((min-colors 88) (class color)) (:foreground "cornflower blue"))))
+ '(message-header-subject ((t (:foreground "lemon chiffon"))))
  '(underline ((t nil))))
