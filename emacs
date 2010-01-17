@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-01-16 15:39:26 danlei>
+;;;;; Time-stamp: <2010-01-17 22:18:53 danlei>
 ;;;;;
 
 
@@ -139,6 +139,10 @@
 		  ("<M-backspace>" paredit-backward-kill-word)
                   ("<C-backspace>" backward-kill-sexp)
                   ("M-k" kill-sexp)
+                  ("M-a" slime-beginning-of-defun)
+                  ("M-e" slime-end-of-defun)
+                  ("C-M-a" backward-sentence)
+                  ("C-M-e" forward-sentence)
 		  ))))
 
 
@@ -390,6 +394,37 @@
 
 ;; (load "auctex.el" nil t t)
 ;; (load "preview-latex.el" nil t t)
+
+
+;;;;
+;;;; xml
+;;;;
+
+(when (require 'rnc-mode "rnc-mode" t)
+  (add-to-list 'auto-mode-alist '("\\.rnc\\'" . rnc-mode))
+  (setq rnc-indent-level 2))
+
+(add-to-list 'auto-mode-alist '("\\.xml\\'" . nxml-mode))
+
+(setq nxml-slash-auto-complete-flag t)
+
+(add-hook 'nxml-mode-hook
+          (lambda ()
+            (define-keys nxml-mode-map
+                `(("TAB" ,(lambda (n)
+                            (interactive "p")
+                            (indent-for-tab-command)
+                            (nxml-complete)))
+                  ("<C-return>" ,(lambda (n)
+                                   (interactive "p")
+                                   (nxml-complete)
+                                   (nxml-balanced-close-start-tag-block)))
+                  ("M-ö" nxml-down-element)
+                  ("M-u" nxml-backward-up-element)
+                  ("M-n" nxml-forward-element)
+                  ("M-p" nxml-backward-element)
+                  ("C-M-ö" nxml-backward-down-element)
+                  ("C-M-n" nxml-up-element)))))
 
 
 ;;;;
@@ -741,8 +776,6 @@ prevents using commands with prefix arguments."
 (setq tramp-syntax 'ftp)
 (setq tramp-default-method "ftp")
 
-(add-to-list 'auto-mode-alist '("\\.xml\\'" . nxml-mode))
-
 (when (eq system-type 'darwin)
   (cua-mode 0)
   (delete-selection-mode -1)
@@ -983,7 +1016,7 @@ are in kbd format."
  '(quack-default-program "mzscheme")
  '(quack-fontify-style nil)
  '(quack-programs (quote ("swindle" "MzScheme" "MzScheme.exe" "bigloo" "csi" "csi -hygienic" "gosh" "gsi" "gsi ~~/syntax-case.scm -" "guile" "kawa" "mit-scheme" "mred -z" "mzscheme" "mzscheme -M errortrace" "mzscheme -il r6rs" "mzscheme -il typed-scheme" "mzscheme.exe" "mzscheme3m" "mzschemecgc" "rs" "scheme" "scheme48" "scsh" "sisc" "stklos" "sxi")))
- '(safe-local-variable-values (quote ((Package . utils-kt) (Package . Demos) (Syntax . ANSI-Common-Lisp) (Package . CLIM-DEMO) (Lowercase . Yes) (Package . CLIMACS-COMMANDS) (Package . CLIMACS-JAVA-SYNTAX) (Package . CLIMACS-C-SYNTAX) (Package . CLIMACS-CORE) (Package . CLIMACS-GUI) (Package . CLIMACS-PROLOG-SYNTAX) (Package . CLIM-NULL) (show-trailing-whitespace . t) (indent-tabs) (Package . DREI-CORE) (Package . DREI-LISP-SYNTAX) (Package . DREI-LR-SYNTAX) (Package . DREI-FUNDAMENTAL-SYNTAX) (Package . DREI-MOTION) (Package . DREI-SYNTAX) (Package . DREI) (Package . DREI-BUFFER) (Package . ESA-IO) (Package . ESA) (Package . ESA-UTILS) (Package . GOATEE) (Package . CLIM-POSTSCRIPT) (Package . CLIM-INTERNALS) (Package . gui-geometry) (Syntax . Common-Lisp) (Package . cells) (Package . ccl) (Package . CL-FAD) (Syntax . COMMON-LISP) (Package . CCL) (Base . 10) (Package . LISP-UNIT) (syntax . ANSI-COMMON-LISP) (Package SERIES :use "COMMON-LISP" :colon-mode :external)))))
+ '(safe-local-variable-values (quote ((Package . CL-PPCRE) (Package . utils-kt) (Package . Demos) (Syntax . ANSI-Common-Lisp) (Package . CLIM-DEMO) (Lowercase . Yes) (Package . CLIMACS-COMMANDS) (Package . CLIMACS-JAVA-SYNTAX) (Package . CLIMACS-C-SYNTAX) (Package . CLIMACS-CORE) (Package . CLIMACS-GUI) (Package . CLIMACS-PROLOG-SYNTAX) (Package . CLIM-NULL) (show-trailing-whitespace . t) (indent-tabs) (Package . DREI-CORE) (Package . DREI-LISP-SYNTAX) (Package . DREI-LR-SYNTAX) (Package . DREI-FUNDAMENTAL-SYNTAX) (Package . DREI-MOTION) (Package . DREI-SYNTAX) (Package . DREI) (Package . DREI-BUFFER) (Package . ESA-IO) (Package . ESA) (Package . ESA-UTILS) (Package . GOATEE) (Package . CLIM-POSTSCRIPT) (Package . CLIM-INTERNALS) (Package . gui-geometry) (Syntax . Common-Lisp) (Package . cells) (Package . ccl) (Package . CL-FAD) (Syntax . COMMON-LISP) (Package . CCL) (Base . 10) (Package . LISP-UNIT) (syntax . ANSI-COMMON-LISP) (Package SERIES :use "COMMON-LISP" :colon-mode :external)))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
