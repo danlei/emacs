@@ -404,7 +404,7 @@
   (add-to-list 'auto-mode-alist '("\\.rnc\\'" . rnc-mode))
   (setq rnc-indent-level 2))
 
-(add-to-list 'auto-mode-alist '("\\.xml\\'" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(xml\\|xsd\\|xsl\\)\\'" . nxml-mode))
 
 (setq nxml-slash-auto-complete-flag t)
 
