@@ -1,5 +1,6 @@
 alias view view-file $1
 alias emacs find-file $1
 alias ed find-file $1
-alias ll ls -l $*
-alias la ls -la $*
+alias ll ls -lh $*
+alias la ls -lah $*
+alias trang java -jar c:/cygwin/home/danlei/build/trang-20081028/trang.jar $*
