@@ -143,6 +143,8 @@
                   ("M-e" slime-end-of-defun)
                   ("C-M-a" backward-sentence)
                   ("C-M-e" forward-sentence)
+                  ("M-q" indent-pp-sexp)
+                  ("C-M-q" fill-paragraph)
 		  ))))
 
 
