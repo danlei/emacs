@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-01-27 15:06:13 danlei>
+;;;;; Time-stamp: <2010-01-27 20:30:07 danlei>
 ;;;;;
 
 
@@ -124,9 +124,10 @@
 	    (define-keys paredit-mode-map
 		'((")" paredit-close-parenthesis)
                   ("M-)" paredit-close-parenthesis-and-newline)
-		  ("}" paredit-close-brace)
-                  ("M-{" paredit-brace-wrap-sexp)
-		  ("{" paredit-open-brace)
+		  ("}" paredit-close-curly)
+		  ("{" paredit-open-curly)
+                  ("M-{" paredit-wrap-curly)
+                  ("M-[" paredit-wrap-square)
 		  ("M-f" paredit-forward)
 		  ("C-M-f" forward-word)
 		  ("M-b" paredit-backward)
@@ -169,8 +170,9 @@
 ;;            swank-clojure-extra-vm-args (list "-server"))))
 
 (when (require 'clojure-mode "clojure-mode" t)
-  (setq clojure-mode-font-lock-comment-sexp t
-        clojure-mode-use-backtracking-indent t))
+  ;; (setq clojure-mode-font-lock-comment-sexp t
+  ;;       clojure-mode-use-backtracking-indent t)
+  )
 
 (require 'swank-clojure "swank-clojure" t)
 
