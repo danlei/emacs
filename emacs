@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-01-23 16:11:17 danlei>
+;;;;; Time-stamp: <2010-01-27 15:06:13 danlei>
 ;;;;;
 
 
@@ -150,66 +150,27 @@
 ;;;; clojure
 ;;;;
 
-;; this stuff is broken, since jochu's swank-clojure is ... a mess
-(case system-type
-  (cygwin
-     (setq swank-clojure-jar-path
-           ;; even slime-connect needs this
-	   "c:/cygwin/home/danlei/build/clojure/clojure.jar"))
-  (windows-nt
-     (setq swank-clojure-path
-           "c:/cygwin/home/danlei/.emacs.d/swank-clojure/classes/"
-           swank-clojure-jar-path
-           "c:/cygwin/home/danlei/build/clojure/clojure.jar"
-           swank-clojure-extra-classpaths
-           '("c:/cygwin/home/danlei/Clojure/clojure-contrib/clojure-contrib.jar"
-             "c:/cygwin/home/danlei/Clojure/swank-clojure/src/")
-           swank-clojure-java-path
-           "c:/Programme/Java/jdk1.6.0_16/bin/java.exe"
-           swank-clojure-extra-vm-args (list "-server"))))
+;; (case system-type
+;;   (cygwin
+;;      (setq swank-clojure-jar-path
+;; 	   "c:/cygwin/home/danlei/build/clojure/clojure.jar"))
+;;   (windows-nt
+;;      (setq swank-clojure-path
+;;            "c:/cygwin/home/danlei/.emacs.d/swank-clojure/classes/"
+;;            swank-clojure-jar-path
+;;            "c:/cygwin/home/danlei/build/clojure/clojure.jar"
+;;            swank-clojure-extra-classpaths
+;;            '("c:/cygwin/home/danlei/Clojure/clojure-contrib/clojure-contrib.jar"
+;;              "c:/cygwin/home/danlei/Clojure/swank-clojure/src/")
+;;            swank-clojure-java-path
+;;            "c:/Programme/Java/jdk1.6.0_16/bin/java.exe"
+;;            swank-clojure-extra-vm-args (list "-server"))))
 
-(require 'clojure-mode "clojure-mode" t)
-(require 'swank-clojure-autoload "swank-clojure-autoload" t)
+(when (require 'clojure-mode "clojure-mode" t)
+  (setq clojure-mode-font-lock-comment-sexp t
+        clojure-mode-use-backtracking-indent t))
 
-;;; bill clementson
-(defun slime-java-describe (symbol-name)
-  "Get details on Java class/instance at point."
-  (interactive (list (slime-read-symbol-name "Java Class/instance: ")))
-  (when (not symbol-name)
-    (error "No symbol given"))
-  (save-excursion
-    (set-buffer (slime-output-buffer))
-    (unless (eq (current-buffer) (window-buffer))
-      (pop-to-buffer (current-buffer) t))
-    (goto-char (point-max))
-    (insert (concat "(show " symbol-name ")"))
-    (when symbol-name
-      (slime-repl-return)
-      (other-window 1))))
-
-;;; bill clementson
-(defun slime-javadoc (symbol-name)
-  "Get JavaDoc documentation on Java class at point."
-  (interactive (list (slime-read-symbol-name "JavaDoc info for: ")))
-  (when (not symbol-name)
-    (error "No symbol given"))
-  (set-buffer (slime-output-buffer))
-  (unless (eq (current-buffer) (window-buffer))
-    (pop-to-buffer (current-buffer) t))
-  (goto-char (point-max))
-  (insert (concat "(javadoc " symbol-name ")"))
-  (when symbol-name
-    (slime-repl-return)
-    (other-window 1)))
-
-(add-hook 'slime-connected-hook
-	  (lambda ()
-	    (interactive)
-	    (require 'clojure-mode)
-	    (define-keys slime-mode-map
-		'(("C-c d" slime-java-describe)
-		  ("C-c D" slime-javadoc)
-		  ))))
+(require 'swank-clojure "swank-clojure" t)
 
 
 ;;;;
