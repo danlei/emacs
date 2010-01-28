@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; javarun.el
 ;;;;;
-;;;;; Time-stamp: <2009-11-17 03:38:44 danlei>
+;;;;; Time-stamp: <2010-01-28 11:25:30 danlei>
 ;;;;;
 ;;;;; License: LLGPL
 ;;;;;
@@ -26,13 +26,13 @@ The window can be closed (and the buffer buried} by typing \"q\".
   (split-window-vertically)
   (other-window 1)
   (switch-to-buffer buffer)
-  (local-set-key (kbd "q")
+  (local-set-key (kbd "Q")
                  (lambda ()
                    (interactive)
                    (bury-buffer)
                    (set-window-configuration
                     *javarun-old-window-configuration*)))
-  (local-set-key (kbd "Q")
+  (local-set-key (kbd "q")
                  (lambda ()
                    (interactive)
                    (kill-buffer)
