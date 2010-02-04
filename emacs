@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-01-27 21:59:12 danlei>
+;;;;; Time-stamp: <2010-02-04 21:39:04 danlei>
 ;;;;;
 
 
@@ -131,7 +131,7 @@
 		  ("M-f" paredit-forward)
 		  ("C-M-f" forward-word)
 		  ("M-b" paredit-backward)
-		  ("C-M-b" forward-word)
+		  ("C-M-b" backward-word)
 		  ("M-u" backward-up-list)
 		  ("C-M-u" upcase-word)
 		  ("M-ö" down-list)
@@ -343,8 +343,7 @@
 (add-hook 'java-mode-hook
           (lambda ()
             (local-set-key (kbd "C-c c") 'javarun)
-            (c-subword-mode 1))
-          )
+            (c-subword-mode 1)))
 
 
 ;;;;
@@ -499,8 +498,7 @@
 (add-hook 'dired-mode-hook
           (lambda ()
 	    (define-keys dired-mode-map
-		'(("e" wdired-change-to-wdired-mode)
-		  ))
+		'(("e" wdired-change-to-wdired-mode)))
 	    (when (eq system-type 'darwin)
 	      (define-key dired-mode-map (kbd "C-c o")
 		'dired-open-mac))))
@@ -542,8 +540,8 @@
 		    comint-replace-by-expanded-history
 		    ielm-complete-filename
 		    ielm-complete-symbol
-		    PC-lisp-complete-symbol
-		    ))))
+		    PC-lisp-complete-symbol))))
+
 
 ;;;;
 ;;;; eshell
