@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; javarun.el
 ;;;;;
-;;;;; Time-stamp: <2010-01-28 11:25:30 danlei>
+;;;;; Time-stamp: <2010-02-01 17:32:21 danlei>
 ;;;;;
 ;;;;; License: LLGPL
 ;;;;;
@@ -19,8 +19,8 @@
 
 (defun javarun-popup-buffer (buffer)
   "Splits window vertically and popups buffer in a new window.
-The window can be closed (and the buffer buried} by typing \"q\".
-\"Q\" will close the popup window and kill the buffer."
+The window can be closed (and the buffer buried) by typing \"Q\".
+\"q\" will close the popup window and kill the buffer."
   (setq *javarun-old-window-configuration*
         (current-window-configuration))
   (split-window-vertically)
