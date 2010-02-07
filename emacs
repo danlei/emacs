@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-02-04 21:39:04 danlei>
+;;;;; Time-stamp: <2010-02-07 21:40:32 danlei>
 ;;;;;
 
 
@@ -508,22 +508,30 @@
     (interactive)
     (let ((file-name (dired-get-file-for-visit)))
       (if (file-exists-p file-name)
-	  (shell-command (concat "open '" file-name "'" nil ))))))
+	  (shell-command (concat "open '" file-name "'" nil))))))
 
 
 ;;;;
 ;;;; elisp
 ;;;;
-          
+
+(defun indent-and-pc-complete (n)
+  (interactive "p")
+  (indent-for-tab-command)
+  (PC-lisp-complete-symbol))
+
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
             (eldoc-mode 1)
             (define-key emacs-lisp-mode-map
-                (kbd "TAB") (lambda (n)
-                              (interactive "p")
-                              (indent-for-tab-command)
-                              (PC-lisp-complete-symbol)))
-            ))
+              (kbd "TAB") 'indent-and-pc-complete)))
+
+(add-hook 'lisp-interaction-mode-hook
+          (lambda ()
+            (eldoc-mode 1)
+            (define-keys lisp-interaction-mode-map
+              '(("TAB" indent-and-pc-complete)
+                ("<C-return>" eval-print-last-sexp)))))
 
 
 ;;;;
@@ -550,8 +558,7 @@
 (add-hook 'eshell-mode-hook
           (lambda ()
             (define-keys eshell-mode-map
-                '(("C-a" eshell-maybe-bol)
-                  ))))
+                '(("C-a" eshell-maybe-bol)))))
 
 (defun eshell-maybe-bol ()
   "Moves point behind the eshell prompt, or
@@ -623,8 +630,7 @@ prevents using commands with prefix arguments."
         kmacro-ring
         kill-ring
         file-name-history
-        register-alist
-        ))
+        register-alist))
 
 (add-hook 'auto-save-hook
 	  (lambda () (desktop-save-in-desktop-dir)))
@@ -786,6 +792,13 @@ are in kbd format."
 	  (destructuring-bind (key function) keybinding
 	    (global-set-key (read-kbd-macro key) function)))
 	keybindings))
+
+(defun kill-all-rnc-input-buffers ()
+  "Closes all Rnc Input buffers."
+  (interactive)
+  (dolist (b (buffer-list))
+    (when (string-match "RNC Input" (buffer-name b))
+      (kill-buffer b))))
 
 
 ;;;;
