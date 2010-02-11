@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-02-07 21:40:32 danlei>
+;;;;; Time-stamp: <2010-02-11 00:40:09 danlei>
 ;;;;;
 
 
@@ -280,7 +280,7 @@
 
 
 ;;;;
-;;;; haskell-mode
+;;;; haskell
 ;;;;
 
 (add-to-list 'load-path "~/.emacs.d/haskell-mode/")
@@ -313,6 +313,21 @@
          ("C-c ." haskell-indent-align-guards-and-rhs)
          ("C-c t" inferior-haskell-type)
          ("C-c i" inferior-haskell-info)))))
+
+
+;;;;
+;;;; f#
+;;;;
+
+(require 'fsharp "fsharp" t)
+
+(setq-default fsharp-indent-offset 2
+              fsharp-continuation-offset 1)
+
+(setq inferior-fsharp-program "fsi.exe"
+      fsharp-compiler "fsc.exe")
+
+(add-to-list 'auto-mode-alist '("\.fs$" . fsharp-mode))
 
 
 ;;;;
