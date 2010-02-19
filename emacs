@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-02-11 00:40:09 danlei>
+;;;;; Time-stamp: <2010-02-11 00:56:29 danlei>
 ;;;;;
 
 
@@ -21,6 +21,7 @@
         "~/.emacs.d/smex/"
         "~/.emacs.d/newlisp-mode/"
         "~/.emacs.d/egg/"
+        "~/.emacs.d/fsharp"
         ))
 
 
@@ -328,6 +329,13 @@
       fsharp-compiler "fsc.exe")
 
 (add-to-list 'auto-mode-alist '("\.fs$" . fsharp-mode))
+
+(add-hook
+ 'fsharp-mode-hook
+ (lambda ()
+   (define-keys fsharp-mode-map
+     `(("C-c b" fsharp-mark-block)
+       ("C-c r" fsharp-run-executable-file)))))
 
 
 ;;;;
