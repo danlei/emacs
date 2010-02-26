@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-02-11 00:56:29 danlei>
+;;;;; Time-stamp: <2010-02-26 18:54:08 danlei>
 ;;;;;
 
 
@@ -290,7 +290,7 @@
      (require 'haskell-indent "haskell-indent" t))
 
 (when (eq system-type 'cygwin)
-  (setq haskell-program-name "/cygdrive/c/ghc/ghc-6.4.2/bin/ghci.exe"))
+  (setq haskell-program-name "ghci.exe"))
 
 (add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
 
@@ -831,6 +831,13 @@ are in kbd format."
 (defadvice split-window-vertically
     (after my-window-splitting-advice first () activate)
   (set-window-buffer (next-window) (other-buffer)))
+
+(when (eq system-type 'cygwin)
+  (defadvice inferior-haskell-load-file
+    (around inferior-haskell-load-file-around)
+   (let ((buffer-file-name (concat "c:/cygwin" buffer-file-name)))
+     ad-do-it))
+  (ad-activate 'inferior-haskell-load-file))
 
 
 ;;;;
