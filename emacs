@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-02-26 18:54:08 danlei>
+;;;;; Time-stamp: <2010-02-28 17:23:59 danlei>
 ;;;;;
 
 
@@ -118,6 +118,12 @@
   (add-hook 'inferior-scheme-mode-hook
             (lambda ()
               (paredit-mode 1)))
+  (add-hook 'inferior-qi-mode-hook
+            (lambda ()
+              (paredit-mode 1)))
+  (add-hook 'qi-mode-hook
+            (lambda ()
+              (paredit-mode 1)))
   )
 
 (add-hook 'paredit-mode-hook
@@ -181,6 +187,11 @@
 ;;;;
 
 (require 'qi-mode "qi-mode" t)
+
+(when (eq system-type 'cygwin)
+  (setq inferior-qi-program
+        "~/build/QiII1.06SBCL/sbcl.exe --noinform --core \
+c:/cygwin/home/danlei/build/QiII1.06SBCL/Qi.core"))
 
 
 ;;;;
