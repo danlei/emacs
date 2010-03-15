@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-02-28 17:23:59 danlei>
+;;;;; Time-stamp: <2010-03-15 03:08:56 danlei>
 ;;;;;
 
 
@@ -22,6 +22,7 @@
         "~/.emacs.d/newlisp-mode/"
         "~/.emacs.d/egg/"
         "~/.emacs.d/fsharp"
+        "~/.emacs.d/gist.el"
         ))
 
 
@@ -301,7 +302,7 @@ c:/cygwin/home/danlei/build/QiII1.06SBCL/Qi.core"))
      (require 'haskell-indent "haskell-indent" t))
 
 (when (eq system-type 'cygwin)
-  (setq haskell-program-name "ghci.exe"))
+  (setq haskell-program-name "ghci.exe")) ; -fglasgow-exts
 
 (add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
 
@@ -702,6 +703,8 @@ prevents using commands with prefix arguments."
 ;;    "Minor mode for incremental blame for Git." t)
 
 (require 'egg "egg" t)
+
+(require 'gist)
 
 
 ;;;;
