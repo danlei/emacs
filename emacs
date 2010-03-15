@@ -491,6 +491,9 @@ c:/cygwin/home/danlei/build/QiII1.06SBCL/Qi.core"))
       erc-hide-list '("JOIN" "PART" "QUIT" "NICK")
       )
 
+(setq erc-button-url-regexp
+      "\\([-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]+\\.\\)+[-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]*[-a-zA-Z0-9\\/]")
+
 (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
                                 "324" "329" "332" "333" "353" "477"))
 
