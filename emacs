@@ -849,8 +849,9 @@ are in kbd format."
 (when (eq system-type 'cygwin)
   (defadvice inferior-haskell-load-file
     (around inferior-haskell-load-file-around)
-   (let ((buffer-file-name (concat "c:/cygwin" buffer-file-name)))
-     ad-do-it))
+    (save-buffer)
+    (let ((buffer-file-name (concat "c:/cygwin" buffer-file-name)))
+      ad-do-it))
   (ad-activate 'inferior-haskell-load-file))
 
 
