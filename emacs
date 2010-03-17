@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-03-15 03:08:56 danlei>
+;;;;; Time-stamp: <2010-03-17 09:55:04 danlei>
 ;;;;;
 
 
@@ -303,6 +303,8 @@ c:/cygwin/home/danlei/build/QiII1.06SBCL/Qi.core"))
 
 (when (eq system-type 'cygwin)
   (setq haskell-program-name "ghci.exe")) ; -fglasgow-exts
+
+(setq haskell-font-lock-symbols 'unicode)
 
 (add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
 
