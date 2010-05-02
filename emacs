@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-05-02 17:15:06 danlei>
+;;;;; Time-stamp: <2010-05-02 18:16:18 danlei>
 ;;;;;
 
 
@@ -23,6 +23,7 @@
         "~/.emacs.d/egg/"
         "~/.emacs.d/fsharp"
         "~/.emacs.d/gist.el"
+        "~/.emacs.d/gnugo"
         ))
 
 
@@ -257,6 +258,7 @@ c:/cygwin/home/danlei/build/QiII1.06SBCL/Qi.core"))
 (when (require 'which-func "which-func" t)
   (which-func-mode 1))
 
+
 ;;;;
 ;;;; ruby
 ;;;; 
@@ -313,6 +315,7 @@ minibuffer, defaulting to word-at-point."
 	      (tcl-send-string
 	       (inferior-tcl-proc)
 	       "namespace path {::tcl::mathop ::tcl::mathfunc}\n"))))
+
 
 ;;;;
 ;;;; maxima
@@ -407,13 +410,14 @@ minibuffer, defaulting to word-at-point."
 
 (add-to-list 'auto-mode-alist '("\.pl$" . prolog-mode))
 
+
 ;;;;
 ;;;; java
 ;;;;
 
 (require 'javarun "javarun" t)
 
-(setq *javarun-cygdir* "c:/cygwin/")
+(setq javarun-cygdir "c:/cygwin/")
 
 (add-hook 'java-mode-hook
           (lambda ()
@@ -544,17 +548,17 @@ minibuffer, defaulting to word-at-point."
                         (or x "Ein guter Abgang ziert die Übung."))
       erc-quit-reason erc-part-reason)
 
-(defvar *erc-auth*
+(defvar erc-auth
   '(;freenode (:name "<irc-nick>" :password "<password>")
     ))
 
 (load "~/.emacs-auth" t)
 
 (defun erc-nick (server)
-  (getf (getf *erc-auth* server) :name))
+  (getf (getf erc-auth server) :name))
 
 (defun erc-password (server)
-  (getf (getf *erc-auth* server) :password))
+  (getf (getf erc-auth server) :password))
 
 (add-hook 'erc-after-connect
 	  (lambda (SERVER NICK)
