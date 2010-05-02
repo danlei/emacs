@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-03-19 19:02:50 danlei>
+;;;;; Time-stamp: <2010-05-02 17:15:06 danlei>
 ;;;;;
 
 
@@ -256,6 +256,44 @@ c:/cygwin/home/danlei/build/QiII1.06SBCL/Qi.core"))
 
 (when (require 'which-func "which-func" t)
   (which-func-mode 1))
+
+;;;;
+;;;; ruby
+;;;; 
+
+(autoload 'run-ruby "inf-ruby.el" "Run irb from Emacs." t)
+;(setq ruby-program-name "irb")
+
+(add-hook
+ 'ruby-mode-hook
+ (lambda ()
+   (define-keys ruby-mode-map
+       '(("C-M-x" ruby-send-definition)
+         ("C-c C-c" dhl-ruby-send-buffer)
+         ("C-c c" dhl-ruby-send-buffer)
+         ("C-c h" dhl-ruby-browse-class-documentation)))))
+
+(defun dhl-ruby-send-buffer ()
+  "Send the current buffer to the inferior Ruby process."
+  (interactive)
+  (ruby-send-region (point-min) (point-max)))
+
+(defvar dhl-ruby-class-documentation-uri
+  "http://ruby-doc.org/core-1.9/classes/"
+  "The ruby class documentation root URI.")
+
+(defun dhl-ruby-browse-class-documentation (class-name)
+  "Browse the ruby class documentation for a class queried in the
+minibuffer, defaulting to word-at-point."
+  (interactive
+   (let* ((default (word-at-point))
+          (input
+           (read-from-minibuffer
+            (if default
+                (format "Browse documentation for class (default %s): " default)
+                "Browse documentation for class: "))))
+     (list (if (equal input "") default input))))
+  (browse-url (concat dhl-ruby-class-documentation-uri class-name ".html")))
 
 
 ;;;;
