@@ -343,7 +343,7 @@ minibuffer, defaulting to word-at-point."
      (require 'haskell-indent "haskell-indent" t))
 
 (when (eq system-type 'cygwin)
-  (setq haskell-program-name "ghci.exe")) ; -fglasgow-exts
+  (setq haskell-program-name "ghci.exe -fglasgow-exts -XNoMonomorphismRestriction"))
 
 (setq haskell-font-lock-symbols 'unicode)
 
