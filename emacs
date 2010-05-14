@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-05-02 18:16:18 danlei>
+;;;;; Time-stamp: <2010-05-14 14:10:42 danlei>
 ;;;;;
 
 
@@ -24,6 +24,7 @@
         "~/.emacs.d/fsharp"
         "~/.emacs.d/gist.el"
         "~/.emacs.d/gnugo"
+        "/cygdrive/c/Programme/Maxima-5.21.1/share/maxima/5.21.1/emacs"
         ))
 
 
@@ -321,16 +322,19 @@ minibuffer, defaulting to word-at-point."
 ;;;; maxima
 ;;;;
 
-;; (add-to-list 'load-path "/usr/share/maxima/5.17.1/emacs/")
+(setq maxima-command "/cygdrive/c/Programme/Maxima-5.21.1/bin/maxima.bat")
 
+(require 'maxima "maxima" t)
+(require 'maxima-font-lock "maxima-font-look" t)
+
+;; (load "maxima.el")
+;; (load "maxima-font-lock.el")
 ;; (setq imaxima-use-maxima-mode-flag t)
-;; (load "/usr/share/maxima/5.17.1/emacs/maxima-font-lock.el")
-;; (load "/usr/share/maxima/5.17.1/emacs/maxima.el")
-;; (load "/usr/share/maxima/5.17.1/emacs/imaxima.el")
-;; (load "/usr/share/maxima/5.17.1/emacs/emaxima.el")
+;; (load "imaxima.el")
+;; (load "emaxima.el")
 ;; (setq imaxima-fnt-size "Large")
 
-;; (add-to-list 'auto-mode-alist '("\\.max" . maxima-mode))
+(add-to-list 'auto-mode-alist '("\\.max" . maxima-mode))
 
 
 ;;;;
