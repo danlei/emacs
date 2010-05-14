@@ -358,7 +358,10 @@ minibuffer, defaulting to word-at-point."
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
-(add-hook 'inferior-haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'inferior-haskell-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c h") 'haskell-hoogle)
+            (turn-on-haskell-doc-mode 1)))
 
 (add-hook
  'haskell-mode-hook
@@ -371,6 +374,7 @@ minibuffer, defaulting to word-at-point."
          ("C-c o" haskell-indent-insert-otherwise)
          ("C-c w" haskell-indent-insert-where)
          ("C-c ." haskell-indent-align-guards-and-rhs)
+         ("C-c h" haskell-hoogle)
          ("C-c t" inferior-haskell-type)
          ("C-c i" inferior-haskell-info)))))
 
