@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-05-14 14:10:42 danlei>
+;;;;; Time-stamp: <2010-07-04 19:32:40 danlei>
 ;;;;;
 
 
@@ -431,6 +431,32 @@ minibuffer, defaulting to word-at-point."
           (lambda ()
             (local-set-key (kbd "C-c c") 'javarun)
             (c-subword-mode 1)))
+
+
+;;;;
+;;;; c
+;;;;
+
+;(require 'cc-mode)
+
+(setq compilation-window-height 10)
+(setq compilation-read-command nil)
+
+(add-hook 'c-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c c") 'compile)
+            (local-set-key (kbd "M-p") 'previous-error)
+            (local-set-key (kbd "M-n") 'next-error)
+            (c-subword-mode 1)))
+
+(defun compile-gcc-command (&optional extra-arguments)
+  "Returns a gcc command line for use with compile-command.
+Intended for use with little test files. Extra options may
+be given as an optional argument."
+  (concat "gcc -std=c99 -pedantic -Wall -o "
+          (file-name-sans-extension (file-name-nondirectory buffer-file-name)) " "
+          (file-name-nondirectory buffer-file-name) " "
+          extra-arguments))
 
 
 ;;;;
