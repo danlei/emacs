@@ -978,7 +978,7 @@ are in kbd format."
 		   ("C-c l" mark-line)
 		   ("C-x C-b" buffer-menu)
 		   ("M-/" hippie-expand)
-		   ("C-c s" slime-selector)
+		   ("C-c C-s" slime-selector)
 		   ("C-x r v" view-register)
 		   ("M-X" dhl-invoke-smex)
                    ("C-^" winner-undo)
