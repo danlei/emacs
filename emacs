@@ -2,35 +2,20 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-08-01 13:17:56 danlei>
+;;;;; Time-stamp: <2010-08-01 13:43:37 danlei>
 ;;;;;
 
 
 (require 'cl)
 
-
-(mapc (lambda (path) (add-to-list 'load-path path))
-      '("~/.emacs.d/"
-        "~/.emacs.d/erc-5.3-extras/"
-        "~/.emacs.d/slime/"
-        "~/.emacs.d/slime/contrib/"
-        "~/.emacs.d/clojure-mode/"
-        "~/.emacs.d/swank-clojure/src/emacs"
-        "~/.emacs.d/swank-clojure/"
-        "~/.emacs.d/color-theme-6.6.0/"
-        "~/.emacs.d/smex/"
-        "~/.emacs.d/newlisp-mode/"
-        "~/.emacs.d/egg/"
-        "~/.emacs.d/fsharp"
-        "~/.emacs.d/gist.el"
-        "~/.emacs.d/gnugo"
-        "~/.emacs.d/ghc-mod"
-        ))
+(add-to-list 'load-path "~/.emacs.d/")
 
 
 ;;;;
 ;;;; color-theme
 ;;;;
+
+(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
 
 (when (require 'color-theme "color-theme" t)
   (color-theme-initialize)
@@ -41,6 +26,9 @@
 ;;;;
 ;;;; slime
 ;;;;
+
+(add-to-list 'load-path "~/.emacs.d/slime/")
+(add-to-list 'load-path "~/.emacs.d/slime/contrib/")
 
 (when (require 'slime "slime" t)
   (slime-setup '(slime-fancy slime-asdf slime-references slime-indentation)))
@@ -163,6 +151,10 @@
 ;;;; clojure
 ;;;;
 
+(add-to-list 'load-path "~/.emacs.d/clojure-mode/")
+(add-to-list 'load-path "~/.emacs.d/swank-clojure/")
+(add-to-list 'load-path "~/.emacs.d/swank-clojure/src/emacs")
+
 (case system-type
   (linux
      (setq swank-clojure-jar-path
@@ -240,6 +232,8 @@ c:/cygwin/home/danlei/build/QiII1.06SBCL/Qi.core"))
 ;;;;
 ;;;; newlisp
 ;;;;
+
+(add-to-list 'load-path "~/.emacs.d/newlisp-mode/")
 
 (add-to-list 'auto-mode-alist '("\\.lsp\\'" . newlisp-mode))
 (autoload 'newlisp-mode "newlisp"
@@ -384,6 +378,8 @@ minibuffer, defaulting to word-at-point."
 ;;; ghc-mod
 ;;;
 
+(add-to-list 'load-path "~/.emacs.d/ghc-mod")
+
 (setq ghc-completion-key (kbd "<backtab>")
       ghc-document-key (kbd "C-c d")
       ghc-import-key (kbd "C-c m")
@@ -407,6 +403,8 @@ minibuffer, defaulting to word-at-point."
 ;;;;
 ;;;; f#
 ;;;;
+
+(add-to-list 'load-path "~/.emacs.d/fsharp")
 
 (require 'fsharp "fsharp" t)
 
@@ -572,6 +570,8 @@ be given as an optional argument."
 ;;;;
 ;;;; erc
 ;;;;
+
+(add-to-list 'load-path "~/.emacs.d/erc-5.3-extras/")
 
 (when (require 'erc "erc" t)
 ; (require 'erc-match "erc-match" t)
@@ -746,6 +746,8 @@ at the beginning of line, if already there."
 ;;;; ido
 ;;;;
 
+(add-to-list 'load-path "~/.emacs.d/smex/")
+
 (and (require 'ido "ido" t)
      (ido-mode t)
      (require 'smex "smex" t)
@@ -816,14 +818,18 @@ prevents using commands with prefix arguments."
 ;; (autoload 'git-blame-mode "git-blame"
 ;;    "Minor mode for incremental blame for Git." t)
 
-(require 'egg "egg" t)
+(add-to-list 'load-path "~/.emacs.d/egg/")
+(add-to-list 'load-path "~/.emacs.d/gist.el")
 
+(require 'egg "egg" t)
 (require 'gist)
 
 
 ;;;;
 ;;;; misc
 ;;;;
+
+(add-to-list 'load-path "~/.emacs.d/gnugo")
 
 (setq inhibit-startup-screen t
       initial-scratch-message nil
