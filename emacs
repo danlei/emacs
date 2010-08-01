@@ -885,6 +885,7 @@ prevents using commands with prefix arguments."
 
 (setq-default c-basic-offset 2)
 (setq-default css-indent-offset 2)
+(setq-default sh-basic-offset 2)
 
 (prefer-coding-system       'utf-8)
 (set-default-coding-systems 'utf-8)
