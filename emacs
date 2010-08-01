@@ -164,6 +164,9 @@
 ;;;;
 
 (case system-type
+  (linux
+     (setq swank-clojure-jar-path
+	   "c:/cygwin/home/danlei/build/clojure/clojure.jar"))
   (cygwin
      (setq swank-clojure-jar-path
 	   "c:/cygwin/home/danlei/build/clojure/clojure.jar"))
@@ -180,7 +183,7 @@
            swank-clojure-extra-vm-args (list "-server"))))
 
 (require 'clojure-mode "clojure-mode" t)
-(require 'swank-clojure-autoload "swank-clojure-autoload" t)
+;(require 'swank-clojure-autoload "swank-clojure-autoload" t)
 
 (require 'swank-clojure "swank-clojure" t)
 
