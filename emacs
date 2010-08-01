@@ -546,6 +546,14 @@ be given as an optional argument."
 	cltl2-root-url
 	"file:///c:/cygwin/home/danlei/doc/cltl2/"))
 
+(when (member system-type '(gnu/linux linux))
+  (setq browse-url-generic-program
+	"firefox"
+	common-lisp-hyperspec-root
+	"file:///home/danlei/doc/HyperSpec/"
+	cltl2-root-url
+	"file:///home/danlei/doc/cltl2/"))
+
 (setq browse-url-browser-function 'browse-url-generic)
 
 (require 'cltl2 "cltl2" t)
