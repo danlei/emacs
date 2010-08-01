@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-07-04 19:32:40 danlei>
+;;;;; Time-stamp: <2010-08-01 13:17:56 danlei>
 ;;;;;
 
 
@@ -24,7 +24,7 @@
         "~/.emacs.d/fsharp"
         "~/.emacs.d/gist.el"
         "~/.emacs.d/gnugo"
-        "/cygdrive/c/Programme/Maxima-5.21.1/share/maxima/5.21.1/emacs"
+        "~/.emacs.d/ghc-mod"
         ))
 
 
@@ -346,8 +346,7 @@ minibuffer, defaulting to word-at-point."
 (and (require 'inf-haskell "inf-haskell" t)
      (require 'haskell-indent "haskell-indent" t))
 
-(when (eq system-type 'cygwin)
-  (setq haskell-program-name "ghci.exe -fglasgow-exts -XNoMonomorphismRestriction"))
+(setq haskell-program-name "ghci -fglasgow-exts -XNoMonomorphismRestriction")
 
 (setq haskell-font-lock-symbols 'unicode)
 
@@ -377,6 +376,29 @@ minibuffer, defaulting to word-at-point."
          ("C-c h" haskell-hoogle)
          ("C-c t" inferior-haskell-type)
          ("C-c i" inferior-haskell-info)))))
+
+;;;
+;;; ghc-mod
+;;;
+
+(setq ghc-completion-key (kbd "<backtab>")
+      ghc-document-key (kbd "C-c d")
+      ghc-import-key (kbd "C-c m")
+      ghc-previous-key (kbd "M-p")
+      ghc-next-key (kbd "M-n")
+      ghc-help-key (kbd "C-c ?")
+      ghc-insert-key (kbd "C-c t")
+      ghc-sort-key (kbd "C-c s")
+      ghc-check-key (kbd "C-x C-s")
+      ghc-toggle-key (kbd "C-c C-c")
+      )
+
+;(autoload 'ghc-init "ghc" nil t)
+(require 'ghc "ghc" t)
+
+(add-hook 'haskell-mode-hook
+          (lambda ()
+            (ghc-init)))
 
 
 ;;;;
