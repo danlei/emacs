@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-08-01 13:43:37 danlei>
+;;;;; Time-stamp: <2010-08-02 00:05:24 danlei>
 ;;;;;
 
 
@@ -370,30 +370,30 @@ minibuffer, defaulting to word-at-point."
          ("C-c o" haskell-indent-insert-otherwise)
          ("C-c w" haskell-indent-insert-where)
          ("C-c ." haskell-indent-align-guards-and-rhs)
-         ("C-c h" haskell-hoogle)
-         ("C-c t" inferior-haskell-type)
+;        ("C-c h" haskell-hoogle)
+;        ("C-c t" inferior-haskell-type)
          ("C-c i" inferior-haskell-info)))))
 
 ;;;
 ;;; ghc-mod
 ;;;
 
-(add-to-list 'load-path "~/.emacs.d/ghc-mod")
+(add-to-list 'load-path "~/.emacs.d/ghc-mod/")
 
 (setq ghc-completion-key (kbd "<backtab>")
       ghc-document-key (kbd "C-c d")
       ghc-import-key (kbd "C-c m")
       ghc-previous-key (kbd "M-p")
       ghc-next-key (kbd "M-n")
-      ghc-help-key (kbd "C-c ?")
+      ghc-help-key (kbd "C-c h")
       ghc-insert-key (kbd "C-c t")
       ghc-sort-key (kbd "C-c s")
       ghc-check-key (kbd "C-x C-s")
       ghc-toggle-key (kbd "C-c C-c")
       )
 
-;(autoload 'ghc-init "ghc" nil t)
 (require 'ghc "ghc" t)
+;(autoload 'ghc-init "ghc" nil t)
 
 (add-hook 'haskell-mode-hook
           (lambda ()
