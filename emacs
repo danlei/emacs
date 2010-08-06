@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-08-06 17:44:07 danlei>
+;;;;; Time-stamp: <2010-08-06 21:45:47 danlei>
 ;;;;;
 
 
@@ -641,7 +641,10 @@ be given as an optional argument."
 ;;;; dired
 ;;;;
 
-(setq dired-recursive-deletes 'top)
+(setq dired-recursive-deletes 'top
+      wdired-allow-to-change-permissions t
+      wdired-allow-to-redirect-links t)
+
 (put 'dired-find-alternate-file 'disabled nil)
 
 (add-hook 'dired-mode-hook
@@ -853,7 +856,8 @@ prevents using commands with prefix arguments."
       )
 
 (setq-default cursor-type 'bar
-              indent-tabs-mode nil)
+              indent-tabs-mode nil
+              tab-width 2)
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -909,6 +913,13 @@ prevents using commands with prefix arguments."
   (setq special-display-regexps
         (remove "[ ]?\\*[hH]elp.*" special-display-regexps))
   (setq special-display-regexps nil))
+
+
+;; (when (eq system-type 'gnu/linux)
+;;   (setenv "PATH"
+;;           (concat (getenv "PATH") ":"
+;;                   "/home/danlei/.cabal/bin" ":"
+;;                   "/home/danlei/bin")))
 
 
 ;;;;
