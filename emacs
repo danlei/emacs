@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-08-02 00:05:24 danlei>
+;;;;; Time-stamp: <2010-08-06 17:44:07 danlei>
 ;;;;;
 
 
@@ -40,31 +40,31 @@
 
 (setq slime-lisp-implementations
       '(
-;;	(sbcl ("/usr/bin/sbcl"))
-;;	(ccl ("/home/danlei/build/clozure/ccl/lx86cl64"))
-;;	(cmucl ("/home/danlei/build/bin/lisp"))
-	(clisp ("/usr/bin/clisp"))
-;;	(allegro ("/home/danlei/build/acl81_express/alisp"))
-;;	(lispworks ("/home/danlei/build/lispworks-personal-5-1-1-x86-linux"))
-;; 	(abcl ("/home/danlei/build/abcl/j/abcl"))
-	))
+;       (sbcl ("/usr/bin/sbcl"))
+;       (ccl ("/home/danlei/build/clozure/ccl/lx86cl64"))
+;       (cmucl ("/home/danlei/build/bin/lisp"))
+        (clisp ("/usr/bin/clisp"))
+;       (allegro ("/home/danlei/build/acl81_express/alisp"))
+;       (lispworks ("/home/danlei/build/lispworks-personal-5-1-1-x86-linux"))
+;       (abcl ("/home/danlei/build/abcl/j/abcl"))
+        ))
 
 
 (add-hook 'slime-mode-hook
-	  (lambda ()
-	    (define-keys slime-mode-map
-		'(("C-c s" slime-selector)
-		  ("C-j" newline-and-indent)
-		  ("TAB" slime-indent-and-complete-symbol)
-		  ("C-c C-d c" cltl2-lookup)
-		  ))))
+          (lambda ()
+            (define-keys slime-mode-map
+                '(("C-c s" slime-selector)
+                  ("C-j" newline-and-indent)
+                  ("TAB" slime-indent-and-complete-symbol)
+                  ("C-c C-d c" cltl2-lookup)
+                  ))))
 
 (add-hook 'slime-repl-mode-hook
-	  (lambda ()
-	    (define-keys slime-repl-mode-map
-		'(("C-c s" slime-selector)
-		  ("C-c C-d c" cltl2-lookup)
-		  ))))
+          (lambda ()
+            (define-keys slime-repl-mode-map
+                '(("C-c s" slime-selector)
+                  ("C-c C-d c" cltl2-lookup)
+                  ))))
 
 ;;; nyef's pathname fix for cygwin
 (when (eq system-type 'cygwin)
@@ -118,24 +118,24 @@
   )
 
 (add-hook 'paredit-mode-hook
-	  (lambda ()
-	    (define-keys paredit-mode-map
-		'((")" paredit-close-parenthesis)
+          (lambda ()
+            (define-keys paredit-mode-map
+                '((")" paredit-close-parenthesis)
                   ("M-)" paredit-close-parenthesis-and-newline)
-		  ("}" paredit-close-curly)
-		  ("{" paredit-open-curly)
+                  ("}" paredit-close-curly)
+                  ("{" paredit-open-curly)
                   ("M-{" paredit-wrap-curly)
                   ("M-[" paredit-wrap-square)
-		  ("M-f" paredit-forward)
-		  ("C-M-f" forward-word)
-		  ("M-b" paredit-backward)
-		  ("C-M-b" backward-word)
-		  ("M-u" backward-up-list)
-		  ("C-M-u" upcase-word)
-		  ("M-ö" down-list)
-		  ("M-t" transpose-sexps)
-		  ("C-M-t" transpose-words)
-		  ("<M-backspace>" paredit-backward-kill-word)
+                  ("M-f" paredit-forward)
+                  ("C-M-f" forward-word)
+                  ("M-b" paredit-backward)
+                  ("C-M-b" backward-word)
+                  ("M-u" backward-up-list)
+                  ("C-M-u" upcase-word)
+                  ("M-ö" down-list)
+                  ("M-t" transpose-sexps)
+                  ("C-M-t" transpose-words)
+                  ("<M-backspace>" paredit-backward-kill-word)
                   ("<C-backspace>" backward-kill-sexp)
                   ("M-k" kill-sexp)
                   ("M-a" slime-beginning-of-defun)
@@ -144,7 +144,7 @@
                   ("C-M-e" forward-sentence)
                   ("M-q" indent-pp-sexp)
                   ("C-M-q" fill-paragraph)
-		  ))))
+                  ))))
 
 
 ;;;;
@@ -158,10 +158,10 @@
 (case system-type
   (linux
      (setq swank-clojure-jar-path
-	   "c:/cygwin/home/danlei/build/clojure/clojure.jar"))
+           "c:/cygwin/home/danlei/build/clojure/clojure.jar"))
   (cygwin
      (setq swank-clojure-jar-path
-	   "c:/cygwin/home/danlei/build/clojure/clojure.jar"))
+           "c:/cygwin/home/danlei/build/clojure/clojure.jar"))
   (windows-nt
      (setq swank-clojure-path
            "c:/cygwin/home/danlei/.emacs.d/swank-clojure/classes/"
@@ -206,7 +206,7 @@ c:/cygwin/home/danlei/build/QiII1.06SBCL/Qi.core"))
 
 (when (require 'quack "quack" t)
   (setq quack-remap-find-file-bindings-p nil)
-	(setq quack-pretty-lambda-p t))
+  (setq quack-pretty-lambda-p t))
 
 (when (require 'scheme-complete "scheme-complete" t)
   (add-hook
@@ -307,12 +307,12 @@ minibuffer, defaulting to word-at-point."
 
 (when (eq system-type 'cygwin)
   (add-hook 'inferior-tcl-mode-hook
-	    (lambda ()
-	      (tcl-send-string
-	       (inferior-tcl-proc) "set ::tcl_interactive 1\n")
-	      (tcl-send-string
-	       (inferior-tcl-proc)
-	       "namespace path {::tcl::mathop ::tcl::mathfunc}\n"))))
+            (lambda ()
+              (tcl-send-string
+               (inferior-tcl-proc) "set ::tcl_interactive 1\n")
+              (tcl-send-string
+               (inferior-tcl-proc)
+               "namespace path {::tcl::mathop ::tcl::mathfunc}\n"))))
 
 
 ;;;;
@@ -538,19 +538,19 @@ be given as an optional argument."
 
 (when (eq system-type 'cygwin)
   (setq browse-url-generic-program
-	"/cygdrive/c/Programme/Mozilla Firefox/firefox.exe"
-	common-lisp-hyperspec-root
-	"file:///c:/cygwin/home/danlei/doc/HyperSpec/"
-	cltl2-root-url
-	"file:///c:/cygwin/home/danlei/doc/cltl2/"))
+        "/cygdrive/c/Programme/Mozilla Firefox/firefox.exe"
+        common-lisp-hyperspec-root
+        "file:///c:/cygwin/home/danlei/doc/HyperSpec/"
+        cltl2-root-url
+        "file:///c:/cygwin/home/danlei/doc/cltl2/"))
 
 (when (member system-type '(gnu/linux linux))
   (setq browse-url-generic-program
-	"firefox"
-	common-lisp-hyperspec-root
-	"file:///home/danlei/doc/HyperSpec/"
-	cltl2-root-url
-	"file:///home/danlei/doc/cltl2/"))
+        "firefox"
+        common-lisp-hyperspec-root
+        "file:///home/danlei/doc/HyperSpec/"
+        cltl2-root-url
+        "file:///home/danlei/doc/cltl2/"))
 
 (setq browse-url-browser-function 'browse-url-generic)
 
@@ -559,11 +559,11 @@ be given as an optional argument."
 (defun random-hyperspec ()
   (interactive)
   (let* ((random-hyperspec-symbol
-	  (let ((syms '()))
-	    (do-symbols (sym common-lisp-hyperspec-symbols) (push sym syms))
-	    (nth (random (length syms)) syms)))
-	 (random-page (let ((pages (symbol-value random-hyperspec-symbol)))
-			(nth (random (length pages)) pages))))
+          (let ((syms '()))
+            (do-symbols (sym common-lisp-hyperspec-symbols) (push sym syms))
+            (nth (random (length syms)) syms)))
+         (random-page (let ((pages (symbol-value random-hyperspec-symbol)))
+                        (nth (random (length pages)) pages))))
     (browse-url (concat common-lisp-hyperspec-root "Body/" random-page))))
 
 
@@ -628,9 +628,9 @@ be given as an optional argument."
   (getf (getf erc-auth server) :password))
 
 (add-hook 'erc-after-connect
-	  (lambda (SERVER NICK)
-	    (cond ((string-match "freenode\\.net" SERVER)
-		   (erc-message "PRIVMSG" (concat "NickServ identify "
+          (lambda (SERVER NICK)
+            (cond ((string-match "freenode\\.net" SERVER)
+                   (erc-message "PRIVMSG" (concat "NickServ identify "
                                                   (erc-password 'freenode)))
                    (erc-message "PRIVMSG" (concat "NickServ ghost "
                                                   (erc-nick 'freenode)))
@@ -646,18 +646,18 @@ be given as an optional argument."
 
 (add-hook 'dired-mode-hook
           (lambda ()
-	    (define-keys dired-mode-map
-		'(("e" wdired-change-to-wdired-mode)))
-	    (when (eq system-type 'darwin)
-	      (define-key dired-mode-map (kbd "C-c o")
-		'dired-open-mac))))
+            (define-keys dired-mode-map
+                '(("e" wdired-change-to-wdired-mode)))
+            (when (eq system-type 'darwin)
+              (define-key dired-mode-map (kbd "C-c o")
+                'dired-open-mac))))
 
 (when (eq system-type 'darwin)
   (defun dired-open-mac ()
     (interactive)
     (let ((file-name (dired-get-file-for-visit)))
       (if (file-exists-p file-name)
-	  (shell-command (concat "open '" file-name "'" nil))))))
+          (shell-command (concat "open '" file-name "'" nil))))))
 
 
 ;;;;
@@ -690,14 +690,14 @@ be given as an optional argument."
 (setq ielm-prompt "elisp> ")
 
 (add-hook 'ielm-mode-hook
-	  (lambda ()
-	    (eldoc-mode 1)
-	    (setq comint-dynamic-complete-functions
-		  '(ielm-tab
-		    comint-replace-by-expanded-history
-		    ielm-complete-filename
-		    ielm-complete-symbol
-		    PC-lisp-complete-symbol))))
+          (lambda ()
+            (eldoc-mode 1)
+            (setq comint-dynamic-complete-functions
+                  '(ielm-tab
+                    comint-replace-by-expanded-history
+                    ielm-complete-filename
+                    ielm-complete-symbol
+                    PC-lisp-complete-symbol))))
 
 
 ;;;;
@@ -731,15 +731,14 @@ at the beginning of line, if already there."
 
 (setq hippie-expand-try-functions-list
       '(try-expand-dabbrev
-	try-expand-dabbrev-all-buffers
-	try-expand-dabbrev-from-kill
+        try-expand-dabbrev-all-buffers
+        try-expand-dabbrev-from-kill
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol
         try-complete-file-name-partially
         try-complete-file-name
         try-expand-whole-kill
-;	ispell-complete-word
-	))
+        ))
 
 
 ;;;;
@@ -784,7 +783,7 @@ prevents using commands with prefix arguments."
         register-alist))
 
 (add-hook 'auto-save-hook
-	  (lambda () (desktop-save-in-desktop-dir)))
+          (lambda () (desktop-save-in-desktop-dir)))
 
 (savehist-mode 1)
 
@@ -854,7 +853,7 @@ prevents using commands with prefix arguments."
       )
 
 (setq-default cursor-type 'bar
-	      indent-tabs-mode nil)
+              indent-tabs-mode nil)
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -906,9 +905,9 @@ prevents using commands with prefix arguments."
   (cua-mode 0)
   (delete-selection-mode -1)
   (set-face-font 'default
-		 "-xos4-terminus-medium-r-normal--14-140-72-72-c-80-utf-8")
+                 "-xos4-terminus-medium-r-normal--14-140-72-72-c-80-utf-8")
   (setq special-display-regexps
-	(remove "[ ]?\\*[hH]elp.*" special-display-regexps))
+        (remove "[ ]?\\*[hH]elp.*" special-display-regexps))
   (setq special-display-regexps nil))
 
 
@@ -921,10 +920,10 @@ prevents using commands with prefix arguments."
    two prefix arguments, write out the day and month name."
   (interactive "P")
   (let ((format (cond ((not prefix) "%d.%m.%Y")
-		      ((not prefix) "%d.%m.%y")
-		      ((equal prefix '(4)) "%Y-%m-%d")
-		      ((equal prefix '(16)) "%A, %d. %B %Y")))
-	(system-time-locale "de_DE"))
+                      ((not prefix) "%d.%m.%y")
+                      ((equal prefix '(4)) "%Y-%m-%d")
+                      ((equal prefix '(16)) "%A, %d. %B %Y")))
+        (system-time-locale "de_DE"))
     (insert (format-time-string format))))
 
 (defun mark-line (&optional arg)
@@ -938,18 +937,18 @@ prevents using commands with prefix arguments."
 lists. The functions are bound to the keys in the given mode-map.
 Keys are in kbd format."
   (mapc (lambda (keybinding)
-	  (destructuring-bind (key function) keybinding
-	    (define-key mode-map (read-kbd-macro key) function)))
-	keybindings))
+          (destructuring-bind (key function) keybinding
+            (define-key mode-map (read-kbd-macro key) function)))
+        keybindings))
 
 (defun global-set-keys (keybindings)
   "Takes a list of (key function-designator) lists.
 The functions are globally bound to the keys. Keys
 are in kbd format."
   (mapc (lambda (keybinding)
-	  (destructuring-bind (key function) keybinding
-	    (global-set-key (read-kbd-macro key) function)))
-	keybindings))
+          (destructuring-bind (key function) keybinding
+            (global-set-key (read-kbd-macro key) function)))
+        keybindings))
 
 (defun kill-all-rnc-input-buffers ()
   "Closes all Rnc Input buffers."
@@ -981,12 +980,12 @@ are in kbd format."
 ;;;;
 
 (global-set-keys '(("C-c i d" insert-date)
-		   ("C-c l" mark-line)
-		   ("C-x C-b" buffer-menu)
-		   ("M-/" hippie-expand)
-		   ("C-c C-s" slime-selector)
-		   ("C-x r v" view-register)
-		   ("M-X" dhl-invoke-smex)
+                   ("C-c l" mark-line)
+                   ("C-x C-b" buffer-menu)
+                   ("M-/" hippie-expand)
+                   ("C-c C-s" slime-selector)
+                   ("C-x r v" view-register)
+                   ("M-X" dhl-invoke-smex)
                    ("C-^" winner-undo)
                    ("C-c ^" winner-redo)
                    ("C-x 8 l" (lambda ()
@@ -1013,7 +1012,7 @@ are in kbd format."
                    ("C-x 8 o e" (lambda ()
                                   (interactive)
                                   (insert "œ")))
-		   ))
+                   ))
 
 
 ;;;;
@@ -1049,10 +1048,10 @@ are in kbd format."
 ;; (setq gnus-auto-select-first 'unseen-or-unread)
 (add-hook 'gnus-summary-prepared-hook 'gnus-summary-hide-all-threads)
 (add-hook 'gnus-summary-mode-hook (lambda ()
-				    (hl-line-mode 1)
-				    (setq cursor-type nil)
-				    (set-face-background 'hl-line "#ee3b3b")
-				    (set-face-foreground 'hl-line "#191970")))
+                                    (hl-line-mode 1)
+                                    (setq cursor-type nil)
+                                    (set-face-background 'hl-line "#ee3b3b")
+                                    (set-face-foreground 'hl-line "#191970")))
 
 ;;;
 ;;; scoring/threading
@@ -1122,11 +1121,11 @@ are in kbd format."
 ;;;
 (setq gnus-secondary-select-methods
       '((nnimap "imap.gmail.com"
-	 (nnimap-stream ssl)
-	 (nnimap-authenticator login))
-	(nntp "news.gmane.org"
-	 (nntp-address "news.gmane.org")
-	 (nntp-port-number 119))))
+         (nnimap-stream ssl)
+         (nnimap-authenticator login))
+        (nntp "news.gmane.org"
+         (nntp-address "news.gmane.org")
+         (nntp-port-number 119))))
 
 ;; (setq smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
 ;;       smtpmail-smtp-server "smtp.gmail.com"
