@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-08-07 19:50:41 danlei>
+;;;;; Time-stamp: <2010-08-07 19:57:34 danlei>
 ;;;;;
 
 
@@ -738,7 +738,8 @@ at the beginning of line, if already there."
 ;;;;
 
 (setq hippie-expand-try-functions-list
-      '(try-expand-dabbrev
+      '(try-expand-dabbrev-visible
+        try-expand-dabbrev
         try-expand-dabbrev-all-buffers
         try-expand-dabbrev-from-kill
         try-complete-lisp-symbol-partially
