@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-08-06 21:45:47 danlei>
+;;;;; Time-stamp: <2010-08-07 19:50:41 danlei>
 ;;;;;
 
 
@@ -642,8 +642,11 @@ be given as an optional argument."
 ;;;;
 
 (setq dired-recursive-deletes 'top
+      dired-recursive-copies 'top
       wdired-allow-to-change-permissions t
-      wdired-allow-to-redirect-links t)
+      wdired-allow-to-redirect-links t
+      dired-listing-switches "-lah"
+      dired-isearch-filenames 'dwim)
 
 (put 'dired-find-alternate-file 'disabled nil)
 
