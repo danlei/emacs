@@ -670,23 +670,25 @@ be given as an optional argument."
 ;;;; elisp
 ;;;;
 
-(defun indent-and-pc-complete (n)
+(defun dhl-lisp-indent-and-complete (n)
   (interactive "p")
   (indent-for-tab-command)
-  (PC-lisp-complete-symbol))
+  (lisp-complete-symbol))
 
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
             (eldoc-mode 1)
             (define-key emacs-lisp-mode-map
-              (kbd "TAB") 'indent-and-pc-complete)))
+              (kbd "TAB") 'dhl-lisp-indent-and-complete)))
 
 (add-hook 'lisp-interaction-mode-hook
           (lambda ()
             (eldoc-mode 1)
             (define-keys lisp-interaction-mode-map
-              '(("TAB" indent-and-pc-complete)
+              '(("TAB" dhl-lisp-indent-and-complete)
                 ("<C-return>" eval-print-last-sexp)))))
+
+(define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
 
 
 ;;;;
@@ -703,7 +705,7 @@ be given as an optional argument."
                     comint-replace-by-expanded-history
                     ielm-complete-filename
                     ielm-complete-symbol
-                    PC-lisp-complete-symbol))))
+                    lisp-complete-symbol))))
 
 
 ;;;;
