@@ -479,7 +479,8 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (hyper-apropos-apropos-warning ((t (:background "indian red" :foreground "white"))))
 
 
-     (highlight ((t (:background "DarkGreen" :foreground "light gray" :underline t))))
+;    (highlight ((t (:background "DarkGreen" :foreground "light gray" :underline t))))
+     (highlight ((t (:background "dimgray" :foreground "light gray" :underline nil))))
 
      (highline-face ((t (:background "gray30" :foreground "white"))))
      (highline-vertical-face ((t (:background "gray30" :foreground "white"))))
