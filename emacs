@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-08-07 19:57:34 danlei>
+;;;;; Time-stamp: <2010-08-08 02:51:08 danlei>
 ;;;;;
 
 
@@ -114,8 +114,7 @@
               (paredit-mode 1)))
   (add-hook 'qi-mode-hook
             (lambda ()
-              (paredit-mode 1)))
-  )
+              (paredit-mode 1))))
 
 (add-hook 'paredit-mode-hook
           (lambda ()
@@ -380,7 +379,7 @@ minibuffer, defaulting to word-at-point."
 
 (add-to-list 'load-path "~/.emacs.d/ghc-mod/")
 
-(setq ghc-completion-key (kbd "<backtab>")
+(setq ghc-completion-key (kbd "<C-tab>")
       ghc-document-key (kbd "C-c d")
       ghc-import-key (kbd "C-c m")
       ghc-previous-key (kbd "M-p")
@@ -389,8 +388,7 @@ minibuffer, defaulting to word-at-point."
       ghc-insert-key (kbd "C-c t")
       ghc-sort-key (kbd "C-c s")
       ghc-check-key (kbd "C-x C-s")
-      ghc-toggle-key (kbd "C-c C-c")
-      )
+      ghc-toggle-key (kbd "C-c C-c"))
 
 (require 'ghc "ghc" t)
 ;(autoload 'ghc-init "ghc" nil t)
@@ -398,6 +396,18 @@ minibuffer, defaulting to word-at-point."
 (add-hook 'haskell-mode-hook
           (lambda ()
             (ghc-init)))
+
+(defadvice ghc-init
+    (before dhl-ghc-init-local-modules first () activate)
+  "Makes ghc-mod completions buffer local."
+  (make-local-variable 'ghc-loaded-module)
+  (make-local-variable 'ghc-merged-keyword))
+
+(defadvice ghc-import-module
+    (before dhl-ghc-reset-modules first () activate)
+  "Makes ghc-import-module recognize dropped imports."
+  (setq ghc-loaded-module nil)
+  (ghc-comp-init))
 
 
 ;;;;
