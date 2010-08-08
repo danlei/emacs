@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-08-08 02:51:08 danlei>
+;;;;; Time-stamp: <2010-08-08 03:03:11 danlei>
 ;;;;;
 
 
@@ -372,6 +372,15 @@ minibuffer, defaulting to word-at-point."
 ;        ("C-c h" haskell-hoogle)
 ;        ("C-c t" inferior-haskell-type)
          ("C-c i" inferior-haskell-info)))))
+
+(when (eq system-type 'cygwin)
+  (defadvice inferior-haskell-load-file
+      (around dhl-inferior-haskell-load-file-cygwin-fix)
+    "Fixes inferior-haskell-load-file for Win Haskell/Cygwin Emacs."
+    (save-buffer)
+    (let ((buffer-file-name (concat "c:/cygwin" buffer-file-name)))
+      ad-do-it))
+  (ad-activate 'inferior-haskell-load-file))
 
 ;;;
 ;;; ghc-mod
@@ -986,20 +995,13 @@ are in kbd format."
 
 
 ;;;;
-;;;; advice
+;;;; misc advice
 ;;;;
 
 (defadvice split-window-vertically
-    (after my-window-splitting-advice first () activate)
+    (after dhl-window-splitting-advice first () activate)
+  "Open other-buffer in vertical split window."
   (set-window-buffer (next-window) (other-buffer)))
-
-(when (eq system-type 'cygwin)
-  (defadvice inferior-haskell-load-file
-    (around inferior-haskell-load-file-around)
-    (save-buffer)
-    (let ((buffer-file-name (concat "c:/cygwin" buffer-file-name)))
-      ad-do-it))
-  (ad-activate 'inferior-haskell-load-file))
 
 
 ;;;;
