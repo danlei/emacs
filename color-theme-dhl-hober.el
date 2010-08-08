@@ -693,7 +693,8 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (sgml-namespace-face ((t (:foreground "steel blue")))) ;%
 
      (shadow ((t ,dhl-hober-insignificant-face)))
-     (sh-heredoc-face ((t (:foreground "khaki"))))
+     (sh-heredoc-face ((t (:foreground "lemon chiffon"))))
+     (sh-heredoc ((t (:foreground "lemon chiffon"))))
      (sh-quoted-exec ((t (:foreground "khaki"))))
 
      (show-paren-match-face ((t (:background "cadet blue" :foreground "gray4"))))
