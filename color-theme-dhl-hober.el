@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; color-theme-dhl-hober.el
 ;;;;;
-;;;;; Time-stamp: <2009-09-18 22:06:54 danlei>
+;;;;; Time-stamp: <2010-08-08 15:26:59 danlei>
 ;;;;;
 ;;;;; dhl-hober is a customization of Edward O'Connor's hober2
 ;;;;;
@@ -226,9 +226,10 @@ speedbar, tex, view, viper, w3m, widget, woman"
 
      (cursor ((t (:background "khaki" :foreground "gray4"))))
 
-     (custom-button-face ((t (:foreground "gray4" :background "light gray" :bold t :underline t))))
-     (custom-button-pressed-face ((t (:foreground "gray4" :background "light gray" :bold t
-                                                                                   :underline t))))
+     (button ((t (:foreground "cadet blue" :bold nil :underline nil))))
+
+     (custom-button-face ((t (:foreground "cadet blue" :bold nil :underline nil))))
+     (custom-button-pressed-face ((t (:foreground "steel blue" :bold nil :underline nil))))
      (custom-face-tag-face ((t (:bold t))))
      (custom-variable-tag-face ((t (:bold t))))
      (custom-state-face ((t (:foreground "light sea green"))))
@@ -241,9 +242,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (darcsum-changed-line-face ((t (:background "gray30" :foreground "white"))))
 
      (diary-face ((t (:foreground "indian red"))))
-     (diary-button-face ((t (:foreground "gray4"
-                             :background "light gray"
-                             :bold t :underline t))))
+     (diary-button-face ((t (:foreground "cadet blue" :bold nil :underline nil))))
 
      (diff-hunk-header-face ((t (:background "gray30" :foreground "white"))))
 
@@ -789,8 +788,8 @@ speedbar, tex, view, viper, w3m, widget, woman"
      (w3m-underline-face ((t (:underline t))))
 
      (whitespace-highlight-face ((t (:background "IndianRed1" :foreground "light gray"))))
-     (widget-button-face ((t (:bold t :underline t))))
-     (widget-button-pressed-face ((t (:bold t :underline t))))
+     (widget-button-face ((t (:foreground "cadet blue" :bold nil :underline nil))))
+     (widget-button-pressed-face ((t (:foreground "steel blue" :bold nil :underline nil))))
      (widget-documentation-face ((t (:foreground "medium sea green")))) ;%
      (widget-field-face ((t (:background "gray30" :foreground "white"))))
      (widget-inactive-face ((t ,dhl-hober-insignificant-face)))
