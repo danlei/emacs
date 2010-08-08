@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-08-08 03:03:11 danlei>
+;;;;; Time-stamp: <2010-08-08 03:12:35 danlei>
 ;;;;;
 
 
@@ -407,13 +407,13 @@ minibuffer, defaulting to word-at-point."
             (ghc-init)))
 
 (defadvice ghc-init
-    (before dhl-ghc-init-local-modules first () activate)
+    (before dhl-ghc-mod-local-completion first () activate)
   "Makes ghc-mod completions buffer local."
   (make-local-variable 'ghc-loaded-module)
   (make-local-variable 'ghc-merged-keyword))
 
 (defadvice ghc-import-module
-    (before dhl-ghc-reset-modules first () activate)
+    (before dhl-ghc-mod-reset-modules first () activate)
   "Makes ghc-import-module recognize dropped imports."
   (setq ghc-loaded-module nil)
   (ghc-comp-init))
