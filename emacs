@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-08-08 03:12:35 danlei>
+;;;;; Time-stamp: <2010-08-09 15:36:51 danlei>
 ;;;;;
 
 
@@ -35,8 +35,7 @@
 
 (setq slime-enable-evaluate-in-emacs t
       slime-net-coding-system 'utf-8-unix
-      lisp-indent-function 'cl-indent:function
-      )
+      lisp-indent-function 'cl-indent:function)
 
 (setq slime-lisp-implementations
       '(
@@ -56,15 +55,13 @@
                 '(("C-c s" slime-selector)
                   ("C-j" newline-and-indent)
                   ("TAB" slime-indent-and-complete-symbol)
-                  ("C-c C-d c" cltl2-lookup)
-                  ))))
+                  ("C-c C-d c" cltl2-lookup)))))
 
 (add-hook 'slime-repl-mode-hook
           (lambda ()
             (define-keys slime-repl-mode-map
                 '(("C-c s" slime-selector)
-                  ("C-c C-d c" cltl2-lookup)
-                  ))))
+                  ("C-c C-d c" cltl2-lookup)))))
 
 ;;; nyef's pathname fix for cygwin
 (when (eq system-type 'cygwin)
@@ -142,8 +139,7 @@
                   ("C-M-a" backward-sentence)
                   ("C-M-e" forward-sentence)
                   ("M-q" indent-pp-sexp)
-                  ("C-M-q" fill-paragraph)
-                  ))))
+                  ("C-M-q" fill-paragraph)))))
 
 
 ;;;;
@@ -215,8 +211,7 @@ c:/cygwin/home/danlei/build/QiII1.06SBCL/Qi.core"))
          '(("TAB" scheme-complete-or-indent)))
      (make-local-variable 'eldoc-documentation-function)
      (setq eldoc-documentation-function 'scheme-get-current-symbol-info)
-     (eldoc-mode 1))
-     )
+     (eldoc-mode 1)))
   (add-hook
    'scheme-mode-hook
    (lambda ()
@@ -224,8 +219,7 @@ c:/cygwin/home/danlei/build/QiII1.06SBCL/Qi.core"))
          '(("TAB" scheme-complete-or-indent)))
      (make-local-variable 'eldoc-documentation-function)
      (setq eldoc-documentation-function 'scheme-get-current-symbol-info)
-     (eldoc-mode 1))
-     ))
+     (eldoc-mode 1))))
 
 
 ;;;;
@@ -600,8 +594,7 @@ be given as an optional argument."
   (erc-timestamp-mode -1)
   (erc-smiley-mode 1)
   (erc-scrolltobottom-mode 1)
-  (erc-truncate-mode 1)
-  )
+  (erc-truncate-mode 1))
 
 (setq erc-keywords '()
 ;     erc-pals '("rhickey")
@@ -618,8 +611,7 @@ be given as an optional argument."
       erc-kill-queries-on-quit t
       erc-kill-server-buffer-on-quit t
       erc-max-buffer-size 50000
-      erc-hide-list '("JOIN" "PART" "QUIT" "NICK")
-      )
+      erc-hide-list '("JOIN" "PART" "QUIT" "NICK"))
 
 (setq erc-button-url-regexp
       "\\([-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]+\\.\\)+[-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]*[-a-zA-Z0-9\\/]")
@@ -697,8 +689,7 @@ be given as an optional argument."
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
             (eldoc-mode 1)
-            (define-key emacs-lisp-mode-map
-              (kbd "TAB") 'dhl-lisp-indent-and-complete)))
+            (local-set-key (kbd "TAB") 'dhl-lisp-indent-and-complete)))
 
 (add-hook 'lisp-interaction-mode-hook
           (lambda ()
@@ -709,6 +700,14 @@ be given as an optional argument."
 
 (define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
 
+
+;;;;
+;;;; asm
+;;;;
+
+(add-hook 'asm-mode-hook
+          (lambda ()
+            (setq tab-width 8)))
 
 ;;;;
 ;;;; ielm
@@ -733,8 +732,7 @@ be given as an optional argument."
 
 (add-hook 'eshell-mode-hook
           (lambda ()
-            (define-keys eshell-mode-map
-                '(("C-a" eshell-maybe-bol)))))
+            (local-set-key (kbd "C-a") 'eshell-maybe-bol)))
 
 (defun eshell-maybe-bol ()
   "Moves point behind the eshell prompt, or
@@ -765,8 +763,7 @@ at the beginning of line, if already there."
         try-complete-lisp-symbol
         try-complete-file-name-partially
         try-complete-file-name
-        try-expand-whole-kill
-        ))
+        try-expand-whole-kill))
 
 
 ;;;;
@@ -831,8 +828,7 @@ prevents using commands with prefix arguments."
         (space-mark 3616 [3620] [95])
         (space-mark 3872 [3876] [95])
         (newline-mark 10 [182 10])
-        (tab-mark 9 [8677 9] [92 9])
-        ))
+        (tab-mark 9 [8677 9] [92 9])))
 
 
 ;;;;
@@ -849,7 +845,7 @@ prevents using commands with prefix arguments."
 (add-to-list 'load-path "~/.emacs.d/gist.el")
 
 (require 'egg "egg" t)
-(require 'gist)
+(require 'gist "gist" t)
 
 
 ;;;;
@@ -877,8 +873,7 @@ prevents using commands with prefix arguments."
       max-specpdl-size 10000
       max-lisp-eval-depth 5000
       user-full-name "Daniel H. Leidisch"
-      user-mail-address "public@leidisch.net"
-      )
+      user-mail-address "public@leidisch.net")
 
 (setq-default cursor-type 'bar
               indent-tabs-mode nil
@@ -1040,8 +1035,7 @@ are in kbd format."
                                   (insert "æ")))
                    ("C-x 8 o e" (lambda ()
                                   (interactive)
-                                  (insert "œ")))
-                   ))
+                                  (insert "œ")))))
 
 
 ;;;;
@@ -1136,8 +1130,7 @@ are in kbd format."
       gnus-treat-strip-pgp nil
       gnus-treat-strip-trailing-blank-lines nil
       gnus-treat-translate nil
-      gnus-cache-enter-articles '(ticked)
-      )
+      gnus-cache-enter-articles '(ticked))
 
 ;;;
 ;;; posting styles
