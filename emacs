@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-08-09 15:36:51 danlei>
+;;;;; Time-stamp: <2010-08-10 13:12:35 danlei>
 ;;;;;
 
 
@@ -494,6 +494,12 @@ be given as an optional argument."
           (file-name-nondirectory buffer-file-name) " "
           extra-arguments))
 
+;;;
+;;; lpc
+;;;
+
+;; (modify-syntax-entry ?' "'" c-mode-syntax-table)
+
 
 ;;;;
 ;;;; auctex
@@ -908,9 +914,6 @@ prevents using commands with prefix arguments."
 (put 'upcase-region 'disabled nil)
 
 ;; (setq time-stamp-format "%:y-%02m-%02d %02H:%02M:%02S")
-
-;;; lpc:
-;; (modify-syntax-entry ?' "'" c-mode-syntax-table)
 
 (setq-default c-basic-offset 2)
 (setq-default css-indent-offset 2)
