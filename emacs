@@ -713,7 +713,9 @@ be given as an optional argument."
 
 (add-hook 'asm-mode-hook
           (lambda ()
-            (setq tab-width 8)))
+            (setq tab-width 8)
+            (local-set-key (kbd "RET") 'newline)))
+
 
 ;;;;
 ;;;; ielm
