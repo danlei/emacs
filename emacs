@@ -485,7 +485,7 @@ minibuffer, defaulting to word-at-point."
             (local-set-key (kbd "M-n") 'next-error)
             (c-subword-mode 1)))
 
-(defun compile-gcc-command (&optional extra-arguments)
+(defun dhl-gcc-compile-command (&optional extra-arguments)
   "Returns a gcc command line for use with compile-command.
 Intended for use with little test files. Extra options may
 be given as an optional argument."
