@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-08-10 13:12:35 danlei>
+;;;;; Time-stamp: <2010-09-10 23:00:21 danlei>
 ;;;;;
 
 
@@ -287,6 +287,17 @@ minibuffer, defaulting to word-at-point."
                 "Browse documentation for class: "))))
      (list (if (equal input "") default input))))
   (browse-url (concat dhl-ruby-class-documentation-uri class-name ".html")))
+
+
+;;;;
+;;;; python
+;;;;
+
+;; http://www.loveshack.ukfsn.org/emacs/python.el
+(add-hook 'python-mode-hook
+          (lambda ()
+            (local-set-key (kbd "<C-tab>") 'symbol-complete)
+            (eldoc-mode 1)))
 
 
 ;;;;
