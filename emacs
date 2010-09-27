@@ -614,13 +614,13 @@ be given as an optional argument."
   (erc-truncate-mode 1))
 
 (setq erc-keywords '()
-;     erc-pals '("rhickey")
+;     erc-pals '()
 ;     erc-fools '()
       erc-current-nick-highlight-type 'nick-or-keyword
       erc-notice-highlight-type 'prefix
       erc-auto-query 'window-noselect
       erc-user-full-name "Daniel H. Leidisch"
-      erc-track-exclude-server-buffer t
+      erc-track-exclude-server-buffer nil
       erc-fill-function 'erc-fill-static
       erc-fill-static-center 16
       erc-fill-column 90
@@ -630,11 +630,12 @@ be given as an optional argument."
       erc-max-buffer-size 50000
       erc-hide-list '("JOIN" "PART" "QUIT" "NICK"))
 
+;(make-variable-buffer-local 'erc-hide-list)
+
 (setq erc-button-url-regexp
       "\\([-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]+\\.\\)+[-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]*[-a-zA-Z0-9\\/]")
 
-(setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
-                                "324" "329" "332" "333" "353" "477"))
+(setq erc-track-exclude-types '("NICK" "MODE" "324" "329" "332" "333" "353" "477"))
 
 (setq erc-spelling-dictionaries '(("#bsdforen.de" "/dev/null"))) ; FIXME
 
@@ -655,14 +656,14 @@ be given as an optional argument."
 (defun erc-password (server)
   (getf (getf erc-auth server) :password))
 
-(add-hook 'erc-after-connect
-          (lambda (SERVER NICK)
-            (cond ((string-match "freenode\\.net" SERVER)
-                   (erc-message "PRIVMSG" (concat "NickServ identify "
-                                                  (erc-password 'freenode)))
-                   (erc-message "PRIVMSG" (concat "NickServ ghost "
-                                                  (erc-nick 'freenode)))
-                   (erc-message "NICK" (erc-nick 'freenode))))))
+;; (add-hook 'erc-after-connect
+;;           (lambda (SERVER NICK)
+;;             (cond ((string-match "freenode\\.net" SERVER)
+;;                    (erc-message "PRIVMSG" (concat "NickServ identify "
+;;                                                   (erc-password 'freenode)))
+;;                    (erc-message "PRIVMSG" (concat "NickServ ghost "
+;;                                                   (erc-nick 'freenode)))
+;;                    (erc-message "NICK" (erc-nick 'freenode))))))
 
 
 ;;;;
