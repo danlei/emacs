@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-09-27 02:33:55 danlei>
+;;;;; Time-stamp: <2010-09-28 03:54:41 danlei>
 ;;;;;
 
 
@@ -704,17 +704,24 @@ be given as an optional argument."
   (indent-for-tab-command)
   (lisp-complete-symbol))
 
+(defun dhl-lisp-eval-print-defun ()
+  (interactive)
+  (end-of-defun)
+  (eval-print-last-sexp))
+
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
             (eldoc-mode 1)
-            (local-set-key (kbd "TAB") 'dhl-lisp-indent-and-complete)))
+            (local-set-key (kbd "TAB") 'dhl-lisp-indent-and-complete)
+            (local-set-key (kbd "<C-return>") 'dhl-lisp-eval-print-defun)))
 
 (add-hook 'lisp-interaction-mode-hook
           (lambda ()
             (eldoc-mode 1)
             (define-keys lisp-interaction-mode-map
               '(("TAB" dhl-lisp-indent-and-complete)
-                ("<C-return>" eval-print-last-sexp)))))
+                ("<C-return>" eval-print-last-sexp)
+                ("<C-return>" dhl-lisp-eval-print-defun)))))
 
 (define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
 
