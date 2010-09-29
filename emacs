@@ -962,6 +962,7 @@ prevents using commands with prefix arguments."
       enable-recursive-minibuffers t
       max-specpdl-size 10000
       max-lisp-eval-depth 5000
+      comment-empty-lines nil
       user-full-name "Daniel H. Leidisch"
       user-mail-address "public@leidisch.net")
 
