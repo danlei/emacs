@@ -494,7 +494,7 @@ minibuffer, defaulting to word-at-point."
             (local-set-key (kbd "C-c c") 'compile)
             (local-set-key (kbd "M-p") 'previous-error)
             (local-set-key (kbd "M-n") 'next-error)
-            (c-subword-mode 1)))
+            (subword-mode 1)))
 
 (defun dhl-gcc-compile-command (&optional extra-arguments)
   "Returns a gcc command line for use with compile-command.
