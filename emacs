@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-09-28 03:54:41 danlei>
+;;;;; Time-stamp: <2010-09-29 18:20:39 danlei>
 ;;;;;
 
 
@@ -470,14 +470,14 @@ minibuffer, defaulting to word-at-point."
 ;;;; java
 ;;;;
 
-(require 'javarun "javarun" t)
+(add-to-list 'load-path "~/.emacs.d/javarun")
 
-(setq javarun-cygdir "c:/cygwin/")
-
-(add-hook 'java-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c c") 'javarun)
-            (c-subword-mode 1)))
+(when (require 'javarun "javarun" t)
+  (setq javarun-cygdir "c:/cygwin/")
+  (add-hook 'java-mode-hook
+            (lambda ()
+              (javarun-mode 1)
+              (subword-mode 1))))
 
 
 ;;;;
