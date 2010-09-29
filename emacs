@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-09-29 19:33:03 danlei>
+;;;;; Time-stamp: <2010-09-29 19:37:32 danlei>
 ;;;;;
 
 
@@ -936,6 +936,37 @@ prevents using commands with prefix arguments."
   (let ((recent-buffer-name (buffer-name)))
     ad-do-it
     (ibuffer-jump-to-buffer recent-buffer-name)))
+
+
+;;;;
+;;;; occur
+;;;;
+
+(add-hook 'occur-mode-hook
+          (lambda ()
+            (next-error-follow-minor-mode 1)
+            (local-set-key (kbd "n") 'next-line)
+            (local-set-key (kbd "p") 'previous-line)))
+
+(defadvice occur
+    (after dhl-switch-to-occur last () activate)
+  "Switch to occur window automatically."
+  (other-window 1))
+
+(defadvice multi-occur
+    (after dhl-switch-to-multi-occur last () activate)
+  "Switch to occur window automatically."
+  (other-window 1))
+
+(defadvice multi-occur-in-matching-buffers
+    (after dhl-switch-to-multi-occur-in-matching-buffers last () activate)
+  "Switch to occur window automatically."
+  (other-window 1))
+
+(defadvice ibuffer-do-occur
+    (after dhl-ibuffer-switch-to-occur last () activate)
+  "Switch to occur window automatically."
+  (other-window 1))
 
 
 ;;;;
