@@ -876,6 +876,69 @@ prevents using commands with prefix arguments."
 
 
 ;;;;
+;;;; ibuffer
+;;;;
+
+(setq ibuffer-show-empty-filter-groups nil
+      ibuffer-expert nil)
+
+(setq ibuffer-saved-filter-groups
+      '(("default"
+         ("elisp" (or (name . "\\.el$")
+                      (mode . emacs-lisp-mode)))
+         ("cl" (or (name . "\\.lisp$")
+                   (name . "\\.asdf$")
+                   (mode . lisp-mode)
+                   (mode . slime-mode)))
+         ("clojure" (or (name . "\\.clj$")
+                        (mode . clojure-mode)))
+         ("python" (or (name . "\\.py$")
+                       (mode . python-mode)
+                       (mode . python-2-mode)
+                       (mode . python-3-mode)))
+         ("haskell" (or (name . "\\.hs$")
+                        (mode . haskell-mode)))
+         ("java" (or (name . "\\.java$")
+                     (mode . java-mode)))
+         ("xml" (or (name . "\\.xml$")
+                    (mode . nxml-mode)))
+         ("html" (or (name . "\\.html$")
+                     (mode . html-mode)))
+         ("ruby" (or (name . "\\.rb$")))
+         ("C" (or (name . "\\.c$")
+                  (name . "\\.h$")
+                  (mode . c-mode)))
+         ("assembler" (or (name . "\\.asm$")
+                          (name . "\\.S$")
+                          (mode . asm-mode)))
+         ("perl" (mode . cperl-mode))
+         ("dired" (mode . dired-mode))
+         ("gnus" (or
+                  (mode . message-mode)
+                  (mode . bbdb-mode)
+                  (mode . mail-mode)
+                  (mode . gnus-group-mode)
+                  (mode . gnus-summary-mode)
+                  (mode . gnus-article-mode)
+                  (name . "^\\.bbdb$")
+                  (name . "^\\.newsrc-dribble")))
+         ("erc" (mode . erc-mode))
+         ("special" (name . "^\\*.*\\*")))))
+
+(add-hook 'ibuffer-mode-hook
+          (lambda ()
+            (ibuffer-switch-to-saved-filter-groups "default")
+            (ibuffer-auto-mode 1)))
+
+(defadvice ibuffer
+    (around ibuffer-point-to-most-recent first () activate)
+  "Open ibuffer with cursor pointed to most recent buffer name."
+  (let ((recent-buffer-name (buffer-name)))
+    ad-do-it
+    (ibuffer-jump-to-buffer recent-buffer-name)))
+
+
+;;;;
 ;;;; misc
 ;;;;
 
@@ -1029,7 +1092,7 @@ are in kbd format."
 
 (global-set-keys '(("C-c i d" insert-date)
                    ("C-c l" mark-line)
-                   ("C-x C-b" buffer-menu)
+                   ("C-x C-b" ibuffer)
                    ("M-/" hippie-expand)
                    ("C-c C-s" slime-selector)
                    ("C-x r v" view-register)
