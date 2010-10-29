@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-10-29 02:37:03 danlei>
+;;;;; Time-stamp: <2010-10-29 03:04:06 danlei>
 ;;;;;
 
 
@@ -908,6 +908,8 @@ prevents using commands with prefix arguments."
                        (mode . python-3-mode)))
          ("haskell" (or (name . "\\.hs$")
                         (mode . haskell-mode)))
+         ("f#" (or (name . "\\.fs$")
+                   (mode . fsharp-mode)))
          ("java" (or (name . "\\.java$")
                      (mode . java-mode)))
          ("sql" (or (name . "\\.sql$")
