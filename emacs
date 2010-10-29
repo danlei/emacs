@@ -583,7 +583,7 @@ be given as an optional argument."
 
 (when (member system-type '(gnu/linux linux))
   (setq browse-url-generic-program
-        "firefox"
+        "google-chrome"
         common-lisp-hyperspec-root
         "file:///home/danlei/doc/HyperSpec/"
         cltl2-root-url
