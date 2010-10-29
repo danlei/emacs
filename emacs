@@ -887,7 +887,7 @@ prevents using commands with prefix arguments."
 ;;;;
 
 (setq ibuffer-show-empty-filter-groups nil
-      ibuffer-expert nil)
+      ibuffer-expert t)
 
 (setq ibuffer-saved-filter-groups
       '(("default"
