@@ -928,6 +928,8 @@ prevents using commands with prefix arguments."
                           (name . "\\.S$")
                           (mode . asm-mode)))
          ("perl" (mode . cperl-mode))
+         ("text" (or (name . "\\.txt$")
+                     (mode . text-mode)))
          ("dired" (mode . dired-mode))
          ("gnus" (or
                   (mode . message-mode)
