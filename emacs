@@ -435,8 +435,15 @@ minibuffer, defaulting to word-at-point."
 (setq-default fsharp-indent-offset 2
               fsharp-continuation-offset 1)
 
-(setq inferior-fsharp-program "fsi.exe"
-      fsharp-compiler "fsc.exe")
+(when (eq system-type 'gnu/linux)
+  (setq inferior-fsharp-program
+        "mono /home/danlei/build/FSharp-2.0.0.0/bin/fsi.exe --readline-"
+        fsharp-compiler
+        "mono /home/danlei/build/FSharp-2.0.0.0/bin/fsc.exe"))
+
+(when (member system-type '(cygwin windows-nt))
+  (setq inferior-fsharp-program "fsi.exe"
+        fsharp-compiler "fsc.exe"))
 
 (add-to-list 'auto-mode-alist '("\.fs$" . fsharp-mode))
 
