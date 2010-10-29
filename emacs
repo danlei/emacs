@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-09-29 19:37:32 danlei>
+;;;;; Time-stamp: <2010-10-29 02:37:03 danlei>
 ;;;;;
 
 
@@ -900,10 +900,16 @@ prevents using commands with prefix arguments."
                         (mode . haskell-mode)))
          ("java" (or (name . "\\.java$")
                      (mode . java-mode)))
+         ("sql" (or (name . "\\.sql$")
+                    (mode . sql-mode)))
          ("xml" (or (name . "\\.xml$")
                     (mode . nxml-mode)))
          ("html" (or (name . "\\.html$")
                      (mode . html-mode)))
+         ("css" (or (name . "\\.css$")
+                    (mode . css-mode)))
+         ("rst" (or (name . "\\.rst$")
+                     (mode . rst-mode)))
          ("ruby" (or (name . "\\.rb$")))
          ("C" (or (name . "\\.c$")
                   (name . "\\.h$")
@@ -1053,6 +1059,7 @@ prevents using commands with prefix arguments."
         (remove "[ ]?\\*[hH]elp.*" special-display-regexps))
   (setq special-display-regexps nil))
 
+(setq sql-sqlite-program "sqlite3")
 
 ;; (when (eq system-type 'gnu/linux)
 ;;   (setenv "PATH"
