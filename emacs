@@ -684,6 +684,9 @@ be given as an optional argument."
       dired-listing-switches "-lah"
       dired-isearch-filenames 'dwim)
 
+(setq dired-garbage-files-regexp
+      "\\(?:\\.\\(?:aux\\|bak\\|dvi\\|log\\|orig\\|rej\\|toc\\|pyc\\)\\)\\'")
+
 (put 'dired-find-alternate-file 'disabled nil)
 
 (add-hook 'dired-mode-hook
