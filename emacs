@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-10-31 18:03:35 danlei>
+;;;;; Time-stamp: <2010-10-31 18:30:42 danlei>
 ;;;;;
 
 
@@ -1338,7 +1338,15 @@ are in kbd format."
 ;; ~/.authinfo:
 ;; machine smtp.gmail.com login name@gmail.com password pass port 587
 
-;; (add-hook 'message-setup-hook '(lambda() (use-hard-newlines t t)))
+;; (add-hook 'message-setup-hook '(lambda() (use-hard-newlines t t))) ;; format=flowed
+
+	
+;; (setq message-alternative-emails
+;;       (regexp-opt '("public@leidisch.net"
+;;                     "foo@bar.baz")))
+
+(load (expand-file-name "~/.message-alternative-emails") t)
+
 
 (setq mm-coding-system-priorities '(utf-8)
       mm-fill-flowed t)
