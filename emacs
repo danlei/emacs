@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-10-31 16:16:25 danlei>
+;;;;; Time-stamp: <2010-10-31 18:03:35 danlei>
 ;;;;;
 
 
@@ -1194,13 +1194,21 @@ are in kbd format."
 ;; ~/.authinfo:
 ;; machine news.albasani.net login me@foo.net password pass
 
+(setq gnus-user-date-format-alist
+      '(((gnus-seconds-today) . "%H:%M ")
+        (604800 . "%a, %H:%M ")
+        ((gnus-seconds-month) . "%a, %d.   ")
+        ((gnus-seconds-year) . "%a, %d.%m.")
+        (t . "%d.%m.%y")))
+
 (setq gnus-group-line-format "%2{%M%S%p%} %0{%5y%} %P%1{%G%}\n"
       gnus-topic-line-format "%i%3{[ %n -- %A ]%}%v\n"
-      gnus-summary-line-format "%U%R%z %3{%u%}: %1{%B%-23,23n%} %s\n"
-      gnus-summary-line-format "%[%U%R%] %30a %[%6d%] %B %s\n")
+;     gnus-summary-line-format "%U%R%z %3{%u%}: %1{%B%-23,23n%} %s\n"
+;     gnus-summary-line-format "%[%U%R%] %30a [%9&user-date;] %B %s\n"
+      gnus-summary-line-format "%[%U%R%] %-40,40s %10&user-date; %B %a\n")
 
 (setq gnus-sum-thread-tree-single-indent   "◎ "
-      gnus-sum-thread-tree-false-root      " ◯ "
+      gnus-sum-thread-tree-false-root      "◯╮"
       gnus-sum-thread-tree-root            "● "
       gnus-sum-thread-tree-vertical        "│"
       gnus-sum-thread-tree-leaf-with-other "├─► "
@@ -1256,7 +1264,7 @@ are in kbd format."
 (setq gnus-add-to-list t
       gnus-use-scoring t
       gnus-summary-default-score 0
-      gnus-summary-make-false-roots 'dummy
+      gnus-summary-make-false-root 'adopt
       gnus-score-expiry-days nil
       gnus-home-score-file "~/.emacs.d/gnus-score"
       gnus-article-save-directory "~/.news"
