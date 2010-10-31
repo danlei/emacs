@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-10-31 18:30:42 danlei>
+;;;;; Time-stamp: <2010-10-31 22:01:20 danlei>
 ;;;;;
 
 
@@ -1203,8 +1203,6 @@ are in kbd format."
 
 (setq gnus-group-line-format "%2{%M%S%p%} %0{%5y%} %P%1{%G%}\n"
       gnus-topic-line-format "%i%3{[ %n -- %A ]%}%v\n"
-;     gnus-summary-line-format "%U%R%z %3{%u%}: %1{%B%-23,23n%} %s\n"
-;     gnus-summary-line-format "%[%U%R%] %30a [%9&user-date;] %B %s\n"
       gnus-summary-line-format "%[%U%R%] %-40,40s %10&user-date; %B %a\n")
 
 (setq gnus-sum-thread-tree-single-indent   "◎ "
@@ -1218,10 +1216,9 @@ are in kbd format."
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
 
 (setq gnus-visible-headers
-      '("^From:" "^Subject:" "^To:" "^Cc:" "^Resent-To:" "^Message-ID:"
-        "^Date:" "^Newsgroups:" "^Organization:" "Followup-To:"
-        "Reply-To:" "^X-Newsreader:" "^X-Mailer:"
-        "^X-Spam-Level:"))
+      '("^Subject:" "^From:" "^To:" "^Cc:" "^Resent-To:" "^Message-Date:"
+        "^Newsgroups:" "^Followup:" "^ID:" "^Organization-To:" "^Reply-To:"
+        "^User-Agent:" "^X-Newsreader:" "^X-Mailer:"))
 
 (setq gnus-sorted-header-list gnus-visible-headers)
 
@@ -1237,36 +1234,42 @@ are in kbd format."
 ;;; scoring/threading
 ;;;
 
-(setq gnus-use-adaptive-scoring '(line))
+(setq gnus-use-adaptive-scoring '(line)
+      gnus-use-scoring t
+      gnus-save-score t
+      gnus-score-expiry-days nil
+      gnus-home-score-file "~/.emacs.d/gnus.score"
+      gnus-home-adapt-file "~/.emacs.d/gnus-adapt.score"
+      gnus-summary-default-score 0
+      gnus-score-thread-simplify t)
 
 (setq gnus-default-adaptive-score-alist
       '((gnus-unread-mark)
-        (gnus-ticked-mark (from 5))
-        (gnus-dormant-mark (from 7))
-        (gnus-del-mark (from -2) (subject -5))
+        (gnus-ticked-mark (from 10))
+        (gnus-dormant-mark (from 5))
+        (gnus-del-mark (from -2) (subject -4))
         (gnus-read-mark (from 2) (subject 5))
         (gnus-expirable-mark (from -3) (subject -5))
-        (gnus-killed-mark (from -2) (subject -5))
+        (gnus-killed-mark (from -1) (subject -4))
         (gnus-kill-file-mark)
-        (gnus-ancient-mark (subject -10))
+        (gnus-ancient-mark)
         (gnus-low-score-mark)
-        (gnus-catchup-mark (subject -10))))
+        (gnus-catchup-mark (subject -1))))
 
 (setq gnus-thread-sort-functions
-      '(gnus-thread-sort-by-subject
-        (not gnus-thread-sort-by-date)
-        gnus-thread-sort-by-total-score))
+      '(gnus-thread-sort-by-number
+        (not gnus-thread-sort-by-date)))
+
+(setq gnus-article-sort-functions
+      '((not gnus-article-sort-by-number)
+        gnus-article-sort-by-subject))
 
 ;;;
 ;;; misc
 ;;;
 
 (setq gnus-add-to-list t
-      gnus-use-scoring t
-      gnus-summary-default-score 0
       gnus-summary-make-false-root 'adopt
-      gnus-score-expiry-days nil
-      gnus-home-score-file "~/.emacs.d/gnus-score"
       gnus-article-save-directory "~/.news"
       gnus-cache-directory "~/.news/cache"
       gnus-cache-active-file "~/.news/cache/active"
@@ -1291,11 +1294,13 @@ are in kbd format."
       gnus-treat-strip-pgp nil
       gnus-treat-strip-trailing-blank-lines nil
       gnus-treat-translate nil
+      gnus-large-newsgroup 500
+      gnus-agent nil
       gnus-cache-enter-articles '(ticked)
       gnus-article-wash-function (if (featurep 'w3m) 'w3m 'html2text)
       mm-text-html-renderer (if (featurep 'w3m) 'w3m 'html2text)
-      gnus-agent t
-      gnus-permanently-visible-groups "Alle Nachrichten\\|friends")
+      mm-discouraged-alternatives '("text/html" "text/richtext")
+      gnus-permanently-visible-groups "Alle Nachrichten")
 
 
 ;;;
@@ -1311,13 +1316,15 @@ are in kbd format."
 
 (setq gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
 
+(require 'nnir)
+
 (setq gnus-secondary-select-methods
       '((nnimap "imap.gmail.com"
          (nnimap-address "imap.gmail.com")
          (nnimap-server-port 993)
          (nnimap-stream ssl)
 ;        (nnimap-authenticator login)      ;; when used without ~/.authinfo
-         )
+         (nnir-search-engine imap))
         (nntp "news.gmane.org"
          (nntp-address "news.gmane.org")
          (nntp-port-number 119))))
@@ -1332,8 +1339,7 @@ are in kbd format."
       smtpmail-default-smtp-server "smtp.gmail.com"
       smtpmail-smtp-server "smtp.gmail.com"
       smtpmail-smtp-service 587
-;     smtpmail-local-domain "yourcompany.com"
-      )
+      smtpmail-local-domain "leidisch.net")
 
 ;; ~/.authinfo:
 ;; machine smtp.gmail.com login name@gmail.com password pass port 587
@@ -1347,9 +1353,13 @@ are in kbd format."
 
 (load (expand-file-name "~/.message-alternative-emails") t)
 
-
 (setq mm-coding-system-priorities '(utf-8)
       mm-fill-flowed t)
+
+
+
+(gnus-compile)
+
 
 
 ;;;;
