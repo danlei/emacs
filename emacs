@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-10-29 03:04:06 danlei>
+;;;;; Time-stamp: <2010-10-31 16:16:25 danlei>
 ;;;;;
 
 
@@ -566,8 +566,6 @@ be given as an optional argument."
 ;;;; browsing
 ;;;;
 
-(when (require 'w3m "w3m" t)
-  (setq browse-url-browser-function 'w3m-browse-url))
 
 ;; (add-to-list 'exec-path "/cygdrive/c/Programme/Mozilla Firefox/")
 ;; (setq browse-url-firefox-program "/cygdrive/c/Programme/Mozilla Firefox/firefox.exe")
@@ -602,6 +600,13 @@ be given as an optional argument."
          (random-page (let ((pages (symbol-value random-hyperspec-symbol)))
                         (nth (random (length pages)) pages))))
     (browse-url (concat common-lisp-hyperspec-root "Body/" random-page))))
+
+
+(when (member system-type '(cygwin gnu/linux))
+  (add-to-list 'load-path "/usr/share/emacs/site-lisp/w3m"))
+
+(when (require 'w3m "w3m" t)
+  (setq browse-url-browser-function 'w3m-browse-url))
 
 
 ;;;;
@@ -1186,19 +1191,21 @@ are in kbd format."
 
 (setq gnus-select-method '(nntp "news.albasani.net"))
 
+;; ~/.authinfo:
+;; machine news.albasani.net login me@foo.net password pass
+
 (setq gnus-group-line-format "%2{%M%S%p%} %0{%5y%} %P%1{%G%}\n"
       gnus-topic-line-format "%i%3{[ %n -- %A ]%}%v\n"
       gnus-summary-line-format "%U%R%z %3{%u%}: %1{%B%-23,23n%} %s\n"
       gnus-summary-line-format "%[%U%R%] %30a %[%6d%] %B %s\n")
 
-(setq
- gnus-sum-thread-tree-single-indent   "◎ "
- gnus-sum-thread-tree-false-root      " ◯ "
- gnus-sum-thread-tree-root            "● "
- gnus-sum-thread-tree-vertical        "│"
- gnus-sum-thread-tree-leaf-with-other "├─► "
- gnus-sum-thread-tree-single-leaf     "╰─► "
- gnus-sum-thread-tree-indent          " ")
+(setq gnus-sum-thread-tree-single-indent   "◎ "
+      gnus-sum-thread-tree-false-root      " ◯ "
+      gnus-sum-thread-tree-root            "● "
+      gnus-sum-thread-tree-vertical        "│"
+      gnus-sum-thread-tree-leaf-with-other "├─► "
+      gnus-sum-thread-tree-single-leaf     "╰─► "
+      gnus-sum-thread-tree-indent          " ")
 
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
 
@@ -1221,7 +1228,9 @@ are in kbd format."
 ;;;
 ;;; scoring/threading
 ;;;
+
 (setq gnus-use-adaptive-scoring '(line))
+
 (setq gnus-default-adaptive-score-alist
       '((gnus-unread-mark)
         (gnus-ticked-mark (from 5))
@@ -1234,6 +1243,7 @@ are in kbd format."
         (gnus-ancient-mark (subject -10))
         (gnus-low-score-mark)
         (gnus-catchup-mark (subject -10))))
+
 (setq gnus-thread-sort-functions
       '(gnus-thread-sort-by-subject
         (not gnus-thread-sort-by-date)
@@ -1242,6 +1252,7 @@ are in kbd format."
 ;;;
 ;;; misc
 ;;;
+
 (setq gnus-add-to-list t
       gnus-use-scoring t
       gnus-summary-default-score 0
@@ -1272,32 +1283,57 @@ are in kbd format."
       gnus-treat-strip-pgp nil
       gnus-treat-strip-trailing-blank-lines nil
       gnus-treat-translate nil
-      gnus-cache-enter-articles '(ticked))
+      gnus-cache-enter-articles '(ticked)
+      gnus-article-wash-function (if (featurep 'w3m) 'w3m 'html2text)
+      mm-text-html-renderer (if (featurep 'w3m) 'w3m 'html2text)
+      gnus-agent t
+      gnus-permanently-visible-groups "Alle Nachrichten\\|friends")
+
 
 ;;;
 ;;; posting styles
 ;;;
+
 (setq gnus-posting-styles
       '((message-news-p (address "news@leidisch.net"))))
 
 ;;;
 ;;; gmail, gmane
 ;;;
+
+(setq gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
+
 (setq gnus-secondary-select-methods
       '((nnimap "imap.gmail.com"
+         (nnimap-address "imap.gmail.com")
+         (nnimap-server-port 993)
          (nnimap-stream ssl)
-         (nnimap-authenticator login))
+;        (nnimap-authenticator login)      ;; when used without ~/.authinfo
+         )
         (nntp "news.gmane.org"
          (nntp-address "news.gmane.org")
          (nntp-port-number 119))))
 
-;; (setq smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-;;       smtpmail-smtp-server "smtp.gmail.com"
-;;       smtpmail-default-smtp-server "smtp.gmail.com"
-;;       send-mail-function 'smtpmail-send-it
-;;       message-send-mail-function 'smtpmail-send-it
-;;       smtpmail-smtp-service 587
-;;       smtpmail-auth-credentials "~/.authinfo")
+;; ~/.authinfo:
+;; machine imap.gmail.com login me@foo.com password pass port 993
+
+(setq message-send-mail-function 'smtpmail-send-it
+      smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+;     smtpmail-auth-credentials '(("smtp.gmail.com" 587 nil nil))
+      smtpmail-auth-credentials (expand-file-name "~/.authinfo")
+      smtpmail-default-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 587
+;     smtpmail-local-domain "yourcompany.com"
+      )
+
+;; ~/.authinfo:
+;; machine smtp.gmail.com login name@gmail.com password pass port 587
+
+;; (add-hook 'message-setup-hook '(lambda() (use-hard-newlines t t)))
+
+(setq mm-coding-system-priorities '(utf-8)
+      mm-fill-flowed t)
 
 
 ;;;;
