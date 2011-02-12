@@ -610,8 +610,13 @@ be given as an optional argument."
 (when (member system-type '(cygwin gnu/linux))
   (add-to-list 'load-path "/usr/share/emacs/site-lisp/w3m"))
 
-(when (require 'w3m "w3m" t)
-  (setq browse-url-browser-function 'w3m-browse-url))
+(require 'w3m "w3m" t)
+;(require 'w3m-namazu)
+
+;; (when (require 'w3m "w3m" t)
+;;   (setq browse-url-browser-function 'w3m-browse-url))
+
+(setq w3m-session-load-last-sessions t)
 
 
 ;;;;
