@@ -1354,6 +1354,7 @@ are in kbd format."
       nndraft-directory "~/.gnus/drafts/"
       gnus-default-article-saver 'gnus-summary-save-in-file
       gnus-show-all-headers nil
+      gnus-fetch-old-headers nil
       gnus-treat-capitalize-sentences nil
       gnus-treat-display-smileys t
       gnus-treat-display-x-face t
