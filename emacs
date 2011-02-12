@@ -1036,6 +1036,38 @@ prevents using commands with prefix arguments."
 
 
 ;;;;
+;;;; org-mode
+;;;;
+
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (local-set-key (kbd "<C-up>") 'org-shiftmetaup)
+            (local-set-key (kbd "<C-down>") 'org-shiftmetadown)
+            (local-set-key (kbd "<C-right>") 'org-shiftmetaright)
+            (local-set-key (kbd "<C-left>") 'org-shiftmetaleft)
+            (local-set-key (kbd "M-n") 'outline-next-visible-heading)
+            (local-set-key (kbd "M-p") 'outline-previous-visible-heading)))
+
+(setq org-special-ctrl-a/e t
+      org-startup-indented nil
+      org-startup-folded nil
+      org-return-follows-link t
+      org-use-extra-keys nil
+      org-use-speed-commands t
+      org-default-notes-file "~/notes/notes.org"
+      remember-data-file "~/notes/notes.org")
+
+
+;;;;
+;;;; abbrev
+;;;;
+
+(setq dabbrev-case-fold-search case-fold-search)
+
+
+;;;;
 ;;;; misc
 ;;;;
 
