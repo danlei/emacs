@@ -1183,12 +1183,6 @@ prevents using commands with prefix arguments."
         (system-time-locale "de_DE"))
     (insert (format-time-string format))))
 
-(defun mark-line (&optional arg)
-  "Marks a line from start of indentation to end"
-  (interactive "p")
-  (back-to-indentation)
-  (end-of-line-mark arg))
-
 (defun define-keys (mode-map keybindings)
   "Takes a mode map, and a list of (key function-designator)
 lists. The functions are bound to the keys in the given mode-map.
@@ -1230,7 +1224,6 @@ are in kbd format."
 ;;;;
 
 (global-set-keys '(("C-c i d" insert-date)
-                   ("C-c l" mark-line)
                    ("C-x C-b" ibuffer)
                    ("M-/" hippie-expand)
                    ("C-c C-s" slime-selector)
