@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2010-10-31 22:01:20 danlei>
+;;;;; Time-stamp: <2011-02-12 20:26:06 danlei>
 ;;;;;
 
 
@@ -347,7 +347,10 @@ minibuffer, defaulting to word-at-point."
 (and (require 'inf-haskell "inf-haskell" t)
      (require 'haskell-indent "haskell-indent" t))
 
-(setq haskell-program-name "ghci -fglasgow-exts -XNoMonomorphismRestriction")
+(setq haskell-program-name (concat "ghci "
+                                   "-fglasgow-exts "
+                                   "-XNoMonomorphismRestriction "
+                                   "-XTupleSections "))
 
 (setq haskell-font-lock-symbols 'unicode)
 
