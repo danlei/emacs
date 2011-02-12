@@ -912,6 +912,13 @@ prevents using commands with prefix arguments."
 
 
 ;;;;
+;;;; darcs
+;;;;
+
+(require 'vc-darcs "vc-darcs" t)
+
+
+;;;;
 ;;;; ibuffer
 ;;;;
 
