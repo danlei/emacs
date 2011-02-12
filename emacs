@@ -782,9 +782,20 @@ be given as an optional argument."
 ;;;; eshell
 ;;;;
 
+(setq eshell-prefer-lisp-functions t
+      eshell-bad-command-tolerance 5)
+
 (add-hook 'eshell-mode-hook
           (lambda ()
-            (local-set-key (kbd "C-a") 'eshell-maybe-bol)))
+            (local-set-key (kbd "C-a") 'eshell-maybe-bol)
+            (local-set-key (kbd "<C-tab>") 'PC-lisp-complete-symbol)
+            (eldoc-mode 1)))
+
+;; (require 'em-smart)
+
+;; (setq eshell-where-to-jump 'begin)
+;; (setq eshell-review-quick-commands t)
+;; (setq eshell-smart-space-goes-to-end t)
 
 (defun eshell-maybe-bol ()
   "Moves point behind the eshell prompt, or
