@@ -984,6 +984,26 @@ prevents using commands with prefix arguments."
     (ibuffer-jump-to-buffer recent-buffer-name)))
 
 
+;; (defun my-ibuffer-hook ()
+;;   (ibuffer-define-sorter pathname
+;;                          (:documentation
+;;                           "Sort the buffers by their pathname."
+;;                           :description "path")
+;;                          (string-lessp (with-current-buffer (car a)
+;;                                          (or buffer-file-name
+;;                                              (if (eq major-mode 'dired-mode)
+;;                                                  (expand-file-name dired-directory))
+;;                                              "~"))
+;;                                        (with-current-buffer (car b)
+;;                                          (or buffer-file-name
+;;                                              (if (eq major-mode 'dired-mode)
+;;                                                  (expand-file-name dired-directory))
+;;                                              "~"))))
+;;   (define-key ibuffer-mode-map (kbd "s p") 'ibuffer-do-sort-by-pathname))
+
+;; (add-hook 'ibuffer-mode-hooks 'my-ibuffer-hook)
+
+
 ;;;;
 ;;;; occur
 ;;;;
