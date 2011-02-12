@@ -1334,18 +1334,18 @@ are in kbd format."
         (gnus-catchup-mark (subject -1))))
 
 (setq gnus-thread-sort-functions
-      '(gnus-thread-sort-by-number
-        (not gnus-thread-sort-by-date)))
+      '((not gnus-thread-sort-by-number)))
 
 (setq gnus-article-sort-functions
-      '((not gnus-article-sort-by-number)
-        gnus-article-sort-by-subject))
+      '(gnus-article-sort-by-number))
+
 
 ;;;
 ;;; misc
 ;;;
 
 (setq gnus-add-to-list t
+      gnus-summary-goto-unread nil
       gnus-summary-make-false-root 'adopt
       gnus-article-save-directory "~/.news"
       gnus-cache-directory "~/.news/cache"
