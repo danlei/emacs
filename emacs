@@ -361,6 +361,8 @@ minibuffer, defaulting to word-at-point."
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
+(setq haskell-hoogle-command "hoogle")
+
 (add-hook 'inferior-haskell-mode-hook
           (lambda ()
             (local-set-key (kbd "C-c h") 'haskell-hoogle)
