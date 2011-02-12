@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2011-02-12 20:26:06 danlei>
+;;;;; Time-stamp: <2011-02-12 20:32:25 danlei>
 ;;;;;
 
 
@@ -1297,7 +1297,7 @@ are in kbd format."
 (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
 
 (setq gnus-visible-headers
-      '("^Subject:" "^From:" "^To:" "^Cc:" "^Resent-To:" "^Message-Date:"
+      '("^Subject:" "^From:" "^To:" "^Cc:" "^Resent-To:" "^\\(Message-\\)?Date:"
         "^Newsgroups:" "^Followup:" "^ID:" "^Organization-To:" "^Reply-To:"
         "^User-Agent:" "^X-Newsreader:" "^X-Mailer:"))
 
