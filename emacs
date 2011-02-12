@@ -1373,7 +1373,7 @@ are in kbd format."
       gnus-treat-strip-trailing-blank-lines nil
       gnus-treat-translate nil
       gnus-large-newsgroup 500
-      gnus-agent nil
+      gnus-agent t
       gnus-cache-enter-articles '(ticked)
       gnus-article-wash-function (if (featurep 'w3m) 'w3m 'html2text)
       mm-text-html-renderer (if (featurep 'w3m) 'w3m 'html2text)
