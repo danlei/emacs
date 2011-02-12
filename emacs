@@ -1126,6 +1126,7 @@ prevents using commands with prefix arguments."
 (put 'set-goal-column 'disabled nil)
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
+(put 'scroll-left 'disabled nil)
 
 ;; (setq time-stamp-format "%:y-%02m-%02d %02H:%02M:%02S")
 
