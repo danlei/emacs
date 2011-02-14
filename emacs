@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2011-02-12 20:32:25 danlei>
+;;;;; Time-stamp: <2011-02-14 04:16:08 danlei>
 ;;;;;
 
 
@@ -963,6 +963,10 @@ prevents using commands with prefix arguments."
                           (name . "\\.S$")
                           (mode . asm-mode)))
          ("perl" (mode . cperl-mode))
+         ("tex" (or (name . "\\.tex$")
+                    (mode . tex-mode)))
+         ("org" (or (name . "\\.org$")
+                    (mode . org-mode)))
          ("text" (or (name . "\\.txt$")
                      (mode . text-mode)))
          ("dired" (mode . dired-mode))
