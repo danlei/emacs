@@ -402,12 +402,12 @@ minibuffer, defaulting to word-at-point."
       ghc-check-key (kbd "C-x C-s")
       ghc-toggle-key (kbd "C-c C-c"))
 
-(require 'ghc "ghc" t)
 ;(autoload 'ghc-init "ghc" nil t)
 
-(add-hook 'haskell-mode-hook
-          (lambda ()
-            (ghc-init)))
+(when (require 'ghc "ghc" t)
+  (add-hook 'haskell-mode-hook
+            (lambda ()
+              (ghc-init))))
 
 (defadvice ghc-init
     (before dhl-ghc-mod-local-completion first () activate)
