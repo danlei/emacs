@@ -565,31 +565,20 @@ be given as an optional argument."
 ;;;;
 
 
-;; (add-to-list 'exec-path "/cygdrive/c/Programme/Mozilla Firefox/")
-;; (setq browse-url-firefox-program "/cygdrive/c/Programme/Mozilla Firefox/firefox.exe")
-;; (setq browse-url-browser-function 'browse-url-firefox)
-
-(when (eq system-type 'cygwin)
-  (setq browse-url-generic-program
-        "/cygdrive/c/Programme/Mozilla Firefox/firefox.exe"
-        common-lisp-hyperspec-root
-        "file:///c:/cygwin/home/danlei/doc/HyperSpec/"
-        cltl2-root-url
-        "file:///c:/cygwin/home/danlei/doc/cltl2/"))
-
-(when (member system-type '(gnu/linux linux))
-  (setq browse-url-generic-program
-        "google-chrome"
-        common-lisp-hyperspec-root
-        "file:///home/danlei/doc/HyperSpec/"
-        cltl2-root-url
-        "file:///home/danlei/doc/cltl2/"))
+(setq browse-url-generic-program
+      (case system-type
+        (windows-nt "~/AppData/Local/Google/Chrome/Application/Chrome.exe")
+        (gnu/linux "google-chrome"))
+      common-lisp-hyperspec-root
+      (expand-file-name "~/doc/HyperSpec/")
+      cltl2-root-url
+      (expand-file-name "~/doc/cltl2/"))
 
 (setq browse-url-browser-function 'browse-url-generic)
 
 (require 'cltl2 "cltl2" t)
 
-(defun random-hyperspec ()
+(defun dhl-random-hyperspec ()
   (interactive)
   (let* ((random-hyperspec-symbol
           (let ((syms '()))
@@ -602,9 +591,6 @@ be given as an optional argument."
 
 (when (member system-type '(cygwin gnu/linux))
   (add-to-list 'load-path "/usr/share/emacs/site-lisp/w3m"))
-
-(require 'w3m "w3m" t)
-;(require 'w3m-namazu)
 
 ;; (when (require 'w3m "w3m" t)
 ;;   (setq browse-url-browser-function 'w3m-browse-url))
