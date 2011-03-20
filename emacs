@@ -50,16 +50,12 @@
       lisp-indent-function 'cl-indent:function)
 
 (setq slime-lisp-implementations
-      '(
-;       (sbcl ("/usr/bin/sbcl"))
-;       (ccl ("/home/danlei/build/clozure/ccl/lx86cl64"))
-;       (cmucl ("/home/danlei/build/bin/lisp"))
-        (clisp ("/usr/bin/clisp"))
-;       (allegro ("/home/danlei/build/acl81_express/alisp"))
-;       (lispworks ("/home/danlei/build/lispworks-personal-5-1-1-x86-linux"))
-;       (abcl ("/home/danlei/build/abcl/j/abcl"))
-        ))
-
+      `((ccl ,(list (case system-type
+                      ((windows-nt cygwin) "~/build/ccl/wx86cl")
+                      (gnu/linux "~/build/ccl/lx86cl"))
+                    "-K utf-8"))
+        (clisp ("clisp" "-E utf-8" "-modern")))
+      slime-default-lisp 'ccl)
 
 (add-hook 'slime-mode-hook
           (lambda ()
@@ -99,31 +95,16 @@
 ;;;;
 
 (when (require 'paredit "paredit" t)
-  (add-hook 'slime-mode-hook
-            (lambda ()
-              (paredit-mode 1)))
-  (add-hook 'slime-repl-mode-hook
-            (lambda ()
-              (paredit-mode 1)))
-  (setq clojure-enable-paredit t)
-  (add-hook 'emacs-lisp-mode-hook
-            (lambda ()
-              (paredit-mode 1)))
-  (add-hook 'ielm-mode-hook
-            (lambda ()
-              (paredit-mode 1)))
-  (add-hook 'scheme-mode-hook
-            (lambda ()
-              (paredit-mode 1)))
-  (add-hook 'inferior-scheme-mode-hook
-            (lambda ()
-              (paredit-mode 1)))
-  (add-hook 'inferior-qi-mode-hook
-            (lambda ()
-              (paredit-mode 1)))
-  (add-hook 'qi-mode-hook
-            (lambda ()
-              (paredit-mode 1))))
+  (mapc (lambda (hook) (add-hook hook (lambda () (paredit-mode 1))))
+        '(slime-mode-hook
+          slime-repl-mode-hook
+          emacs-lisp-mode-hook
+          ielm-mode-hook
+          scheme-mode-hook
+          inferior-scheme-mode-hook
+          inferior-qi-mode-hook
+          qi-mode-hook))
+  (setq clojure-enable-paredit t))
 
 (add-hook 'paredit-mode-hook
           (lambda ()
@@ -163,7 +144,7 @@
 (add-to-list 'load-path "~/.emacs.d/swank-clojure/src/emacs")
 
 (case system-type
-  (linux
+  (gnu/linux
      (setq swank-clojure-jar-path
            "c:/cygwin/home/danlei/build/clojure/clojure.jar"))
   (cygwin
