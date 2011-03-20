@@ -437,10 +437,10 @@ minibuffer, defaulting to word-at-point."
   (setq inferior-fsharp-program
         "mono /home/danlei/build/FSharp-2.0.0.0/bin/fsi.exe --readline-"
         fsharp-compiler
-        "mono /home/danlei/build/FSharp-2.0.0.0/bin/fsc.exe"))
+        "mono /home/danlei/build/FSharp-2.0.0.0/bin/fsc.exe --resident"))
 
 (when (member system-type '(cygwin windows-nt))
-  (setq inferior-fsharp-program "fsi.exe"
+  (setq inferior-fsharp-program "fsi.exe --readline-"
         fsharp-compiler "fsc.exe"))
 
 (add-to-list 'auto-mode-alist '("\.fs$" . fsharp-mode))
