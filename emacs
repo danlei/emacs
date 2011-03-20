@@ -889,6 +889,10 @@ prevents using commands with prefix arguments."
 (require 'egg "egg" t)
 (require 'gist "gist" t)
 
+(when (eq system-type 'windows-nt)
+  (setq egg-git-command "C:/Program Files/Git/bin/git.exe"
+        egg-patch-command "C:/Program Files/Git/bin/patch.exe"))
+
 
 ;;;;
 ;;;; darcs
