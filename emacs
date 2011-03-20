@@ -2,13 +2,25 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2011-02-14 04:16:08 danlei>
+;;;;; Time-stamp: <2011-03-20 17:53:05 dhl>
 ;;;;;
 
 
 (require 'cl)
 
+
+;;;;
+;;;; paths
+;;;;
+
 (add-to-list 'load-path "~/.emacs.d/")
+
+(when (eq system-type 'windows-nt)
+  (add-to-list 'exec-path "C:/cygwin/bin")
+  (add-to-list 'exec-path "~/programme/darcs-2.5.2-win1")
+  (setenv "PATH" (concat "C:/cygwin/bin" ";"
+                         (expand-file-name "~/programme/darcs-2.5.2-win1") ";"
+                         (getenv "PATH"))))
 
 
 ;;;;
