@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2011-03-20 17:53:05 dhl>
+;;;;; Time-stamp: <2011-04-16 13:14:34 dhl>
 ;;;;;
 
 
@@ -33,6 +33,21 @@
   (color-theme-initialize)
   (and (require 'color-theme-dhl-hober "color-theme-dhl-hober" t)
        (color-theme-dhl-hober)))
+
+;;;;
+;;;; smart-tab
+;;;;
+
+;; (add-to-list 'load-path "~/.emacs.d/smart-tab/")
+
+;; (when (require 'smart-tab "smart-tab" t)
+;;   (global-smart-tab-mode 1))
+
+;; (setq smart-tab-using-hippie-expand t)
+
+;; (setq smart-tab-completion-functions-alist
+;;       '((emacs-lisp-mode . lisp-complete-symbol)
+;;         (text-mode . dabbrev-completion)))
 
 
 ;;;;
