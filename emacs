@@ -483,8 +483,10 @@ minibuffer, defaulting to word-at-point."
 
 (setq prolog-system 'swi)
 
-(when (eq system-type 'cygwin)
-    (setq prolog-program-name "/usr/bin/pl"))
+(setq prolog-prgram-name
+      (case system-type
+        (windows-nt "c:/cygwin/lib/pl-5.6.36/bin/i686-cygwin/pl")
+        (cygwin "/usr/bin/pl")))
 
 (add-to-list 'auto-mode-alist '("\.pl$" . prolog-mode))
 
