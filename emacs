@@ -444,7 +444,7 @@ minibuffer, defaulting to word-at-point."
 ;;;; f#
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/fsharp")
+(add-to-list 'load-path "~/.emacs.d/fsharp/")
 
 (require 'fsharp "fsharp" t)
 
@@ -495,10 +495,12 @@ minibuffer, defaulting to word-at-point."
 ;;;; java
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/javarun")
+(add-to-list 'load-path "~/.emacs.d/javarun/")
 
 (when (require 'javarun "javarun" t)
-  (setq javarun-cygdir "c:/cygwin/")
+  (setq ; javarun-cygdir "c:/cygwin/"
+        javarun-javac-command "javac"
+        javarun-java-command "java")
   (add-hook 'java-mode-hook
             (lambda ()
               (javarun-mode 1)
@@ -776,7 +778,6 @@ prevents using commands with prefix arguments."
 ;;    "Minor mode for incremental blame for Git." t)
 
 (add-to-list 'load-path "~/.emacs.d/egg/")
-(add-to-list 'load-path "~/.emacs.d/gist.el")
 
 (require 'egg "egg" t)
 (require 'gist "gist" t)
@@ -823,7 +824,7 @@ prevents using commands with prefix arguments."
 
 
 (when (member system-type '(cygwin gnu/linux))
-  (add-to-list 'load-path "/usr/share/emacs/site-lisp/w3m"))
+  (add-to-list 'load-path "/usr/share/emacs/site-lisp/w3m/"))
 
 ;; (when (require 'w3m "w3m" t)
 ;;   (setq browse-url-browser-function 'w3m-browse-url))
@@ -1096,7 +1097,7 @@ prevents using commands with prefix arguments."
 ;;;; misc
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/gnugo")
+(add-to-list 'load-path "~/.emacs.d/gnugo/")
 
 (setq inhibit-startup-screen t
       initial-scratch-message nil
