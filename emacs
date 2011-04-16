@@ -579,145 +579,6 @@ be given as an optional argument."
 
 
 ;;;;
-;;;; browsing
-;;;;
-
-
-(setq browse-url-generic-program
-      (case system-type
-        (windows-nt "~/AppData/Local/Google/Chrome/Application/Chrome.exe")
-        (gnu/linux "google-chrome"))
-      common-lisp-hyperspec-root
-      (expand-file-name "~/doc/HyperSpec/")
-      cltl2-root-url
-      (expand-file-name "~/doc/cltl2/"))
-
-(setq browse-url-browser-function 'browse-url-generic)
-
-(require 'cltl2 "cltl2" t)
-
-(defun dhl-random-hyperspec ()
-  (interactive)
-  (let* ((random-hyperspec-symbol
-          (let ((syms '()))
-            (do-symbols (sym common-lisp-hyperspec-symbols) (push sym syms))
-            (nth (random (length syms)) syms)))
-         (random-page (let ((pages (symbol-value random-hyperspec-symbol)))
-                        (nth (random (length pages)) pages))))
-    (browse-url (concat common-lisp-hyperspec-root "Body/" random-page))))
-
-
-(when (member system-type '(cygwin gnu/linux))
-  (add-to-list 'load-path "/usr/share/emacs/site-lisp/w3m"))
-
-;; (when (require 'w3m "w3m" t)
-;;   (setq browse-url-browser-function 'w3m-browse-url))
-
-(setq w3m-session-load-last-sessions t)
-
-
-;;;;
-;;;; erc
-;;;;
-
-(add-to-list 'load-path "~/.emacs.d/erc-5.3-extras/")
-
-(when (require 'erc "erc" t)
-; (require 'erc-match "erc-match" t)
-  (require 'erc-list-old "erc-list-old" t)
-  (erc-spelling-mode -1)
-  (erc-list-mode 1)
-  (erc-timestamp-mode -1)
-  (erc-smiley-mode 1)
-  (erc-scrolltobottom-mode 1)
-  (erc-truncate-mode 1))
-
-(setq erc-keywords '()
-;     erc-pals '()
-;     erc-fools '()
-      erc-current-nick-highlight-type 'nick-or-keyword
-      erc-notice-highlight-type 'prefix
-      erc-auto-query 'window-noselect
-      erc-user-full-name "Daniel H. Leidisch"
-      erc-track-exclude-server-buffer nil
-      erc-fill-function 'erc-fill-static
-      erc-fill-static-center 16
-      erc-fill-column 90
-      erc-kill-buffer-on-part t
-      erc-kill-queries-on-quit t
-      erc-kill-server-buffer-on-quit t
-      erc-max-buffer-size 50000
-      erc-hide-list '("JOIN" "PART" "QUIT" "NICK"))
-
-;(make-variable-buffer-local 'erc-hide-list)
-
-(setq erc-button-url-regexp
-      "\\([-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]+\\.\\)+[-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]*[-a-zA-Z0-9\\/]")
-
-(setq erc-track-exclude-types '("NICK" "MODE" "324" "329" "332" "333" "353" "477"))
-
-(setq erc-spelling-dictionaries '(("#bsdforen.de" "/dev/null"))) ; FIXME
-
-
-(setq erc-part-reason (lambda (x)
-                        (or x "Ein guter Abgang ziert die Übung."))
-      erc-quit-reason erc-part-reason)
-
-(defvar erc-auth
-  '(;freenode (:name "<irc-nick>" :password "<password>")
-    ))
-
-(load "~/.emacs-auth" t)
-
-(defun erc-nick (server)
-  (getf (getf erc-auth server) :name))
-
-(defun erc-password (server)
-  (getf (getf erc-auth server) :password))
-
-;; (add-hook 'erc-after-connect
-;;           (lambda (SERVER NICK)
-;;             (cond ((string-match "freenode\\.net" SERVER)
-;;                    (erc-message "PRIVMSG" (concat "NickServ identify "
-;;                                                   (erc-password 'freenode)))
-;;                    (erc-message "PRIVMSG" (concat "NickServ ghost "
-;;                                                   (erc-nick 'freenode)))
-;;                    (erc-message "NICK" (erc-nick 'freenode))))))
-
-
-;;;;
-;;;; dired
-;;;;
-
-(setq dired-recursive-deletes 'top
-      dired-recursive-copies 'top
-      wdired-allow-to-change-permissions t
-      wdired-allow-to-redirect-links t
-      dired-listing-switches "-lah"
-      dired-isearch-filenames 'dwim)
-
-(setq dired-garbage-files-regexp
-      "\\(?:\\.\\(?:aux\\|bak\\|dvi\\|log\\|orig\\|rej\\|toc\\|pyc\\)\\)\\'")
-
-(put 'dired-find-alternate-file 'disabled nil)
-
-(add-hook 'dired-mode-hook
-          (lambda ()
-            (define-keys dired-mode-map
-                '(("e" wdired-change-to-wdired-mode)))
-            (when (eq system-type 'darwin)
-              (define-key dired-mode-map (kbd "C-c o")
-                'dired-open-mac))))
-
-(when (eq system-type 'darwin)
-  (defun dired-open-mac ()
-    (interactive)
-    (let ((file-name (dired-get-file-for-visit)))
-      (if (file-exists-p file-name)
-          (shell-command (concat "open '" file-name "'" nil))))))
-
-
-;;;;
 ;;;; elisp
 ;;;;
 
@@ -917,6 +778,145 @@ prevents using commands with prefix arguments."
 ;;;;
 
 (require 'vc-darcs "vc-darcs" t)
+
+
+;;;;
+;;;; browsing
+;;;;
+
+
+(setq browse-url-generic-program
+      (case system-type
+        (windows-nt "~/AppData/Local/Google/Chrome/Application/Chrome.exe")
+        (gnu/linux "google-chrome"))
+      common-lisp-hyperspec-root
+      (expand-file-name "~/doc/HyperSpec/")
+      cltl2-root-url
+      (expand-file-name "~/doc/cltl2/"))
+
+(setq browse-url-browser-function 'browse-url-generic)
+
+(require 'cltl2 "cltl2" t)
+
+(defun dhl-random-hyperspec ()
+  (interactive)
+  (let* ((random-hyperspec-symbol
+          (let ((syms '()))
+            (do-symbols (sym common-lisp-hyperspec-symbols) (push sym syms))
+            (nth (random (length syms)) syms)))
+         (random-page (let ((pages (symbol-value random-hyperspec-symbol)))
+                        (nth (random (length pages)) pages))))
+    (browse-url (concat common-lisp-hyperspec-root "Body/" random-page))))
+
+
+(when (member system-type '(cygwin gnu/linux))
+  (add-to-list 'load-path "/usr/share/emacs/site-lisp/w3m"))
+
+;; (when (require 'w3m "w3m" t)
+;;   (setq browse-url-browser-function 'w3m-browse-url))
+
+(setq w3m-session-load-last-sessions t)
+
+
+;;;;
+;;;; erc
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/erc-5.3-extras/")
+
+(when (require 'erc "erc" t)
+; (require 'erc-match "erc-match" t)
+  (require 'erc-list-old "erc-list-old" t)
+  (erc-spelling-mode -1)
+  (erc-list-mode 1)
+  (erc-timestamp-mode -1)
+  (erc-smiley-mode 1)
+  (erc-scrolltobottom-mode 1)
+  (erc-truncate-mode 1))
+
+(setq erc-keywords '()
+;     erc-pals '()
+;     erc-fools '()
+      erc-current-nick-highlight-type 'nick-or-keyword
+      erc-notice-highlight-type 'prefix
+      erc-auto-query 'window-noselect
+      erc-user-full-name "Daniel H. Leidisch"
+      erc-track-exclude-server-buffer nil
+      erc-fill-function 'erc-fill-static
+      erc-fill-static-center 16
+      erc-fill-column 90
+      erc-kill-buffer-on-part t
+      erc-kill-queries-on-quit t
+      erc-kill-server-buffer-on-quit t
+      erc-max-buffer-size 50000
+      erc-hide-list '("JOIN" "PART" "QUIT" "NICK"))
+
+;(make-variable-buffer-local 'erc-hide-list)
+
+(setq erc-button-url-regexp
+      "\\([-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]+\\.\\)+[-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]*[-a-zA-Z0-9\\/]")
+
+(setq erc-track-exclude-types '("NICK" "MODE" "324" "329" "332" "333" "353" "477"))
+
+(setq erc-spelling-dictionaries '(("#bsdforen.de" "/dev/null"))) ; FIXME
+
+
+(setq erc-part-reason (lambda (x)
+                        (or x "Ein guter Abgang ziert die Übung."))
+      erc-quit-reason erc-part-reason)
+
+(defvar erc-auth
+  '(;freenode (:name "<irc-nick>" :password "<password>")
+    ))
+
+(load "~/.emacs-auth" t)
+
+(defun erc-nick (server)
+  (getf (getf erc-auth server) :name))
+
+(defun erc-password (server)
+  (getf (getf erc-auth server) :password))
+
+;; (add-hook 'erc-after-connect
+;;           (lambda (SERVER NICK)
+;;             (cond ((string-match "freenode\\.net" SERVER)
+;;                    (erc-message "PRIVMSG" (concat "NickServ identify "
+;;                                                   (erc-password 'freenode)))
+;;                    (erc-message "PRIVMSG" (concat "NickServ ghost "
+;;                                                   (erc-nick 'freenode)))
+;;                    (erc-message "NICK" (erc-nick 'freenode))))))
+
+
+;;;;
+;;;; dired
+;;;;
+
+(setq dired-recursive-deletes 'top
+      dired-recursive-copies 'top
+      wdired-allow-to-change-permissions t
+      wdired-allow-to-redirect-links t
+      dired-listing-switches "-lah"
+      dired-isearch-filenames 'dwim)
+
+(setq dired-garbage-files-regexp
+      "\\(?:\\.\\(?:aux\\|bak\\|dvi\\|log\\|orig\\|rej\\|toc\\|pyc\\)\\)\\'")
+
+(put 'dired-find-alternate-file 'disabled nil)
+
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (define-keys dired-mode-map
+                '(("e" wdired-change-to-wdired-mode)))
+            (when (eq system-type 'darwin)
+              (define-key dired-mode-map (kbd "C-c o")
+                'dired-open-mac))))
+
+(when (eq system-type 'darwin)
+  (defun dired-open-mac ()
+    (interactive)
+    (let ((file-name (dired-get-file-for-visit)))
+      (if (file-exists-p file-name)
+          (shell-command (concat "open '" file-name "'" nil))))))
 
 
 ;;;;
