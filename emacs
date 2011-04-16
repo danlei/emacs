@@ -307,6 +307,9 @@ minibuffer, defaulting to word-at-point."
             (local-set-key (kbd "<C-tab>") 'symbol-complete)
             (eldoc-mode 1)))
 
+(when (eq system-type 'windows-nt)
+  (setq python-command "c:/Python32/python.exe"))
+
 
 ;;;;
 ;;;; tcl
