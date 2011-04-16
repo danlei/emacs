@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2011-04-16 13:14:34 dhl>
+;;;;; Time-stamp: <2011-04-16 15:16:50 dhl>
 ;;;;;
 
 
@@ -619,6 +619,17 @@ be given as an optional argument."
           (lambda ()
             (setq tab-width 8)
             (local-set-key (kbd "RET") 'newline)))
+
+
+;;;;
+;;;; ess
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/ess-5.13/lisp/")
+
+(require 'ess-site)
+
+(setq inferior-R-program-name "C:/Program Files/R/R-2.13.0/bin/i386/Rterm.exe")
 
 
 ;;;;
