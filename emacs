@@ -278,6 +278,9 @@
 (autoload 'run-ruby "inf-ruby.el" "Run irb from Emacs." t)
 ;(setq ruby-program-name "irb")
 
+(when (eq system-type 'windows-nt)
+  (setq ruby-program-name "C:/Ruby192/bin/ruby.exe"))
+
 (add-hook
  'ruby-mode-hook
  (lambda ()
