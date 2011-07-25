@@ -202,10 +202,10 @@
 
 (require 'qi-mode "qi-mode" t)
 
-(when (eq system-type 'cygwin)
-  (setq inferior-qi-program
-        "~/build/QiII1.06SBCL/sbcl.exe --noinform --core \
-c:/cygwin/home/danlei/build/QiII1.06SBCL/Qi.core"))
+(setq inferior-qi-program
+      (case system-type
+        (windows-nt "C:/Users/dhl/QiII1.06SBCL/sbcl.exe --noinform --core c:/Users/dhl/QiII1.06SBCL/Qi.core")
+        (cygwin "~/build/QiII1.06SBCL/sbcl.exe --noinform --core c:/cygwin/home/danlei/build/QiII1.06SBCL/Qi.core")))
 
 
 ;;;;
