@@ -65,14 +65,17 @@
 
 (setq slime-enable-evaluate-in-emacs t
       slime-net-coding-system 'utf-8-unix
-      lisp-indent-function 'cl-indent:function)
+;;    lisp-indent-function 'cl-indent:function
+      )
 
 (setq slime-lisp-implementations
-      `((ccl ,(list (case system-type
-                      ((windows-nt cygwin) "~/build/ccl/wx86cl")
-                      (gnu/linux "~/build/ccl/lx86cl"))
-                    "-K utf-8"))
-        (clisp ("clisp" "-E utf-8" "-modern")))
+      `((ccl ,@(list (case system-type
+                       ((windows-nt cygwin) '("~/build/ccl/wx86cl" "-K utf-8"))
+                       (gnu/linux '("~/build/ccl/lx86cl" "-K utf-8")))))
+        (clisp ,@(list (case system-type
+                         ((cygwin gnu/linux) '("clisp" "-E utf-8" "-modern"))
+                         (windows-nt '("~/build/clisp/clisp-2.49/clisp"
+                                       "-modern"))))))
       slime-default-lisp 'ccl)
 
 (add-hook 'slime-mode-hook
