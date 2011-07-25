@@ -1395,6 +1395,8 @@ are in kbd format."
 (setq gnus-article-sort-functions
       '(gnus-article-sort-by-number))
 
+(setq gnus-summary-expunge-below -500)
+
 
 ;;;
 ;;; misc
