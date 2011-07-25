@@ -317,14 +317,23 @@ minibuffer, defaulting to word-at-point."
 ;;;; python
 ;;;;
 
+(setq python-process-kill-without-query t
+      python-default-version 3)
+
 ;; http://www.loveshack.ukfsn.org/emacs/python.el
 (add-hook 'python-mode-hook
           (lambda ()
             (local-set-key (kbd "<C-tab>") 'symbol-complete)
+            (setq parens-require-spaces nil)
             (eldoc-mode 1)))
 
+(add-hook 'inferior-python-mode-hook
+          (lambda ()
+            (setq parens-require-spaces nil)))
+
 (when (eq system-type 'windows-nt)
-  (setq python-command "c:/Python32/python.exe"))
+  (setq-default python-command "c:/Python32/python.exe"
+                python-python-command "c:/Python32/python.exe"))
 
 
 ;;;;
