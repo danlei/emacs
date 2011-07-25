@@ -92,6 +92,13 @@
                 '(("C-c s" slime-selector)
                   ("C-c C-d c" cltl2-lookup)))))
 
+;; correct repl cursor position after compilation
+(add-hook 'slime-compilation-finished-hook
+          (lambda (compiler-notes)
+            (with-current-buffer (slime-repl-buffer)
+              (forward-word))))
+
+
 ;;; nyef's pathname fix for cygwin
 (when (eq system-type 'cygwin)
   ;; FIXME: It turns out that the slime-tramp contrib wraps over this
