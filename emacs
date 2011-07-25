@@ -1269,6 +1269,11 @@ are in kbd format."
   "Open other-buffer in vertical split window."
   (set-window-buffer (next-window) (other-buffer)))
 
+(defadvice python-describe-symbol
+    (after dhl-python-describe-symbol-advice last () activate)
+  "Switch to help buffer after invocation."
+  (other-window 1))
+
 
 ;;;;
 ;;;; global keybindings
