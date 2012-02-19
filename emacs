@@ -1488,7 +1488,8 @@ prevents using commands with prefix arguments."
         (remove "[ ]?\\*[hH]elp.*" special-display-regexps))
   (setq special-display-regexps nil))
 
-(setq sql-sqlite-program "sqlite3")
+(setq sql-sqlite-program "sqlite3"
+      sql-sqlite-options '("-interactive"))
 
 ;; (when (eq system-type 'gnu/linux)
 ;;   (setenv "PATH"
