@@ -426,13 +426,17 @@ minibuffer, defaulting to word-at-point."
      (require 'haskell-indent "haskell-indent" t))
 
 (setq haskell-program-name (concat "ghci "
-                                   "-fglasgow-exts "
-                                   "-XNoMonomorphismRestriction "
-                                   "-XTupleSections "))
+;                                   "-fglasgow-exts "
+;                                   "-XNoMonomorphismRestriction "
+;                                   "-XTupleSections "
+                                   ))
+
+;(setq inferior-haskell-find-project-root nil)
 
 (setq haskell-font-lock-symbols 'unicode)
 
 (add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
+(add-to-list 'auto-mode-alist '("\\.lhs$" . literal-haskell-mode))
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
@@ -459,7 +463,8 @@ minibuffer, defaulting to word-at-point."
          ("C-c ." haskell-indent-align-guards-and-rhs)
 ;        ("C-c h" haskell-hoogle)
 ;        ("C-c t" inferior-haskell-type)
-         ("C-c i" inferior-haskell-info)))))
+         ("C-c i" inferior-haskell-info)
+         ("M-." inferior-haskell-find-definition)))))
 
 (when (eq system-type 'cygwin)
   (defadvice inferior-haskell-load-file
@@ -487,7 +492,7 @@ minibuffer, defaulting to word-at-point."
       ghc-check-key (kbd "C-x C-s")
       ghc-toggle-key (kbd "C-c C-c"))
 
-;(autoload 'ghc-init "ghc" nil t)
+(autoload 'ghc-init "ghc" nil t)
 
 (when (require 'ghc "ghc" t)
   (add-hook 'haskell-mode-hook
