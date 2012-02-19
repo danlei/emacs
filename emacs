@@ -1144,6 +1144,13 @@ prevents using commands with prefix arguments."
 ;;;; org-mode
 ;;;;
 
+(setq load-path (append (list "~/.emacs.d/org-mode/lisp/"
+                              "~/.emacs.d/org-mode/contrib/lisp/")
+                        load-path))
+
+(require 'org-install)
+(require 'org-latex)
+
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
 (add-hook 'org-mode-hook
@@ -1156,13 +1163,200 @@ prevents using commands with prefix arguments."
             (local-set-key (kbd "M-p") 'outline-previous-visible-heading)))
 
 (setq org-special-ctrl-a/e t
+      org-special-ctrl-k t
       org-startup-indented nil
       org-startup-folded nil
       org-return-follows-link t
       org-use-extra-keys nil
       org-use-speed-commands t
+      org-footnote-auto-adjust t
+      org-export-with-LaTeX-fragments t
+      org-export-html-validation-link nil
+      org-export-creator-info nil
+      org-export-html-style-include-default nil
+      org-export-htmlize-output-type 'inline-css
       org-default-notes-file "~/notes/notes.org"
       remember-data-file "~/notes/notes.org")
+
+(setq org-export-html-style "
+<style type=\"text/css\">
+    html {
+      font-family: Verdana, Arial, sans-serif;
+      font-size: 12pt;
+      /*max-width: 360pt;*/
+    }
+
+    body {
+      margin: 10%;
+    }
+
+    .title  { text-align: center; }
+    
+    .todo   { color: red; }
+    .done   { color: green; }
+    .tag    { background-color: #add8e6; font-weight:normal; }
+    .target { }
+       
+    .timestamp { color: #bebebe; }
+    .timestamp-kwd { color: #5f9ea0; }
+    
+    .right  { margin-left:auto; margin-right:0px;  text-align:right; }
+    .left   { margin-left:0px;  margin-right:auto; text-align:left; }
+    .center { margin-left:auto; margin-right:auto; text-align:center; }
+    
+    p.verse { margin-left: 3%; }
+    
+    pre {
+      border: 1pt solid #AEBDCC;
+      background-color: #F3F5F7;
+      padding: 5pt;
+      font-family: courier, monospace;
+      font-size: 90%;
+      overflow:auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    td, th { vertical-align: top; }
+    th.right { text-align:center; }
+    th.left { text-align:center; }
+    th.center { text-align:center; }
+    td.right { text-align:right; }
+    td.left { text-align:left; }
+    td.center { text-align:center; }
+    dt { font-weight: bold; }
+
+    div.figure { padding: 0.5em; }
+    div.figure p { text-align: center; }
+
+    div.inlinetask {
+      padding:10px;
+      border:2px solid gray;
+      margin:10px;
+      background: #ffffcc;
+    }
+
+    textarea { overflow-x: auto; }
+
+    .linenr { font-size:smaller; }
+    .code-highlighted { background-color:#ffff00; }
+
+    .org-info-js_info-navigation { border-style:none; }
+    #org-info-js_console-label {
+      font-size:10px;
+      font-weight:bold;
+      white-space:nowrap;
+    }
+    .org-info-js_search-highlight {
+      background-color:#ffff00;
+      color:#000000;
+      font-weight:bold;
+    }
+
+    .tog { cursor: pointer; }
+</style>")
+
+(setq org-export-html-scripts "
+<script src=\"jquery-1.6.4.js\"></script>
+<script type=\"text/javascript\">
+  function CodeHighlightOn(elem, id) {
+    var target = document.getElementById(id);
+
+    if(null != target) {
+      elem.cacheClassElem   = elem.className;
+      elem.cacheClassTarget = target.className;
+      target.className      = \"code-highlighted\";
+      elem.className        = \"code-highlighted\";
+    }
+  }
+
+  function CodeHighlightOff(elem, id) {
+    var target = document.getElementById(id);
+
+    if(elem.cacheClassElem)
+      elem.className = elem.cacheClassElem;
+    if(elem.cacheClassTarget)
+      target.className = elem.cacheClassTarget;
+  }
+
+  jQuery(document).ready(function() {
+    var togSuffix = \" …\";
+
+    jQuery('.tog').append(togSuffix);
+    jQuery('.tog').next().hide();
+    jQuery('.tog').toggle(
+      function() {
+        jQuery(this).html(function(idx, oldHtml) {
+          return oldHtml.replace(new RegExp(togSuffix+\"$\"), \"\");
+        });
+      },
+      function() {
+        jQuery(this).append(togSuffix);
+      }
+    );
+    jQuery('.tog').click(function(e) {
+      jQuery(this).next().toggle();
+    });
+  });
+</script>")
+
+(add-to-list 'org-export-latex-classes
+  `("article-de"
+    ,(concat "\\documentclass[a4paper,\n"
+             "               headings=small,\n"
+             "               captions=tableheading]\n"
+             "              {scrartcl}\n"
+             "[NO-DEFAULT-PACKAGES]\n"
+             "[PACKAGES]\n"
+             "[EXTRA]\n"
+             "\\usepackage[ngerman]{babel}")
+    ("\\section{%s}" . "\\section*{%s}")
+    ("\\subsection{%s}" . "\\subsection*{%s}")
+    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+    ("\\paragraph{%s}" . "\\paragraph*{%s}")
+    ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+(setq org-export-latex-packages-alist
+      '(("utf8" "inputenc" t)
+        ("T1" "fontenc" t)
+        ("" "parskip" t)
+        ("" "fixltx2e" nil)
+        ("" "graphicx" t)
+        ("" "longtable" nil)
+        ("" "float" nil)
+        ("" "wrapfig" nil)
+        ("" "soul" t)
+        ("" "textcomp" t)
+;       ("" "marvosym" t)
+;       ("" "wasysym" t)
+;       ("" "latexsym" t)
+        ("" "amssymb" t)
+        ("" "amsmath" t)
+        ("" "hyperref" nil)
+        "\\tolerance=1000"))
+
+;; (org-add-link-type "togsp"
+;;   (lambda (&rest rest)
+;;     (message "This link just hides the following Html element."))
+;;   (lambda (path desc format)
+;;     (case format
+;;       (html
+;;        (format "<span class=\"tog\">%s</span>" desc))
+;;       (latex
+;;        (format "%s" desc)))))
+
+;; (org-add-link-type "togsp"
+;;   (lambda (&rest rest)
+;;     (message "This link just hides the following Html element."))
+;;   (lambda (path desc format)
+;;     (case format
+;;       (html
+;;        (format "<span class=\"tog\">%s</span> <span>%s</span>" desc path))
+;;       (latex
+;;        (format "%s %s" desc path)))))
 
 
 ;;;;
