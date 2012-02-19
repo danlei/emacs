@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2012-02-17 01:53:11 dhl>
+;;;;; Time-stamp: <2012-02-19 02:02:31 dhl>
 ;;;;;
 
 
@@ -66,7 +66,8 @@
 (add-to-list 'load-path "~/.emacs.d/slime/contrib/")
 
 (when (require 'slime "slime" t)
-  (slime-setup '(slime-fancy slime-asdf slime-references slime-indentation)))
+  (slime-setup '(slime-fancy slime-asdf slime-references
+                 slime-indentation slime-xref-browser)))
 
 (setq slime-enable-evaluate-in-emacs t
       slime-net-coding-system 'utf-8-unix
@@ -280,7 +281,7 @@
 
 ;;;;
 ;;;; ruby
-;;;; 
+;;;;
 
 (autoload 'run-ruby "inf-ruby.el" "Run irb from Emacs." t)
 ;(setq ruby-program-name "irb")
@@ -1191,21 +1192,21 @@ prevents using commands with prefix arguments."
     }
 
     .title  { text-align: center; }
-    
+
     .todo   { color: red; }
     .done   { color: green; }
     .tag    { background-color: #add8e6; font-weight:normal; }
     .target { }
-       
+
     .timestamp { color: #bebebe; }
     .timestamp-kwd { color: #5f9ea0; }
-    
+
     .right  { margin-left:auto; margin-right:0px;  text-align:right; }
     .left   { margin-left:0px;  margin-right:auto; text-align:left; }
     .center { margin-left:auto; margin-right:auto; text-align:center; }
-    
+
     p.verse { margin-left: 3%; }
-    
+
     pre {
       border: 1pt solid #AEBDCC;
       background-color: #F3F5F7;
@@ -1665,7 +1666,7 @@ are in kbd format."
       gnus-article-save-directory "~/.news"
       gnus-cache-directory "~/.news/cache"
       gnus-cache-active-file "~/.news/cache/active"
-      gnus-kill-files-direcotry "~/.news"
+      gnus-kill-files-directory "~/.news"
       nndraft-directory "~/.gnus/drafts/"
       gnus-default-article-saver 'gnus-summary-save-in-file
       gnus-show-all-headers nil
@@ -1739,7 +1740,7 @@ are in kbd format."
 
 ;; (add-hook 'message-setup-hook '(lambda() (use-hard-newlines t t))) ;; format=flowed
 
-	
+
 ;; (setq message-alternative-emails
 ;;       (regexp-opt '("public@leidisch.net"
 ;;                     "foo@bar.baz")))
