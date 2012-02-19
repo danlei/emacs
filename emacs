@@ -1467,9 +1467,10 @@ prevents using commands with prefix arguments."
 
 ;; (setq time-stamp-format "%:y-%02m-%02d %02H:%02M:%02S")
 
-(setq-default c-basic-offset 2)
-(setq-default css-indent-offset 2)
-(setq-default sh-basic-offset 2)
+(setq-default c-basic-offset 2
+              css-indent-offset 2
+              sh-basic-offset 2
+              js-indent-level 2)
 
 (prefer-coding-system       'utf-8)
 (set-default-coding-systems 'utf-8)
