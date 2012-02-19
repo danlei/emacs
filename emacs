@@ -324,10 +324,13 @@ minibuffer, defaulting to word-at-point."
 ;;;; python
 ;;;;
 
+(add-to-list 'load-path "~/.emacs.d/python.el/")
+
+(require 'python)
+
 (setq python-process-kill-without-query t
       python-default-version 3)
 
-;; http://www.loveshack.ukfsn.org/emacs/python.el
 (add-hook 'python-mode-hook
           (lambda ()
             (local-set-key (kbd "<C-tab>") 'symbol-complete)
@@ -339,8 +342,40 @@ minibuffer, defaulting to word-at-point."
             (setq parens-require-spaces nil)))
 
 (when (eq system-type 'windows-nt)
-  (setq-default python-command "c:/Python32/python.exe"
-                python-python-command "c:/Python32/python.exe"))
+  (setq-default python-command "C:/Python32/python.exe"
+                python-python-command "C:/Python32/python.exe"
+                python-shell-interpreter "C:/Python32/python.exe"
+                python-shell-interpreter-args "-ui"))
+
+
+;;;;
+;;;; perl
+;;;;
+
+(add-to-list 'auto-mode-alist '("\.pl$" . sepia-mode))
+(add-to-list 'interpreter-mode-alist '("perl" . sepia-mode))
+(add-to-list 'interpreter-mode-alist '("perl5" . sepia-mode))
+(add-to-list 'interpreter-mode-alist '("miniperl" . sepia-mode))
+
+(setq cperl-indent-level 4
+      cperl-indent-parens-as-block nil)
+
+;; (defun cperl-eldoc-documentation-function ()
+;;   "Return meaningful doc string for `eldoc-mode'."
+;;   (car
+;;    (let ((cperl-message-on-help-error nil))
+;;      (cperl-get-help))))
+
+;; (add-hook 'cperl-mode-hook
+;;           (lambda ()
+;;             (set (make-local-variable 'eldoc-documentation-function)
+;;                  'cperl-eldoc-documentation-function)))
+
+(add-to-list 'load-path "~/.emacs.d/Sepia-0.992-S3oGPo/")
+(setq sepia-perl5lib (list (expand-file-name "~/.emacs.d/Sepia-0.992-S3oGPo/lib")))
+;(defalias 'perl-mode 'sepia-mode)
+(require 'sepia)
+(setq sepia-program-name "c:/Perl/bin/perl")
 
 
 ;;;;
