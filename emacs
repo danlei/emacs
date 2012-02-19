@@ -173,32 +173,34 @@
 ;;;;
 
 (add-to-list 'load-path "~/.emacs.d/clojure-mode/")
-(add-to-list 'load-path "~/.emacs.d/swank-clojure/")
-(add-to-list 'load-path "~/.emacs.d/swank-clojure/src/emacs")
+;; (add-to-list 'load-path "~/.emacs.d/swank-clojure/")
+;; (add-to-list 'load-path "~/.emacs.d/swank-clojure/src/emacs")
 
-(case system-type
-  (gnu/linux
-     (setq swank-clojure-jar-path
-           "c:/cygwin/home/danlei/build/clojure/clojure.jar"))
-  (cygwin
-     (setq swank-clojure-jar-path
-           "c:/cygwin/home/danlei/build/clojure/clojure.jar"))
-  (windows-nt
-     (setq swank-clojure-path
-           "c:/cygwin/home/danlei/.emacs.d/swank-clojure/classes/"
-           swank-clojure-jar-path
-           "c:/cygwin/home/danlei/build/clojure/clojure.jar"
-           swank-clojure-extra-classpaths
-           '("c:/cygwin/home/danlei/Clojure/clojure-contrib/clojure-contrib.jar"
-             "c:/cygwin/home/danlei/Clojure/swank-clojure/src/")
-           swank-clojure-java-path
-           "c:/Programme/Java/jdk1.6.0_16/bin/java.exe"
-           swank-clojure-extra-vm-args (list "-server"))))
+;; (case system-type
+;;   (gnu/linux
+;;      (setq swank-clojure-jar-path
+;;            "c:/cygwin/home/danlei/build/clojure/clojure.jar"))
+;;   (cygwin
+;;      (setq swank-clojure-jar-path
+;;            "c:/cygwin/home/danlei/build/clojure/clojure.jar"))
+;;   (windows-nt
+;;      (setq swank-clojure-path
+;;            "c:/cygwin/home/danlei/.emacs.d/swank-clojure/classes/"
+;;            swank-clojure-jar-path
+;;            "c:/cygwin/home/danlei/build/clojure/clojure.jar"
+;;            swank-clojure-extra-classpaths
+;;            '("c:/cygwin/home/danlei/Clojure/clojure-contrib/clojure-contrib.jar"
+;;              "c:/cygwin/home/danlei/Clojure/swank-clojure/src/")
+;;            swank-clojure-java-path
+;;            "c:/Programme/Java/jdk1.6.0_16/bin/java.exe"
+;;            swank-clojure-extra-vm-args (list "-server"))))
 
 (require 'clojure-mode "clojure-mode" t)
 ;(require 'swank-clojure-autoload "swank-clojure-autoload" t)
 
-(require 'swank-clojure "swank-clojure" t)
+;; (require 'swank-clojure "swank-clojure" t)
+
+(add-hook 'clojure-mode-hook (lambda () (paredit-mode 1)))
 
 
 ;;;;
