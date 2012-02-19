@@ -1367,8 +1367,44 @@ prevents using commands with prefix arguments."
 
 
 ;;;;
+;;;; flashcard
+;;;;
+
+(require 'flashcard)
+
+(add-to-list 'auto-mode-alist '("\\.deck\\'" . flashcard-mode))
+
+(add-hook 'flashcard-mode-hook
+          'flashcard-add-scroll-to-bottom)
+
+(add-hook 'flashcard-positive-feedback-functions
+          'flashcard-method-leitner-positive-feedback)
+
+(add-hook 'flashcard-mode-hook
+          (lambda ()
+            (variable-pitch-mode 1)
+            (set-input-method 'greek-babel)
+            (toggle-input-method)))
+
+
+;;;;
+;;;; voctest
+;;;;
+
+(require 'voctest)
+
+(setq voctest-test-direction '(1 . 0))
+
+(add-hook 'voctest-mode-hook
+          (lambda ()
+            (variable-pitch-mode 1)))
+
+
+;;;;
 ;;;; misc
 ;;;;
+
+(require 'misc)
 
 (add-to-list 'load-path "~/.emacs.d/gnugo/")
 
