@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2011-07-25 18:09:02 dhl>
+;;;;; Time-stamp: <2012-02-17 01:53:11 dhl>
 ;;;;;
 
 
@@ -16,11 +16,16 @@
 (add-to-list 'load-path "~/.emacs.d/")
 
 (when (eq system-type 'windows-nt)
+  (setenv "CYGWIN" (concat (getenv "CYGWIN") " nodosfilewarning"))
   (mapcar (apply-partially 'add-to-list 'exec-path)
-          '("C:/cygwin/bin"
+          '("C:/Perl/bin"
+            "C:/MinGW/bin"
+            (expand-file-name "~/programme/latex/miktex/bin")
             "~/programme/darcs-2.5.2-win1"
-            "C:/MinGW/bin"))
-  (setenv "PATH" (concat "C:/MinGW/bin" ";"
+            "C:/cygwin/bin"))
+  (setenv "PATH" (concat "C:/Perl/bin/" ";"
+                         "C:/MinGW/bin" ";"
+                         (expand-file-name "~/programme/latex/miktex/bin") ";"
                          "C:/cygwin/bin" ";"
                          (expand-file-name "~/programme/darcs-2.5.2-win1") ";"
                          (getenv "PATH"))))
