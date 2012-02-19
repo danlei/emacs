@@ -1456,6 +1456,7 @@ prevents using commands with prefix arguments."
 (put 'eval-expression 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
+(put 'narrow-to-defun 'disabled nil)
 (put 'erase-buffer 'disabled nil)
 (put 'overwrite-mode 'disabled nil)
 (put 'set-goal-column 'disabled nil)
