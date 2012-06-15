@@ -403,10 +403,15 @@ minibuffer, defaulting to word-at-point."
 ;;;; maxima
 ;;;;
 
-(setq maxima-command "/cygdrive/c/Programme/Maxima-5.21.1/bin/maxima.bat")
+(setq maxima-command "C:/Program Files/Maxima-5.25.0/bin/maxima.bat")
+
+(add-to-list 'load-path "C:/Program Files/Maxima-5.25.0/share/maxima/5.25.0/emacs/")
 
 (require 'maxima "maxima" t)
 (require 'maxima-font-lock "maxima-font-look" t)
+
+;(load "c:/Program Files/Maxima-5.25.0/share/maxima/5.25.0/emacs/setup-imaxima-imath.el")
+;(load "C:/Users/dhl/foo/setup-imaxima-imath.el")
 
 ;; (load "maxima.el")
 ;; (load "maxima-font-lock.el")
