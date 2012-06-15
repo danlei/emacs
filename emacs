@@ -1443,6 +1443,8 @@ prevents using commands with prefix arguments."
               indent-tabs-mode nil
               tab-width 2)
 
+;(setq standard-indent 2)
+
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -1786,18 +1788,18 @@ are in kbd format."
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(quack-default-program "mzscheme")
- '(quack-fontify-style nil)
- '(quack-programs (quote ("swindle" "MzScheme" "MzScheme.exe" "bigloo" "csi" "csi -hygienic" "gosh" "gsi" "gsi ~~/syntax-case.scm -" "guile" "kawa" "mit-scheme" "mred -z" "mzscheme" "mzscheme -M errortrace" "mzscheme -il r6rs" "mzscheme -il typed-scheme" "mzscheme.exe" "mzscheme3m" "mzschemecgc" "rs" "scheme" "scheme48" "scsh" "sisc" "stklos" "sxi")))
- '(safe-local-variable-values (quote ((Package . CL-PPCRE) (Package . utils-kt) (Package . Demos) (Syntax . ANSI-Common-Lisp) (Package . CLIM-DEMO) (Lowercase . Yes) (Package . CLIMACS-COMMANDS) (Package . CLIMACS-JAVA-SYNTAX) (Package . CLIMACS-C-SYNTAX) (Package . CLIMACS-CORE) (Package . CLIMACS-GUI) (Package . CLIMACS-PROLOG-SYNTAX) (Package . CLIM-NULL) (show-trailing-whitespace . t) (indent-tabs) (Package . DREI-CORE) (Package . DREI-LISP-SYNTAX) (Package . DREI-LR-SYNTAX) (Package . DREI-FUNDAMENTAL-SYNTAX) (Package . DREI-MOTION) (Package . DREI-SYNTAX) (Package . DREI) (Package . DREI-BUFFER) (Package . ESA-IO) (Package . ESA) (Package . ESA-UTILS) (Package . GOATEE) (Package . CLIM-POSTSCRIPT) (Package . CLIM-INTERNALS) (Package . gui-geometry) (Syntax . Common-Lisp) (Package . cells) (Package . ccl) (Package . CL-FAD) (Syntax . COMMON-LISP) (Package . CCL) (Base . 10) (Package . LISP-UNIT) (syntax . ANSI-COMMON-LISP) (Package SERIES :use "COMMON-LISP" :colon-mode :external)))))
+ '(quack-fontify-style nil))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :background "gray4" :foreground "light gray" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "outline" :family "DejaVu Sans Mono"))))
  '(buffer-menu-buffer ((t (:foreground "indian red"))))
  '(erc-underline-face ((t nil)))
  '(gnus-header-subject ((t (:foreground "lemon chiffon"))))
  '(ido-only-match ((((class color)) (:foreground "turquoise"))))
  '(ido-subdir ((((min-colors 88) (class color)) (:foreground "cornflower blue"))))
  '(message-header-subject ((t (:foreground "lemon chiffon"))))
+ '(rst-level-1-face ((default nil) (nil (:background "black" :foreground "gray"))) t)
  '(underline ((t nil))))
