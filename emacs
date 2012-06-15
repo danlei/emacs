@@ -102,7 +102,8 @@
 (add-hook 'slime-compilation-finished-hook
           (lambda (compiler-notes)
             (with-current-buffer (slime-repl-buffer)
-              (forward-word))))
+              (forward-word)))
+          t)
 
 
 ;;; nyef's pathname fix for cygwin
