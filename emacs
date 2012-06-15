@@ -579,8 +579,9 @@ minibuffer, defaulting to word-at-point."
 
 (when (require 'javarun "javarun" t)
   (setq ; javarun-cygdir "c:/cygwin/"
-        javarun-javac-command "javac"
-        javarun-java-command "java")
+        javarun-javac-command "javac.exe"
+        javarun-java-command "java"
+        javarun-java-path "C:/Program Files/Java/jdk1.6.0/bin/")
   (add-hook 'java-mode-hook
             (lambda ()
               (javarun-mode 1)
