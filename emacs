@@ -1489,6 +1489,9 @@ prevents using commands with prefix arguments."
 (setq tramp-syntax 'ftp)
 (setq tramp-default-method "ftp")
 
+(setq ange-ftp-try-passive-mode t)
+(setq ange-ftp-ftp-program-name "ftp")
+
 (when (eq system-type 'darwin)
   (cua-mode 0)
   (delete-selection-mode -1)
