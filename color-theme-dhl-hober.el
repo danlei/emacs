@@ -1,7 +1,7 @@
 ;;;;;
 ;;;;; color-theme-dhl-hober.el
 ;;;;;
-;;;;; Time-stamp: <2010-08-08 15:26:59 danlei>
+;;;;; Time-stamp: <2010-08-10 13:13:21 danlei>
 ;;;;;
 ;;;;; dhl-hober is a customization of Edward O'Connor's hober2
 ;;;;;
@@ -480,7 +480,7 @@ speedbar, tex, view, viper, w3m, widget, woman"
 
 
 ;    (highlight ((t (:background "DarkGreen" :foreground "light gray" :underline t))))
-     (highlight ((t (:background "dimgray" :foreground "light gray" :underline nil))))
+     (highlight ((t (:background "dimgray" :foreground "light gray" :underline nil :weight normal))))
 
      (highline-face ((t (:background "gray30" :foreground "white"))))
      (highline-vertical-face ((t (:background "gray30" :foreground "white"))))
