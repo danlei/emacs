@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2012-06-16 04:14:12 dhl>
+;;;;; Time-stamp: <2012-06-16 19:26:27 dhl>
 ;;;;;
 
 
@@ -44,7 +44,7 @@
              (color-theme-dhl-hober))))
   (add-to-list 'load-path "~/.emacs.d/themes/")
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-  (load-theme 'zenburn))
+  (load-theme 'zenburn t))
 
 
 ;;;;
