@@ -826,11 +826,9 @@ prevents using commands with prefix arguments."
 
 (desktop-save-mode 1)
 
-(setq desktop-dirname "~/"
-      history-length 250)
+(setq history-length 250)
 
-(mapc (lambda (global)
-        (add-to-list 'desktop-globals-to-save global))
+(mapc (apply-partially 'add-to-list 'desktop-globals-to-save)
       '(global-mark-ring
         mark-ring
         kmacro-ring
