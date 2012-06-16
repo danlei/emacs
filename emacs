@@ -1794,31 +1794,4 @@ are in kbd format."
 ;;;;
 
 
-(server-start)
-
-
-;;;;
-;;;; customize
-;;;;
-
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(quack-default-program "mzscheme")
- '(quack-fontify-style nil))
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "gray4" :foreground "light gray" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "outline" :family "DejaVu Sans Mono"))))
- '(buffer-menu-buffer ((t (:foreground "indian red"))))
- '(erc-underline-face ((t nil)))
- '(gnus-header-subject ((t (:foreground "lemon chiffon"))))
- '(ido-only-match ((((class color)) (:foreground "turquoise"))))
- '(ido-subdir ((((min-colors 88) (class color)) (:foreground "cornflower blue"))))
- '(message-header-subject ((t (:foreground "lemon chiffon"))))
- '(rst-level-1-face ((default nil) (nil (:background "black" :foreground "gray"))) t)
- '(underline ((t nil))))
+;(server-start)
