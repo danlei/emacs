@@ -1429,6 +1429,12 @@ prevents using commands with prefix arguments."
 
 (require 'misc)
 
+(if (< emacs-major-version 24)
+    (partial-completion-mode 1)
+  (setq completion-styles '(partial-completion initials)
+        completion-pcm-complete-word-inserts-delimiters t
+        completion-cycle-threshold 5))
+
 (add-to-list 'load-path "~/.emacs.d/gnugo/")
 
 (setq inhibit-startup-screen t
@@ -1468,7 +1474,6 @@ prevents using commands with prefix arguments."
 (display-time-mode -1)
 (show-paren-mode 1)
 (transient-mark-mode -1)
-(partial-completion-mode 1)
 (blink-cursor-mode -1)
 (auto-compression-mode 1)
 (auto-image-file-mode 1)
