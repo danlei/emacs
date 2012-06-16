@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2012-06-16 03:11:50 dhl>
+;;;;; Time-stamp: <2012-06-16 04:14:12 dhl>
 ;;;;;
 
 
@@ -1650,9 +1650,7 @@ are in kbd format."
 (add-hook 'gnus-summary-prepared-hook 'gnus-summary-hide-all-threads)
 (add-hook 'gnus-summary-mode-hook (lambda ()
                                     (hl-line-mode 1)
-                                    (setq cursor-type nil)
-                                    (set-face-background 'hl-line "#ee3b3b")
-                                    (set-face-foreground 'hl-line "#191970")))
+                                    (setq cursor-type nil)))
 
 ;;;
 ;;; scoring/threading
