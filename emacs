@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2012-06-16 19:26:27 dhl>
+;;;;; Time-stamp: <2012-06-16 21:25:41 dhl>
 ;;;;;
 
 
@@ -803,12 +803,13 @@ at the beginning of line, if already there."
 
 (add-to-list 'load-path "~/.emacs.d/smex/")
 
-(and (require 'ido "ido" t)
-     (ido-mode t)
-     (require 'smex "smex" t)
-     (smex-initialize)
-     (setq smex-save-file "~/.smex")
-     (smex-auto-update))
+(when (require 'ido "ido" t)
+     (ido-mode 1))
+
+(when (require 'smex "smex" t)
+  (smex-initialize)
+  (setq smex-save-file "~/.smex")
+  (smex-auto-update))
 
 (defun dhl-invoke-smex (x)
   "Invokes smex, if called without a prefix argument,
