@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2012-06-15 23:01:54 dhl>
+;;;;; Time-stamp: <2012-06-16 03:11:50 dhl>
 ;;;;;
 
 
@@ -35,12 +35,17 @@
 ;;;; color-theme
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
+(if (< emacs-major-version 24)
+    (progn
+      (add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
+      (when (require 'color-theme "color-theme" t)
+        (color-theme-initialize)
+        (and (require 'color-theme-dhl-hober "color-theme-dhl-hober" t)
+             (color-theme-dhl-hober))))
+  (add-to-list 'load-path "~/.emacs.d/themes/")
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+  (load-theme 'zenburn))
 
-(when (require 'color-theme "color-theme" t)
-  (color-theme-initialize)
-  (and (require 'color-theme-dhl-hober "color-theme-dhl-hober" t)
-       (color-theme-dhl-hober)))
 
 ;;;;
 ;;;; smart-tab
