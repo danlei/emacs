@@ -1425,7 +1425,7 @@ prevents using commands with prefix arguments."
 (setq inhibit-startup-screen t
       initial-scratch-message nil
       ring-bell-function (lambda ())
-      scroll-conservatively 1
+      scroll-conservatively 101
       require-final-newline nil
       ispell-personal-dictionary "~/.ispell-emacs"
       ispell-dictionary "german"
