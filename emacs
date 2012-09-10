@@ -202,6 +202,7 @@
             lisp-var-doc-command "(doc %s)\n"
             lisp-describe-sym-command "(doc %s)\n"))
 
+(require 'inf-lisp)
 (add-hook 'inferior-lisp-mode-hook (lambda () (paredit-mode 1)))
 
 
