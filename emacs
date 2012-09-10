@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2012-06-17 05:24:43 dhl>
+;;;;; Time-stamp: <2012-09-04 05:03:22 dhl>
 ;;;;;
 
 
@@ -80,7 +80,7 @@
 (add-to-list 'load-path "~/.emacs.d/slime/contrib/")
 
 (when (require 'slime "slime" t)
-  (slime-setup '(slime-fancy slime-asdf slime-references
+  (slime-setup '(slime-fancy slime-asdf slime-references slime-mrepl
                  slime-indentation slime-xref-browser)))
 
 (setq slime-enable-evaluate-in-emacs t
