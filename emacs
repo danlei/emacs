@@ -414,14 +414,21 @@ minibuffer, defaulting to word-at-point."
 ;(load "c:/Program Files/Maxima-5.25.0/share/maxima/5.25.0/emacs/setup-imaxima-imath.el")
 ;(load "C:/Users/dhl/foo/setup-imaxima-imath.el")
 
-;; (load "maxima.el")
-;; (load "maxima-font-lock.el")
 ;; (setq imaxima-use-maxima-mode-flag t)
-;; (load "imaxima.el")
-;; (load "emaxima.el")
 ;; (setq imaxima-fnt-size "Large")
+;; (setq imaxima-maxima-program "C:/Program Files/Maxima-5.25.0/bin/maxima.bat")
 
-(add-to-list 'auto-mode-alist '("\\.max" . maxima-mode))
+(add-to-list 'auto-mode-alist '("\\.max$" . maxima-mode))
+
+
+;;;;
+;;;; octave
+;;;;
+
+(add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
+
+(when (eq system-type 'windows-nt)
+  (setq inferior-octave-program "C:/Octave/3.2.4_gcc-4.4.0/bin/octave.exe"))
 
 
 ;;;;
