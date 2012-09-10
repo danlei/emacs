@@ -562,19 +562,18 @@ minibuffer, defaulting to word-at-point."
 ;;;; prolog
 ;;;;
 
-(autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
-(autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
-(autoload 'mercury-mode "prolog" "Major mode for editing Mercury programs." t)
-
 (require 'prolog "prolog" t)
 
-(setq prolog-system 'swi)
+(setq-default prolog-system 'swi)
 
 (setq prolog-program-name
       (case system-type
         (windows-nt "C:/Program Files/pl/bin/swipl.exe")
         (cygwin "/usr/bin/pl")))
 
+(when (eq system-type 'windows-nt)
+  (add-to-list 'prolog-program-switches
+               '(swi ("-f" "C:/Users/dhl/.emacs.d/swipl-init.pl"))))
 
 ;(add-to-list 'auto-mode-alist '("\.pl$" . prolog-mode))
 
