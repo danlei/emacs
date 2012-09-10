@@ -440,6 +440,8 @@ minibuffer, defaulting to word-at-point."
 (and (require 'inf-haskell "inf-haskell" t)
      (require 'haskell-indent "haskell-indent" t))
 
+(require 'ghc-core "ghc-core" t)
+
 (setq haskell-program-name (concat "ghci "
 ;                                   "-fglasgow-exts "
 ;                                   "-XNoMonomorphismRestriction "
