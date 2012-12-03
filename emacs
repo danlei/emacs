@@ -157,7 +157,9 @@
           scheme-mode-hook
           inferior-scheme-mode-hook
           inferior-qi-mode-hook
-          qi-mode-hook))
+          qi-mode-hook
+          clojure-mode-hook
+          nrepl-mode-hook))
   (setq clojure-enable-paredit t))
 
 (add-hook 'paredit-mode-hook
@@ -181,8 +183,8 @@
                   ("<M-backspace>" paredit-backward-kill-word)
                   ("<C-backspace>" backward-kill-sexp)
                   ("M-k" kill-sexp)
-                  ("M-a" slime-beginning-of-defun)
-                  ("M-e" slime-end-of-defun)
+                  ("M-a" beginning-of-defun)
+                  ("M-e" end-of-defun)
                   ("C-M-a" backward-sentence)
                   ("C-M-e" forward-sentence)
                   ("M-q" indent-pp-sexp)
@@ -195,20 +197,30 @@
 
 (add-to-list 'load-path "~/.emacs.d/clojure-mode/")
 
-(require 'clojure-mode "clojure-mode" t)
+(when (require 'clojure-mode "clojure-mode" t)
+  (add-hook 'clojure-mode-hook
+            (lambda ()
+              (setq inferior-lisp-program (case system-type
+                                            (windows-nt "cmd /c lein repl")
+                                            (t "lein repl")))
+              lisp-function-doc-command "(doc %s)\n"
+              lisp-var-doc-command "(doc %s)\n"
+              lisp-describe-sym-command "(doc %s)\n")))
 
-(add-hook 'clojure-mode-hook
-          (lambda ()
-            (paredit-mode 1)
-            (setq inferior-lisp-program (case system-type
-                                          (windows-nt "cmd /c lein repl")
-                                          (t "lein repl")))
-            lisp-function-doc-command "(doc %s)\n"
-            lisp-var-doc-command "(doc %s)\n"
-            lisp-describe-sym-command "(doc %s)\n"))
 
-(require 'inf-lisp)
-(add-hook 'inferior-lisp-mode-hook (lambda () (paredit-mode 1)))
+(add-to-list 'load-path "~/.emacs.d/nrepl/")
+
+(require 'nrepl)
+
+(add-to-list 'same-window-buffer-names "*nrepl*")
+
+(add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
+(add-hook 'nrepl-mode-hook 'subword-mode)
+
+(defadvice nrepl-default-err-handler
+  (after dhl-switch-to-nrepl-err-buffer last () activate)
+  "Switch to occur window automatically."
+  (other-window 1))
 
 
 ;;;;
