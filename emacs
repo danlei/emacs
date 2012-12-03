@@ -141,6 +141,9 @@
   (setq slime-backend (concat "/cygwin" slime-path slime-backend)))
 
 
+(put 'iter 'common-lisp-indent-function 0)
+
+
 ;;;;
 ;;;; paredit
 ;;;;
