@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2012-09-04 05:03:22 dhl>
+;;;;; Time-stamp: <2012-12-03 16:38:40 dhl>
 ;;;;;
 
 
@@ -104,13 +104,15 @@
                 '(("C-c s" slime-selector)
                   ("C-j" newline-and-indent)
                   ("TAB" slime-indent-and-complete-symbol)
-                  ("C-c C-d c" cltl2-lookup)))))
+                  ("C-c C-d c" cltl2-lookup)
+                  ("C-c d" slime-documentation)))))
 
 (add-hook 'slime-repl-mode-hook
           (lambda ()
             (define-keys slime-repl-mode-map
                 '(("C-c s" slime-selector)
-                  ("C-c C-d c" cltl2-lookup)))))
+                  ("C-c C-d c" cltl2-lookup)
+                  ("C-c d" slime-documentation)))))
 
 ;; correct repl cursor position after compilation
 (add-hook 'slime-compilation-finished-hook
