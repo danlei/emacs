@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2012-12-03 16:38:40 dhl>
+;;;;; Time-stamp: <2012-12-03 18:33:46 dhl>
 ;;;;;
 
 
@@ -219,7 +219,7 @@
 
 (defadvice nrepl-default-err-handler
   (after dhl-switch-to-nrepl-err-buffer last () activate)
-  "Switch to occur window automatically."
+  "Switch to nREPL error window automatically."
   (other-window 1))
 
 
