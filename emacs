@@ -738,7 +738,9 @@ be given as an optional argument."
 
 (require 'ess-site)
 
-(setq inferior-R-program-name "C:/Program Files/R/R-2.13.0/bin/i386/Rterm.exe")
+(when (eq system-type 'windows-nt)
+  (setq inferior-R-program-name
+        "C:/Program Files/R/R-2.13.0/bin/i386/Rterm.exe"))
 
 
 ;;;;
