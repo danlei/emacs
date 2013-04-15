@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2012-12-03 18:33:46 dhl>
+;;;;; Time-stamp: <2013-04-04 17:13:26 dhl>
 ;;;;;
 
 
@@ -95,7 +95,9 @@
         (clisp ,@(list (case system-type
                          ((cygwin gnu/linux) '("clisp" "-E utf-8" "-modern"))
                          (windows-nt '("~/build/clisp/clisp-2.49/clisp"
-                                       "-modern"))))))
+                                       "-modern")))))
+        (ecl ,@(list (case system-type
+                       ((gnu/linux '("ecl")))))))
       slime-default-lisp 'ccl)
 
 (add-hook 'slime-mode-hook
