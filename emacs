@@ -856,8 +856,10 @@ be given as an optional argument."
 ;;;; eshell
 ;;;;
 
-(setq eshell-prefer-lisp-functions t
+(setq eshell-prefer-lisp-functions nil
       eshell-bad-command-tolerance 5)
+
+;(add-to-list 'eshell-visual-commands "zsh")
 
 (add-hook 'eshell-mode-hook
           (lambda ()
