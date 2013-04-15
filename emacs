@@ -1789,7 +1789,8 @@ are in kbd format."
                    ("C-c L" org-store-link)
                    ("C-c R" org-remember)
                    ("C-c C" org-capture)
-                   ("C-x RET i" set-input-method)))
+                   ("C-x RET i" set-input-method)
+                   ("M-#" quick-calc)))
 
 
 ;;;;
