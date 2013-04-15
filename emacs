@@ -161,7 +161,8 @@
           inferior-qi-mode-hook
           qi-mode-hook
           clojure-mode-hook
-          nrepl-mode-hook))
+          nrepl-mode-hook
+          eval-expression-minibuffer-setup-hook))
   (setq clojure-enable-paredit t))
 
 (add-hook 'paredit-mode-hook
