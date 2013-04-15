@@ -1633,8 +1633,6 @@ prevents using commands with prefix arguments."
       line-move-visual nil
       help-window-select t
       enable-recursive-minibuffers t
-      max-specpdl-size 10000
-      max-lisp-eval-depth 5000
       comment-empty-lines nil
       user-full-name "Daniel H. Leidisch"
       user-mail-address "public@leidisch.net")
@@ -1675,11 +1673,6 @@ prevents using commands with prefix arguments."
 (put 'scroll-left 'disabled nil)
 
 ;; (setq time-stamp-format "%:y-%02m-%02d %02H:%02M:%02S")
-
-(setq-default c-basic-offset 2
-              css-indent-offset 2
-              sh-basic-offset 2
-              js-indent-level 2)
 
 (prefer-coding-system       'utf-8)
 (set-default-coding-systems 'utf-8)
