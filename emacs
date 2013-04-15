@@ -1711,6 +1711,13 @@ prevents using commands with prefix arguments."
 ;;                   "/home/danlei/.cabal/bin" ":"
 ;;                   "/home/danlei/bin")))
 
+;; (re-)enable z binding for special modes
+(require 'man)
+(dolist (mode-map (list special-mode-map
+                        Man-mode-map
+                        ibuffer-mode-map))
+  (define-key mode-map (kbd "z") 'kill-this-buffer))
+
 
 ;;;;
 ;;;; misc functions
