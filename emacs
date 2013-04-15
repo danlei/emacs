@@ -923,7 +923,19 @@ at the beginning of line, if already there."
 (add-to-list 'load-path "~/.emacs.d/smex/")
 
 (when (require 'ido "ido" t)
-     (ido-mode 1))
+     (ido-mode 1)
+     (ido-everywhere 1))
+
+(require 'idomenu)
+
+(global-set-key (kbd "M-g i") 'idomenu)
+
+(defadvice idomenu
+  (after idomenu-recenter last () activate)
+  (recenter-top-bottom))
+
+(setq ido-use-filename-at-point 'guess ; 'ffap-guesser
+      ido-use-url-at-point t)
 
 (when (require 'smex "smex" t)
   (smex-initialize)
