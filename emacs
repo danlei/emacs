@@ -1316,10 +1316,12 @@ prevents using commands with prefix arguments."
                               "~/.emacs.d/org-mode/contrib/lisp/")
                         load-path))
 
-(require 'org-install)
+(require 'org)
 (require 'org-latex)
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+
+(plist-put org-format-latex-options :scale 1.2)
 
 (add-hook 'org-mode-hook
           (lambda ()
@@ -1343,14 +1345,17 @@ prevents using commands with prefix arguments."
       org-export-creator-info nil
       org-export-html-style-include-default nil
       org-export-htmlize-output-type 'inline-css
+      org-table-formula-evaluate-inline nil
+      org-M-RET-may-split-line nil
+      org-pretty-entities t
       org-default-notes-file "~/notes/notes.org"
       remember-data-file "~/notes/notes.org")
 
 (setq org-export-html-style "
 <style type=\"text/css\">
     html {
-      font-family: Verdana, Arial, sans-serif;
-      font-size: 12pt;
+      font-family: /*'Droid Sans',*/ Verdana, Arial, sans-serif;
+      font-size: 11pt;
       /*max-width: 360pt;*/
     }
 
@@ -1358,7 +1363,15 @@ prevents using commands with prefix arguments."
       margin: 10%;
     }
 
-    .title  { text-align: center; }
+    h1,h2,h3,h4,h5,h6 {
+      color: #505050;
+    }
+
+    .title  {
+      text-align: center;
+    /*font-family: 'Droid Serif';
+      font-size: 49px;*/
+    }
 
     .todo   { color: red; }
     .done   { color: green; }
@@ -1388,6 +1401,7 @@ prevents using commands with prefix arguments."
       margin-left: auto;
       margin-right: auto;
     }
+    th { background: #eee; padding: 0.3em; }
     td, th { vertical-align: top; }
     th.right { text-align:center; }
     th.left { text-align:center; }
@@ -1396,6 +1410,15 @@ prevents using commands with prefix arguments."
     td.left { text-align:left; }
     td.center { text-align:center; }
     dt { font-weight: bold; }
+
+    li table {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+
+    dt {
+      line-height: 150%;
+    }
 
     div.figure { padding: 0.5em; }
     div.figure p { text-align: center; }
@@ -1409,9 +1432,14 @@ prevents using commands with prefix arguments."
 
     textarea { overflow-x: auto; }
 
+     a {
+       color: #0099cc;
+       text-decoration: none;
+     }
+     a:visited { color: #005c7a; }
+
     .linenr { font-size:smaller; }
     .code-highlighted { background-color:#ffff00; }
-
     .org-info-js_info-navigation { border-style:none; }
     #org-info-js_console-label {
       font-size:10px;
@@ -1428,7 +1456,7 @@ prevents using commands with prefix arguments."
 </style>")
 
 (setq org-export-html-scripts "
-<script src=\"jquery-1.6.4.js\"></script>
+<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>
 <script type=\"text/javascript\">
   function CodeHighlightOn(elem, id) {
     var target = document.getElementById(id);
@@ -1457,19 +1485,26 @@ prevents using commands with prefix arguments."
     jQuery('.tog').next().hide();
     jQuery('.tog').toggle(
       function() {
-        jQuery(this).html(function(idx, oldHtml) {
+        jQuery(this).html(function(idx, oldHtml) {  /* TODO */
           return oldHtml.replace(new RegExp(togSuffix+\"$\"), \"\");
         });
       },
       function() {
         jQuery(this).append(togSuffix);
       }
-    );
+    ); /* END TODO */
     jQuery('.tog').click(function(e) {
       jQuery(this).next().toggle();
     });
   });
 </script>")
+
+;; (setq org-export-html-style-extra
+;;       "<link href=\"http://fonts.googleapis.com/css?family=Droid+Serif\"
+;;              rel=\"stylesheet\" type=\"text/css\">
+;;        <link href=\"http://fonts.googleapis.com/css?family=Droid+Sans\"
+;;              rel=\"stylesheet\" type=\"text/css\">")
+
 
 (add-to-list 'org-export-latex-classes
   `("article-de"
