@@ -348,24 +348,29 @@ minibuffer, defaulting to word-at-point."
 
 (require 'python)
 
-(setq python-process-kill-without-query t
-      python-default-version 3)
+;; (setq python-process-kill-without-query t
+;;       python-default-version 3)
 
 (add-hook 'python-mode-hook
           (lambda ()
-            (local-set-key (kbd "<C-tab>") 'symbol-complete)
-            (setq parens-require-spaces nil)
+;           (local-set-key (kbd "<C-tab>") 'symbol-complete)
+;           (setq parens-require-spaces nil)
             (eldoc-mode 1)))
 
-(add-hook 'inferior-python-mode-hook
-          (lambda ()
-            (setq parens-require-spaces nil)))
+;; (add-hook 'inferior-python-mode-hook
+;;           (lambda ()
+;;             (setq parens-require-spaces nil)))
 
-(when (eq system-type 'windows-nt)
-  (setq-default python-command "C:/Python32/python.exe"
-                python-python-command "C:/Python32/python.exe"
-                python-shell-interpreter "C:/Python32/python.exe"
-                python-shell-interpreter-args "-ui"))
+(setq dhl-python-command
+      (if (eq system-type 'windows-nt)
+          "C:/Python32/python.exe"
+        "python3"))
+
+(setq-default python-shell-interpreter dhl-python-command
+              python-shell-interpreter-args "-ui"
+;             python-command dhl-python-command
+;             python-python-command dhl-python-command
+              )
 
 
 ;;;;
