@@ -1811,7 +1811,7 @@ are in kbd format."
 
 (setq gnus-group-line-format "%2{%M%S%p%} %0{%5y%} %P%1{%G%}\n"
       gnus-topic-line-format "%i%3{[ %n -- %A ]%}%v\n"
-      gnus-summary-line-format "%[%U%R%] %-40,40s %10&user-date; %B %a\n")
+      gnus-summary-line-format "%[%U%R%] %-55,55s %10&user-date; %B %a\n")
 
 (setq gnus-sum-thread-tree-single-indent   "◎ "
       gnus-sum-thread-tree-false-root      "◯╮"
