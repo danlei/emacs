@@ -701,12 +701,15 @@ minibuffer, defaulting to word-at-point."
 (setq compilation-window-height 10)
 (setq compilation-read-command nil)
 
+(setq-default c-basic-offset 2)
+
 (add-hook 'c-mode-hook
           (lambda ()
             (local-set-key (kbd "C-c c") 'compile)
             (local-set-key (kbd "M-p") 'previous-error)
             (local-set-key (kbd "M-n") 'next-error)
-            (subword-mode 1)))
+            (subword-mode 1)
+            (c-toggle-electric-state -1)))
 
 (defun dhl-gcc-compile-command (&optional extra-arguments)
   "Returns a gcc command line for use with compile-command.
