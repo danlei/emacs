@@ -771,8 +771,19 @@ be given as an optional argument."
 
 
 ;;;;
+;;;; html/css
+;;;;
+
+(setq-default css-indent-offset 2)
+
+
+;;;;
 ;;;; elisp
 ;;;;
+
+(setq max-specpdl-size 10000
+      max-lisp-eval-depth 5000
+      debug-on-error t)
 
 (defun dhl-lisp-indent-and-complete (n)
   (interactive "p")
