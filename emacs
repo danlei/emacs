@@ -823,6 +823,17 @@ be given as an optional argument."
 
 
 ;;;;
+;;;; shell-script-mode
+;;;;
+
+(setq-default sh-basic-offset 2)
+
+(add-hook 'sh-mode-hook
+          (lambda ()
+            (sh-electric-here-document-mode -1)))
+
+
+;;;;
 ;;;; ess
 ;;;;
 
