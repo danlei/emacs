@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-04-04 17:13:26 dhl>
+;;;;; Time-stamp: <2013-04-15 22:45:20 dhl>
 ;;;;;
 
 
@@ -617,6 +617,79 @@ minibuffer, defaulting to word-at-point."
             (lambda ()
               (javarun-mode 1)
               (subword-mode 1))))
+
+
+;;;;
+;;;; javascript
+;;;;
+
+(setq-default js-indent-level 2)
+
+(when (require 'js2-mode "js2-mode" t)
+  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)))
+
+;(require 'slime-js "slime-js" t)
+
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (slime-js-minor-mode 1)
+	    (define-keys slime-js-minor-mode-map
+	      `(("M-n" next-error)
+		("M-p" previous-error)))))
+
+(setq-default js2-basic-offset 2)
+
+;(setq js2-bounce-indent-p t)
+
+
+;;;;
+;;;; coffee
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/coffee-mode/")
+
+(require 'coffee-mode)
+
+(add-to-list 'auto-mode-alist '("\.coffee$" . coffee-mode))
+
+(setq coffee-command "coffee")
+
+;; alternatively, set NODE_NO_READLINE=1
+(add-to-list
+ 'comint-preoutput-filter-functions
+ (lambda (output)
+   (replace-regexp-in-string "\\[[0-9]+[GKJ]" "" output)))
+
+(defadvice coffee-repl
+  (after coffee-repl-purge-echoes last () activate)
+  (setq comint-process-echoes t))
+
+(defun coffee-send-region ()
+  (interactive)
+  (let ((coffee-process (get-process "CoffeeREPL")))
+    (comint-send-string coffee-process "\n")
+    (sleep-for 0 5)
+    (comint-send-string coffee-process
+                        (concat (buffer-substring-no-properties (point) (mark))
+                                "\n"))))
+
+(defun coffee-send-buffer
+  (interactive)
+  (coffee-send-region (point-min) (point-max)))
+
+(add-hook 'coffee-mode-hook
+          (lambda ()
+            (define-keys coffee-mode-map
+              '((("C-c C-l" "C-c l") coffee-send-buffer)
+                (("C-c C-r" "C-c r") coffee-send-region)
+                (("C-c C-k" "C-c k") coffee-compile-buffer)))))
+
+
+(defun coffee-send-region* (start end)
+  "Send the current region to the inferior Coffee process."
+  (interactive "r")
+  (send-region "*CoffeeREPL*" start end)
+  (send-string "*CoffeeREPL*" "\n"))
 
 
 ;;;;
