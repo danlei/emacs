@@ -1641,7 +1641,14 @@ prevents using commands with prefix arguments."
               indent-tabs-mode nil
               tab-width 2)
 
+(set-cursor-color "#ff7700")
+
 ;(setq standard-indent 2)
+
+;; (setq default-frame-alist
+;;       (append default-frame-alist '((width . 90) (height . 31))))
+
+(set-frame-size (selected-frame) 90 30)
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
