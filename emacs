@@ -1162,6 +1162,8 @@ prevents using commands with prefix arguments."
 ;;;; ibuffer
 ;;;;
 
+(require 'ibuffer)
+
 (setq ibuffer-show-empty-filter-groups nil
       ibuffer-expert t)
 
