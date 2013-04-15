@@ -1732,8 +1732,11 @@ prevents using commands with prefix arguments."
 lists. The functions are bound to the keys in the given mode-map.
 Keys are in kbd format."
   (mapc (lambda (keybinding)
-          (destructuring-bind (key function) keybinding
-            (define-key mode-map (read-kbd-macro key) function)))
+          (destructuring-bind (keys function) keybinding
+            (funcall (if (consp keys) #'mapcar #'funcall)
+                     (lambda (key)
+                       (define-key mode-map (read-kbd-macro key) function))
+                     keys)))
         keybindings))
 
 (defun global-set-keys (keybindings)
