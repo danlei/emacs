@@ -297,9 +297,6 @@
 ;(setq j-dictionary-url "http://www.jsoftware.com/help/dictionary/")
 (setq j-dictionary-url "file:///C:/Dokumente und Einstellungen/danlei/j602/help/dictionary/")
 
-(when (require 'which-func "which-func" t)
-  (which-func-mode 1))
-
 
 ;;;;
 ;;;; ruby
