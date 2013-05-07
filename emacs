@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-04-15 22:45:20 dhl>
+;;;;; Time-stamp: <2013-05-07 04:57:55 dhl>
 ;;;;;
 
 
@@ -15,20 +15,23 @@
 
 (add-to-list 'load-path "~/.emacs.d/")
 
-(when (eq system-type 'windows-nt)
-  (setenv "CYGWIN" (concat (getenv "CYGWIN") " nodosfilewarning"))
-  (mapcar (apply-partially 'add-to-list 'exec-path)
-          '("C:/Perl/bin"
-            "C:/MinGW/bin"
-            (expand-file-name "~/programme/latex/miktex/bin")
-            "~/programme/darcs-2.5.2-win1"
-            "C:/cygwin/bin"))
-  (setenv "PATH" (concat "C:/Perl/bin/" ";"
-                         "C:/MinGW/bin" ";"
-                         (expand-file-name "~/programme/latex/miktex/bin") ";"
-                         "C:/cygwin/bin" ";"
-                         (expand-file-name "~/programme/darcs-2.5.2-win1") ";"
-                         (getenv "PATH"))))
+(case system-type
+  (windows-nt
+   (setenv "CYGWIN" (concat (getenv "CYGWIN") " nodosfilewarning"))
+   (mapcar (apply-partially 'add-to-list 'exec-path)
+           '("C:/Perl/bin"
+             "C:/MinGW/bin"
+             (expand-file-name "~/programme/latex/miktex/bin")
+             "~/programme/darcs-2.5.2-win1"
+             "C:/cygwin/bin"))
+   (setenv "PATH" (concat "C:/Perl/bin/" ";"
+                          "C:/MinGW/bin" ";"
+                          (expand-file-name "~/programme/latex/miktex/bin") ";"
+                          "C:/cygwin/bin" ";"
+                          (expand-file-name "~/programme/darcs-2.5.2-win1") ";"
+                          (getenv "PATH"))))
+  (gnu/linux
+   (setenv "LC_MESSAGES" "C")))
 
 
 ;;;;
