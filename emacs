@@ -1732,6 +1732,8 @@ prevents using commands with prefix arguments."
 (setq sql-sqlite-program "sqlite3"
       sql-sqlite-options '("-interactive"))
 
+(setq diff-switches "-u")
+
 ;; (when (eq system-type 'gnu/linux)
 ;;   (setenv "PATH"
 ;;           (concat (getenv "PATH") ":"
