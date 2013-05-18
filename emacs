@@ -199,6 +199,7 @@
         '(slime-mode-hook
           slime-repl-mode-hook
           emacs-lisp-mode-hook
+          lisp-mode-hook
           ielm-mode-hook
           scheme-mode-hook
           inferior-scheme-mode-hook
