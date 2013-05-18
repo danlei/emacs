@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-05-07 04:57:55 dhl>
+;;;;; Time-stamp: <2013-05-18 13:38:07 dhl>
 ;;;;;
 
 
@@ -76,20 +76,26 @@
 
 
 ;;;;
-;;;; slime
+;;;; common lisp
 ;;;;
+
+(put 'iter 'common-lisp-indent-function 0)
+
+
+;;;
+;;; slime
+;;;
 
 (add-to-list 'load-path "~/.emacs.d/slime/")
 (add-to-list 'load-path "~/.emacs.d/slime/contrib/")
 
 (when (require 'slime "slime" t)
-  (slime-setup '(slime-fancy slime-asdf slime-references slime-mrepl
-                 slime-indentation slime-xref-browser)))
+  (slime-setup '(slime-fancy slime-asdf slime-indentation
+                 slime-xref-browser slime-js)))
 
 (setq slime-enable-evaluate-in-emacs t
       slime-net-coding-system 'utf-8-unix
-;;    lisp-indent-function 'cl-indent:function
-      )
+      slime-protocol-version 'ignore)
 
 (setq slime-lisp-implementations
       `((ccl ,@(list (case system-type
@@ -100,7 +106,8 @@
                          (windows-nt '("~/build/clisp/clisp-2.49/clisp"
                                        "-modern")))))
         (ecl ,@(list (case system-type
-                       ((gnu/linux '("ecl")))))))
+                       ((gnu/linux '("ecl"))))))
+        (sbcl ("sbcl")))
       slime-default-lisp 'ccl)
 
 (add-hook 'slime-mode-hook
@@ -146,7 +153,41 @@
   (setq slime-backend (concat "/cygwin" slime-path slime-backend)))
 
 
-(put 'iter 'common-lisp-indent-function 0)
+;;;
+;;; hyperspec/cltl
+;;;
+
+(setq common-lisp-hyperspec-root (expand-file-name "~/doc/HyperSpec/")
+      cltl2-root-url (expand-file-name "~/doc/cltl2/"))
+
+(require 'cltl2 "cltl2" t)
+
+(setq Info-additional-directory-list
+      (list (expand-file-name "~/.emacs.d/hyperspec/info")))
+
+(require 'info-look)
+
+(info-lookup-add-help
+ :mode 'lisp-mode
+ :regexp "[^][()'\" \t\n]+"
+ :ignore-case t
+ :doc-spec '(("(ansicl)Symbol Index" nil nil nil)))
+
+(defun hyperspec-index-search (topic)
+  "Look up TOPIC in the indices of the HyperSpec."
+  (interactive "sSubject to look up: ")
+  (info "ansicl")
+  (Info-index topic))
+
+(defun dhl-random-hyperspec ()
+  (interactive)
+  (let* ((random-hyperspec-symbol
+          (let ((syms '()))
+            (do-symbols (sym common-lisp-hyperspec-symbols) (push sym syms))
+            (nth (random (length syms)) syms)))
+         (random-page (let ((pages (symbol-value random-hyperspec-symbol)))
+                        (nth (random (length pages)) pages))))
+    (browse-url (concat common-lisp-hyperspec-root "Body/" random-page))))
 
 
 ;;;;
@@ -1026,30 +1067,12 @@ prevents using commands with prefix arguments."
 ;;;; browsing
 ;;;;
 
-
 (setq browse-url-generic-program
       (case system-type
         (windows-nt "~/AppData/Local/Google/Chrome/Application/Chrome.exe")
-        (gnu/linux "google-chrome"))
-      common-lisp-hyperspec-root
-      (expand-file-name "~/doc/HyperSpec/")
-      cltl2-root-url
-      (expand-file-name "~/doc/cltl2/"))
+        (gnu/linux "google-chrome")))
 
 (setq browse-url-browser-function 'browse-url-generic)
-
-(require 'cltl2 "cltl2" t)
-
-(defun dhl-random-hyperspec ()
-  (interactive)
-  (let* ((random-hyperspec-symbol
-          (let ((syms '()))
-            (do-symbols (sym common-lisp-hyperspec-symbols) (push sym syms))
-            (nth (random (length syms)) syms)))
-         (random-page (let ((pages (symbol-value random-hyperspec-symbol)))
-                        (nth (random (length pages)) pages))))
-    (browse-url (concat common-lisp-hyperspec-root "Body/" random-page))))
-
 
 (when (member system-type '(cygwin gnu/linux))
   (add-to-list 'load-path "/usr/share/emacs/site-lisp/w3m/"))
