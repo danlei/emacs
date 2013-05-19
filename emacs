@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-05-19 09:09:37 dhl>
+;;;;; Time-stamp: <2013-05-19 13:29:40 dhl>
 ;;;;;
 
 
@@ -18,12 +18,12 @@
 (case system-type
   (windows-nt
    (setenv "CYGWIN" (concat (getenv "CYGWIN") " nodosfilewarning"))
-   (mapcar (apply-partially 'add-to-list 'exec-path)
-           '("C:/Perl/bin"
-             "C:/MinGW/bin"
-             (expand-file-name "~/programme/latex/miktex/bin")
-             "~/programme/darcs-2.5.2-win1"
-             "C:/cygwin/bin"))
+   (mapc (apply-partially 'add-to-list 'exec-path)
+         '("C:/Perl/bin"
+           "C:/MinGW/bin"
+           (expand-file-name "~/programme/latex/miktex/bin")
+           "~/programme/darcs-2.5.2-win1"
+           "C:/cygwin/bin"))
    (setenv "PATH" (concat "C:/Perl/bin/" ";"
                           "C:/MinGW/bin" ";"
                           (expand-file-name "~/programme/latex/miktex/bin") ";"
