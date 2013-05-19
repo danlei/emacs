@@ -727,8 +727,8 @@ minibuffer, defaulting to word-at-point."
 
 ;(require 'cc-mode)
 
-(setq compilation-window-height 10)
-(setq compilation-read-command nil)
+(setq compilation-window-height 10
+      compilation-read-command nil)
 
 (setq-default c-basic-offset 2)
 
