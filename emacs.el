@@ -665,9 +665,9 @@ minibuffer, defaulting to word-at-point."
 (add-hook 'js2-mode-hook
           (lambda ()
             (slime-js-minor-mode 1)
-	    (define-keys slime-js-minor-mode-map
-	      `(("M-n" next-error)
-		("M-p" previous-error)))))
+            (define-keys slime-js-minor-mode-map
+              `(("M-n" next-error)
+                ("M-p" previous-error)))))
 
 (setq-default js2-basic-offset 2)
 
