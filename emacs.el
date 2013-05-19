@@ -1998,11 +1998,6 @@ are in kbd format."
       mm-fill-flowed t)
 
 
-
-(gnus-compile)
-
-
-
 ;;;;
 ;;;; epilogue
 ;;;;
