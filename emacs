@@ -1667,6 +1667,7 @@ prevents using commands with prefix arguments."
       help-window-select t
       enable-recursive-minibuffers t
       comment-empty-lines nil
+      set-mark-command-repeat-pop t
       user-full-name "Daniel H. Leidisch"
       user-mail-address "public@leidisch.net")
 
