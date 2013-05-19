@@ -69,8 +69,8 @@
 ;;; slime
 ;;;
 
-(add-to-list 'load-path "~/.emacs.d/slime/")
-(add-to-list 'load-path "~/.emacs.d/slime/contrib/")
+(mapc (apply-partially 'add-to-list 'load-path)
+      '("~/.emacs.d/slime/" "~/.emacs.d/slime/contrib/"))
 
 (when (require 'slime "slime" t)
   (slime-setup '(slime-fancy slime-asdf slime-indentation
@@ -1339,12 +1339,12 @@ prevents using commands with prefix arguments."
 ;;;; org-mode
 ;;;;
 
-(setq load-path (append (list "~/.emacs.d/org-mode/lisp/"
-                              "~/.emacs.d/org-mode/contrib/lisp/")
-                        load-path))
+(mapc (apply-partially 'add-to-list 'load-path)
+      '("~/.emacs.d/org-mode/lisp/"
+        "~/.emacs.d/org-mode/contrib/lisp/"))
 
-(require 'org)
-(require 'org-latex)
+(require 'org "org" t)
+(require 'org-latex "org-latex" t)
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
