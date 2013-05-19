@@ -50,22 +50,6 @@
 
 
 ;;;;
-;;;; smart-tab
-;;;;
-
-;; (add-to-list 'load-path "~/.emacs.d/smart-tab/")
-
-;; (when (require 'smart-tab "smart-tab" t)
-;;   (global-smart-tab-mode 1))
-
-;; (setq smart-tab-using-hippie-expand t)
-
-;; (setq smart-tab-completion-functions-alist
-;;       '((emacs-lisp-mode . lisp-complete-symbol)
-;;         (text-mode . dabbrev-completion)))
-
-
-;;;;
 ;;;; packages
 ;;;;
 
