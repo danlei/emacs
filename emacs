@@ -1047,20 +1047,17 @@ prevents using commands with prefix arguments."
 ;;;; git
 ;;;;
 
-;; (require 'vc-git)
-;; (when (featurep 'vc-git) (add-to-list 'vc-handled-backends 'git))
-;; (require 'git)
-;; (autoload 'git-blame-mode "git-blame"
-;;    "Minor mode for incremental blame for Git." t)
+(mapc (apply-partially 'add-to-list 'load-path)
+      '("~/.emacs.d/magit/"
+        "~/.emacs.d/magit/contrib"))
 
-(add-to-list 'load-path "~/.emacs.d/egg/")
+(when (require 'magit "magit" t)
+  (add-to-list 'Info-additional-directory-list
+               (expand-file-name "~/.emacs.d/magit/")))
 
-(require 'egg "egg" t)
-(require 'gist "gist" t)
+(require 'rebase-mode "rebase-mode" t)
 
-(when (eq system-type 'windows-nt)
-  (setq egg-git-command "C:/Program Files/Git/bin/git.exe"
-        egg-patch-command "C:/Program Files/Git/bin/patch.exe"))
+
 
 
 ;;;;
