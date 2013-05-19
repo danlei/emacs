@@ -1026,8 +1026,7 @@ prevents using commands with prefix arguments."
 ;;;;
 
 (mapc (apply-partially 'add-to-list 'load-path)
-      '("~/.emacs.d/magit/"
-        "~/.emacs.d/magit/contrib"))
+      '("~/.emacs.d/magit/contrib" "~/.emacs.d/magit/"))
 
 (when (require 'magit "magit" t)
   (add-to-list 'Info-additional-directory-list
@@ -1822,7 +1821,8 @@ are in kbd format."
                    ("C-c R" org-remember)
                    ("C-c C" org-capture)
                    ("C-x RET i" set-input-method)
-                   ("M-#" quick-calc)))
+                   ("M-#" quick-calc)
+                   ("C-c s" magit-status)))
 
 
 ;;;;
