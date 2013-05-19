@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-05-18 13:38:07 dhl>
+;;;;; Time-stamp: <2013-05-19 09:08:46 dhl>
 ;;;;;
 
 
@@ -193,6 +193,9 @@
 ;;;;
 ;;;; paredit
 ;;;;
+
+(modify-syntax-entry ?[ "(]" lisp-mode-syntax-table)
+(modify-syntax-entry ?] ")[" lisp-mode-syntax-table)
 
 (when (require 'paredit "paredit" t)
   (mapc (lambda (hook) (add-hook hook (lambda () (paredit-mode 1))))
