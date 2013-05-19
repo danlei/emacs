@@ -312,6 +312,7 @@
 (add-to-list 'load-path "~/.emacs.d/newlisp-mode/")
 
 (add-to-list 'auto-mode-alist '("\\.lsp\\'" . newlisp-mode))
+
 (autoload 'newlisp-mode "newlisp"
   "Newlisp editing mode." t)
 
