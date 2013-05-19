@@ -1058,6 +1058,20 @@ prevents using commands with prefix arguments."
 (require 'rebase-mode "rebase-mode" t)
 
 
+;;;
+;;; gists
+;;;
+
+(if (< emacs-major-version 24)
+    (add-to-list 'load-path "~/.emacs.d/tabulated-list.el/"))
+
+(mapc (apply-partially 'add-to-list 'load-path)
+      '("~/.emacs.d/logito/"
+        "~/.emacs.d/pcache/"
+        "~/.emacs.d/gh.el/"
+        "~/.emacs.d/gist.el/"))
+
+(require 'gist "gist" t)
 
 
 ;;;;
