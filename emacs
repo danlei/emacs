@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-05-19 09:08:46 dhl>
+;;;;; Time-stamp: <2013-05-19 09:09:37 dhl>
 ;;;;;
 
 
@@ -197,6 +197,8 @@
 (modify-syntax-entry ?[ "(]" lisp-mode-syntax-table)
 (modify-syntax-entry ?] ")[" lisp-mode-syntax-table)
 
+(require 'eldoc)
+
 (when (require 'paredit "paredit" t)
   (mapc (lambda (hook) (add-hook hook (lambda () (paredit-mode 1))))
         '(slime-mode-hook
@@ -211,7 +213,8 @@
           clojure-mode-hook
           nrepl-mode-hook
           eval-expression-minibuffer-setup-hook))
-  (setq clojure-enable-paredit t))
+  (setq clojure-enable-paredit t)
+  (eldoc-add-command 'paredit-backward-delete 'paredit-close-round))
 
 (add-hook 'paredit-mode-hook
           (lambda ()
