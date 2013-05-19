@@ -247,12 +247,10 @@
 
 (add-to-list 'load-path "~/.emacs.d/nrepl/")
 
-(require 'nrepl)
-
-(add-to-list 'same-window-buffer-names "*nrepl*")
-
-(add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
-(add-hook 'nrepl-mode-hook 'subword-mode)
+(when (require 'nrepl "nrepl" t)
+  (add-to-list 'same-window-buffer-names "*nrepl*")
+  (add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
+  (add-hook 'nrepl-mode-hook 'subword-mode))
 
 (defadvice nrepl-default-err-handler
   (after dhl-switch-to-nrepl-err-buffer last () activate)
@@ -682,17 +680,14 @@ minibuffer, defaulting to word-at-point."
 
 (add-to-list 'load-path "~/.emacs.d/coffee-mode/")
 
-(require 'coffee-mode)
+(when (require 'coffee-mode "coffee-mode" t)
+  (add-to-list 'auto-mode-alist '("\.coffee$" . coffee-mode))
+  (setq coffee-command "coffee")
+  (add-to-list ; alternatively, set NODE_NO_READLINE=1
+   'comint-preoutput-filter-functions
+   (lambda (output)
+     (replace-regexp-in-string "\\[[0-9]+[GKJ]" "" output))))
 
-(add-to-list 'auto-mode-alist '("\.coffee$" . coffee-mode))
-
-(setq coffee-command "coffee")
-
-;; alternatively, set NODE_NO_READLINE=1
-(add-to-list
- 'comint-preoutput-filter-functions
- (lambda (output)
-   (replace-regexp-in-string "\\[[0-9]+[GKJ]" "" output)))
 
 (defadvice coffee-repl
   (after coffee-repl-purge-echoes last () activate)
@@ -873,7 +868,7 @@ be given as an optional argument."
 
 (add-to-list 'load-path "~/.emacs.d/ess-5.13/lisp/")
 
-(require 'ess-site)
+(require 'ess-site "ess-site" t)
 
 (when (eq system-type 'windows-nt)
   (setq inferior-R-program-name
@@ -1600,7 +1595,7 @@ prevents using commands with prefix arguments."
 ;;;; flashcard
 ;;;;
 
-(require 'flashcard)
+(require 'flashcard "flashcard" t)
 
 (add-to-list 'auto-mode-alist '("\\.deck\\'" . flashcard-mode))
 
@@ -1621,7 +1616,7 @@ prevents using commands with prefix arguments."
 ;;;; voctest
 ;;;;
 
-(require 'voctest)
+(require 'voctest "voctest" t)
 
 (setq voctest-test-direction '(1 . 0))
 
