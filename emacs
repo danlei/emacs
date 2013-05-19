@@ -162,8 +162,8 @@
 
 (require 'cltl2 "cltl2" t)
 
-(setq Info-additional-directory-list
-      (list (expand-file-name "~/.emacs.d/hyperspec/info")))
+(add-to-list 'Info-additional-directory-list
+             (expand-file-name "~/.emacs.d/hyperspec/"))
 
 (require 'info-look)
 
