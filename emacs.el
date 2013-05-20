@@ -405,6 +405,11 @@ minibuffer, defaulting to word-at-point."
 ;             python-python-command dhl-python-command
               )
 
+(defadvice python-describe-symbol
+  (after dhl-python-describe-symbol-advice last () activate)
+  "Switch to help buffer after invocation."
+  (other-window 1))
+
 
 ;;;;
 ;;;; perl
@@ -1795,11 +1800,6 @@ are in kbd format."
   (after dhl-window-splitting-advice last () activate)
   "Open other-buffer in vertical split window."
   (set-window-buffer (next-window) (other-buffer)))
-
-(defadvice python-describe-symbol
-    (after dhl-python-describe-symbol-advice last () activate)
-  "Switch to help buffer after invocation."
-  (other-window 1))
 
 
 ;;;;
