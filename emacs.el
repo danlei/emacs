@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-05-20 05:46:41 dhl>
+;;;;; Time-stamp: <2013-05-20 07:55:35 dhl>
 ;;;;;
 
 
@@ -1791,8 +1791,8 @@ are in kbd format."
 ;;;; misc advice
 ;;;;
 
-(defadvice split-window-vertically
-    (after dhl-window-splitting-advice last () activate)
+(defadvice split-window
+  (after dhl-window-splitting-advice last () activate)
   "Open other-buffer in vertical split window."
   (set-window-buffer (next-window) (other-buffer)))
 
