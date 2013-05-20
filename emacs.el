@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-05-19 17:05:57 dhl>
+;;;;; Time-stamp: <2013-05-20 05:46:41 dhl>
 ;;;;;
 
 
@@ -1011,14 +1011,14 @@ prevents using commands with prefix arguments."
       '(spaces tabs newline space-mark tab-mark newline-mark))
 
 (setq whitespace-display-mappings
-      '((space-mark 32 [183] [46])
-        (space-mark 160 [164] [95])
-        (space-mark 2208 [2212] [95])
-        (space-mark 2336 [2340] [95])
-        (space-mark 3616 [3620] [95])
-        (space-mark 3872 [3876] [95])
-        (newline-mark 10 [182 10])
-        (tab-mark 9 [8677 9] [92 9])))
+      '((space-mark 32 [183] [46])             ; space, ·, .
+        (space-mark 160 [9085] [95])           ; non-breaking space, ⍽, _
+        (space-mark 8201 [9251] [95])          ; thin space, ␣, _
+        (space-mark 8202 [9251] [95])          ; hair space, ␣, _
+        (space-mark 8203 [9251] [95])          ; zero width space​, ␣, _
+        (newline-mark 10 [182 10] [92 110 10]) ; line feed, ¶, \n
+        (newline-mark 13 [8629] [92 114])      ; carriage return, ↵, \r
+        (tab-mark 9 [8677 9] [92 116 9])))     ; character tabulation, ⇥, \t
 
 
 ;;;;
