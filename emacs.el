@@ -36,6 +36,8 @@
   (gnu/linux
    (setenv "LC_MESSAGES" "C")))
 
+(setenv "EDITOR" "emacsclient")
+
 
 ;;;;
 ;;;; packages
