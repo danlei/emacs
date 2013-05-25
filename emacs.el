@@ -470,21 +470,15 @@ minibuffer, defaulting to word-at-point."
 ;;;; maxima
 ;;;;
 
-(setq maxima-command "C:/Program Files/Maxima-5.25.0/bin/maxima.bat")
+(when (eq system-type 'windows-nt)
+ (setq maxima-command "C:/Program Files/Maxima-5.25.0/bin/maxima.bat"))
 
-(add-to-list 'load-path "C:/Program Files/Maxima-5.25.0/share/maxima/5.25.0/emacs/")
+(add-to-list 'load-path "~/.emacs.d/maxima/")
 
-(require 'maxima "maxima" t)
+(when (require 'maxima "maxima" t)
+  (add-to-list 'auto-mode-alist '("\\.max$" . maxima-mode)))
+
 (require 'maxima-font-lock "maxima-font-look" t)
-
-;(load "c:/Program Files/Maxima-5.25.0/share/maxima/5.25.0/emacs/setup-imaxima-imath.el")
-;(load "C:/Users/dhl/foo/setup-imaxima-imath.el")
-
-;; (setq imaxima-use-maxima-mode-flag t)
-;; (setq imaxima-fnt-size "Large")
-;; (setq imaxima-maxima-program "C:/Program Files/Maxima-5.25.0/bin/maxima.bat")
-
-(add-to-list 'auto-mode-alist '("\\.max$" . maxima-mode))
 
 
 ;;;;
