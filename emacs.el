@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-05-25 13:12:53 dhl>
+;;;;; Time-stamp: <2013-05-25 13:16:44 dhl>
 ;;;;;
 
 
@@ -421,10 +421,18 @@ minibuffer, defaulting to word-at-point."
 ;;;; perl
 ;;;;
 
-(add-to-list 'auto-mode-alist '("\.pl$" . sepia-mode))
-(add-to-list 'interpreter-mode-alist '("perl" . sepia-mode))
-(add-to-list 'interpreter-mode-alist '("perl5" . sepia-mode))
-(add-to-list 'interpreter-mode-alist '("miniperl" . sepia-mode))
+(add-to-list 'load-path "~/.emacs.d/Sepia-0.992-S3oGPo/")
+
+(when (require 'sepia nil t)
+  (add-to-list 'auto-mode-alist '("\.pl$" . sepia-mode))
+  (add-to-list 'interpreter-mode-alist '("perl" . sepia-mode))
+  (add-to-list 'interpreter-mode-alist '("perl5" . sepia-mode))
+  (add-to-list 'interpreter-mode-alist '("miniperl" . sepia-mode))
+
+  (setq sepia-perl5lib
+        (list (expand-file-name "~/.emacs.d/Sepia-0.992-S3oGPo/lib")))
+; (defalias 'perl-mode 'sepia-mode)
+  (setq sepia-program-name "c:/Perl/bin/perl"))
 
 (setq cperl-indent-level 4
       cperl-indent-parens-as-block nil)
@@ -439,12 +447,6 @@ minibuffer, defaulting to word-at-point."
 ;;           (lambda ()
 ;;             (set (make-local-variable 'eldoc-documentation-function)
 ;;                  'cperl-eldoc-documentation-function)))
-
-(add-to-list 'load-path "~/.emacs.d/Sepia-0.992-S3oGPo/")
-(setq sepia-perl5lib (list (expand-file-name "~/.emacs.d/Sepia-0.992-S3oGPo/lib")))
-;(defalias 'perl-mode 'sepia-mode)
-(require 'sepia nil t)
-(setq sepia-program-name "c:/Perl/bin/perl")
 
 
 ;;;;
