@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-05-22 18:55:08 dhl>
+;;;;; Time-stamp: <2013-05-25 12:23:51 dhl>
 ;;;;;
 
 
@@ -38,6 +38,18 @@
 
 
 ;;;;
+;;;; packages
+;;;;
+
+(when (require 'package "package" t)
+  (mapc (apply-partially 'add-to-list 'package-archives)
+        '(("marmalade" . "http://marmalade-repo.org/packages/")
+          ("melpa" . "http://melpa.milkbox.net/packages/")))
+  (package-initialize)
+  (setq package-enable-at-startup nil))
+
+
+;;;;
 ;;;; color-theme
 ;;;;
 
@@ -50,15 +62,6 @@
              (color-theme-dhl-hober))))
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
   (load-theme 'zenburn t))
-
-
-;;;;
-;;;; packages
-;;;;
-
-(when (require 'package)
-  (add-to-list 'package-archives
-               '("marmalade" . "http://marmalade-repo.org/packages/")))
 
 
 ;;;;
