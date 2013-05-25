@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-05-25 13:16:44 dhl>
+;;;;; Time-stamp: <2013-05-25 15:30:39 dhl>
 ;;;;;
 
 
@@ -747,14 +747,20 @@ minibuffer, defaulting to word-at-point."
             (subword-mode 1)
             (c-toggle-electric-state -1)))
 
-(defun dhl-gcc-compile-command (&optional extra-arguments)
-  "Returns a gcc command line for use with compile-command.
-Intended for use with little test files. Extra options may
-be given as an optional argument."
-  (concat "gcc -std=c99 -pedantic -Wall -o "
-          (file-name-sans-extension (file-name-nondirectory buffer-file-name)) " "
-          (file-name-nondirectory buffer-file-name) " "
-          extra-arguments))
+(defun dhl-gcc-compile-command (&optional options)
+  "Return a gcc command line invocation string with OPTIONS.
+
+Intended to use with the variable `compile-command' on little
+test programs that don't need a proper makefile. Extra command
+line options may be given in OPTIONS."
+  (mapconcat
+   'identity
+   (list "gcc -std=c99 -pedantic -Wall -o"
+         (file-name-sans-extension (file-name-nondirectory buffer-file-name))
+         (file-name-nondirectory buffer-file-name)
+         options)
+   " "))
+
 
 ;;;
 ;;; lpc
