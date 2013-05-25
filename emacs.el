@@ -822,7 +822,8 @@ be given as an optional argument."
 
 (setq max-specpdl-size 10000
       max-lisp-eval-depth 5000
-      debug-on-error nil)
+      debug-on-error nil
+      eval-expression-print-level nil)
 
 (defun dhl-lisp-indent-and-complete (n)
   (interactive "p")
