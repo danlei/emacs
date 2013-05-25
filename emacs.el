@@ -1105,6 +1105,16 @@ using commands with prefix arguments."
 
 
 ;;;;
+;;;; expand-region
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/expand-region.el/")
+
+(when (require 'expand-region nil t)
+  (global-set-key (kbd "C-.") 'er/expand-region))
+
+
+;;;;
 ;;;; erc
 ;;;;
 
