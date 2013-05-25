@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-05-25 13:08:35 dhl>
+;;;;; Time-stamp: <2013-05-25 13:12:53 dhl>
 ;;;;;
 
 
@@ -557,37 +557,37 @@ minibuffer, defaulting to word-at-point."
 ;;; ghc-mod
 ;;;
 
-(add-to-list 'load-path "~/.emacs.d/ghc-mod/")
+;; (add-to-list 'load-path "~/.emacs.d/ghc-mod/")
 
-(setq ghc-completion-key (kbd "<C-tab>")
-      ghc-document-key (kbd "C-c d")
-      ghc-import-key (kbd "C-c m")
-      ghc-previous-key (kbd "M-p")
-      ghc-next-key (kbd "M-n")
-      ghc-help-key (kbd "C-c h")
-      ghc-insert-key (kbd "C-c t")
-      ghc-sort-key (kbd "C-c s")
-      ghc-check-key (kbd "C-x C-s")
-      ghc-toggle-key (kbd "C-c C-c"))
+;; (setq ghc-completion-key (kbd "<C-tab>")
+;;       ghc-document-key (kbd "C-c d")
+;;       ghc-import-key (kbd "C-c m")
+;;       ghc-previous-key (kbd "M-p")
+;;       ghc-next-key (kbd "M-n")
+;;       ghc-help-key (kbd "C-c h")
+;;       ghc-insert-key (kbd "C-c t")
+;;       ghc-sort-key (kbd "C-c s")
+;;       ghc-check-key (kbd "C-x C-s")
+;;       ghc-toggle-key (kbd "C-c C-c"))
 
-(autoload 'ghc-init "ghc" nil t)
+;; (autoload 'ghc-init "ghc" nil t)
 
-(when (require 'ghc nil t)
-  (add-hook 'haskell-mode-hook
-            (lambda ()
-              (ghc-init))))
+;; (when (require 'ghc nil t)
+;;   (add-hook 'haskell-mode-hook
+;;             (lambda ()
+;;               (ghc-init))))
 
-(defadvice ghc-init
-    (before dhl-ghc-mod-local-completion first () activate)
-  "Makes ghc-mod completions buffer local."
-  (make-local-variable 'ghc-loaded-module)
-  (make-local-variable 'ghc-merged-keyword))
+;; (defadvice ghc-init
+;;     (before dhl-ghc-mod-local-completion first () activate)
+;;   "Makes ghc-mod completions buffer local."
+;;   (make-local-variable 'ghc-loaded-module)
+;;   (make-local-variable 'ghc-merged-keyword))
 
-(defadvice ghc-import-module
-    (before dhl-ghc-mod-reset-modules first () activate)
-  "Makes ghc-import-module recognize dropped imports."
-  (setq ghc-loaded-module nil)
-  (ghc-comp-init))
+;; (defadvice ghc-import-module
+;;     (before dhl-ghc-mod-reset-modules first () activate)
+;;   "Makes ghc-import-module recognize dropped imports."
+;;   (setq ghc-loaded-module nil)
+;;   (ghc-comp-init))
 
 
 ;;;;
