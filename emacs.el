@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-05-25 12:23:51 dhl>
+;;;;; Time-stamp: <2013-05-25 13:08:35 dhl>
 ;;;;;
 
 
@@ -41,7 +41,7 @@
 ;;;; packages
 ;;;;
 
-(when (require 'package "package" t)
+(when (require 'package nil t)
   (mapc (apply-partially 'add-to-list 'package-archives)
         '(("marmalade" . "http://marmalade-repo.org/packages/")
           ("melpa" . "http://melpa.milkbox.net/packages/")))
@@ -56,9 +56,9 @@
 (if (< emacs-major-version 24)
     (progn
       (add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
-      (when (require 'color-theme "color-theme" t)
+      (when (require 'color-theme nil t)
         (color-theme-initialize)
-        (and (require 'color-theme-dhl-hober "color-theme-dhl-hober" t)
+        (and (require 'color-theme-dhl-hober nil t)
              (color-theme-dhl-hober))))
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
   (load-theme 'zenburn t))
@@ -78,7 +78,7 @@
 (mapc (apply-partially 'add-to-list 'load-path)
       '("~/.emacs.d/slime/" "~/.emacs.d/slime/contrib/"))
 
-(when (require 'slime "slime" t)
+(when (require 'slime nil t)
   (slime-setup '(slime-fancy slime-asdf slime-indentation
                  slime-xref-browser slime-js)))
 
@@ -149,7 +149,7 @@
 (setq common-lisp-hyperspec-root (expand-file-name "~/doc/HyperSpec/")
       cltl2-root-url (expand-file-name "~/doc/cltl2/"))
 
-(require 'cltl2 "cltl2" t)
+(require 'cltl2 nil t)
 
 (setq Info-additional-directory-list
       (list (expand-file-name "~/.emacs.d/hyperspec/")))
@@ -188,7 +188,7 @@
 
 (require 'eldoc)
 
-(when (require 'paredit "paredit" t)
+(when (require 'paredit nil t)
   (mapc (lambda (hook) (add-hook hook (lambda () (paredit-mode 1))))
         '(slime-mode-hook
           slime-repl-mode-hook
@@ -240,7 +240,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/clojure-mode/")
 
-(when (require 'clojure-mode "clojure-mode" t)
+(when (require 'clojure-mode nil t)
   (add-hook 'clojure-mode-hook
             (lambda ()
               (setq inferior-lisp-program (case system-type
@@ -253,7 +253,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/nrepl/")
 
-(when (require 'nrepl "nrepl" t)
+(when (require 'nrepl nil t)
   (add-to-list 'same-window-buffer-names "*nrepl*")
   (add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
   (add-hook 'nrepl-mode-hook 'subword-mode))
@@ -268,7 +268,7 @@
 ;;;; qi
 ;;;;
 
-(require 'qi-mode "qi-mode" t)
+(require 'qi-mode nil t)
 
 (setq inferior-qi-program
       (case system-type
@@ -288,11 +288,11 @@
    (define-keys inferior-scheme-mode-map
        '(("M-TAB" hippie-expand)))))
 
-(when (require 'quack "quack" t)
+(when (require 'quack nil t)
   (setq quack-remap-find-file-bindings-p nil)
   (setq quack-pretty-lambda-p t))
 
-(when (require 'scheme-complete "scheme-complete" t)
+(when (require 'scheme-complete nil t)
   (add-hook
    'inferior-scheme-mode-hook
    (lambda ()
@@ -385,7 +385,7 @@ minibuffer, defaulting to word-at-point."
 
 (add-to-list 'load-path "~/.emacs.d/python.el/")
 
-(require 'python)
+(require 'python nil t)
 
 ;; (setq python-process-kill-without-query t
 ;;       python-default-version 3)
@@ -443,7 +443,7 @@ minibuffer, defaulting to word-at-point."
 (add-to-list 'load-path "~/.emacs.d/Sepia-0.992-S3oGPo/")
 (setq sepia-perl5lib (list (expand-file-name "~/.emacs.d/Sepia-0.992-S3oGPo/lib")))
 ;(defalias 'perl-mode 'sepia-mode)
-(require 'sepia)
+(require 'sepia nil t)
 (setq sepia-program-name "c:/Perl/bin/perl")
 
 
@@ -451,7 +451,7 @@ minibuffer, defaulting to word-at-point."
 ;;;; tcl
 ;;;;
 
-(require 'tcl "tcl" t)
+(require 'tcl nil t)
 
 (when (eq system-type 'cygwin)
   (setq tcl-application "/cygdrive/c/Tcl/bin/tclsh85.exe"))
@@ -475,10 +475,10 @@ minibuffer, defaulting to word-at-point."
 
 (add-to-list 'load-path "~/.emacs.d/maxima/")
 
-(when (require 'maxima "maxima" t)
+(when (require 'maxima nil t)
   (add-to-list 'auto-mode-alist '("\\.max$" . maxima-mode)))
 
-(require 'maxima-font-lock "maxima-font-look" t)
+(require 'maxima-font-lock nil t)
 
 
 ;;;;
@@ -497,10 +497,10 @@ minibuffer, defaulting to word-at-point."
 
 (add-to-list 'load-path "~/.emacs.d/haskell-mode/")
 
-(and (require 'inf-haskell "inf-haskell" t)
-     (require 'haskell-indent "haskell-indent" t))
+(and (require 'inf-haskell nil t)
+     (require 'haskell-indent nil t))
 
-(require 'ghc-core "ghc-core" t)
+(require 'ghc-core nil t)
 
 (setq haskell-program-name (concat "ghci "
 ;                                   "-fglasgow-exts "
@@ -552,6 +552,7 @@ minibuffer, defaulting to word-at-point."
       ad-do-it))
   (ad-activate 'inferior-haskell-load-file))
 
+
 ;;;
 ;;; ghc-mod
 ;;;
@@ -571,7 +572,7 @@ minibuffer, defaulting to word-at-point."
 
 (autoload 'ghc-init "ghc" nil t)
 
-(when (require 'ghc "ghc" t)
+(when (require 'ghc nil t)
   (add-hook 'haskell-mode-hook
             (lambda ()
               (ghc-init))))
@@ -595,7 +596,7 @@ minibuffer, defaulting to word-at-point."
 
 (add-to-list 'load-path "~/.emacs.d/fsharp/")
 
-(require 'fsharp "fsharp" t)
+(require 'fsharp nil t)
 
 (setq-default fsharp-indent-offset 2
               fsharp-continuation-offset 1)
@@ -624,7 +625,7 @@ minibuffer, defaulting to word-at-point."
 ;;;; prolog
 ;;;;
 
-(require 'prolog "prolog" t)
+(require 'prolog nil t)
 
 (setq-default prolog-system 'swi)
 
@@ -646,7 +647,7 @@ minibuffer, defaulting to word-at-point."
 
 (add-to-list 'load-path "~/.emacs.d/javarun/")
 
-(when (require 'javarun "javarun" t)
+(when (require 'javarun nil t)
   (when (eq system-type 'windows-nt)
     (setq javarun-java-path "C:/Program Files/Java/jdk1.6.0/bin/"))
   (add-hook 'java-mode-hook
@@ -661,10 +662,10 @@ minibuffer, defaulting to word-at-point."
 
 (setq-default js-indent-level 2)
 
-(when (require 'js2-mode "js2-mode" t)
+(when (require 'js2-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)))
 
-;(require 'slime-js "slime-js" t)
+;(require 'slime-js nil t)
 
 (add-hook 'js2-mode-hook
           (lambda ()
@@ -684,7 +685,7 @@ minibuffer, defaulting to word-at-point."
 
 (add-to-list 'load-path "~/.emacs.d/coffee-mode/")
 
-(when (require 'coffee-mode "coffee-mode" t)
+(when (require 'coffee-mode nil t)
   (add-to-list 'auto-mode-alist '("\.coffee$" . coffee-mode))
   (setq coffee-command "coffee")
   (add-to-list ; alternatively, set NODE_NO_READLINE=1
@@ -729,7 +730,7 @@ minibuffer, defaulting to word-at-point."
 ;;;; c
 ;;;;
 
-;(require 'cc-mode)
+;(require 'cc-mode nil t)
 
 (setq compilation-window-height 10
       compilation-read-command nil)
@@ -776,7 +777,7 @@ be given as an optional argument."
 ;;;; xml
 ;;;;
 
-(when (require 'rnc-mode "rnc-mode" t)
+(when (require 'rnc-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.rnc\\'" . rnc-mode))
   (setq rnc-indent-level 2))
 
@@ -873,7 +874,7 @@ be given as an optional argument."
 
 (add-to-list 'load-path "~/.emacs.d/ess-5.13/lisp/")
 
-(require 'ess-site "ess-site" t)
+(require 'ess-site nil t)
 
 (when (eq system-type 'windows-nt)
   (setq inferior-R-program-name
@@ -912,7 +913,7 @@ be given as an optional argument."
             (local-set-key (kbd "<C-tab>") 'PC-lisp-complete-symbol)
             (eldoc-mode 1)))
 
-;; (require 'em-smart)
+;; (require 'em-smart nil t)
 
 ;; (setq eshell-where-to-jump 'begin)
 ;; (setq eshell-review-quick-commands t)
@@ -956,11 +957,11 @@ at the beginning of line, if already there."
 
 (add-to-list 'load-path "~/.emacs.d/smex/")
 
-(when (require 'ido "ido" t)
+(when (require 'ido nil t)
   (ido-mode 1)
   (ido-everywhere 1))
 
-(when (require 'idomenu "idomenu" t)
+(when (require 'idomenu nil t)
   (global-set-key (kbd "M-g i") 'idomenu))
 
 (defadvice idomenu
@@ -970,7 +971,7 @@ at the beginning of line, if already there."
 (setq ido-use-filename-at-point 'guess ; 'ffap-guesser
       ido-use-url-at-point t)
 
-(when (require 'smex "smex" t)
+(when (require 'smex nil t)
   (smex-initialize)
   (setq smex-save-file "~/.smex")
   (smex-auto-update))
@@ -1032,13 +1033,13 @@ prevents using commands with prefix arguments."
 (mapc (apply-partially 'add-to-list 'load-path)
       '("~/.emacs.d/magit/contrib" "~/.emacs.d/magit/"))
 
-(when (require 'magit "magit" t)
+(when (require 'magit nil t)
   (add-to-list 'Info-additional-directory-list
                (expand-file-name "~/.emacs.d/magit/")))
 
-(require 'rebase-mode "rebase-mode" t)
+(require 'rebase-mode nil t)
 
-(when (require 'vc-dir "vc-dir" t)
+(when (require 'vc-dir nil t)
   (define-key vc-dir-mode-map (kbd "d") 'vc-dir-delete-file))
 
 
@@ -1055,14 +1056,14 @@ prevents using commands with prefix arguments."
         "~/.emacs.d/gh.el/"
         "~/.emacs.d/gist.el/"))
 
-(require 'gist "gist" t)
+(require 'gist nil t)
 
 
 ;;;;
 ;;;; darcs
 ;;;;
 
-(require 'vc-darcs "vc-darcs" t)
+(require 'vc-darcs nil t)
 
 
 ;;;;
@@ -1079,7 +1080,7 @@ prevents using commands with prefix arguments."
 (when (member system-type '(cygwin gnu/linux))
   (add-to-list 'load-path "/usr/share/emacs/site-lisp/w3m/"))
 
-;; (when (require 'w3m "w3m" t)
+;; (when (require 'w3m nil t)
 ;;   (setq browse-url-browser-function 'w3m-browse-url))
 
 (setq w3m-session-load-last-sessions t)
@@ -1091,9 +1092,9 @@ prevents using commands with prefix arguments."
 
 (add-to-list 'load-path "~/.emacs.d/erc-5.3-extras/")
 
-(when (require 'erc "erc" t)
-; (require 'erc-match "erc-match" t)
-  (require 'erc-list-old "erc-list-old" t)
+(when (require 'erc nil t)
+; (require 'erc-match nil t)
+  (require 'erc-list-old nil t)
   (erc-spelling-mode -1)
   (erc-list-mode 1)
   (erc-timestamp-mode -1)
@@ -1190,7 +1191,7 @@ prevents using commands with prefix arguments."
 ;;;; ibuffer
 ;;;;
 
-(require 'ibuffer)
+(require 'ibuffer nil t)
 
 (setq ibuffer-show-empty-filter-groups nil
       ibuffer-expert t)
@@ -1344,8 +1345,8 @@ prevents using commands with prefix arguments."
       '("~/.emacs.d/org-mode/lisp/"
         "~/.emacs.d/org-mode/contrib/lisp/"))
 
-(require 'org "org" t)
-(require 'org-latex "org-latex" t)
+(require 'org nil t)
+(require 'org-latex nil t)
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
@@ -1601,7 +1602,7 @@ prevents using commands with prefix arguments."
 ;;;; flashcard
 ;;;;
 
-(require 'flashcard "flashcard" t)
+(require 'flashcard nil t)
 
 (add-to-list 'auto-mode-alist '("\\.deck\\'" . flashcard-mode))
 
@@ -1622,7 +1623,7 @@ prevents using commands with prefix arguments."
 ;;;; voctest
 ;;;;
 
-(require 'voctest "voctest" t)
+(require 'voctest nil t)
 
 (setq voctest-test-direction '(1 . 0))
 
@@ -1635,7 +1636,7 @@ prevents using commands with prefix arguments."
 ;;;; misc
 ;;;;
 
-(require 'misc)
+(require 'misc nil t)
 
 (if (< emacs-major-version 24)
     (partial-completion-mode 1)
@@ -1743,7 +1744,7 @@ prevents using commands with prefix arguments."
 ;;                   "/home/danlei/bin")))
 
 ;; (re-)enable z binding for special modes
-(require 'man)
+(require 'man nil t)
 (dolist (mode-map (list special-mode-map
                         Man-mode-map
                         ibuffer-mode-map))
@@ -1959,7 +1960,7 @@ are in kbd format."
 
 (setq gnus-ignored-newsgroups "^to\\.\\|^[0-9. ]+\\( \\|$\\)\\|^[\"]\"[#'()]")
 
-(require 'nnir)
+(require 'nnir nil t)
 
 (setq gnus-secondary-select-methods
       '((nnimap "imap.gmail.com"
