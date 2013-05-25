@@ -653,10 +653,8 @@ minibuffer, defaulting to word-at-point."
 (add-to-list 'load-path "~/.emacs.d/javarun/")
 
 (when (require 'javarun "javarun" t)
-  (setq ; javarun-cygdir "c:/cygwin/"
-        javarun-javac-command "javac.exe"
-        javarun-java-command "java"
-        javarun-java-path "C:/Program Files/Java/jdk1.6.0/bin/")
+  (when (eq system-type 'windows-nt)
+    (setq javarun-java-path "C:/Program Files/Java/jdk1.6.0/bin/"))
   (add-hook 'java-mode-hook
             (lambda ()
               (javarun-mode 1)
