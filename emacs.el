@@ -828,9 +828,10 @@ line options may be given in OPTIONS."
       debug-on-error nil
       eval-expression-print-level nil)
 
-(defun dhl-lisp-indent-and-complete (n)
-  (interactive "p")
-  (indent-for-tab-command)
+(defun dhl-lisp-indent-and-complete ()
+  "Indent, then complete the symbol at point."
+  (interactive)
+  (indent-for-tab-command t)
   (lisp-complete-symbol))
 
 (defun dhl-lisp-eval-print-defun ()
