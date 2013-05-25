@@ -1044,6 +1044,9 @@ prevents using commands with prefix arguments."
 
 (require 'rebase-mode "rebase-mode" t)
 
+(when (require 'vc-dir "vc-dir" t)
+  (define-key vc-dir-mode-map (kbd "d") 'vc-dir-delete-file))
+
 
 ;;;
 ;;; gists
