@@ -1787,13 +1787,19 @@ Keys are in kbd format."
                      keys)))
         keybindings))
 
-(defun global-set-keys (keybindings)
-  "Takes a list of (key function-designator) lists.
-The functions are globally bound to the keys. Keys
-are in kbd format."
+(defun dhl-global-set-keys (keybindings)
+  "Define multiple global KEYBINDINGS at once.
+
+Take a list of (KEY FUNCTION-DESIGNATOR) lists. Bind the
+functions to their respective KEY globally. Keys are expected to
+be in kbd format. If KEY is a list of keys, bind all of them to
+the respective function."
   (mapc (lambda (keybinding)
-          (destructuring-bind (key function) keybinding
-            (global-set-key (read-kbd-macro key) function)))
+          (destructuring-bind (keys function) keybinding
+            (funcall (if (consp keys) #'mapcar #'funcall)
+                     (lambda (key)
+                       (global-set-key (read-kbd-macro key) function))
+                     keys)))
         keybindings))
 
 (defun kill-all-rnc-input-buffers ()
@@ -1818,23 +1824,23 @@ are in kbd format."
 ;;;; global keybindings
 ;;;;
 
-(global-set-keys '(("C-c i d" insert-date)
-                   ("C-x C-b" ibuffer)
-                   ("M-/" hippie-expand)
-                   ("C-c C-s" slime-selector)
-                   ("C-x r v" view-register)
-                   ("M-X" dhl-invoke-smex)
-                   ("C-^" winner-undo)
-                   ("C-c ^" winner-redo)
-                   ("M-s m o" multi-occur)
-                   ("M-s m m" multi-occur-in-matching-buffers)
-                   ("M-z" zap-up-to-char)
-                   ("C-c L" org-store-link)
-                   ("C-c R" org-remember)
-                   ("C-c C" org-capture)
-                   ("C-x RET i" set-input-method)
-                   ("M-#" quick-calc)
-                   ("C-c s" magit-status)))
+(dhl-global-set-keys '(("C-c i d" dhl-insert-date)
+                       ("C-x C-b" ibuffer)
+                       ("M-/" hippie-expand)
+                       ("C-c C-s" slime-selector)
+                       ("C-x r v" view-register)
+                       ("M-X" dhl-invoke-smex)
+                       ("C-^" winner-undo)
+                       ("C-c ^" winner-redo)
+                       ("M-s m o" multi-occur)
+                       ("M-s m m" multi-occur-in-matching-buffers)
+                       ("M-z" zap-up-to-char)
+                       ("C-c L" org-store-link)
+                       ("C-c R" org-remember)
+                       ("C-c C" org-capture)
+                       ("C-x RET i" set-input-method)
+                       ("M-#" quick-calc)
+                       ("C-c s" magit-status)))
 
 
 ;;;;
