@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-05-25 15:30:39 dhl>
+;;;;; Time-stamp: <2013-05-25 15:41:52 dhl>
 ;;;;;
 
 
@@ -101,7 +101,7 @@
 
 (add-hook 'slime-mode-hook
           (lambda ()
-            (define-keys slime-mode-map
+            (dhl-define-keys slime-mode-map
                 '(("C-c s" slime-selector)
                   ("C-j" newline-and-indent)
                   ("TAB" slime-indent-and-complete-symbol)
@@ -110,7 +110,7 @@
 
 (add-hook 'slime-repl-mode-hook
           (lambda ()
-            (define-keys slime-repl-mode-map
+            (dhl-define-keys slime-repl-mode-map
                 '(("C-c s" slime-selector)
                   ("C-c C-d c" cltl2-lookup)
                   ("C-c d" slime-documentation)))))
@@ -162,13 +162,14 @@
  :ignore-case t
  :doc-spec '(("(ansicl)Symbol Index" nil nil nil)))
 
-(defun hyperspec-index-search (topic)
+(defun dhl-hyperspec-index-search (topic)
   "Look up TOPIC in the indices of the HyperSpec."
   (interactive "sSubject to look up: ")
   (info "ansicl")
   (Info-index topic))
 
 (defun dhl-random-hyperspec ()
+  "Browse a random HyperSpec entry."
   (interactive)
   (let* ((random-hyperspec-symbol
           (let ((syms '()))
@@ -207,7 +208,7 @@
 
 (add-hook 'paredit-mode-hook
           (lambda ()
-            (define-keys paredit-mode-map
+            (dhl-define-keys paredit-mode-map
                 '((")" paredit-close-parenthesis)
                   ("M-)" paredit-close-parenthesis-and-newline)
                   ("}" paredit-close-curly)
@@ -285,7 +286,7 @@
 (add-hook
  'inferior-scheme-mode-hook
  (lambda ()
-   (define-keys inferior-scheme-mode-map
+   (dhl-define-keys inferior-scheme-mode-map
        '(("M-TAB" hippie-expand)))))
 
 (when (require 'quack nil t)
@@ -296,7 +297,7 @@
   (add-hook
    'inferior-scheme-mode-hook
    (lambda ()
-     (define-keys inferior-scheme-mode-map
+     (dhl-define-keys inferior-scheme-mode-map
          '(("TAB" scheme-complete-or-indent)))
      (make-local-variable 'eldoc-documentation-function)
      (setq eldoc-documentation-function 'scheme-get-current-symbol-info)
@@ -304,7 +305,7 @@
   (add-hook
    'scheme-mode-hook
    (lambda ()
-     (define-keys inferior-scheme-mode-map
+     (dhl-define-keys inferior-scheme-mode-map
          '(("TAB" scheme-complete-or-indent)))
      (make-local-variable 'eldoc-documentation-function)
      (setq eldoc-documentation-function 'scheme-get-current-symbol-info)
@@ -350,7 +351,7 @@
 (add-hook
  'ruby-mode-hook
  (lambda ()
-   (define-keys ruby-mode-map
+   (dhl-define-keys ruby-mode-map
        '(("C-M-x" ruby-send-definition)
          ("C-c C-c" dhl-ruby-send-buffer)
          ("C-c c" dhl-ruby-send-buffer)
@@ -366,15 +367,17 @@
   "The ruby class documentation root URI.")
 
 (defun dhl-ruby-browse-class-documentation (class-name)
-  "Browse the ruby class documentation for a class queried in the
-minibuffer, defaulting to word-at-point."
+  "Browse the ruby class documentation for CLASS-NAME.
+
+CLASS-NAME is queried in the minibuffer, defaulting to
+`word-at-point'."
   (interactive
    (let* ((default (word-at-point))
           (input
            (read-from-minibuffer
             (if default
                 (format "Browse documentation for class (default %s): " default)
-                "Browse documentation for class: "))))
+              "Browse documentation for class: "))))
      (list (if (equal input "") default input))))
   (browse-url (concat dhl-ruby-class-documentation-uri class-name ".html")))
 
@@ -413,7 +416,7 @@ minibuffer, defaulting to word-at-point."
 
 (defadvice python-describe-symbol
   (after dhl-python-describe-symbol-advice last () activate)
-  "Switch to help buffer after invocation."
+  "Switch to the python help buffer after invocation."
   (other-window 1))
 
 
@@ -437,8 +440,8 @@ minibuffer, defaulting to word-at-point."
 (setq cperl-indent-level 4
       cperl-indent-parens-as-block nil)
 
-;; (defun cperl-eldoc-documentation-function ()
-;;   "Return meaningful doc string for `eldoc-mode'."
+;; (defun dhl-cperl-eldoc-documentation-function ()
+;;   "Return a meaningful doc string for `eldoc-mode'."
 ;;   (car
 ;;    (let ((cperl-message-on-help-error nil))
 ;;      (cperl-get-help))))
@@ -446,7 +449,7 @@ minibuffer, defaulting to word-at-point."
 ;; (add-hook 'cperl-mode-hook
 ;;           (lambda ()
 ;;             (set (make-local-variable 'eldoc-documentation-function)
-;;                  'cperl-eldoc-documentation-function)))
+;;                  'dhl-cperl-eldoc-documentation-function)))
 
 
 ;;;;
@@ -532,7 +535,7 @@ minibuffer, defaulting to word-at-point."
 (add-hook
  'haskell-mode-hook
  (lambda ()
-   (define-keys haskell-mode-map
+   (dhl-define-keys haskell-mode-map
        '(("RET" newline)
          ("TAB" haskell-indent-cycle)
          ("C-c =" haskell-indent-insert-equal)
@@ -547,8 +550,8 @@ minibuffer, defaulting to word-at-point."
 
 (when (eq system-type 'cygwin)
   (defadvice inferior-haskell-load-file
-      (around dhl-inferior-haskell-load-file-cygwin-fix)
-    "Fixes inferior-haskell-load-file for Win Haskell/Cygwin Emacs."
+    (around dhl-inferior-haskell-load-file-cygwin-fix)
+    "Fix `inferior-haskell-load-file' for Win Haskell/Cygwin Emacs."
     (save-buffer)
     (let ((buffer-file-name (concat "c:/cygwin" buffer-file-name)))
       ad-do-it))
@@ -580,14 +583,14 @@ minibuffer, defaulting to word-at-point."
 ;;               (ghc-init))))
 
 ;; (defadvice ghc-init
-;;     (before dhl-ghc-mod-local-completion first () activate)
-;;   "Makes ghc-mod completions buffer local."
+;;   (before dhl-ghc-mod-local-completion first () activate)
+;;   "Make `ghc-mod' completions buffer local."
 ;;   (make-local-variable 'ghc-loaded-module)
 ;;   (make-local-variable 'ghc-merged-keyword))
 
 ;; (defadvice ghc-import-module
-;;     (before dhl-ghc-mod-reset-modules first () activate)
-;;   "Makes ghc-import-module recognize dropped imports."
+;;   (before dhl-ghc-mod-reset-modules first () activate)
+;;   "Make `ghc-import-module' recognize dropped imports."
 ;;   (setq ghc-loaded-module nil)
 ;;   (ghc-comp-init))
 
@@ -618,7 +621,7 @@ minibuffer, defaulting to word-at-point."
 (add-hook
  'fsharp-mode-hook
  (lambda ()
-   (define-keys fsharp-mode-map
+   (dhl-define-keys fsharp-mode-map
      `(("C-c b" fsharp-mark-block)
        ("C-c r" fsharp-run-executable-file)))))
 
@@ -672,7 +675,7 @@ minibuffer, defaulting to word-at-point."
 (add-hook 'js2-mode-hook
           (lambda ()
             (slime-js-minor-mode 1)
-            (define-keys slime-js-minor-mode-map
+            (dhl-define-keys slime-js-minor-mode-map
               `(("M-n" next-error)
                 ("M-p" previous-error)))))
 
@@ -697,10 +700,12 @@ minibuffer, defaulting to word-at-point."
 
 
 (defadvice coffee-repl
-  (after coffee-repl-purge-echoes last () activate)
+  (after dhl-coffee-repl-purge-echoes last () activate)
+  "Get rid of command echos in the Coffee REPL."
   (setq comint-process-echoes t))
 
-(defun coffee-send-region ()
+(defun dhl-coffee-send-region ()
+  "Send the region to the Coffee process."
   (interactive)
   (let ((coffee-process (get-process "CoffeeREPL")))
     (comint-send-string coffee-process "\n")
@@ -709,19 +714,20 @@ minibuffer, defaulting to word-at-point."
                         (concat (buffer-substring-no-properties (point) (mark))
                                 "\n"))))
 
-(defun coffee-send-buffer
+(defun dhl-coffee-send-buffer ()
+  "Send the contents of the current buffer to the Coffee process."
   (interactive)
-  (coffee-send-region (point-min) (point-max)))
+  (dhl-coffee-send-region (point-min) (point-max)))
 
 (add-hook 'coffee-mode-hook
           (lambda ()
-            (define-keys coffee-mode-map
-              '((("C-c C-l" "C-c l") coffee-send-buffer)
-                (("C-c C-r" "C-c r") coffee-send-region)
+            (dhl-define-keys coffee-mode-map
+              '((("C-c C-l" "C-c l") dhl-coffee-send-buffer)
+                (("C-c C-r" "C-c r") dhl-coffee-send-region)
                 (("C-c C-k" "C-c k") coffee-compile-buffer)))))
 
 
-(defun coffee-send-region* (start end)
+(defun dhl-coffee-send-region* (start end)
   "Send the current region to the inferior Coffee process."
   (interactive "r")
   (send-region "*CoffeeREPL*" start end)
@@ -795,7 +801,7 @@ line options may be given in OPTIONS."
 
 (add-hook 'nxml-mode-hook
           (lambda ()
-            (define-keys nxml-mode-map
+            (dhl-define-keys nxml-mode-map
                 `(("TAB" ,(lambda (n)
                             (interactive "p")
                             (indent-for-tab-command)
@@ -835,6 +841,7 @@ line options may be given in OPTIONS."
   (lisp-complete-symbol))
 
 (defun dhl-lisp-eval-print-defun ()
+  "Move behind current toplevel form, evaluate, and insert result."
   (interactive)
   (end-of-defun)
   (eval-print-last-sexp))
@@ -848,7 +855,7 @@ line options may be given in OPTIONS."
 (add-hook 'lisp-interaction-mode-hook
           (lambda ()
             (eldoc-mode 1)
-            (define-keys lisp-interaction-mode-map
+            (dhl-define-keys lisp-interaction-mode-map
               '(("TAB" dhl-lisp-indent-and-complete)
                 ("<C-return>" eval-print-last-sexp)
                 ("<C-return>" dhl-lisp-eval-print-defun)))))
@@ -918,7 +925,7 @@ line options may be given in OPTIONS."
 
 (add-hook 'eshell-mode-hook
           (lambda ()
-            (local-set-key (kbd "C-a") 'eshell-maybe-bol)
+            (local-set-key (kbd "C-a") 'dhl-eshell-maybe-bol)
             (local-set-key (kbd "<C-tab>") 'PC-lisp-complete-symbol)
             (eldoc-mode 1)))
 
@@ -928,9 +935,8 @@ line options may be given in OPTIONS."
 ;; (setq eshell-review-quick-commands t)
 ;; (setq eshell-smart-space-goes-to-end t)
 
-(defun eshell-maybe-bol ()
-  "Moves point behind the eshell prompt, or
-at the beginning of line, if already there."
+(defun dhl-eshell-maybe-bol ()
+  "Move point behind the eshell prompt, or at the beginning of line."
   (interactive)
   (let ((p (point)))
     (eshell-bol)
@@ -938,7 +944,7 @@ at the beginning of line, if already there."
       (beginning-of-line))))
 
 (defun eshell/clear ()
-  "Clears the eshell buffer."
+  "Clear the eshell buffer."
   (interactive)
   (let ((inhibit-read-only t))
     (erase-buffer)))
@@ -974,7 +980,8 @@ at the beginning of line, if already there."
   (global-set-key (kbd "M-g i") 'idomenu))
 
 (defadvice idomenu
-  (after idomenu-recenter last () activate)
+  (after dhl-idomenu-recenter last () activate)
+  "Recenter after invoking `idomenu'."
   (recenter-top-bottom))
 
 (setq ido-use-filename-at-point 'guess ; 'ffap-guesser
@@ -986,13 +993,15 @@ at the beginning of line, if already there."
   (smex-auto-update))
 
 (defun dhl-invoke-smex (x)
-  "Invokes smex, if called without a prefix argument,
-smex-major-mode-commands otherwise. Note that this
-prevents using commands with prefix arguments."
+  "Invoke smex. For commands with prefix argument X.
+
+If called without a prefix argument, invoke vanilla `smex'.
+Otherwise `smex-major-mode-commands'. Note that this prevents
+using commands with prefix arguments."
   (interactive "p")
   (if (= x 1)
       (smex)
-      (smex-major-mode-commands)))
+    (smex-major-mode-commands)))
 
 
 ;;;;
@@ -1142,26 +1151,26 @@ prevents using commands with prefix arguments."
                         (or x "Ein guter Abgang ziert die Übung."))
       erc-quit-reason erc-part-reason)
 
-(defvar erc-auth
+(defvar dhl-erc-auth
   '(;freenode (:name "<irc-nick>" :password "<password>")
     ))
 
 (load "~/.emacs-auth" t)
 
-(defun erc-nick (server)
-  (getf (getf erc-auth server) :name))
+(defun dhl-erc-nick (server)
+  (getf (getf dhl-erc-auth server) :name))
 
-(defun erc-password (server)
-  (getf (getf erc-auth server) :password))
+(defun dhl-erc-password (server)
+  (getf (getf dhl-erc-auth server) :password))
 
 ;; (add-hook 'erc-after-connect
 ;;           (lambda (SERVER NICK)
 ;;             (cond ((string-match "freenode\\.net" SERVER)
 ;;                    (erc-message "PRIVMSG" (concat "NickServ identify "
-;;                                                   (erc-password 'freenode)))
+;;                                                   (dhl-erc-password 'freenode)))
 ;;                    (erc-message "PRIVMSG" (concat "NickServ ghost "
-;;                                                   (erc-nick 'freenode)))
-;;                    (erc-message "NICK" (erc-nick 'freenode))))))
+;;                                                   (dhl-erc-nick 'freenode)))
+;;                    (erc-message "NICK" (dhl-erc-nick 'freenode))))))
 
 
 ;;;;
@@ -1182,14 +1191,15 @@ prevents using commands with prefix arguments."
 
 (add-hook 'dired-mode-hook
           (lambda ()
-            (define-keys dired-mode-map
+            (dhl-define-keys dired-mode-map
                 '(("e" wdired-change-to-wdired-mode)))
             (when (eq system-type 'darwin)
               (define-key dired-mode-map (kbd "C-c o")
-                'dired-open-mac))))
+                'dhl-dired-open-mac))))
 
 (when (eq system-type 'darwin)
-  (defun dired-open-mac ()
+  (defun dhl-dired-open-mac ()
+    "Open files on the mac from dired."
     (interactive)
     (let ((file-name (dired-get-file-for-visit)))
       (if (file-exists-p file-name)
@@ -1288,14 +1298,14 @@ prevents using commands with prefix arguments."
             (ibuffer-auto-mode 1)))
 
 (defadvice ibuffer
-    (around ibuffer-point-to-most-recent first () activate)
-  "Open ibuffer with cursor pointed to most recent buffer name."
+  (around dhl-ibuffer-point-to-most-recent first () activate)
+  "Open `ibuffer' with cursor pointed to most recent buffer name."
   (let ((recent-buffer-name (buffer-name)))
     ad-do-it
     (ibuffer-jump-to-buffer recent-buffer-name)))
 
 
-;; (defun my-ibuffer-hook ()
+;; (defun dhl-ibuffer-hook ()
 ;;   (ibuffer-define-sorter pathname
 ;;                          (:documentation
 ;;                           "Sort the buffers by their pathname."
@@ -1312,7 +1322,7 @@ prevents using commands with prefix arguments."
 ;;                                              "~"))))
 ;;   (define-key ibuffer-mode-map (kbd "s p") 'ibuffer-do-sort-by-pathname))
 
-;; (add-hook 'ibuffer-mode-hooks 'my-ibuffer-hook)
+;; (add-hook 'ibuffer-mode-hooks 'dhl-ibuffer-hook)
 
 
 ;;;;
@@ -1326,23 +1336,23 @@ prevents using commands with prefix arguments."
             (local-set-key (kbd "p") 'previous-line)))
 
 (defadvice occur
-    (after dhl-switch-to-occur last () activate)
-  "Switch to occur window automatically."
+  (after dhl-switch-to-occur last () activate)
+  "Switch to `occur' window automatically."
   (other-window 1))
 
 (defadvice multi-occur
-    (after dhl-switch-to-multi-occur last () activate)
-  "Switch to occur window automatically."
+  (after dhl-switch-to-multi-occur last () activate)
+  "Switch to `occur' window automatically."
   (other-window 1))
 
 (defadvice multi-occur-in-matching-buffers
-    (after dhl-switch-to-multi-occur-in-matching-buffers last () activate)
-  "Switch to occur window automatically."
+  (after dhl-switch-to-multi-occur-in-matching-buffers last () activate)
+  "Switch to `occur' window automatically."
   (other-window 1))
 
 (defadvice ibuffer-do-occur
-    (after dhl-ibuffer-switch-to-occur last () activate)
-  "Switch to occur window automatically."
+  (after dhl-ibuffer-switch-to-occur last () activate)
+  "Switch to `occur' window automatically."
   (other-window 1))
 
 
@@ -1764,9 +1774,12 @@ prevents using commands with prefix arguments."
 ;;;; misc functions
 ;;;;
 
-(defun insert-date (prefix)
-  "Insert the current date. With prefix-argument, use ISO format. With
-   two prefix arguments, write out the day and month name."
+(defun dhl-insert-date (prefix)
+  "Insert the current date. PREFIX switches the output format.
+
+Without an explicit PREFIX (i.e. 1), use german output format.
+With a PREFIX of 4, use ISO format. With a PREFIX of 16, write
+out the day and month name."
   (interactive "P")
   (let ((format (cond ((not prefix) "%d.%m.%Y")
                       ((not prefix) "%d.%m.%y")
@@ -1775,10 +1788,13 @@ prevents using commands with prefix arguments."
         (system-time-locale "de_DE"))
     (insert (format-time-string format))))
 
-(defun define-keys (mode-map keybindings)
-  "Takes a mode map, and a list of (key function-designator)
-lists. The functions are bound to the keys in the given mode-map.
-Keys are in kbd format."
+(defun dhl-define-keys (mode-map keybindings)
+  "Define multiple KEYBINDINGS for MODE-MAP at once.
+
+Take a MODE-MAP, and a list of (KEY FUNCTION-DESIGNATOR) lists.
+Bind the functions to their respective KEY in the given MODE-MAP.
+Keys are expected to be in kbd format. If KEY is a list of keys,
+bind all of them to the respective function."
   (mapc (lambda (keybinding)
           (destructuring-bind (keys function) keybinding
             (funcall (if (consp keys) #'mapcar #'funcall)
@@ -1802,8 +1818,8 @@ the respective function."
                      keys)))
         keybindings))
 
-(defun kill-all-rnc-input-buffers ()
-  "Closes all Rnc Input buffers."
+(defun dhl-kill-all-rnc-input-buffers ()
+  "Close all RNC Input buffers."
   (interactive)
   (dolist (b (buffer-list))
     (when (string-match "RNC Input" (buffer-name b))
@@ -1816,7 +1832,7 @@ the respective function."
 
 (defadvice split-window
   (after dhl-window-splitting-advice last () activate)
-  "Open other-buffer in vertical split window."
+  "Open `other-buffer' in vertical split window."
   (set-window-buffer (next-window) (other-buffer)))
 
 
