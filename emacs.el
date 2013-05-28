@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-05-25 15:41:52 dhl>
+;;;;; Time-stamp: <2013-05-28 13:19:27 dhl>
 ;;;;;
 
 
@@ -104,18 +104,18 @@
 (add-hook 'slime-mode-hook
           (lambda ()
             (dhl-define-keys slime-mode-map
-                '(("C-c s" slime-selector)
-                  ("C-j" newline-and-indent)
-                  ("TAB" slime-indent-and-complete-symbol)
-                  ("C-c C-d c" cltl2-lookup)
-                  ("C-c d" slime-documentation)))))
+                             '(("C-c s" slime-selector)
+                               ("C-j" newline-and-indent)
+                               ("TAB" slime-indent-and-complete-symbol)
+                               ("C-c C-d c" cltl2-lookup)
+                               ("C-c d" slime-documentation)))))
 
 (add-hook 'slime-repl-mode-hook
           (lambda ()
             (dhl-define-keys slime-repl-mode-map
-                '(("C-c s" slime-selector)
-                  ("C-c C-d c" cltl2-lookup)
-                  ("C-c d" slime-documentation)))))
+                             '(("C-c s" slime-selector)
+                               ("C-c C-d c" cltl2-lookup)
+                               ("C-c d" slime-documentation)))))
 
 ;; correct repl cursor position after compilation
 (add-hook 'slime-compilation-finished-hook
@@ -211,30 +211,30 @@
 (add-hook 'paredit-mode-hook
           (lambda ()
             (dhl-define-keys paredit-mode-map
-                '((")" paredit-close-parenthesis)
-                  ("M-)" paredit-close-parenthesis-and-newline)
-                  ("}" paredit-close-curly)
-                  ("{" paredit-open-curly)
-                  ("M-{" paredit-wrap-curly)
-                  ("M-[" paredit-wrap-square)
-                  ("M-f" paredit-forward)
-                  ("C-M-f" forward-word)
-                  ("M-b" paredit-backward)
-                  ("C-M-b" backward-word)
-                  ("M-u" backward-up-list)
-                  ("C-M-u" upcase-word)
-                  ("M-ö" down-list)
-                  ("M-t" transpose-sexps)
-                  ("C-M-t" transpose-words)
-                  ("<M-backspace>" paredit-backward-kill-word)
-                  ("<C-backspace>" backward-kill-sexp)
-                  ("M-k" kill-sexp)
-                  ("M-a" beginning-of-defun)
-                  ("M-e" end-of-defun)
-                  ("C-M-a" backward-sentence)
-                  ("C-M-e" forward-sentence)
-                  ("M-q" indent-pp-sexp)
-                  ("C-M-q" fill-paragraph)))))
+                             '((")" paredit-close-parenthesis)
+                               ("M-)" paredit-close-parenthesis-and-newline)
+                               ("}" paredit-close-curly)
+                               ("{" paredit-open-curly)
+                               ("M-{" paredit-wrap-curly)
+                               ("M-[" paredit-wrap-square)
+                               ("M-f" paredit-forward)
+                               ("C-M-f" forward-word)
+                               ("M-b" paredit-backward)
+                               ("C-M-b" backward-word)
+                               ("M-u" backward-up-list)
+                               ("C-M-u" upcase-word)
+                               ("M-ö" down-list)
+                               ("M-t" transpose-sexps)
+                               ("C-M-t" transpose-words)
+                               ("<M-backspace>" paredit-backward-kill-word)
+                               ("<C-backspace>" backward-kill-sexp)
+                               ("M-k" kill-sexp)
+                               ("M-a" beginning-of-defun)
+                               ("M-e" end-of-defun)
+                               ("C-M-a" backward-sentence)
+                               ("C-M-e" forward-sentence)
+                               ("M-q" indent-pp-sexp)
+                               ("C-M-q" fill-paragraph)))))
 
 
 ;;;;
@@ -275,8 +275,10 @@
 
 (setq inferior-qi-program
       (case system-type
-        (windows-nt "C:/Users/dhl/QiII1.06SBCL/sbcl.exe --noinform --core c:/Users/dhl/QiII1.06SBCL/Qi.core")
-        (cygwin "~/build/QiII1.06SBCL/sbcl.exe --noinform --core c:/cygwin/home/danlei/build/QiII1.06SBCL/Qi.core")))
+        (windows-nt (concat "C:/Users/dhl/QiII1.06SBCL/sbcl.exe --noinform "
+                            "--core c:/Users/dhl/QiII1.06SBCL/Qi.core"))
+        (cygwin (concat "~/build/QiII1.06SBCL/sbcl.exe --noinform --core "
+                        "c:/cygwin/home/danlei/build/QiII1.06SBCL/Qi.core"))))
 
 
 ;;;;
@@ -289,7 +291,7 @@
  'inferior-scheme-mode-hook
  (lambda ()
    (dhl-define-keys inferior-scheme-mode-map
-       '(("M-TAB" hippie-expand)))))
+                    '(("M-TAB" hippie-expand)))))
 
 (when (require 'quack nil t)
   (setq quack-remap-find-file-bindings-p nil)
@@ -300,7 +302,7 @@
    'inferior-scheme-mode-hook
    (lambda ()
      (dhl-define-keys inferior-scheme-mode-map
-         '(("TAB" scheme-complete-or-indent)))
+                      '(("TAB" scheme-complete-or-indent)))
      (make-local-variable 'eldoc-documentation-function)
      (setq eldoc-documentation-function 'scheme-get-current-symbol-info)
      (eldoc-mode 1)))
@@ -308,7 +310,7 @@
    'scheme-mode-hook
    (lambda ()
      (dhl-define-keys inferior-scheme-mode-map
-         '(("TAB" scheme-complete-or-indent)))
+                      '(("TAB" scheme-complete-or-indent)))
      (make-local-variable 'eldoc-documentation-function)
      (setq eldoc-documentation-function 'scheme-get-current-symbol-info)
      (eldoc-mode 1))))
@@ -337,7 +339,8 @@
 
 (setq j-path "/cygdrive/c/Dokumente und Einstellungen/danlei/j602/bin/")
 ;(setq j-dictionary-url "http://www.jsoftware.com/help/dictionary/")
-(setq j-dictionary-url "file:///C:/Dokumente und Einstellungen/danlei/j602/help/dictionary/")
+(setq j-dictionary-url
+      "file:///C:/Dokumente und Einstellungen/danlei/j602/help/dictionary/")
 
 
 ;;;;
@@ -354,10 +357,10 @@
  'ruby-mode-hook
  (lambda ()
    (dhl-define-keys ruby-mode-map
-       '(("C-M-x" ruby-send-definition)
-         ("C-c C-c" dhl-ruby-send-buffer)
-         ("C-c c" dhl-ruby-send-buffer)
-         ("C-c h" dhl-ruby-browse-class-documentation)))))
+                    '(("C-M-x" ruby-send-definition)
+                      ("C-c C-c" dhl-ruby-send-buffer)
+                      ("C-c c" dhl-ruby-send-buffer)
+                      ("C-c h" dhl-ruby-browse-class-documentation)))))
 
 (defun dhl-ruby-send-buffer ()
   "Send the current buffer to the inferior Ruby process."
@@ -478,7 +481,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;;;
 
 (when (eq system-type 'windows-nt)
- (setq maxima-command "C:/Program Files/Maxima-5.25.0/bin/maxima.bat"))
+  (setq maxima-command "C:/Program Files/Maxima-5.25.0/bin/maxima.bat"))
 
 (add-to-list 'load-path "~/.emacs.d/maxima/")
 
@@ -538,17 +541,17 @@ CLASS-NAME is queried in the minibuffer, defaulting to
  'haskell-mode-hook
  (lambda ()
    (dhl-define-keys haskell-mode-map
-       '(("RET" newline)
-         ("TAB" haskell-indent-cycle)
-         ("C-c =" haskell-indent-insert-equal)
-         ("C-c |" haskell-indent-insert-guard)
-         ("C-c o" haskell-indent-insert-otherwise)
-         ("C-c w" haskell-indent-insert-where)
-         ("C-c ." haskell-indent-align-guards-and-rhs)
-;        ("C-c h" haskell-hoogle)
-;        ("C-c t" inferior-haskell-type)
-         ("C-c i" inferior-haskell-info)
-         ("M-." inferior-haskell-find-definition)))))
+                    '(("RET" newline)
+                      ("TAB" haskell-indent-cycle)
+                      ("C-c =" haskell-indent-insert-equal)
+                      ("C-c |" haskell-indent-insert-guard)
+                      ("C-c o" haskell-indent-insert-otherwise)
+                      ("C-c w" haskell-indent-insert-where)
+                      ("C-c ." haskell-indent-align-guards-and-rhs)
+;                     ("C-c h" haskell-hoogle)
+;                     ("C-c t" inferior-haskell-type)
+                      ("C-c i" inferior-haskell-info)
+                      ("M-." inferior-haskell-find-definition)))))
 
 (when (eq system-type 'cygwin)
   (defadvice inferior-haskell-load-file
@@ -624,8 +627,8 @@ CLASS-NAME is queried in the minibuffer, defaulting to
  'fsharp-mode-hook
  (lambda ()
    (dhl-define-keys fsharp-mode-map
-     `(("C-c b" fsharp-mark-block)
-       ("C-c r" fsharp-run-executable-file)))))
+                    `(("C-c b" fsharp-mark-block)
+                      ("C-c r" fsharp-run-executable-file)))))
 
 
 ;;;;
@@ -678,8 +681,8 @@ CLASS-NAME is queried in the minibuffer, defaulting to
           (lambda ()
             (slime-js-minor-mode 1)
             (dhl-define-keys slime-js-minor-mode-map
-              `(("M-n" next-error)
-                ("M-p" previous-error)))))
+                             `(("M-n" next-error)
+                               ("M-p" previous-error)))))
 
 (setq-default js2-basic-offset 2)
 
@@ -724,9 +727,9 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (add-hook 'coffee-mode-hook
           (lambda ()
             (dhl-define-keys coffee-mode-map
-              '((("C-c C-l" "C-c l") dhl-coffee-send-buffer)
-                (("C-c C-r" "C-c r") dhl-coffee-send-region)
-                (("C-c C-k" "C-c k") coffee-compile-buffer)))))
+                             '((("C-c C-l" "C-c l") dhl-coffee-send-buffer)
+                               (("C-c C-r" "C-c r") dhl-coffee-send-region)
+                               (("C-c C-k" "C-c k") coffee-compile-buffer)))))
 
 
 (defun dhl-coffee-send-region* (start end)
@@ -804,20 +807,21 @@ line options may be given in OPTIONS."
 (add-hook 'nxml-mode-hook
           (lambda ()
             (dhl-define-keys nxml-mode-map
-                `(("TAB" ,(lambda (n)
-                            (interactive "p")
-                            (indent-for-tab-command)
-                            (nxml-complete)))
-                  ("<C-return>" ,(lambda (n)
+                             `(("TAB" ,(lambda (n)
+                                         (interactive "p")
+                                         (indent-for-tab-command)
+                                         (nxml-complete)))
+                               ("<C-return>"
+                                ,(lambda (n)
                                    (interactive "p")
                                    (nxml-complete)
                                    (nxml-balanced-close-start-tag-block)))
-                  ("M-ö" nxml-down-element)
-                  ("M-u" nxml-backward-up-element)
-                  ("M-n" nxml-forward-element)
-                  ("M-p" nxml-backward-element)
-                  ("C-M-ö" nxml-backward-down-element)
-                  ("C-M-n" nxml-up-element)))))
+                               ("M-ö" nxml-down-element)
+                               ("M-u" nxml-backward-up-element)
+                               ("M-n" nxml-forward-element)
+                               ("M-p" nxml-backward-element)
+                               ("C-M-ö" nxml-backward-down-element)
+                               ("C-M-n" nxml-up-element)))))
 
 
 ;;;;
@@ -858,9 +862,9 @@ line options may be given in OPTIONS."
           (lambda ()
             (eldoc-mode 1)
             (dhl-define-keys lisp-interaction-mode-map
-              '(("TAB" dhl-lisp-indent-and-complete)
-                ("<C-return>" eval-print-last-sexp)
-                ("<C-return>" dhl-lisp-eval-print-defun)))))
+                             '(("TAB" dhl-lisp-indent-and-complete)
+                               ("<C-return>" eval-print-last-sexp)
+                               ("<C-return>" dhl-lisp-eval-print-defun)))))
 
 (define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
 
@@ -1152,9 +1156,11 @@ using commands with prefix arguments."
 ;(make-variable-buffer-local 'erc-hide-list)
 
 (setq erc-button-url-regexp
-      "\\([-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]+\\.\\)+[-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]*[-a-zA-Z0-9\\/]")
+      (concat "\\([-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]+\\.\\)+"
+              "[-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]*[-a-zA-Z0-9\\/]"))
 
-(setq erc-track-exclude-types '("NICK" "MODE" "324" "329" "332" "333" "353" "477"))
+(setq erc-track-exclude-types
+      '("NICK" "MODE" "324" "329" "332" "333" "353" "477"))
 
 (setq erc-spelling-dictionaries '(("#bsdforen.de" "/dev/null"))) ; FIXME
 
@@ -1178,10 +1184,12 @@ using commands with prefix arguments."
 ;; (add-hook 'erc-after-connect
 ;;           (lambda (SERVER NICK)
 ;;             (cond ((string-match "freenode\\.net" SERVER)
-;;                    (erc-message "PRIVMSG" (concat "NickServ identify "
-;;                                                   (dhl-erc-password 'freenode)))
-;;                    (erc-message "PRIVMSG" (concat "NickServ ghost "
-;;                                                   (dhl-erc-nick 'freenode)))
+;;                    (erc-message "PRIVMSG"
+;;                                 (concat "NickServ identify "
+;;                                         (dhl-erc-password 'freenode)))
+;;                    (erc-message "PRIVMSG"
+;;                                 (concat "NickServ ghost "
+;;                                         (dhl-erc-nick 'freenode)))
 ;;                    (erc-message "NICK" (dhl-erc-nick 'freenode))))))
 
 
@@ -1204,7 +1212,7 @@ using commands with prefix arguments."
 (add-hook 'dired-mode-hook
           (lambda ()
             (dhl-define-keys dired-mode-map
-                '(("e" wdired-change-to-wdired-mode)))
+                             '(("e" wdired-change-to-wdired-mode)))
             (when (eq system-type 'darwin)
               (define-key dired-mode-map (kbd "C-c o")
                 'dhl-dired-open-mac))))
@@ -1319,19 +1327,19 @@ using commands with prefix arguments."
 
 ;; (defun dhl-ibuffer-hook ()
 ;;   (ibuffer-define-sorter pathname
-;;                          (:documentation
-;;                           "Sort the buffers by their pathname."
-;;                           :description "path")
-;;                          (string-lessp (with-current-buffer (car a)
-;;                                          (or buffer-file-name
-;;                                              (if (eq major-mode 'dired-mode)
-;;                                                  (expand-file-name dired-directory))
-;;                                              "~"))
-;;                                        (with-current-buffer (car b)
-;;                                          (or buffer-file-name
-;;                                              (if (eq major-mode 'dired-mode)
-;;                                                  (expand-file-name dired-directory))
-;;                                              "~"))))
+;;     (:documentation
+;;      "Sort the buffers by their pathname."
+;;      :description "path")
+;;     (string-lessp (with-current-buffer (car a)
+;;                     (or buffer-file-name
+;;                         (if (eq major-mode 'dired-mode)
+;;                             (expand-file-name dired-directory))
+;;                         "~"))
+;;                   (with-current-buffer (car b)
+;;                     (or buffer-file-name
+;;                         (if (eq major-mode 'dired-mode)
+;;                             (expand-file-name dired-directory))
+;;                         "~"))))
 ;;   (define-key ibuffer-mode-map (kbd "s p") 'ibuffer-do-sort-by-pathname))
 
 ;; (add-hook 'ibuffer-mode-hooks 'dhl-ibuffer-hook)
@@ -1516,7 +1524,8 @@ using commands with prefix arguments."
 </style>")
 
 (setq org-export-html-scripts "
-<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>
+<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\">
+</script>
 <script type=\"text/javascript\">
   function CodeHighlightOn(elem, id) {
     var target = document.getElementById(id);
@@ -1567,20 +1576,20 @@ using commands with prefix arguments."
 
 
 (add-to-list 'org-export-latex-classes
-  `("article-de"
-    ,(concat "\\documentclass[a4paper,\n"
-             "               headings=small,\n"
-             "               captions=tableheading]\n"
-             "              {scrartcl}\n"
-             "[NO-DEFAULT-PACKAGES]\n"
-             "[PACKAGES]\n"
-             "[EXTRA]\n"
-             "\\usepackage[ngerman]{babel}")
-    ("\\section{%s}" . "\\section*{%s}")
-    ("\\subsection{%s}" . "\\subsection*{%s}")
-    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-    ("\\paragraph{%s}" . "\\paragraph*{%s}")
-    ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+             `("article-de"
+               ,(concat "\\documentclass[a4paper,\n"
+                        "               headings=small,\n"
+                        "               captions=tableheading]\n"
+                        "              {scrartcl}\n"
+                        "[NO-DEFAULT-PACKAGES]\n"
+                        "[PACKAGES]\n"
+                        "[EXTRA]\n"
+                        "\\usepackage[ngerman]{babel}")
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
 (setq org-export-latex-packages-alist
       '(("utf8" "inputenc" t)
@@ -2007,14 +2016,14 @@ the respective function."
 
 (setq gnus-secondary-select-methods
       '((nnimap "imap.gmail.com"
-         (nnimap-address "imap.gmail.com")
-         (nnimap-server-port 993)
-         (nnimap-stream ssl)
-;        (nnimap-authenticator login)      ;; when used without ~/.authinfo
-         (nnir-search-engine imap))
+                (nnimap-address "imap.gmail.com")
+                (nnimap-server-port 993)
+                (nnimap-stream ssl)
+;               (nnimap-authenticator login)    ;; when used without ~/.authinfo
+                (nnir-search-engine imap))
         (nntp "news.gmane.org"
-         (nntp-address "news.gmane.org")
-         (nntp-port-number 119))))
+              (nntp-address "news.gmane.org")
+              (nntp-port-number 119))))
 
 ;; ~/.authinfo:
 ;; machine imap.gmail.com login me@foo.com password pass port 993
@@ -2031,7 +2040,8 @@ the respective function."
 ;; ~/.authinfo:
 ;; machine smtp.gmail.com login name@gmail.com password pass port 587
 
-;; (add-hook 'message-setup-hook '(lambda() (use-hard-newlines t t))) ;; format=flowed
+;; (add-hook 'message-setup-hook
+;;            (lambda () (use-hard-newlines t t))) ;; format=flowed
 
 
 ;; (setq message-alternative-emails
