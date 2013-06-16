@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-05-28 13:19:27 dhl>
+;;;;; Time-stamp: <2013-06-16 20:10:36 dhl>
 ;;;;;
 
 
@@ -1657,6 +1657,8 @@ using commands with prefix arguments."
             (variable-pitch-mode 1)
             (set-input-method 'greek-babel)
             (toggle-input-method)))
+
+(setq flashcard-coding-system 'utf-8-unix)
 
 
 ;;;;
