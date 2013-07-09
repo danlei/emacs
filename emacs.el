@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-06-16 20:10:36 dhl>
+;;;;; Time-stamp: <2013-07-09 08:02:24 dhl>
 ;;;;;
 
 
@@ -756,6 +756,8 @@ CLASS-NAME is queried in the minibuffer, defaulting to
             (local-set-key (kbd "M-p") 'previous-error)
             (local-set-key (kbd "M-n") 'next-error)
             (subword-mode 1)
+            (setq comment-start "// "
+                  comment-end "")
             (c-toggle-electric-state -1)))
 
 (defun dhl-gcc-compile-command (&optional options)
