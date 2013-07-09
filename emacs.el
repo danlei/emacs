@@ -1660,7 +1660,8 @@ using commands with prefix arguments."
             (set-input-method 'greek-babel)
             (toggle-input-method)))
 
-(setq flashcard-coding-system 'utf-8-unix)
+(setq flashcard-coding-system 'utf-8-unix
+      flashcard-method-leitner-compartment-sizes [40 80 200 320 560])
 
 
 ;;;;
