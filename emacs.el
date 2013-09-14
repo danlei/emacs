@@ -34,7 +34,8 @@
                         ,(getenv "PATH"))
                       ";")))
   (gnu/linux
-   (setenv "LC_MESSAGES" "C")))
+   (setenv "LC_MESSAGES" "C")
+   (setenv "MANWIDTH" "72")))
 
 (setenv "EDITOR" "emacsclient")
 
