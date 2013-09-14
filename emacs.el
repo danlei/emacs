@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-07-09 08:02:24 dhl>
+;;;;; Time-stamp: <2013-09-14 03:14:52 dhl>
 ;;;;;
 
 
@@ -1057,7 +1057,7 @@ using commands with prefix arguments."
 ;;;;
 
 (mapc (apply-partially 'add-to-list 'load-path)
-      '("~/.emacs.d/magit/contrib" "~/.emacs.d/magit/"))
+      '("~/.emacs.d/magit/contrib" "~/.emacs.d/magit/" "~/.emacs.d/git-modes/"))
 
 (when (require 'magit nil t)
   (add-to-list 'Info-additional-directory-list
