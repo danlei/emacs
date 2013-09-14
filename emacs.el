@@ -751,6 +751,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (setq-default c-basic-offset 2)
 
+;; maybe this would be better in c-mode-common-hook
 (add-hook 'c-mode-hook
           (lambda ()
             (local-set-key (kbd "C-c c") 'compile)
@@ -759,6 +760,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
             (subword-mode 1)
             (setq comment-start "// "
                   comment-end "")
+            (c-set-offset 'case-label '+)
             (c-toggle-electric-state -1)))
 
 (defun dhl-gcc-compile-command (&optional options)
