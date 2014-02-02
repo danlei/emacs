@@ -738,41 +738,6 @@ CLASS-NAME is queried in the minibuffer, defaulting to
      (replace-regexp-in-string "\\[[0-9]+[GKJ]" "" output))))
 
 
-(defadvice coffee-repl
-  (after dhl-coffee-repl-purge-echoes last () activate)
-  "Get rid of command echos in the Coffee REPL."
-  (setq comint-process-echoes t))
-
-(defun dhl-coffee-send-region ()
-  "Send the region to the Coffee process."
-  (interactive)
-  (let ((coffee-process (get-process "CoffeeREPL")))
-    (comint-send-string coffee-process "\n")
-    (sleep-for 0 5)
-    (comint-send-string coffee-process
-                        (concat (buffer-substring-no-properties (point) (mark))
-                                "\n"))))
-
-(defun dhl-coffee-send-buffer ()
-  "Send the contents of the current buffer to the Coffee process."
-  (interactive)
-  (dhl-coffee-send-region (point-min) (point-max)))
-
-(add-hook 'coffee-mode-hook
-          (lambda ()
-            (dhl-define-keys coffee-mode-map
-                             '((("C-c C-l" "C-c l") dhl-coffee-send-buffer)
-                               (("C-c C-r" "C-c r") dhl-coffee-send-region)
-                               (("C-c C-k" "C-c k") coffee-compile-buffer)))))
-
-
-(defun dhl-coffee-send-region* (start end)
-  "Send the current region to the inferior Coffee process."
-  (interactive "r")
-  (send-region "*CoffeeREPL*" start end)
-  (send-string "*CoffeeREPL*" "\n"))
-
-
 ;;;;
 ;;;; c
 ;;;;
