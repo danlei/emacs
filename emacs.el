@@ -1717,6 +1717,8 @@ using commands with prefix arguments."
       enable-recursive-minibuffers t
       comment-empty-lines nil
       set-mark-command-repeat-pop t
+      epa-file-cache-passphrase-for-symmetric-encryption t
+      epa-file-select-keys 'no
       user-full-name "Daniel H. Leidisch"
       user-mail-address "public@leidisch.net")
 
