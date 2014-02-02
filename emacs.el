@@ -1,10 +1,7 @@
 ;;;;; -*- emacs-lisp -*-
 ;;;;;
-;;;;; Emacs Configuration File (.emacs)
+;;;;; Emacs configuration (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2014-02-02 06:16:08 dhl>
-;;;;;
-
 
 (require 'cl)
 
