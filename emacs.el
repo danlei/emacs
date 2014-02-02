@@ -552,9 +552,11 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
 (add-to-list 'auto-mode-alist '("\\.lhs$" . literal-haskell-mode))
 
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;; TODO:
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 (setq haskell-hoogle-command "hoogle")
