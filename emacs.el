@@ -1135,6 +1135,17 @@ using commands with prefix arguments."
 
 
 ;;;;
+;;;; multiple cursors
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/multiple-cursors.el")
+
+(when (require 'multiple-cursors nil t)
+  (global-set-key (kbd "S-SPC") 'mc/edit-lines)
+  (global-set-key (kbd "C-,") 'mc/mark-next-like-this))
+
+
+;;;;
 ;;;; erc
 ;;;;
 
