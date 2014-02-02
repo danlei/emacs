@@ -13,7 +13,7 @@
 ;;;; environment
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/elisp/")
 
 (case system-type
   (windows-nt
@@ -58,12 +58,12 @@
 
 (if (< emacs-major-version 24)
     (progn
-      (add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
+      (add-to-list 'load-path "~/.emacs.d/elisp/color-theme-6.6.0/")
       (when (require 'color-theme nil t)
         (color-theme-initialize)
         (and (require 'color-theme-dhl-hober nil t)
              (color-theme-dhl-hober))))
-  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/elisp/themes/")
   (load-theme 'zenburn t))
 
 
@@ -79,7 +79,7 @@
 ;;;
 
 (mapc (apply-partially 'add-to-list 'load-path)
-      '("~/.emacs.d/slime/" "~/.emacs.d/slime/contrib/"))
+      '("~/.emacs.d/elisp/slime/" "~/.emacs.d/elisp/slime/contrib/"))
 
 (when (require 'slime nil t)
   (slime-setup '(slime-fancy
@@ -191,10 +191,12 @@
 ;;;; paredit
 ;;;;
 
+(add-to-list 'load-path "~/.emacs.d/elisp/paredit/")
+
 (modify-syntax-entry ?[ "(]" lisp-mode-syntax-table)
 (modify-syntax-entry ?] ")[" lisp-mode-syntax-table)
 
-(require 'eldoc)
+(require 'eldoc)			; TODO: why is this here?
 
 (when (require 'paredit nil t)
   (mapc (lambda (hook) (add-hook hook (lambda () (paredit-mode 1))))
@@ -246,7 +248,7 @@
 ;;;; clojure
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/clojure-mode/")
+(add-to-list 'load-path "~/.emacs.d/elisp/clojure-mode/")
 
 (when (require 'clojure-mode nil t)
   (add-hook 'clojure-mode-hook
@@ -325,7 +327,9 @@
 ;;;; newlisp
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/newlisp-mode/")
+;; TODO: upgrade?
+
+(add-to-list 'load-path "~/.emacs.d/elisp/newlisp-mode/")
 
 (add-to-list 'auto-mode-alist '("\\.lsp\\'" . newlisp-mode))
 
@@ -351,6 +355,10 @@
 ;;;;
 ;;;; ruby
 ;;;;
+
+;; TODO: use a proper ruby mode
+
+(add-to-list 'load-path "~/.emacs.d/elisp/inf-ruby/")
 
 (autoload 'run-ruby "inf-ruby.el" "Run irb from Emacs." t)
 ;(setq ruby-program-name "irb")
@@ -396,7 +404,10 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;;; python
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/python.el/")
+;; TODO: update config for use with bundled python mode --
+;;       but this already seems to work
+
+;(add-to-list 'load-path "~/.emacs.d/elisp/python.el/")
 
 (require 'python nil t)
 
@@ -434,7 +445,9 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;;; perl
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/Sepia-0.992-S3oGPo/")
+;; TODO: update this to work under linux and a newer version
+
+(add-to-list 'load-path "~/.emacs.d/elisp/Sepia-0.992-S3oGPo/")
 
 (when (require 'sepia nil t)
   (add-to-list 'auto-mode-alist '("\\.pl$" . sepia-mode))
@@ -443,7 +456,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
   (add-to-list 'interpreter-mode-alist '("miniperl" . sepia-mode))
 
   (setq sepia-perl5lib
-        (list (expand-file-name "~/.emacs.d/Sepia-0.992-S3oGPo/lib")))
+        (list (expand-file-name "~/.emacs.d/elisp/Sepia-0.992-S3oGPo/lib")))
 ; (defalias 'perl-mode 'sepia-mode)
   (setq sepia-program-name "c:/Perl/bin/perl"))
 
@@ -485,10 +498,12 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;;; maxima
 ;;;;
 
+;; TODO: make this work properly under linux
+
 (when (eq system-type 'windows-nt)
   (setq maxima-command "C:/Program Files/Maxima-5.25.0/bin/maxima.bat"))
 
-(add-to-list 'load-path "~/.emacs.d/maxima/")
+(add-to-list 'load-path "~/.emacs.d/elisp/maxima/")
 
 (when (require 'maxima nil t)
   (add-to-list 'auto-mode-alist '("\\.max$" . maxima-mode)))
@@ -510,9 +525,10 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;;; haskell
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/haskell-mode/")
+(add-to-list 'load-path "~/.emacs.d/elisp/haskell-mode/")
 
-(and (require 'inf-haskell nil t)
+(and (require 'haskell-mode)
+     (require 'inf-haskell nil t)
      (require 'haskell-indent nil t))
 
 (require 'ghc-core nil t)
@@ -572,7 +588,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;; ghc-mod
 ;;;
 
-;; (add-to-list 'load-path "~/.emacs.d/ghc-mod/")
+;; (add-to-list 'load-path "~/.emacs.d/elisp/ghc-mod/")
 
 ;; (setq ghc-completion-key (kbd "<C-tab>")
 ;;       ghc-document-key (kbd "C-c d")
@@ -609,7 +625,9 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;;; f#
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/fsharp/")
+;; TODO: make this work under linux
+
+(add-to-list 'load-path "~/.emacs.d/elisp/fsharp/")
 
 (require 'fsharp nil t)
 
@@ -660,7 +678,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;;; java
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/javarun/")
+(add-to-list 'load-path "~/.emacs.d/elisp/javarun/")
 
 (when (require 'javarun nil t)
   (when (eq system-type 'windows-nt)
@@ -674,6 +692,8 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;;;
 ;;;; javascript
 ;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/js2-mode/")
 
 (setq-default js-indent-level 2)
 
@@ -699,7 +719,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;;; coffee
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/coffee-mode/")
+(add-to-list 'load-path "~/.emacs.d/elisp/coffee-mode/")
 
 (when (require 'coffee-mode nil t)
   (add-to-list 'auto-mode-alist '("\.coffee$" . coffee-mode))
@@ -806,6 +826,8 @@ line options may be given in OPTIONS."
 ;;;; xml
 ;;;;
 
+(add-to-list 'load-path "~/.emacs.d/elisp/rnc-mode/")
+
 (when (require 'rnc-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.rnc\\'" . rnc-mode))
   (setq rnc-indent-level 2))
@@ -904,7 +926,7 @@ line options may be given in OPTIONS."
 ;;;; ess
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/ess-5.13/lisp/")
+(add-to-list 'load-path "~/.emacs.d/elisp/ESS/lisp/")
 
 (require 'ess-site nil t)
 
@@ -986,7 +1008,9 @@ line options may be given in OPTIONS."
 ;;;; ido
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/smex/")
+;; TODO: should I keep this? never use it.
+
+(add-to-list 'load-path "~/.emacs.d/elisp/smex/")
 
 (when (require 'ido nil t)
   (ido-mode 1)
@@ -1005,7 +1029,7 @@ line options may be given in OPTIONS."
 
 (when (require 'smex nil t)
   (smex-initialize)
-  (setq smex-save-file "~/.smex")
+  (setq smex-save-file "~/.emacs.d/smex")
   (smex-auto-update))
 
 (defun dhl-invoke-smex (x)
@@ -1065,11 +1089,13 @@ using commands with prefix arguments."
 ;;;;
 
 (mapc (apply-partially 'add-to-list 'load-path)
-      '("~/.emacs.d/magit/contrib" "~/.emacs.d/magit/" "~/.emacs.d/git-modes/"))
+      '("~/.emacs.d/elisp/magit/contrib"
+        "~/.emacs.d/elisp/magit/"
+        "~/.emacs.d/elisp/git-modes/"))
 
 (when (require 'magit nil t)
   (add-to-list 'Info-additional-directory-list
-               (expand-file-name "~/.emacs.d/magit/")))
+               (expand-file-name "~/.emacs.d/elisp/magit/")))
 
 (require 'rebase-mode nil t)
 
@@ -1082,13 +1108,13 @@ using commands with prefix arguments."
 ;;;
 
 (if (< emacs-major-version 24)
-    (add-to-list 'load-path "~/.emacs.d/tabulated-list.el/"))
+    (add-to-list 'load-path "~/.emacs.d/elisp/tabulated-list.el/"))
 
 (mapc (apply-partially 'add-to-list 'load-path)
-      '("~/.emacs.d/logito/"
-        "~/.emacs.d/pcache/"
-        "~/.emacs.d/gh.el/"
-        "~/.emacs.d/gist.el/"))
+      '("~/.emacs.d/elisp/logito/"
+        "~/.emacs.d/elisp/pcache/"
+        "~/.emacs.d/elisp/gh.el/"
+        "~/.emacs.d/elisp/gist.el/"))
 
 (require 'gist nil t)
 
@@ -1124,7 +1150,7 @@ using commands with prefix arguments."
 ;;;; expand-region
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/expand-region.el/")
+(add-to-list 'load-path "~/.emacs.d/elisp/expand-region.el/")
 
 (when (require 'expand-region nil t)
   (global-set-key (kbd "C-.") 'er/expand-region))
@@ -1134,7 +1160,8 @@ using commands with prefix arguments."
 ;;;; erc
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/erc-5.3-extras/")
+;; TODO: upgrade this
+(add-to-list 'load-path "~/.emacs.d/elisp/erc-5.3-extras/")
 
 (when (require 'erc nil t)
 ; (require 'erc-match nil t)
@@ -1391,15 +1418,15 @@ using commands with prefix arguments."
 ;;;;
 
 (mapc (apply-partially 'add-to-list 'load-path)
-      '("~/.emacs.d/org-mode/lisp/"
-        "~/.emacs.d/org-mode/contrib/lisp/"))
+      '("~/.emacs.d/elisp/org-mode/lisp/"
+        "~/.emacs.d/elisp/org-mode/contrib/lisp/"))
 
 (require 'org nil t)
-(require 'org-latex nil t)
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
-(plist-put org-format-latex-options :scale 1.2)
+(add-to-list 'Info-additional-directory-list
+             (expand-file-name "~/.emacs.d/elisp/org-mode/doc/"))
 
 (add-hook 'org-mode-hook
           (lambda ()
@@ -1652,6 +1679,8 @@ using commands with prefix arguments."
 ;;;; flashcard
 ;;;;
 
+;; TODO: still needed?
+
 (require 'flashcard nil t)
 
 (add-to-list 'auto-mode-alist '("\\.deck\\'" . flashcard-mode))
@@ -1676,6 +1705,8 @@ using commands with prefix arguments."
 ;;;; voctest
 ;;;;
 
+;; TODO: still needed?
+
 (require 'voctest nil t)
 
 (setq voctest-test-direction '(1 . 0))
@@ -1697,7 +1728,8 @@ using commands with prefix arguments."
         completion-pcm-complete-word-inserts-delimiters t
         completion-cycle-threshold 5))
 
-(add-to-list 'load-path "~/.emacs.d/gnugo/")
+;; TODO: keep this?
+;(add-to-list 'load-path "~/.emacs.d/elisp/gnugo/")
 
 (setq inhibit-startup-screen t
       initial-scratch-message nil
