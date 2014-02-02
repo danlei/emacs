@@ -437,7 +437,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (add-to-list 'load-path "~/.emacs.d/Sepia-0.992-S3oGPo/")
 
 (when (require 'sepia nil t)
-  (add-to-list 'auto-mode-alist '("\.pl$" . sepia-mode))
+  (add-to-list 'auto-mode-alist '("\\.pl$" . sepia-mode))
   (add-to-list 'interpreter-mode-alist '("perl" . sepia-mode))
   (add-to-list 'interpreter-mode-alist '("perl5" . sepia-mode))
   (add-to-list 'interpreter-mode-alist '("miniperl" . sepia-mode))
