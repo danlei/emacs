@@ -266,7 +266,9 @@
   (add-hook 'cider-mode-hook
             (lambda ()
               (subword-mode)
-              (cider-turn-on-eldoc-mode))))
+              (cider-turn-on-eldoc-mode)
+              (local-set-key (kbd "TAB"
+                                  'cider-repl-indent-and-complete-symbol)))))
 
 (setq cider-history-file "~/.emacs.d/cider-history"
       cider-popup-stacktraces-in-repl nil
