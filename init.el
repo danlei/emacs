@@ -1,6 +1,6 @@
 ;;;;; -*- emacs-lisp -*-
 ;;;;;
-;;;;; Emacs configuration (.emacs)
+;;;;; Emacs configuration (init.el)
 ;;;;;
 
 (require 'cl)
