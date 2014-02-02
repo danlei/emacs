@@ -1342,6 +1342,8 @@ using commands with prefix arguments."
                     (mode . tex-mode)))
          ("org" (or (name . "\\.org$")
                     (mode . org-mode)))
+         ("tf" (or (name . "\\.tf$")
+                   (mode . tinyfugue-mode)))
          ("text" (or (name . "\\.txt$")
                      (mode . text-mode)))
          ("dired" (mode . dired-mode))
@@ -1722,6 +1724,15 @@ using commands with prefix arguments."
 (add-hook 'voctest-mode-hook
           (lambda ()
             (variable-pitch-mode 1)))
+
+
+;;;;
+;;;; tf
+;;;;
+
+(when (require 'tinyfugue nil t)
+  (add-to-list 'auto-mode-alist '("\\.tf\\'" . tinyfugue-mode))
+  (add-to-list 'auto-mode-alist '("^\\.?tfrc\\'" . tinyfugue-mode)))
 
 
 ;;;;
