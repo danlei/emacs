@@ -210,7 +210,7 @@
           inferior-qi-mode-hook
           qi-mode-hook
           clojure-mode-hook
-          nrepl-mode-hook
+          cider-repl-mode-hook
           eval-expression-minibuffer-setup-hook))
   (setq clojure-enable-paredit t)
   (eldoc-add-command 'paredit-backward-delete 'paredit-close-round))
@@ -248,30 +248,38 @@
 ;;;; clojure
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/elisp/clojure-mode/")
+(mapc (apply-partially 'add-to-list 'load-path)
+      '("~/.emacs.d/elisp/clojure-mode/"
+        "~/.emacs.d/elisp/dash.el/"
+        "~/.emacs.d/elisp/epl/"
+        "~/.emacs.d/elisp/pkg-info.el/"
+        "~/.emacs.d/elisp/s.el/"
+        "~/.emacs.d/elisp/cider/"))
 
 (when (require 'clojure-mode nil t)
   (add-hook 'clojure-mode-hook
             (lambda ()
               (setq inferior-lisp-program (case system-type
                                             (windows-nt "cmd /c lein repl")
-                                            (t "lein repl")))
-              lisp-function-doc-command "(doc %s)\n"
-              lisp-var-doc-command "(doc %s)\n"
-              lisp-describe-sym-command "(doc %s)\n")))
+                                            (t "lein repl"))))))
 
+(when (require 'cider nil t)
+  (add-to-list 'same-window-buffer-names "*cider*")
+  (add-hook 'cider-interaction-mode-hook
+            (lambda ()
+              (subword-mode)
+              (cider-turn-on-eldoc-mode)))
+  (add-hook 'cider-mode-hook
+            (lambda ()
+              (subword-mode)
+              (cider-turn-on-eldoc-mode))))
 
-(add-to-list 'load-path "~/.emacs.d/nrepl/")
-
-(when (require 'nrepl nil t)
-  (add-to-list 'same-window-buffer-names "*nrepl*")
-  (add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
-  (add-hook 'nrepl-mode-hook 'subword-mode))
-
-(defadvice nrepl-default-err-handler
-  (after dhl-switch-to-nrepl-err-buffer last () activate)
-  "Switch to nREPL error window automatically."
-  (other-window 1))
+(setq cider-history-file "~/.emacs.d/cider-history"
+      cider-popup-stacktraces-in-repl nil
+      cider-popup-stacktraces nil
+      cider-auto-select-error-buffer t
+      cider-repl-wrap-history t
+      cider-repl-use-pretty-printing t)
 
 
 ;;;;
