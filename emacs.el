@@ -2,7 +2,7 @@
 ;;;;;
 ;;;;; Emacs Configuration File (.emacs)
 ;;;;;
-;;;;; Time-stamp: <2013-09-14 03:14:52 dhl>
+;;;;; Time-stamp: <2014-02-02 06:16:08 dhl>
 ;;;;;
 
 
@@ -189,7 +189,7 @@
 (modify-syntax-entry ?[ "(]" lisp-mode-syntax-table)
 (modify-syntax-entry ?] ")[" lisp-mode-syntax-table)
 
-(require 'eldoc)			; TODO: why is this here?
+(require 'eldoc)                        ; TODO: why is this here?
 
 (when (require 'paredit nil t)
   (mapc (lambda (hook) (add-hook hook (lambda () (paredit-mode 1))))
@@ -749,7 +749,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (setq-default c-basic-offset 2)
 
-;; maybe this would be better in c-mode-common-hook
+;; TODO:  maybe this would be better in c-mode-common-hook
 (add-hook 'c-mode-hook
           (lambda ()
             (local-set-key (kbd "C-c c") 'compile)
@@ -1114,6 +1114,8 @@ using commands with prefix arguments."
         (gnu/linux "google-chrome")))
 
 (setq browse-url-browser-function 'browse-url-generic)
+
+;; TODO: use eww?
 
 (when (member system-type '(cygwin gnu/linux))
   (add-to-list 'load-path "/usr/share/emacs/site-lisp/w3m/"))
@@ -1882,6 +1884,7 @@ using commands with prefix arguments."
 (prefer-coding-system       'utf-8-unix)
 (set-default-coding-systems 'utf-8-unix)
 
+;; TODO: is this really what I want?
 (setq tramp-syntax 'ftp)
 (setq tramp-default-method "ftp")
 
