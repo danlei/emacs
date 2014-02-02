@@ -1766,11 +1766,9 @@ using commands with prefix arguments."
 
 ;; (setq time-stamp-format "%:y-%02m-%02d %02H:%02M:%02S")
 
-(prefer-coding-system       'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
 (set-language-environment   'utf-8)
+(prefer-coding-system       'utf-8-unix)
+(set-default-coding-systems 'utf-8-unix)
 
 (setq tramp-syntax 'ftp)
 (setq tramp-default-method "ftp")
