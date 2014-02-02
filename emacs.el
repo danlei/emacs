@@ -82,8 +82,12 @@
       '("~/.emacs.d/slime/" "~/.emacs.d/slime/contrib/"))
 
 (when (require 'slime nil t)
-  (slime-setup '(slime-fancy slime-asdf slime-indentation
-                 slime-xref-browser slime-js)))
+  (slime-setup '(slime-fancy
+                 slime-asdf
+                 slime-indentation
+                 slime-xref-browser
+;                slime-js               ; TODO: setup slime-js
+                 )))
 
 (setq slime-enable-evaluate-in-emacs t
       slime-net-coding-system 'utf-8-unix
@@ -676,14 +680,15 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (when (require 'js2-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)))
 
+;; TODO: fix slime-js
 ;(require 'slime-js nil t)
 
-(add-hook 'js2-mode-hook
-          (lambda ()
-            (slime-js-minor-mode 1)
-            (dhl-define-keys slime-js-minor-mode-map
-                             `(("M-n" next-error)
-                               ("M-p" previous-error)))))
+;; (add-hook 'js2-mode-hook
+;;           (lambda ()
+;;             (slime-js-minor-mode 1)
+;;             (dhl-define-keys slime-js-minor-mode-map
+;;                              `(("M-n" next-error)
+;;                                ("M-p" previous-error)))))
 
 (setq-default js2-basic-offset 2)
 
