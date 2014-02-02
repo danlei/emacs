@@ -986,10 +986,6 @@ line options may be given in OPTIONS."
 ;;;; ido
 ;;;;
 
-;; TODO: should I keep this? never use it.
-
-(add-to-list 'load-path "~/.emacs.d/elisp/smex/")
-
 (when (require 'ido nil t)
   (ido-mode 1)
   (ido-everywhere 1))
@@ -1004,6 +1000,10 @@ line options may be given in OPTIONS."
 
 (setq ido-use-filename-at-point 'guess ; 'ffap-guesser
       ido-use-url-at-point t)
+
+
+;; TODO: should I keep this? never use it.
+(add-to-list 'load-path "~/.emacs.d/elisp/smex/")
 
 (when (require 'smex nil t)
   (smex-initialize)
