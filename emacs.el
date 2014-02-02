@@ -255,7 +255,8 @@
             (lambda ()
               (setq inferior-lisp-program (case system-type
                                             (windows-nt "cmd /c lein repl")
-                                            (t "lein repl"))))))
+                                            (t "lein repl")))
+              (put 'match 'clojure-indent-function 1))))
 
 (when (require 'cider nil t)
   (add-to-list 'same-window-buffer-names "*cider*")
