@@ -1439,18 +1439,44 @@ using commands with prefix arguments."
       org-use-extra-keys nil
       org-use-speed-commands t
       org-footnote-auto-adjust t
-      org-export-with-LaTeX-fragments t
-      org-export-html-validation-link nil
-      org-export-creator-info nil
-      org-export-html-style-include-default nil
-      org-export-htmlize-output-type 'inline-css
+      org-pretty-entities t
       org-table-formula-evaluate-inline nil
       org-M-RET-may-split-line nil
-      org-pretty-entities t
       org-default-notes-file "~/notes/notes.org"
-      remember-data-file "~/notes/notes.org")
+      org-agenda-files (list org-default-notes-file "~/studium/master.org")
+      org-refile-use-outline-path t
+      org-refile-allow-creating-parent-nodes t
+      org-export-with-timestamps nil
+      org-export-with-sub-superscripts '{}
+      org-export-with-archived-trees nil
+      org-export-with-creator 'comment
+      org-export-with-section-numbers nil
+      org-export-with-tags nil
+      org-export-with-latex t
+      org-export-time-stamp-file t
+      org-export-with-toc nil
+      org-export-skip-text-before-1st-heading t
+      org-html-with-latex t
+      org-html-style-include-default nil
+      org-html-htmlize-output-type 'inline-css)
 
-(setq org-export-html-style "
+;; TODO: fix note template
+(setq org-capture-templates
+      '(("n" "Note" entry (file+headline "" "Misc")
+         "* %^{Title}% ^G\n%U\n\n%i%?"
+         :empty-lines 1)
+        ("c" "Note" entry (file+headline "" "Misc")
+         "* %?\n%U\n\n%i"
+         :empty-lines 1)
+        ("y" "Yank" entry (file+headline "" "Misc")
+         "* %^{Title}% ^G\n%U\n\n%c%?"
+         :empty-lines 1)
+        ("t" "Task" entry (file+headline "" "Tasks")
+         "* TODO %^{Title}% ^G\n%^T\n\n%i%?"
+         :empty-lines 1)))
+
+
+(setq org-html-head "
 <style type=\"text/css\">
     html {
       font-family: /*'Droid Sans',*/ Verdana, Arial, sans-serif;
@@ -1554,7 +1580,7 @@ using commands with prefix arguments."
     .tog { cursor: pointer; }
 </style>")
 
-(setq org-export-html-scripts "
+(setq org-html-scripts "
 <script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\">
 </script>
 <script type=\"text/javascript\">
@@ -1599,47 +1625,11 @@ using commands with prefix arguments."
   });
 </script>")
 
-;; (setq org-export-html-style-extra
+;; (setq org-html-head-extra
 ;;       "<link href=\"http://fonts.googleapis.com/css?family=Droid+Serif\"
 ;;              rel=\"stylesheet\" type=\"text/css\">
 ;;        <link href=\"http://fonts.googleapis.com/css?family=Droid+Sans\"
 ;;              rel=\"stylesheet\" type=\"text/css\">")
-
-
-(add-to-list 'org-export-latex-classes
-             `("article-de"
-               ,(concat "\\documentclass[a4paper,\n"
-                        "               headings=small,\n"
-                        "               captions=tableheading]\n"
-                        "              {scrartcl}\n"
-                        "[NO-DEFAULT-PACKAGES]\n"
-                        "[PACKAGES]\n"
-                        "[EXTRA]\n"
-                        "\\usepackage[ngerman]{babel}")
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-
-(setq org-export-latex-packages-alist
-      '(("utf8" "inputenc" t)
-        ("T1" "fontenc" t)
-        ("" "parskip" t)
-        ("" "fixltx2e" nil)
-        ("" "graphicx" t)
-        ("" "longtable" nil)
-        ("" "float" nil)
-        ("" "wrapfig" nil)
-        ("" "soul" t)
-        ("" "textcomp" t)
-;       ("" "marvosym" t)
-;       ("" "wasysym" t)
-;       ("" "latexsym" t)
-        ("" "amssymb" t)
-        ("" "amsmath" t)
-        ("" "hyperref" nil)
-        "\\tolerance=1000"))
 
 ;; (org-add-link-type "togsp"
 ;;   (lambda (&rest rest)
@@ -1660,6 +1650,91 @@ using commands with prefix arguments."
 ;;        (format "<span class=\"tog\">%s</span> <span>%s</span>" desc path))
 ;;       (latex
 ;;        (format "%s %s" desc path)))))
+
+
+(when (require 'ox-latex nil t)
+  (add-to-list 'org-latex-classes
+               `("article-de"
+                 ,(concat "\\documentclass[a4paper,\n"
+                          "               headings=small,\n"
+                          "               captions=tableheading]\n"
+                          "              {scrartcl}\n"
+                          "[NO-DEFAULT-PACKAGES]\n"
+                          "[PACKAGES]\n"
+                          "[EXTRA]\n"
+                          "\\usepackage[ngerman]{babel}")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  (add-to-list 'org-latex-classes
+               `("xe-article-de"
+                 ,(concat "\\documentclass[11pt,\n"
+                          "                a4paper]\n"
+                          "               {article}\n"
+;                         "                a4paper,\n"
+;                         "                headings=small,\n"
+;                         "                captions=tableheading]\n"
+;                         "                {article}\n"
+                          "\\usepackage[T1]{fontenc}\n"
+                          "\\usepackage{graphicx}\n"
+                          "\\usepackage{hyperref}\n"
+                          "\\usepackage{fontspec}\n"
+                          "\\defaultfontfeatures{Mapping=tex-text}\n"
+                          "\\setmainfont{Linux Libertine O}\n"
+;                         "\\setromanfont{Gentium}\n"
+;                         "\\setromanfont [BoldFont={Gentium Basic Bold},\n"
+;                         "ItalicFont={Gentium Basic Italic}]{Gentium Basic}\n"
+                          "\\setsansfont{Charis SIL}\n"
+                          "\\setmonofont[Scale=0.8]{DejaVu Sans Mono}\n"
+                          "\\usepackage{geometry}\n"
+                          "\\geometry{a4paper, textwidth=6.5in, textheight=10in,\n"
+                          "           marginparsep=7pt, marginparwidth=.6in}\n"
+                          "\\pagestyle{empty}\n"
+                          "\\title{}\n"
+                          "[NO-DEFAULT-PACKAGES]\n"
+                          "[NO-PACKAGES]\n")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  (add-to-list 'org-latex-classes
+               `("beamer"
+                 ,(concat "\\documentclass[presentation\]\{beamer\}"
+                          "[NO-DEFAULT-PACKAGES]\n"
+                          "[PACKAGES]\n"
+                          "[EXTRA]\n"
+                          "\\usepackage[ngerman]{babel}")
+                 ("\\section\{%s\}" . "\\section*\{%s\}")
+                 ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
+                 ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}"))))
+
+(setq org-latex-pdf-process
+      '("xelatex -interaction nonstopmode %f"
+        "xelatex -interaction nonstopmode %f"))
+
+(plist-put org-format-latex-options :scale 1.2)
+
+(setq org-latex-packages-alist
+      '(("utf8" "inputenc" t)
+        ("T1" "fontenc" t)
+        ("" "parskip" t)
+        ("" "fixltx2e" nil)
+        ("" "graphicx" t)
+        ("" "longtable" nil)
+        ("" "float" nil)
+        ("" "wrapfig" nil)
+        ("" "soul" t)
+        ("" "textcomp" t)
+;       ("" "marvosym" t)
+;       ("" "wasysym" t)
+;       ("" "latexsym" t)
+        ("" "amssymb" t)
+        ("" "amsmath" t)
+        ("" "hyperref" nil)
+        "\\tolerance=1000"))
 
 
 ;;;;
