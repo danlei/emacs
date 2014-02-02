@@ -1410,6 +1410,16 @@ using commands with prefix arguments."
 
 
 ;;;;
+;;;; markdown-mode
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/markdown-mode/")
+
+(when (require 'markdown-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
+
+
+;;;;
 ;;;; org-mode
 ;;;;
 
