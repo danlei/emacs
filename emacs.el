@@ -871,7 +871,10 @@ line options may be given in OPTIONS."
                                ("<C-return>" eval-print-last-sexp)
                                ("<C-return>" dhl-lisp-eval-print-defun)))))
 
-(define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
+(define-key read-expression-map (kbd "TAB")
+  (if (< emacs-major-version 24)
+      'lisp-complete-symbol
+    'completion-at-point))
 
 
 ;;;;
@@ -918,11 +921,13 @@ line options may be given in OPTIONS."
           (lambda ()
             (eldoc-mode 1)
             (setq comint-dynamic-complete-functions
-                  '(ielm-tab
+                  `(ielm-tab
                     comint-replace-by-expanded-history
                     ielm-complete-filename
                     ielm-complete-symbol
-                    lisp-complete-symbol))))
+                    ,(if (< emacs-major-version 24)
+                         'lisp-complete-symbol
+                       'completion-at-point)))))
 
 
 ;;;;
