@@ -344,6 +344,18 @@
 ;(setq j-dictionary-url "http://www.jsoftware.com/help/dictionary/")
 (setq j-dictionary-url
       "file:///C:/Dokumente und Einstellungen/danlei/j602/help/dictionary/")
+;;;;
+;;;; apl
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/gnu-apl-mode/")
+
+(when (require 'gnu-apl-mode nil t)
+  (add-hook 'gnu-apl-mode-hook (lambda () (eldoc-mode)))
+  (add-hook 'gnu-apl-interactive-mode-hook (lambda () (eldoc-mode)))
+  (add-to-list 'auto-mode-alist '("\\.apl$" . gnu-apl-mode)))
+
+(setq gnu-apl-show-keymap-on-startup t)
 
 
 ;;;;
