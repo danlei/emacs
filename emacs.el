@@ -204,6 +204,7 @@
           qi-mode-hook
           clojure-mode-hook
           cider-repl-mode-hook
+          geiser-repl-mode-hook
           eval-expression-minibuffer-setup-hook))
   (setq clojure-enable-paredit t)
   (eldoc-add-command 'paredit-backward-delete 'paredit-close-round))
@@ -293,35 +294,27 @@
 ;;;; scheme
 ;;;;
 
-(setq scheme-program-name "guile")
+(mapc (lambda (entry)
+        (destructuring-bind (symbol . indent) entry
+          (put symbol 'scheme-indent-function indent)))
+      '((let/cc . 1)
+        (shift . 1)
+        (reset . 0)
+        (for . 1)
+        (let-keywords . 3)))
 
-(add-hook
- 'inferior-scheme-mode-hook
- (lambda ()
-   (dhl-define-keys inferior-scheme-mode-map
-                    '(("M-TAB" hippie-expand)))))
+(when (or (load "~/.emacs.d/elisp/geiser/build/elisp/geiser-load" t)
+          (load-file "~/.emacs.d/elisp/geiser/elisp/geiser.el"))
+  (setq geiser-mode-smart-tab-p t
+        geiser-guile-load-init-file-p t
+        geiser-default-implementation 'guile)
+  (add-to-list 'Info-additional-directory-list "~/.emacs.d/elisp/geiser/doc/"))
 
-(when (require 'quack nil t)
-  (setq quack-remap-find-file-bindings-p nil)
-  (setq quack-pretty-lambda-p t))
-
-(when (require 'scheme-complete nil t)
-  (add-hook
-   'inferior-scheme-mode-hook
-   (lambda ()
-     (dhl-define-keys inferior-scheme-mode-map
-                      '(("TAB" scheme-complete-or-indent)))
-     (make-local-variable 'eldoc-documentation-function)
-     (setq eldoc-documentation-function 'scheme-get-current-symbol-info)
-     (eldoc-mode 1)))
-  (add-hook
-   'scheme-mode-hook
-   (lambda ()
-     (dhl-define-keys inferior-scheme-mode-map
-                      '(("TAB" scheme-complete-or-indent)))
-     (make-local-variable 'eldoc-documentation-function)
-     (setq eldoc-documentation-function 'scheme-get-current-symbol-info)
-     (eldoc-mode 1))))
+(defadvice geiser-repl--maybe-send
+    (before dhl-geiser-repl--maybe-send-goto-end-of-form activate)
+  "Allow RET to send from anywhere in a form unconditionally."
+  (end-of-line)
+  (end-of-defun))
 
 
 ;;;;
@@ -1281,6 +1274,9 @@ using commands with prefix arguments."
                    (name . "\\.asdf$")
                    (mode . lisp-mode)
                    (mode . slime-mode)))
+         ("scheme" (or (name . "\\.scm$")
+                       (mode . scheme-mode)
+                       (mode . geiser-mode)))
          ("clojure" (or (name . "\\.clj$")
                         (mode . clojure-mode)))
          ("qi" (or (name . "\\.qi$")
