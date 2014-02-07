@@ -1299,6 +1299,8 @@ using commands with prefix arguments."
                       (mode . shell-script-mode)))
          ("octave" (or (name . "\\.m$")
                        (mode . octave-mode)))
+         ("apl" (or (name . "\\.apl$")
+                    (mode . gnu-apl-mode)))
          ("haskell" (or (name . "\\.hs$")
                         (mode . haskell-mode)))
          ("f#" (or (name . "\\.fs$")
