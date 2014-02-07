@@ -485,6 +485,8 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;;; tcl
 ;;;;
 
+;; TODO: make this work under linux
+
 (require 'tcl nil t)
 
 (when (eq system-type 'cygwin)
