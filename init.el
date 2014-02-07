@@ -351,8 +351,13 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/gnu-apl-mode/")
 
 (when (require 'gnu-apl-mode nil t)
-  (add-hook 'gnu-apl-mode-hook (lambda () (eldoc-mode)))
-  (add-hook 'gnu-apl-interactive-mode-hook (lambda () (eldoc-mode)))
+  (dolist (hook '(gnu-apl-mode-hook gnu-apl-interactive-mode-hook))
+    (add-hook hook (lambda ()
+                     (eldoc-mode)
+                     (setq buffer-face-mode-face 'gnu-apl-default)
+                     (buffer-face-mode))))
+  (set-face-attribute 'gnu-apl-default nil
+                      :family "DejaVu Sans Mono")
   (add-to-list 'auto-mode-alist '("\\.apl$" . gnu-apl-mode)))
 
 (setq gnu-apl-show-keymap-on-startup t)
