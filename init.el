@@ -360,7 +360,7 @@
                       :family "DejaVu Sans Mono")
   (add-to-list 'auto-mode-alist '("\\.apl$" . gnu-apl-mode)))
 
-(setq gnu-apl-show-keymap-on-startup t)
+(setq gnu-apl-show-keymap-on-startup nil)
 
 
 ;;;;
