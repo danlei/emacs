@@ -591,7 +591,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (when (eq system-type 'cygwin)
   (defadvice inferior-haskell-load-file
-    (around dhl-inferior-haskell-load-file-cygwin-fix)
+      (around dhl-inferior-haskell-load-file-cygwin-fix)
     "Fix `inferior-haskell-load-file' for Win Haskell/Cygwin Emacs."
     (save-buffer)
     (let ((buffer-file-name (concat "c:/cygwin" buffer-file-name)))
