@@ -2107,8 +2107,8 @@ the respective function."
       gnus-use-scoring t
       gnus-save-score t
       gnus-score-expiry-days nil
-      gnus-home-score-file "~/.emacs.d/gnus.score"
-      gnus-home-adapt-file "~/.emacs.d/gnus-adapt.score"
+      gnus-home-score-file "~/.emacs.d/gnus/score"
+      gnus-home-adapt-file "~/.emacs.d/gnus/adapt-score"
       gnus-summary-default-score 0
       gnus-score-thread-simplify t)
 
@@ -2141,11 +2141,12 @@ the respective function."
 (setq gnus-add-to-list t
       gnus-summary-goto-unread nil
       gnus-summary-make-false-root 'adopt
-      gnus-article-save-directory "~/.news"
-      gnus-cache-directory "~/.news/cache"
-      gnus-cache-active-file "~/.news/cache/active"
-      gnus-kill-files-directory "~/.news"
-      nndraft-directory "~/.gnus/drafts/"
+      gnus-directory "~/.emacs.d/gnus/"
+      gnus-article-save-directory "~/.emacs.d/gnus/articles/"
+      gnus-cache-directory "~/.emacs.d/gnus/cache/"
+      gnus-cache-active-file "~/.emacs.d/gnus/cache/active/"
+      gnus-kill-files-directory "~/.emacs.d/gnus/killfiles/"
+      nndraft-directory "~/.emacs.d/gnus/drafts/"
       gnus-default-article-saver 'gnus-summary-save-in-file
       gnus-show-all-headers nil
       gnus-fetch-old-headers t
