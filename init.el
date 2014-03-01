@@ -519,9 +519,35 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (add-to-list 'load-path "~/.emacs.d/elisp/maxima/")
 
 (when (require 'maxima nil t)
-  (add-to-list 'auto-mode-alist '("\\.max$" . maxima-mode)))
+  (add-to-list 'auto-mode-alist '("\\.max$" . maxima-mode))
+  (defadvice maxima
+      (after dhl-maxima-maybe-insert-semicolon activate)
+    "Insert semicolon if needed."
+    (local-set-key (kbd "RET") 'dhl-maybe-insert-semicolon-and-send-input)))
 
 (require 'maxima-font-lock nil t)
+
+(autoload 'imaxima "imaxima" "Frontend for maxima with Image support" t)
+
+(with-eval-after-load "imaxima"
+  (defadvice imaxima
+      (after dhl-imaxima-maybe-insert-semicolon activate)
+    "Insert semicolon if needed."
+    (local-set-key (kbd "RET") 'dhl-maybe-insert-semicolon-and-send-input)))
+
+(setq imaxima-fnt-size "Large"
+;     imaxima-pt-size 12
+;     imaxima-scale-factor 1.2
+      imaxima-label-color "#dc322f")
+
+(defun dhl-maybe-insert-semicolon-and-send-input ()
+  "Insert semicolon if needed and send input."
+  (interactive)
+  (end-of-line)
+  (unless (or (= (point) (comint-line-beginning-position))
+              (char-equal (char-before) ?\;))
+    (insert ";"))
+  (comint-send-input))
 
 
 ;;;;
