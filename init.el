@@ -523,6 +523,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
   (defadvice maxima
       (after dhl-maxima-maybe-insert-semicolon activate)
     "Insert semicolon if needed."
+    (use-local-map (copy-keymap comint-mode-map))
     (local-set-key (kbd "RET") 'dhl-maybe-insert-semicolon-and-send-input)))
 
 (require 'maxima-font-lock nil t)
@@ -533,6 +534,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
   (defadvice imaxima
       (after dhl-imaxima-maybe-insert-semicolon activate)
     "Insert semicolon if needed."
+    (use-local-map (copy-keymap comint-mode-map))
     (local-set-key (kbd "RET") 'dhl-maybe-insert-semicolon-and-send-input)))
 
 (setq imaxima-fnt-size "Large"
