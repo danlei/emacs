@@ -1847,6 +1847,15 @@ using commands with prefix arguments."
 
 
 ;;;;
+;;;; tramp
+;;;;
+
+(require 'tramp)
+
+(setq ange-ftp-try-passive-mode t)
+
+
+;;;;
 ;;;; misc
 ;;;;
 
@@ -1933,13 +1942,6 @@ using commands with prefix arguments."
 (set-language-environment   'utf-8)
 (prefer-coding-system       'utf-8-unix)
 (set-default-coding-systems 'utf-8-unix)
-
-;; TODO: is this really what I want?
-(setq tramp-syntax 'ftp)
-(setq tramp-default-method "ftp")
-
-(setq ange-ftp-try-passive-mode t)
-(setq ange-ftp-ftp-program-name "ftp")
 
 (when (eq system-type 'darwin)
   (cua-mode 0)
