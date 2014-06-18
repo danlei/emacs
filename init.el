@@ -784,8 +784,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (setq-default c-basic-offset 2)
 
-;; TODO:  maybe this would be better in c-mode-common-hook
-(add-hook 'c-mode-hook
+(add-hook 'c-mode-common-hook
           (lambda ()
             (local-set-key (kbd "C-c c") 'compile)
             (local-set-key (kbd "M-p") 'previous-error)
