@@ -1972,7 +1972,7 @@ using commands with prefix arguments."
 
 
 ;;;;
-;;;; misc functions
+;;;; utility functions/macros
 ;;;;
 
 (defun dhl-insert-date (prefix)
