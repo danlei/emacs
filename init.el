@@ -1979,6 +1979,10 @@ using commands with prefix arguments."
                         ibuffer-mode-map))
   (define-key mode-map (kbd "z") 'kill-this-buffer))
 
+(define-key 'help-command (kbd "C-f") 'find-function)
+(define-key 'help-command (kbd "C-l") 'find-library)
+(define-key 'help-command (kbd "C-v") 'find-variable)
+
 
 ;;;;
 ;;;; utility functions/macros
