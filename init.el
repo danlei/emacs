@@ -361,7 +361,12 @@
                       :family "DejaVu Sans Mono")
   (add-to-list 'auto-mode-alist '("\\.apl$" . gnu-apl-mode)))
 
-(setq gnu-apl-show-keymap-on-startup nil)
+(setq gnu-apl-show-keymap-on-startup nil
+      gnu-apl-show-tips-on-start nil
+      gnu-apl-use-new-native-library t
+;     gnu-apl-libemacs-location
+;     (expand-file-name "~/.emacs.d/elisp/gnu-apl-mode/native/libemacs.so")
+      )
 
 
 ;;;;
