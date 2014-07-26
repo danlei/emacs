@@ -939,11 +939,20 @@ line options may be given in OPTIONS."
 
 (add-to-list 'load-path "~/.emacs.d/elisp/ESS/lisp/")
 
-(require 'ess-site nil t)
+(when (require 'ess-site nil t)
+  (add-hook 'ess-mode-hook
+            (lambda ()
+              (electric-indent-mode -1)
+              (local-set-key (kbd "RET") 'newline)))
+  (add-hook 'julia-mode-hook
+            (lambda ()
+              (setq julia-basic-offset 2))))
 
 (when (eq system-type 'windows-nt)
   (setq inferior-R-program-name
         "C:/Program Files/R/R-2.13.0/bin/i386/Rterm.exe"))
+
+(setq ess-tab-complete-in-script t)
 
 
 ;;;;
