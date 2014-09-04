@@ -7,6 +7,19 @@
 
 
 ;;;;
+;;;; backports
+;;;;
+
+(unless (fboundp 'with-eval-after-load)
+  (defmacro with-eval-after-load (file &rest body)
+    "Execute BODY after FILE is loaded.
+FILE is normally a feature name, but it can also be a file name,
+in case that file does not provide any feature."
+    (declare (indent 1) (debug t))
+    `(eval-after-load ,file (lambda () ,@body))))
+
+
+;;;;
 ;;;; environment
 ;;;;
 
@@ -61,7 +74,10 @@
         (and (require 'color-theme-dhl-hober nil t)
              (color-theme-dhl-hober))))
   (add-to-list 'custom-theme-load-path "~/.emacs.d/elisp/themes/")
-  (when (load-theme 'zenburn t t)
+  (when (and (locate-file "zenburn-theme"
+                          custom-theme-load-path
+                          '(".el" ".elc"))
+             (load-theme 'zenburn t t))
     (enable-theme 'zenburn)))
 
 
@@ -912,7 +928,7 @@ line options may be given in OPTIONS."
                                ("<C-return>" dhl-lisp-eval-print-defun)))))
 
 (define-key read-expression-map (kbd "TAB")
-  (if (< emacs-major-version 24)
+  (if (version< emacs-version "24.4")
       'lisp-complete-symbol
     'completion-at-point))
 
@@ -1120,9 +1136,10 @@ using commands with prefix arguments."
         "~/.emacs.d/elisp/magit/"
         "~/.emacs.d/elisp/git-modes/"))
 
-(when (require 'magit nil t)
-  (add-to-list 'Info-additional-directory-list
-               (expand-file-name "~/.emacs.d/elisp/magit/")))
+(and (executable-find "git")
+     (require 'magit nil t)
+     (add-to-list 'Info-additional-directory-list
+                  (expand-file-name "~/.emacs.d/elisp/magit/")))
 
 (require 'rebase-mode nil t)
 
@@ -2043,14 +2060,6 @@ the respective function."
   (dolist (b (buffer-list))
     (when (string-match "RNC Input" (buffer-name b))
       (kill-buffer b))))
-
-(unless (fboundp 'with-eval-after-load)
-  (defmacro with-eval-after-load (file &rest body)
-    "Execute BODY after FILE is loaded.
-FILE is normally a feature name, but it can also be a file name,
-in case that file does not provide any feature."
-    (declare (indent 1) (debug t))
-    `(eval-after-load ,file (lambda () ,@body))))
 
 
 ;;;;
