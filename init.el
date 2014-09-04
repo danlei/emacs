@@ -365,7 +365,9 @@ in case that file does not provide any feature."
 ;;;; apl
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/elisp/gnu-apl-mode/")
+(mapc (apply-partially 'add-to-list 'load-path)
+      '("~/.emacs.d/elisp/gnu-apl-mode/"
+        "~/.emacs.d/elisp/gnu-apl-mode-docs-ibm/"))
 
 (when (require 'gnu-apl-mode nil t)
   (dolist (hook '(gnu-apl-mode-hook gnu-apl-interactive-mode-hook))
@@ -383,6 +385,10 @@ in case that file does not provide any feature."
 ;     gnu-apl-libemacs-location
 ;     (expand-file-name "~/.emacs.d/elisp/gnu-apl-mode/native/libemacs.so")
       )
+
+(when (locate-file "gnu-apl-refdocs-apl2" load-path '(".el" ".elc"))
+  (makunbound 'gnu-apl--symbol-doc)
+  (load "gnu-apl-refdocs-apl2" t))
 
 
 ;;;;
