@@ -790,6 +790,11 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (when (require 'js2-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)))
 
+(setq-default js2-basic-offset 2)
+
+;(setq js2-bounce-indent-p t)
+
+
 ;; TODO: fix slime-js
 ;(require 'slime-js nil t)
 
@@ -800,9 +805,33 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;                              `(("M-n" next-error)
 ;;                                ("M-p" previous-error)))))
 
-(setq-default js2-basic-offset 2)
 
-;(setq js2-bounce-indent-p t)
+(require 'js-comint nil t)
+
+;(setq inferior-js-program-command "nodejs --harmony --use_strict")
+(setq inferior-js-program-command
+      (mapconcat 'identity
+                 '("/home/dhl/.nvm/versions/io.js/v1.0.4/bin/node"
+                   "--es_staging" "--harmony_modules"
+                   "--harmony_arrow_functions"
+                   "--harmony_classes" "--use_strict")
+                 " "))
+
+(add-hook 'inferior-js-mode-hook
+          (lambda ()
+            (ansi-color-for-comint-mode-on)
+            (add-to-list
+             'comint-preoutput-filter-functions
+             (lambda (output)
+               (replace-regexp-in-string "\033\\[[0-9]+[GK]" "" output)))))
+
+
+(require 'nodejs-repl nil t)
+
+(setq nodejs-repl-command "/home/dhl/.nvm/versions/io.js/v1.0.4/bin/node")
+(setq nodejs-repl-options
+      '("--es_staging" "--harmony_modules" "--harmony_arrow_functions"
+        "--harmony_classes" "--use_strict"))
 
 
 ;;;;
