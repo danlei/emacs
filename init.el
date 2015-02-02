@@ -930,6 +930,12 @@ line options may be given in OPTIONS."
 (modify-syntax-entry ?' "'" lpc-mode-syntax-table)
 
 
+;;;
+;;; pike
+;;;
+
+(add-to-list 'auto-mode-alist '("\\.pike\\'" . pike-mode))
+
 
 ;;;;
 ;;;; auctex
