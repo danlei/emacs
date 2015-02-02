@@ -865,6 +865,10 @@ CLASS-NAME is queried in the minibuffer, defaulting to
             (local-set-key (kbd "C-c C-e") 'dhl-nodejs-repl-eval-last-sexp)
             (local-set-key (kbd "C-c C-r") 'dhl-nodejs-repl-eval-last-sexp)))
 
+(when (require 'js nil t)
+  (modify-syntax-entry ?` "\"" js-mode-syntax-table)) ; for ES6 string templates
+
+
 ;;;;
 ;;;; coffee
 ;;;;
