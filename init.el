@@ -456,12 +456,14 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (add-hook 'python-mode-hook
           (lambda ()
 ;           (local-set-key (kbd "<C-tab>") 'symbol-complete)
+            (local-set-key (kbd "C-c d") 'pydoc)
 ;           (setq parens-require-spaces nil)
             (eldoc-mode 1)))
 
-;; (add-hook 'inferior-python-mode-hook
-;;           (lambda ()
-;;             (setq parens-require-spaces nil)))
+(add-hook 'inferior-python-mode-hook
+          (lambda ()
+;           (setq parens-require-spaces nil)
+            (local-set-key (kbd "C-c d") 'pydoc)))
 
 (setq dhl-python-command
       (if (eq system-type 'windows-nt)
@@ -478,6 +480,23 @@ CLASS-NAME is queried in the minibuffer, defaulting to
   (after dhl-python-describe-symbol-advice last () activate)
   "Switch to the python help buffer after invocation."
   (other-window 1))
+
+;; modified from http://ubuntuforums.org/showthread.php?t=1363999
+(defun pydoc (word)
+  "Launch pydoc on the word at point"
+  (interactive
+   (list (let* ((word (thing-at-point 'word))
+                (input (read-string
+                        (format "pydoc entry%s: "
+                                (if word
+                                    (format " (default %s)" word)
+                                  "")))))
+           (if (string= input "")
+               (or word (error "No pydoc args given"))
+             input))))
+  (save-window-excursion
+    (shell-command (concat "pydoc " word) "*PYDOC*"))
+  (view-buffer "*PYDOC*" 'bury-buffer))
 
 
 ;;;;
