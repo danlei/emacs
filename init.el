@@ -925,7 +925,10 @@ line options may be given in OPTIONS."
 ;;; lpc
 ;;;
 
-;; (modify-syntax-entry ?' "'" c-mode-syntax-table)
+(define-derived-mode lpc-mode c-mode "LPC")
+
+(modify-syntax-entry ?' "'" lpc-mode-syntax-table)
+
 
 
 ;;;;
