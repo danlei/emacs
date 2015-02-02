@@ -833,6 +833,37 @@ CLASS-NAME is queried in the minibuffer, defaulting to
       '("--es_staging" "--harmony_modules" "--harmony_arrow_functions"
         "--harmony_classes" "--use_strict"))
 
+(defun dhl-nodejs-repl-eval-buffer ()
+  (interactive)
+  (nodejs-repl--send-string (buffer-string)))
+
+(defun dhl-nodejs-repl-eval-defun ()
+  (interactive)
+  (nodejs-repl--send-string (thing-at-point 'defun)))
+
+(defun dhl-nodejs-repl-eval-last-sexp ()
+  (interactive)
+  (nodejs-repl--send-string (preceding-sexp)))
+
+(defun dhl-nodejs-repl-eval-region (start end)
+  (interactive "r")
+  (nodejs-repl--send-string (buffer-substring-no-properties start end)))
+
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c C-b") 'dhl-nodejs-repl-eval-buffer)
+            (local-set-key (kbd "C-c C-c") 'dhl-nodejs-repl-eval-defun)
+            (local-set-key (kbd "C-M-x") 'dhl-nodejs-repl-eval-defun)
+            (local-set-key (kbd "C-c C-e") 'dhl-nodejs-repl-eval-last-sexp)
+            (local-set-key (kbd "C-c C-r") 'dhl-nodejs-repl-eval-last-sexp)))
+
+(add-hook 'js-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c C-b") 'dhl-nodejs-repl-eval-buffer)
+            (local-set-key (kbd "C-c C-c") 'dhl-nodejs-repl-eval-defun)
+            (local-set-key (kbd "C-M-x") 'dhl-nodejs-repl-eval-defun)
+            (local-set-key (kbd "C-c C-e") 'dhl-nodejs-repl-eval-last-sexp)
+            (local-set-key (kbd "C-c C-r") 'dhl-nodejs-repl-eval-last-sexp)))
 
 ;;;;
 ;;;; coffee
