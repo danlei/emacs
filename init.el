@@ -1616,12 +1616,13 @@ using commands with prefix arguments."
 
 (setq org-special-ctrl-a/e t
       org-special-ctrl-k t
-      org-startup-indented nil
+      org-startup-indented t
       org-startup-folded nil
       org-return-follows-link t
       org-use-extra-keys nil
       org-use-speed-commands t
       org-footnote-auto-adjust t
+      org-use-sub-superscripts '{}
       org-pretty-entities t
       org-table-formula-evaluate-inline nil
       org-M-RET-may-split-line nil
@@ -1639,6 +1640,7 @@ using commands with prefix arguments."
       org-export-time-stamp-file t
       org-export-with-toc nil
       org-export-skip-text-before-1st-heading t
+      org-html-postamble nil
       org-html-with-latex t
       org-html-style-include-default nil
       org-html-htmlize-output-type 'inline-css)
