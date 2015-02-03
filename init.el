@@ -1597,6 +1597,8 @@ using commands with prefix arguments."
         "~/.emacs.d/elisp/org-mode/contrib/lisp/"))
 
 (require 'org nil t)
+(require 'org-table nil t)
+(require 'ox-bibtex nil t)
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
