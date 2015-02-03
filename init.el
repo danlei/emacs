@@ -1978,6 +1978,16 @@ using commands with prefix arguments."
 
 (setq org-latex-pdf-process (list "latexmk -bibtex -pdf %f"))
 
+
+(require 'reftex nil t)
+
+(defadvice reftex-TeX-master-file
+  (around dhl-reftex-Tex-master-file-fix last () activate)
+  (flet ((tex-main-file ()
+           (buffer-file-name)))
+    ad-do-it))
+
+
 ;;;;
 ;;;; abbrev
 ;;;;
