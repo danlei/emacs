@@ -1946,10 +1946,6 @@ using commands with prefix arguments."
                  ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
                  ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}"))))
 
-(setq org-latex-pdf-process
-      '("xelatex -interaction nonstopmode %f"
-        "xelatex -interaction nonstopmode %f"))
-
 (plist-put org-format-latex-options :scale 1.2)
 
 (setq org-latex-packages-alist
@@ -1971,6 +1967,16 @@ using commands with prefix arguments."
         ("" "hyperref" nil)
         "\\tolerance=1000"))
 
+
+
+;; (setq org-latex-pdf-process
+;;       '("xelatex -interaction nonstopmode %f"
+;;         "xelatex -interaction nonstopmode %f"))
+
+;; (setq org-latex-to-pdf-process
+;;       "latexmk -pdflatex='lualatex -shell-escape -interaction nonstopmode' -pdf -f %f")
+
+(setq org-latex-pdf-process (list "latexmk -bibtex -pdf %f"))
 
 ;;;;
 ;;;; abbrev
