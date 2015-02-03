@@ -1660,6 +1660,12 @@ using commands with prefix arguments."
          "* TODO %^{Title}% ^G\n%^T\n\n%i%?"
          :empty-lines 1)))
 
+(setq org-html-mathjax-options
+      '((path "MathJax/MathJax.js")
+        (scale "100")
+        (align "center")
+        (indent "2em")
+        (mathml nil)))
 
 (setq org-html-head "
 <style type=\"text/css\">
