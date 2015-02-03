@@ -1964,7 +1964,7 @@ using commands with prefix arguments."
 ;       ("" "latexsym" t)
         ("" "amssymb" t)
         ("" "amsmath" t)
-        ("" "hyperref" nil)
+        ("hidelinks" "hyperref" nil)
         "\\tolerance=1000"))
 
 
