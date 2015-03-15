@@ -456,14 +456,14 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (add-hook 'python-mode-hook
           (lambda ()
 ;           (local-set-key (kbd "<C-tab>") 'symbol-complete)
-            (local-set-key (kbd "C-c d") 'pydoc)
+            (local-set-key (kbd "C-c d") 'dhl-pydoc)
 ;           (setq parens-require-spaces nil)
             (eldoc-mode 1)))
 
 (add-hook 'inferior-python-mode-hook
           (lambda ()
 ;           (setq parens-require-spaces nil)
-            (local-set-key (kbd "C-c d") 'pydoc)))
+            (local-set-key (kbd "C-c d") 'dhl-pydoc)))
 
 (setq dhl-python-command
       (if (eq system-type 'windows-nt)
@@ -482,7 +482,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
   (other-window 1))
 
 ;; modified from http://ubuntuforums.org/showthread.php?t=1363999
-(defun pydoc (word)
+(defun dhl-pydoc (word)
   "Launch pydoc on the word at point"
   (interactive
    (list (let* ((word (thing-at-point 'word))
