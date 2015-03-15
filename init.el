@@ -503,9 +503,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;;; perl
 ;;;;
 
-;; TODO: update this to work under linux and a newer version
-
-(add-to-list 'load-path "~/.emacs.d/elisp/Sepia-0.992-S3oGPo/")
+(add-to-list 'load-path "~/.emacs.d/elisp/Sepia-0.992_01/")
 
 (when (require 'sepia nil t)
   (add-to-list 'auto-mode-alist '("\\.pl$" . sepia-mode))
@@ -514,12 +512,17 @@ CLASS-NAME is queried in the minibuffer, defaulting to
   (add-to-list 'interpreter-mode-alist '("miniperl" . sepia-mode))
 
   (setq sepia-perl5lib
-        (list (expand-file-name "~/.emacs.d/elisp/Sepia-0.992-S3oGPo/lib")))
+        (list (expand-file-name "~/.emacs.d/elisp/Sepia-0.992_01/lib")))
 ; (defalias 'perl-mode 'sepia-mode)
-  (setq sepia-program-name "c:/Perl/bin/perl"))
+  (if (eq system-type 'windows-nt)
+      (setq sepia-program-name "c:/Perl/bin/perl")))
 
 (setq cperl-indent-level 4
-      cperl-indent-parens-as-block nil)
+      cperl-indent-parens-as-block nil
+      cperl-highlight-variables-indiscriminately t)
+
+(put 'cperl-array-face 'face-alias 'font-lock-variable-name-face)
+(put 'cperl-hash-face 'face-alias 'font-lock-variable-name-face)
 
 ;; (defun dhl-cperl-eldoc-documentation-function ()
 ;;   "Return a meaningful doc string for `eldoc-mode'."
