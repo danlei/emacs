@@ -1340,7 +1340,7 @@ using commands with prefix arguments."
       erc-user-full-name "Daniel H. Leidisch"
       erc-track-exclude-server-buffer nil
       erc-fill-function 'erc-fill-static
-      erc-fill-static-center 16
+      erc-fill-static-center 20
       erc-fill-column 90
       erc-kill-buffer-on-part t
       erc-kill-queries-on-quit t
