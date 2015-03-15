@@ -495,7 +495,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
                (or word (error "No pydoc args given"))
              input))))
   (save-window-excursion
-    (shell-command (concat "pydoc " word) "*PYDOC*"))
+    (shell-command (concat "pydoc3 " word) "*PYDOC*"))
   (view-buffer "*PYDOC*" 'bury-buffer))
 
 
