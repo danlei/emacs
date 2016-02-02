@@ -458,7 +458,8 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (add-hook 'python-mode-hook
           (lambda ()
-;           (local-set-key (kbd "<C-tab>") 'symbol-complete)
+            (local-set-key (kbd "<C-tab>")
+                           'python-shell-completion-complete-at-point)
             (local-set-key (kbd "C-c d") 'dhl-pydoc)
 ;           (setq parens-require-spaces nil)
             (eldoc-mode 1)))
