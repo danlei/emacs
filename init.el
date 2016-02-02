@@ -2095,6 +2095,7 @@ using commands with prefix arguments."
       line-move-visual nil
       help-window-select t
       enable-recursive-minibuffers t
+      minibuffer-depth-indicate-mode 1
       comment-empty-lines nil
       set-mark-command-repeat-pop t
       epa-file-cache-passphrase-for-symmetric-encryption t
