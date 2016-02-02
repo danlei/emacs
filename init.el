@@ -286,11 +286,14 @@ in case that file does not provide any feature."
                              'cider-repl-indent-and-complete-symbol))))
 
 (setq cider-history-file "~/.emacs.d/cider-history"
-      cider-popup-stacktraces-in-repl nil
-      cider-popup-stacktraces nil
+      cider-show-error-buffer t
       cider-auto-select-error-buffer t
       cider-repl-wrap-history t
-      cider-repl-use-pretty-printing t)
+      cider-repl-use-pretty-printing t
+      cider-repl-use-clojure-font-lock t
+      cider-prefer-local-resources t
+      cider-use-overlays 'both
+      nrepl-log-messages nil)
 
 
 ;;;;
