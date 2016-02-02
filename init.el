@@ -467,7 +467,8 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (add-hook 'inferior-python-mode-hook
           (lambda ()
 ;           (setq parens-require-spaces nil)
-            (local-set-key (kbd "C-c d") 'dhl-pydoc)))
+            (local-set-key (kbd "C-c d") 'dhl-pydoc)
+            (setq comint-prompt-read-only t)))
 
 (setq dhl-python-command
       (if (eq system-type 'windows-nt)
