@@ -2271,6 +2271,9 @@ the respective function."
                        ("M-#" quick-calc)
                        ("C-c s" magit-status)))
 
+(when (fboundp 'cycle-spacing)
+  (global-set-key (kbd "M-SPC") 'cycle-spacing))
+
 
 ;;;;
 ;;;; gnus
