@@ -2100,7 +2100,6 @@ using commands with prefix arguments."
       line-move-visual nil
       help-window-select t
       enable-recursive-minibuffers t
-      minibuffer-depth-indicate-mode 1
       comment-empty-lines nil
       set-mark-command-repeat-pop t
       epa-file-cache-passphrase-for-symmetric-encryption t
@@ -2131,6 +2130,7 @@ using commands with prefix arguments."
 (show-paren-mode 1)
 (transient-mark-mode -1)
 (blink-cursor-mode -1)
+(minibuffer-depth-indicate-mode 1)
 (auto-compression-mode 1)
 (auto-image-file-mode 1)
 (winner-mode 1)
