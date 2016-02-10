@@ -2068,6 +2068,9 @@ using commands with prefix arguments."
 
 (require 'misc nil t)
 
+(when (require 'uniquify nil t)
+  (setq uniquify-buffer-name-style 'forward))
+
 (if (< emacs-major-version 24)
     (partial-completion-mode 1)
 ; messes up nrepl/cider completion
