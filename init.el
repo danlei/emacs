@@ -2068,6 +2068,8 @@ using commands with prefix arguments."
 
 (require 'misc nil t)
 
+(require 'iso-transl nil t)             ; fix dead-* is not defined (24.3)
+
 (when (require 'uniquify nil t)
   (setq uniquify-buffer-name-style 'forward))
 
