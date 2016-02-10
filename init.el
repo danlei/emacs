@@ -2126,6 +2126,7 @@ using commands with prefix arguments."
 (toggle-scroll-bar -1)
 (column-number-mode 1)
 (line-number-mode 1)
+(size-indication-mode 1)
 (display-time-mode -1)
 (show-paren-mode 1)
 (transient-mark-mode -1)
