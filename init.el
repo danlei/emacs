@@ -2072,6 +2072,17 @@ using commands with prefix arguments."
 
 (setq browse-kill-ring-highlight-current-entry t)
 
+
+;;;;
+;;;; japanese
+;;;;
+
+(require 'mozc nil t)
+
+;(setq default-input-method "japanzese-mozc")
+
+
+;;;;
 ;;;; misc
 ;;;;
 
