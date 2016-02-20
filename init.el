@@ -2051,6 +2051,27 @@ using commands with prefix arguments."
 
 
 ;;;;
+;;;; kill ring
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/emacs-noflet/")
+(add-to-list 'load-path "~/.emacs.d/elisp/browse-kill-ring/")
+
+(when (require 'browse-kill-ring nil t)
+; (browse-kill-ring-default-keybindings)
+  (global-set-key (kbd "C-c C-y") 'browse-kill-ring))
+
+(when (and (require 'noflet nil t)
+           (require 'kill-ring-ido nil t))
+  (global-set-key (kbd "M-y") 'kill-ring-ido))
+
+(setq kill-ring-ido-shortage-length 40)
+
+(when (require 'kill-ring-search nil t)
+  (global-set-key (kbd "C-M-y") 'kill-ring-search))
+
+(setq browse-kill-ring-highlight-current-entry t)
+
 ;;;; misc
 ;;;;
 
