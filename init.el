@@ -836,7 +836,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (require 'nodejs-repl nil t)
 
-(setq nodejs-repl-command "/home/dhl/.nvm/versions/io.js/v1.0.4/bin/node")
+(setq nodejs-repl-command "/home/dhl/.nvm/versions/io.js/v3.3.1/bin/node")
 (setq nodejs-repl-options
       '("--es_staging" "--harmony_modules" "--harmony_arrow_functions"
         "--harmony_classes" "--use_strict"))
