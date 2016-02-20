@@ -1251,6 +1251,9 @@ using commands with prefix arguments."
      (add-to-list 'Info-additional-directory-list
                   (expand-file-name "~/.emacs.d/elisp/magit/")))
 
+(setq magit-auto-revert-mode nil
+      magit-last-seen-setup-instructions "1.4.2")
+
 (require 'rebase-mode nil t)
 
 (when (require 'vc-dir nil t)
