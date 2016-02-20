@@ -841,6 +841,10 @@ CLASS-NAME is queried in the minibuffer, defaulting to
       '("--es_staging" "--harmony_modules" "--harmony_arrow_functions"
         "--harmony_classes" "--use_strict"))
 
+(add-hook 'nodejs-repl-mode-hook
+          (lambda ()
+            (setq comint-prompt-read-only t)))
+
 (defun dhl-nodejs-repl-eval-buffer ()
   (interactive)
   (nodejs-repl--send-string (buffer-string)))
