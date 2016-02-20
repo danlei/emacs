@@ -1336,7 +1336,7 @@ using commands with prefix arguments."
   (erc-spelling-mode -1)
   (erc-list-mode 1)
   (erc-timestamp-mode -1)
-  (erc-smiley-mode 1)
+  (erc-smiley-mode -1)
   (erc-scrolltobottom-mode 1)
   (erc-truncate-mode 1))
 
