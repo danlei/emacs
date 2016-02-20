@@ -1346,7 +1346,8 @@ using commands with prefix arguments."
       erc-current-nick-highlight-type 'nick-or-keyword
       erc-notice-highlight-type 'prefix
       erc-auto-query 'window-noselect
-      erc-user-full-name "Daniel H. Leidisch"
+;     erc-user-full-name "Daniel H. Leidisch"
+      erc-nick "danlei"
       erc-track-exclude-server-buffer nil
       erc-fill-function 'erc-fill-static
       erc-fill-static-center 20
@@ -1355,9 +1356,15 @@ using commands with prefix arguments."
       erc-kill-queries-on-quit t
       erc-kill-server-buffer-on-quit t
       erc-max-buffer-size 50000
-      erc-hide-list '("JOIN" "PART" "QUIT" "NICK"))
-
-;(make-variable-buffer-local 'erc-hide-list)
+      erc-interpret-controls-p t
+      erc-rename-buffers nil
+      erc-default-server "irc.freenode.net"
+      erc-default-port 6697
+      erc-hide-list '("JOIN" "PART" "QUIT" "NICK")
+      erc-autojoin-timing 'ident
+      erc-server-auto-reconnect t
+      erc-whowas-on-nosuchnick t
+      erc-disable-ctcp-replies t)
 
 (setq erc-button-url-regexp
       (concat "\\([-a-zA-Z0-9_=!?#$@~`%&*+\\/:;,]+\\.\\)+"
