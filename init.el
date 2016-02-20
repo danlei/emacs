@@ -1011,12 +1011,6 @@ line options may be given in OPTIONS."
       debug-on-error nil
       eval-expression-print-level nil)
 
-(defun dhl-lisp-indent-and-complete ()
-  "Indent, then complete the symbol at point."
-  (interactive)
-  (indent-for-tab-command t)
-  (lisp-complete-symbol))
-
 (defun dhl-lisp-eval-print-defun ()
   "Move behind current toplevel form, evaluate, and insert result."
   (interactive)
@@ -1026,15 +1020,13 @@ line options may be given in OPTIONS."
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
             (eldoc-mode 1)
-            (local-set-key (kbd "TAB") 'dhl-lisp-indent-and-complete)
             (local-set-key (kbd "<C-return>") 'dhl-lisp-eval-print-defun)))
 
 (add-hook 'lisp-interaction-mode-hook
           (lambda ()
             (eldoc-mode 1)
             (dhl-define-keys lisp-interaction-mode-map
-                             '(("TAB" dhl-lisp-indent-and-complete)
-                               ("<C-return>" eval-print-last-sexp)
+                             '(("<C-return>" eval-print-last-sexp)
                                ("<C-return>" dhl-lisp-eval-print-defun)))))
 
 (define-key read-expression-map (kbd "TAB")
@@ -2111,6 +2103,7 @@ using commands with prefix arguments."
       require-final-newline nil
       ispell-personal-dictionary "~/.ispell-emacs"
       ispell-dictionary "german"
+      tab-always-indent 'complete
       woman-use-own-frame nil
       sentence-end-double-space nil
       make-backup-files 1
