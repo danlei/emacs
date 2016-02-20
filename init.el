@@ -1373,35 +1373,9 @@ using commands with prefix arguments."
 (setq erc-track-exclude-types
       '("NICK" "MODE" "324" "329" "332" "333" "353" "477"))
 
-(setq erc-spelling-dictionaries '(("#bsdforen.de" "/dev/null"))) ; FIXME
-
-
 (setq erc-part-reason (lambda (x)
                         (or x "Ein guter Abgang ziert die Übung."))
       erc-quit-reason erc-part-reason)
-
-(defvar dhl-erc-auth
-  '(;freenode (:name "<irc-nick>" :password "<password>")
-    ))
-
-(load "~/.emacs-auth" t)
-
-(defun dhl-erc-nick (server)
-  (getf (getf dhl-erc-auth server) :name))
-
-(defun dhl-erc-password (server)
-  (getf (getf dhl-erc-auth server) :password))
-
-;; (add-hook 'erc-after-connect
-;;           (lambda (SERVER NICK)
-;;             (cond ((string-match "freenode\\.net" SERVER)
-;;                    (erc-message "PRIVMSG"
-;;                                 (concat "NickServ identify "
-;;                                         (dhl-erc-password 'freenode)))
-;;                    (erc-message "PRIVMSG"
-;;                                 (concat "NickServ ghost "
-;;                                         (dhl-erc-nick 'freenode)))
-;;                    (erc-message "NICK" (dhl-erc-nick 'freenode))))))
 
 
 ;;;;
