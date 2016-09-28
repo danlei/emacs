@@ -844,6 +844,11 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;                              `(("M-n" next-error)
 ;;                                ("M-p" previous-error)))))
 
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (dhl-define-keys js2-mode-map
+                             `(("M-n" next-error)
+                               ("M-p" previous-error)))))
 
 (require 'js-comint nil t)
 
