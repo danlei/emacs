@@ -262,6 +262,8 @@ in case that file does not provide any feature."
         "~/.emacs.d/elisp/epl/"
         "~/.emacs.d/elisp/pkg-info.el/"
         "~/.emacs.d/elisp/s.el/"
+        "~/.emacs.d/elisp/seq.el"       ; TODO: included in emacs 25
+        "~/.emacs.d/elisp/spinner.el/"
         "~/.emacs.d/elisp/cider/"))
 
 (when (require 'clojure-mode nil t)
@@ -272,16 +274,18 @@ in case that file does not provide any feature."
                                             (t "lein repl")))
               (put 'match 'clojure-indent-function 1))))
 
+;;(require 'icomplete nil t) ; TODO: enhances minibuffer completion
+
 (when (require 'cider nil t)
   (add-to-list 'same-window-buffer-names "*cider*")
   (add-hook 'cider-interaction-mode-hook
             (lambda ()
               (subword-mode)
-              (cider-turn-on-eldoc-mode)))
+              (eldoc-mode)))
   (add-hook 'cider-mode-hook
             (lambda ()
               (subword-mode)
-              (cider-turn-on-eldoc-mode)
+              (eldoc-mode)
               (local-set-key (kbd "TAB")
                              'cider-repl-indent-and-complete-symbol))))
 
@@ -292,6 +296,7 @@ in case that file does not provide any feature."
       cider-repl-use-pretty-printing t
       cider-repl-use-clojure-font-lock t
       cider-prefer-local-resources t
+      cider-repl-display-help-banner nil
       cider-use-overlays 'both
       nrepl-log-messages nil)
 
