@@ -2211,6 +2211,7 @@ using commands with prefix arguments."
       epa-file-cache-passphrase-for-symmetric-encryption t
       epa-file-select-keys 'no
       gc-cons-threshold 20000000
+      kill-ring-max 200
       user-full-name "Daniel H. Leidisch"
       user-mail-address "public@leidisch.net")
 
