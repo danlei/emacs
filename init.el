@@ -500,15 +500,15 @@ CLASS-NAME is queried in the minibuffer, defaulting to
               )
 
 (defadvice python-describe-symbol
-  (after dhl-python-describe-symbol-advice last () activate)
-  "Switch to the python help buffer after invocation."
+    (after dhl-python-describe-symbol-advice last () activate)
+  "Switch to the python help window after invocation."
   (other-window 1))
 
 ;; modified from http://ubuntuforums.org/showthread.php?t=1363999
 (defun dhl-pydoc (word)
   "Launch pydoc on the word at point"
   (interactive
-   (list (let* ((word (thing-at-point 'word))
+   (list (let* ((word (thing-at-point 'word t))
                 (input (read-string
                         (format "pydoc entry%s: "
                                 (if word
@@ -884,7 +884,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (defun dhl-nodejs-repl-eval-defun ()
   (interactive)
-  (nodejs-repl--send-string (thing-at-point 'defun)))
+  (nodejs-repl--send-string (thing-at-point 'defun t)))
 
 (defun dhl-nodejs-repl-eval-last-sexp ()
   (interactive)
