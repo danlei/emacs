@@ -377,12 +377,20 @@ in case that file does not provide any feature."
       '("~/.emacs.d/elisp/gnu-apl-mode/"
         "~/.emacs.d/elisp/gnu-apl-mode-docs-ibm/"))
 
+(setq gnu-apl-use-old-symbols nil)
+
 (when (require 'gnu-apl-mode nil t)
   (dolist (hook '(gnu-apl-mode-hook gnu-apl-interactive-mode-hook))
     (add-hook hook (lambda ()
                      (eldoc-mode)
                      (setq buffer-face-mode-face 'gnu-apl-default)
                      (buffer-face-mode))))
+  (add-hook 'gnu-apl-interactive-mode-hook
+            (lambda ()
+              (setq comint-prompt-read-only t)
+              (local-set-key (kbd "C-a") 'comint-bol)))
+  (add-hook 'gnu-apl-documentation-mode-hook
+            (lambda () (view-mode 1)))
   (set-face-attribute 'gnu-apl-default nil
                       :family "DejaVu Sans Mono")
   (add-to-list 'auto-mode-alist '("\\.apl$" . gnu-apl-mode)))
@@ -397,6 +405,11 @@ in case that file does not provide any feature."
 (when (locate-file "gnu-apl-refdocs-apl2" load-path '(".el" ".elc"))
   (makunbound 'gnu-apl--symbol-doc)
   (load "gnu-apl-refdocs-apl2" t))
+
+(defadvice gnu-apl-show-keyboard
+    (after dhl-gnu-apl-show-keyboard-advice last () activate)
+  "Switch to the GNU APL keyboard window after invocation."
+  (other-window 1))
 
 
 ;;;;
