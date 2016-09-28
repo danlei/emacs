@@ -2237,7 +2237,10 @@ using commands with prefix arguments."
 (column-number-mode 1)
 (line-number-mode 1)
 (size-indication-mode 1)
-(display-time-mode -1)
+(setq display-time-24hr-format t
+      display-time-default-load-average nil
+      display-time-mail-file -1)
+(display-time-mode 1)
 (show-paren-mode 1)
 (transient-mark-mode -1)
 (blink-cursor-mode -1)
