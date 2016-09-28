@@ -2210,6 +2210,7 @@ using commands with prefix arguments."
       set-mark-command-repeat-pop t
       epa-file-cache-passphrase-for-symmetric-encryption t
       epa-file-select-keys 'no
+      gc-cons-threshold 20000000
       user-full-name "Daniel H. Leidisch"
       user-mail-address "public@leidisch.net")
 
