@@ -2487,15 +2487,21 @@ the respective function."
 ;;; misc
 ;;;
 
-(setq gnus-add-to-list t
+(setq gnus-novice-user nil
+      gnus-add-to-list t
       gnus-summary-goto-unread nil
       gnus-summary-make-false-root 'adopt
       gnus-directory "~/.emacs.d/gnus/"
+      gnus-startup-file "~/.emacs.d/gnus/newsrc"
       gnus-article-save-directory "~/.emacs.d/gnus/articles/"
       gnus-cache-directory "~/.emacs.d/gnus/cache/"
-      gnus-cache-active-file "~/.emacs.d/gnus/cache/active/"
+      gnus-cache-active-file "~/.emacs.d/gnus/cache/active"
       gnus-kill-files-directory "~/.emacs.d/gnus/killfiles/"
       nndraft-directory "~/.emacs.d/gnus/drafts/"
+      gnus-save-newsrc-file nil
+      gnus-read-newsrc-file nil
+      gnus-save-killed-list nil
+      gnus-check-new-newsgroups 'ask-server
       gnus-default-article-saver 'gnus-summary-save-in-file
       gnus-show-all-headers nil
       gnus-fetch-old-headers t
@@ -2518,11 +2524,23 @@ the respective function."
       gnus-treat-translate nil
       gnus-large-newsgroup 500
       gnus-agent t
-      gnus-cache-enter-articles '(ticked)
+      gnus-cache-enter-articles '(ticked dormant)
       gnus-article-wash-function (if (featurep 'w3m) 'w3m 'html2text)
       mm-text-html-renderer (if (featurep 'w3m) 'w3m 'html2text)
       mm-discouraged-alternatives '("text/html" "text/richtext")
       gnus-permanently-visible-groups "Alle Nachrichten")
+
+(setq gnus-message-archive-method
+      '(nnfolder "archive"
+                 (nnfolder-inhibit-expiry t)
+                 ;; TODO: just set this directly?
+                 (nnfolder-active-file "~/.emacs.d/gnus/sent/active")
+                 (nnfolder-directory "~/.emacs.d/gnus/sent/")))
+
+(setq gnus-message-archive-group
+      '((if (message-news-p)
+            "sent-news"
+          "sent-mail")))
 
 
 ;;;
