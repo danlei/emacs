@@ -1945,6 +1945,7 @@ using commands with prefix arguments."
 ;;       (latex
 ;;        (format "%s %s" desc path)))))
 
+(setq org-list-allow-alphabetical nil)  ; TODO: hack to allow loading ox-latex
 
 (when (require 'ox-latex nil t)
   (add-to-list 'org-latex-classes
@@ -1996,14 +1997,16 @@ using commands with prefix arguments."
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
   (add-to-list 'org-latex-classes
                `("beamer"
-                 ,(concat "\\documentclass[presentation\]\{beamer\}"
+                 ,(concat "\\documentclass[presentation\]\{beamer\}\n"
                           "[NO-DEFAULT-PACKAGES]\n"
                           "[PACKAGES]\n"
                           "[EXTRA]\n"
                           "\\usepackage[ngerman]{babel}")
-                 ("\\section\{%s\}" . "\\section*\{%s\}")
-                 ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
-                 ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}"))))
+;                ("\\section\{%s\}" . "\\section*\{%s\}")
+;                ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
+;                ("\\subsection\{%s\}" . "\\frame\{%s\}")
+;                ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")
+                 )))
 
 (plist-put org-format-latex-options :scale 1.2)
 
@@ -2023,10 +2026,14 @@ using commands with prefix arguments."
 ;       ("" "latexsym" t)
         ("" "amssymb" t)
         ("" "amsmath" t)
-        ("hidelinks" "hyperref" nil)
+;       ("hidelinks" "hyperref" nil)
         "\\tolerance=1000"))
 
 
+;; (setq org-export-latex-quotes
+;;       '(("en" ("\\(\\s-\\|[[(]\\)\"" . "\\enquote{")
+;;          ("\\(\\S-\\)\"" . "}")
+;;          ("\\(\\s-\\|(\\)'" . "`"))))
 
 ;; (setq org-latex-pdf-process
 ;;       '("xelatex -interaction nonstopmode %f"
