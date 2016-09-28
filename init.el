@@ -856,14 +856,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (require 'js-comint nil t)
 
-;(setq inferior-js-program-command "nodejs --harmony --use_strict")
-(setq inferior-js-program-command
-      (mapconcat 'identity
-                 '("/home/dhl/.nvm/versions/io.js/v1.0.4/bin/node"
-                   "--es_staging" "--harmony_modules"
-                   "--harmony_arrow_functions"
-                   "--harmony_classes" "--use_strict")
-                 " "))
+(setq inferior-js-program-command "js24 -s")
 
 (add-hook 'inferior-js-mode-hook
           (lambda ()
