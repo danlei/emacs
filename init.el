@@ -2474,7 +2474,8 @@ the respective function."
 (setq gnus-article-sort-functions
       '(gnus-article-sort-by-number))
 
-(setq gnus-summary-expunge-below -500)
+(setq gnus-summary-expunge-below -500
+      gnus-thread-expunge-below nil)
 
 
 ;;;
