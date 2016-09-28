@@ -2121,6 +2121,21 @@ using commands with prefix arguments."
 
 
 ;;;;
+;;;; projectile
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/projectile/")
+
+(when (require 'projectile nil t)
+  (projectile-global-mode t))
+
+(defadvice projectile-grep
+    (after dhl-projectile-grep-advice last () activate)
+  "Switch to the grep window after invocation."
+  (other-window 1))
+
+
+;;;;
 ;;;; kill ring
 ;;;;
 
