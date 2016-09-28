@@ -1036,6 +1036,44 @@ line options may be given in OPTIONS."
 
 
 ;;;;
+;;;; semantic web
+;;;;
+
+(mapc (apply-partially 'add-to-list 'load-path)
+      '("~/.emacs.d/elisp/manchester-mode/"
+        "~/.emacs.d/elisp/ttl-mode/"
+        "~/.emacs.d/elisp/emacs-async/"
+        "~/.emacs.d/elisp/sparql-mode/"))
+
+(when (require 'manchester-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.omn\\'" . manchester-mode)))
+
+(when (require 'ttl-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.\\(n3\\|ttl\\)\\'" . ttl-mode)))
+
+(setq ttl-electric-punctuation nil)
+
+(when (and (require 'async nil t)
+           (require 'sparql-mode nil t))
+  (add-to-list 'auto-mode-alist '("\\.\\(sparql\\|rq\\)\\'" . sparql-mode)))
+
+(setq sparql-default-base-url "http://dbpedia.org/sparql"
+      sparql-default-format "text/html")
+
+(define-key sparql-result-mode-map (kbd "z") ; TODO: set for view-mode-map?
+  'View-kill-and-leave)
+
+;; (define-key view-mode-map (kbd "z")          ; TODO: yes?
+;;   'View-kill-and-leave)
+
+(when (require 'dhl-sparql-output-html-prefix nil t)
+  (defadvice sparql-query-region
+      (after dhl-sparql-output-frobbing activate)
+    (other-window 1)
+    (dhl-render-sparql-html-output-buffer)))
+
+
+;;;;
 ;;;; elisp
 ;;;;
 
