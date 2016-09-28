@@ -2477,6 +2477,11 @@ the respective function."
 (setq gnus-summary-expunge-below -500
       gnus-thread-expunge-below nil)
 
+(defadvice gnus-score-find-trace
+    (after dhl-switch-to-score-trace last () activate)
+  "Switch to `gnus-score-find-trace' window automatically."
+  (other-window 1))
+
 
 ;;;
 ;;; misc
