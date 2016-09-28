@@ -781,13 +781,26 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (setq prolog-program-name
       (case system-type
         (windows-nt "C:/Program Files/pl/bin/swipl.exe")
-        (cygwin "/usr/bin/pl")))
+        (cygwin "/usr/bin/pl")
+        (gnu/linux '((swi "/usr/bin/swipl")
+                     (gnu "/usr/bin/gprolog")
+                     (yap "/usr/bin/yap")))))
 
 (when (eq system-type 'windows-nt)
   (add-to-list 'prolog-program-switches
                '(swi ("-f" "C:/Users/dhl/.emacs.d/swipl-init.pl"))))
 
-;(add-to-list 'auto-mode-alist '("\.pl$" . prolog-mode))
+(when (eq system-type 'gnu/linux)
+  (add-to-list 'prolog-program-switches
+               '(swi ("--traditional"))))
+
+(add-hook 'prolog-inferior-mode-hook
+          (lambda ()
+            (setq comint-prompt-read-only t)
+            (local-set-key (kbd "C-c C-d") 'comint-send-eof)))
+
+;(add-to-list 'auto-mode-alist '("\.pl\\'" . prolog-mode))
+(add-to-list 'auto-mode-alist '(".pro\\'" . prolog-mode))
 
 
 ;;;;
