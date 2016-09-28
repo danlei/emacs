@@ -2198,6 +2198,7 @@ using commands with prefix arguments."
       ispell-dictionary "german"
       tab-always-indent 'complete
       woman-use-own-frame nil
+      Man-notify-method 'aggressive
       sentence-end-double-space nil
       make-backup-files 1
       default-major-mode 'text-mode
