@@ -2204,6 +2204,7 @@ using commands with prefix arguments."
       default-major-mode 'text-mode
       undo-limit 100000
       apropos-do-all 1
+      extended-command-suggest-shorter nil
       line-move-visual nil
       help-window-select t
       enable-recursive-minibuffers t
