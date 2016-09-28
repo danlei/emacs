@@ -1651,9 +1651,9 @@ using commands with prefix arguments."
 ;;;; org-mode
 ;;;;
 
-(mapc (apply-partially 'add-to-list 'load-path)
-      '("~/.emacs.d/elisp/org-mode/lisp/"
-        "~/.emacs.d/elisp/org-mode/contrib/lisp/"))
+;; (mapc (apply-partially 'add-to-list 'load-path)
+;;       '("~/.emacs.d/elisp/org-mode/lisp/"
+;;         "~/.emacs.d/elisp/org-mode/contrib/lisp/"))
 
 (require 'org nil t)
 (require 'org-table nil t)
