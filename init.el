@@ -2466,6 +2466,8 @@ the respective function."
         (gnus-low-score-mark)
         (gnus-catchup-mark (subject -1))))
 
+(setq gnus-adaptive-pretty-print t)
+
 (setq gnus-thread-sort-functions
       '((not gnus-thread-sort-by-number)))
 
