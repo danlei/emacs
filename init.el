@@ -850,6 +850,10 @@ CLASS-NAME is queried in the minibuffer, defaulting to
                              `(("M-n" next-error)
                                ("M-p" previous-error)))))
 
+(add-to-list 'load-path "~/.emacs.d/elisp/jss/")
+(add-to-list 'load-path "~/.emacs.d/elisp/emacs-websocket/")
+(require 'jss nil t)
+
 (require 'js-comint nil t)
 
 ;(setq inferior-js-program-command "nodejs --harmony --use_strict")
