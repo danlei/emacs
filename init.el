@@ -861,6 +861,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (add-hook 'inferior-js-mode-hook
           (lambda ()
             (ansi-color-for-comint-mode-on)
+            (setq comint-process-echoes t)
             (add-to-list
              'comint-preoutput-filter-functions
              (lambda (output)
