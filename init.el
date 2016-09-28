@@ -2453,12 +2453,14 @@ the respective function."
 
 (setq gnus-default-adaptive-score-alist
       '((gnus-unread-mark)
-        (gnus-ticked-mark (from 10))
-        (gnus-dormant-mark (from 5))
-        (gnus-del-mark (from -2) (subject -4))
-        (gnus-read-mark (from 2) (subject 5))
-        (gnus-expirable-mark (from -3) (subject -5))
-        (gnus-killed-mark (from -1) (subject -4))
+        (gnus-ticked-mark (from 5) (subject 2))
+        (gnus-saved-mark (from 10) (subject 2))
+        (gnus-dormant-mark (from 5) (subject 2))
+        (gnus-del-mark (from -1) (subject -5))       ; marked as read with d
+        (gnus-read-mark (from 3) (subject 5))
+        (gnus-replied-mark (from 20) (subject 10))
+        (gnus-expirable-mark (from -1) (subject -3))
+        (gnus-killed-mark (from -1) (subject -5))
         (gnus-kill-file-mark)
         (gnus-ancient-mark)
         (gnus-low-score-mark)
