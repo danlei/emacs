@@ -1742,6 +1742,11 @@ using commands with prefix arguments."
       color: #505050;
     }
 
+    /* TODO */
+    h2 {
+      margin-top: 1em;
+    }
+
     .title  {
       text-align: center;
     /*font-family: 'Droid Serif';
