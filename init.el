@@ -86,6 +86,15 @@ in case that file does not provide any feature."
   )
 
 
+;;;;
+;;;; auto-complete
+;;;;
+
+;; (add-to-list 'load-path "~/.emacs.d/elisp/auto-complete/")
+;; (add-to-list 'load-path "~/.emacs.d/elisp/popup-el/")
+
+;; (require 'auto-complete nil t)
+
 
 ;;;;
 ;;;; common lisp
@@ -198,6 +207,23 @@ in case that file does not provide any feature."
          (random-page (let ((pages (symbol-value random-hyperspec-symbol)))
                         (nth (random (length pages)) pages))))
     (browse-url (concat common-lisp-hyperspec-root "Body/" random-page))))
+
+
+;;;
+;;; ac
+;;;
+
+;; (add-to-list 'load-path "~/.emacs.d/elisp/ac-slime/")
+
+;; (require 'ac-slime nil t)
+
+;; (eval-after-load 'auto-complete
+;;   '(progn
+;;      (add-to-list 'ac-modes 'slime-repl-mode)
+;;      (add-to-list 'ac-modes 'js2-mode)
+;;      (add-to-list 'ac-modes 'js-mode)
+;;      (add-hook 'slime-mode-hook 'set-up-slime-ac)
+;;      (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)))
 
 
 ;;;;
