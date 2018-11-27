@@ -2244,7 +2244,7 @@ using commands with prefix arguments."
 (show-paren-mode 1)
 (transient-mark-mode -1)
 (electric-indent-mode -1)
-(blink-cursor-mode -1)
+(blink-cursor-mode 1)
 (minibuffer-depth-indicate-mode 1)
 (auto-compression-mode 1)
 (auto-image-file-mode 1)
