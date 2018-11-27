@@ -1773,6 +1773,11 @@ using commands with prefix arguments."
 (add-to-list 'Info-additional-directory-list
              (expand-file-name "~/.emacs.d/elisp/org-mode/doc/"))
 
+(setq org-file-apps
+      (append `(("\\.x?html?\\'" . ,(concat browse-url-generic-program " %s"))
+                ("\\.pdf\\'" . ,(concat browse-url-generic-program " %s")))
+              org-file-apps))
+
 (add-hook 'org-mode-hook
           (lambda ()
             (local-set-key (kbd "<C-up>") 'org-shiftmetaup)
