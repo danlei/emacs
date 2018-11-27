@@ -125,7 +125,7 @@ in case that file does not provide any feature."
 (setq slime-lisp-implementations
       `((ccl ,@(list (case system-type
                        ((windows-nt cygwin) '("~/build/ccl/wx86cl" "-K utf-8"))
-                       (gnu/linux '("~/build/ccl/lx86cl" "-K utf-8")))))
+                       (gnu/linux '("~/build/ccl/lx86cl64" "-K utf-8")))))
         (clisp ,@(list (case system-type
                          ((cygwin gnu/linux) '("clisp" "-E utf-8" "-modern"))
                          (windows-nt '("~/build/clisp/clisp-2.49/clisp"
