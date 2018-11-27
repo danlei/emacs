@@ -1462,7 +1462,7 @@ using commands with prefix arguments."
 (setq browse-url-generic-program
       (case system-type
         (windows-nt "~/AppData/Local/Google/Chrome/Application/Chrome.exe")
-        (gnu/linux "google-chrome")))
+        (gnu/linux "/usr/bin/firefox")))
 
 (setq browse-url-browser-function 'browse-url-generic)
 
