@@ -607,6 +607,28 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;                  'dhl-cperl-eldoc-documentation-function)))
 
 
+;;;
+;;; perl 6
+;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/perl6-mode/")
+(add-to-list 'load-path "~/.emacs.d/elisp/inferior-perl6/")
+
+(require 'perl6-mode nil t)
+(require 'inferior-perl6 nil t)
+
+(setq inferior-perl6-program "~/build/rakudobrew/bin/perl6")
+
+(add-hook 'perl6-mode-hook
+	  (lambda ()
+	    (dhl-define-keys perl6-mode-map
+			     '(("C-x C-e" perl6-send-last-sexp)
+			       ("C-M-x" perl6-send-defun)
+			       ("C-c C-b" perl6-send-buffer)
+			       ("C-c C-r" perl6-send-region)
+			       ("C-c C-c" perl6-send-sentence)))))
+
+
 ;;;;
 ;;;; tcl
 ;;;;
