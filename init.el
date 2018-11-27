@@ -73,12 +73,18 @@ in case that file does not provide any feature."
         (color-theme-initialize)
         (and (require 'color-theme-dhl-hober nil t)
              (color-theme-dhl-hober))))
-  (add-to-list 'custom-theme-load-path "~/.emacs.d/elisp/themes/")
-  (when (and (locate-file "zenburn-theme"
-                          custom-theme-load-path
-                          '(".el" ".elc"))
-             (load-theme 'zenburn t t))
-    (enable-theme 'zenburn)))
+  (mapc (apply-partially 'add-to-list 'custom-theme-load-path)
+        '("~/.emacs.d/elisp/themes/"
+          "~/.emacs.d/elisp/leuven-theme/"
+          "~/.emacs.d/elisp/white-theme/"
+          "~/.emacs.d/elisp/tango-plus-theme/"))
+; (when (and (locate-file "zenburn-theme"
+;                         custom-theme-load-path
+;                         '(".el" ".elc"))
+;            (load-theme 'zenburn t t))
+;   (enable-theme 'zenburn))
+  )
+
 
 
 ;;;;
