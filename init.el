@@ -508,17 +508,33 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (add-hook 'python-mode-hook
           (lambda ()
-            (local-set-key (kbd "<C-tab>")
-                           'python-shell-completion-complete-at-point)
             (local-set-key (kbd "C-c d") 'dhl-pydoc)
 ;           (setq parens-require-spaces nil)
             (eldoc-mode 1)))
 
 (add-hook 'inferior-python-mode-hook
           (lambda ()
-;           (setq parens-require-spaces nil)
-            (local-set-key (kbd "C-c d") 'dhl-pydoc)
             (setq comint-prompt-read-only t)))
+
+(add-hook
+ 'python-mode-hook
+ (lambda ()
+   (dolist (mode-map (list python-mode-map
+                           inferior-python-mode-map))
+     (dhl-define-keys mode-map
+                      '(("M-f" python-nav-forward-sexp)
+                        ("C-M-f" forward-word)
+                        ("M-b" python-nav-backward-sexp)
+                        ("C-M-b" backward-word)
+                        ("M-u" python-nav-backward-up-list)
+                        ("C-M-u" upcase-word)
+                        ("M-t" transpose-sexps)
+                        ("C-M-t" transpose-words)
+                        ("C-M-a" python-nav-backward-defun)
+                        ("C-M-e" python-nav-forward-defun)
+;                       ("C-M-q" fill-paragraph)
+                        ("<C-tab>" python-shell-completion-complete-at-point)
+                        ("C-c d" dhl-pydoc))))))
 
 (setq dhl-python-command
       (if (eq system-type 'windows-nt)
