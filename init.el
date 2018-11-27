@@ -1227,6 +1227,16 @@ line options may be given in OPTIONS."
 
 
 ;;;;
+;;;; fish
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/fish/")
+(when (require 'fish-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.fish\\'" . fish-mode))
+  (setq fish-indent-offset 2))
+
+
+;;;;
 ;;;; ess
 ;;;;
 
