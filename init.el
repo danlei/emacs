@@ -1816,7 +1816,12 @@ using commands with prefix arguments."
       org-html-postamble nil
       org-html-with-latex t
       org-html-style-include-default nil
-      org-html-htmlize-output-type 'inline-css)
+      org-html-htmlize-output-type 'inline-css
+      org-html-table-caption-above nil
+      org-latex-table-caption-above nil
+      org-goto-interface 'outline-path-completion ; 'outline
+      org-goto-max-level 10
+      org-outline-path-complete-in-steps nil)
 
 ;; TODO: fix note template
 (setq org-capture-templates
