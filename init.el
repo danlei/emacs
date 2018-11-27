@@ -848,6 +848,9 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (setq-default prolog-system 'swi)
 
+(setq prolog-indent-width 4
+      prolog-electric-newline-flag nil)
+
 (setq prolog-program-name
       (case system-type
         (windows-nt "C:/Program Files/pl/bin/swipl.exe")
@@ -856,18 +859,23 @@ CLASS-NAME is queried in the minibuffer, defaulting to
                      (gnu "/usr/bin/gprolog")
                      (yap "/usr/bin/yap")))))
 
+(add-to-list 'prolog-program-switches
+             '(swi ("-tty" "--traditional" "--quiet")))
+(add-to-list 'prolog-program-switches
+             '(yap ("-q")))
+
 (when (eq system-type 'windows-nt)
   (add-to-list 'prolog-program-switches
                '(swi ("-f" "C:/Users/dhl/.emacs.d/swipl-init.pl"))))
-
-(when (eq system-type 'gnu/linux)
-  (add-to-list 'prolog-program-switches
-               '(swi ("--traditional"))))
 
 (add-hook 'prolog-inferior-mode-hook
           (lambda ()
             (setq comint-prompt-read-only t)
             (local-set-key (kbd "C-c C-d") 'comint-send-eof)))
+
+(add-hook 'prolog-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c C-l") 'prolog-consult-file)))
 
 ;(add-to-list 'auto-mode-alist '("\.pl\\'" . prolog-mode))
 (add-to-list 'auto-mode-alist '(".pro\\'" . prolog-mode))
