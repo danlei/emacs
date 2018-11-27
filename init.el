@@ -2196,6 +2196,7 @@ using commands with prefix arguments."
       require-final-newline nil
       ispell-personal-dictionary "~/.ispell-emacs"
       ispell-dictionary "german"
+      standard-indent 2
       tab-always-indent 'complete
       woman-use-own-frame nil
       Man-notify-method 'aggressive
@@ -2222,8 +2223,6 @@ using commands with prefix arguments."
               tab-width 2)
 
 (set-cursor-color "#ff7700")
-
-;(setq standard-indent 2)
 
 ;; (setq default-frame-alist
 ;;       (append default-frame-alist '((width . 90) (height . 31))))
