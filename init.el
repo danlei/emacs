@@ -1106,6 +1106,27 @@ line options may be given in OPTIONS."
                                ("C-M-n" nxml-up-element)))))
 
 
+;;;
+;;; xquery
+;;;
+
+;; TODO: switch to outputbuffer in view mode automatically (maybe use
+;; sentinels? or write from scratch?
+
+(add-to-list 'load-path "~/.emacs.d/elisp/xquery-mode/")
+
+(when (require 'xquery-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.xqy\\'" . xquery-mode)))
+
+(define-key xquery-mode-map (kbd "C-c C-c") 'dhl-run-xquery)
+
+(setq dhl-xquery-command "basex")
+
+(defun dhl-run-xquery ()
+  (interactive)
+  (save-buffer)
+  (shell-command (concat dhl-xquery-command " " (buffer-file-name))))
+
 ;;;;
 ;;;; html/css
 ;;;;
