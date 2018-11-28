@@ -1435,6 +1435,20 @@ using commands with prefix arguments."
 
 
 ;;;;
+;;;; flx
+;;;;
+
+;; TODO: I'm not sure if I really like this better than vanilla
+
+;; (add-to-list 'load-path "~/.emacs.d/elisp/flx/")
+
+;; (when (require 'flx-ido nil t)
+;;   (flx-ido-mode t)
+;;   (setq ido-enable-flex-matching t
+;;         ido-use-faces nil))
+
+
+;;;;
 ;;;; session management
 ;;;;
 
