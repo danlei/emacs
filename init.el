@@ -112,7 +112,7 @@ in case that file does not provide any feature."
 
 (when (require 'slime nil t)
   (slime-setup '(slime-fancy
-                 slime-asdf
+;                slime-asdf
                  slime-indentation
                  slime-xref-browser
 ;                slime-js               ; TODO: setup slime-js
