@@ -74,10 +74,11 @@ in case that file does not provide any feature."
         (and (require 'color-theme-dhl-hober nil t)
              (color-theme-dhl-hober))))
   (mapc (apply-partially 'add-to-list 'custom-theme-load-path)
-        '("~/.emacs.d/elisp/themes/"
-          "~/.emacs.d/elisp/leuven-theme/"
-          "~/.emacs.d/elisp/white-theme/"
-          "~/.emacs.d/elisp/tango-plus-theme/"))
+        '("~/.emacs.d/themes/"
+          "~/.emacs.d/themes/leuven-theme/"
+          "~/.emacs.d/themes/white-theme/"
+          "~/.emacs.d/themes/tango-plus-theme/"
+          "~/.emacs.d/themes/zenburn-emacs/"))
 ; (when (and (locate-file "zenburn-theme"
 ;                         custom-theme-load-path
 ;                         '(".el" ".elc"))
