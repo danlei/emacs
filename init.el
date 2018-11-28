@@ -1478,27 +1478,6 @@ using commands with prefix arguments."
 
 
 ;;;;
-;;;; expand-region
-;;;;
-
-(add-to-list 'load-path "~/.emacs.d/elisp/expand-region.el/")
-
-(when (require 'expand-region nil t)
-  (global-set-key (kbd "C-.") 'er/expand-region))
-
-
-;;;;
-;;;; multiple cursors
-;;;;
-
-(add-to-list 'load-path "~/.emacs.d/elisp/multiple-cursors.el")
-
-(when (require 'multiple-cursors nil t)
-  (global-set-key (kbd "S-SPC") 'mc/edit-lines)
-  (global-set-key (kbd "C-,") 'mc/mark-next-like-this))
-
-
-;;;;
 ;;;; erc
 ;;;;
 
@@ -2289,6 +2268,26 @@ using commands with prefix arguments."
 (require 'mozc nil t)
 
 ;(setq default-input-method "japanzese-mozc")
+
+
+;;;;
+;;;; expand-region
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/expand-region.el/")
+
+(when (require 'expand-region nil t)
+  (global-set-key (kbd "S-SPC") 'er/expand-region))
+
+
+;;;;
+;;;; multiple cursors
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/multiple-cursors.el")
+
+(when (require 'multiple-cursors nil t)
+  (global-set-key (kbd "C-,") 'mc/mark-next-like-this))
 
 
 ;;;;
