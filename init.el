@@ -2399,7 +2399,7 @@ using commands with prefix arguments."
       ring-bell-function (lambda ())
       scroll-conservatively 101
       require-final-newline nil
-      ispell-personal-dictionary "~/.ispell-emacs"
+      ispell-personal-dictionary "~/.emacs.d/ispell"
       ispell-dictionary "german"
       standard-indent 2
       tab-always-indent 'complete
