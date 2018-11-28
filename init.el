@@ -704,6 +704,9 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (when (eq system-type 'windows-nt)
   (setq inferior-octave-program "C:/Octave/3.2.4_gcc-4.4.0/bin/octave.exe"))
 
+(add-hook 'inferior-octave-mode-hook
+          (lambda () (local-set-key (kbd "C-a") 'comint-bol)))
+
 
 ;;;;
 ;;;; haskell
