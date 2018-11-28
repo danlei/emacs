@@ -824,13 +824,13 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;               (ghc-init))))
 
 ;; (defadvice ghc-init
-;;   (before dhl-ghc-mod-local-completion first () activate)
+;;     (before dhl-ghc-mod-local-completion first () activate)
 ;;   "Make `ghc-mod' completions buffer local."
 ;;   (make-local-variable 'ghc-loaded-module)
 ;;   (make-local-variable 'ghc-merged-keyword))
 
 ;; (defadvice ghc-import-module
-;;   (before dhl-ghc-mod-reset-modules first () activate)
+;;     (before dhl-ghc-mod-reset-modules first () activate)
 ;;   "Make `ghc-import-module' recognize dropped imports."
 ;;   (setq ghc-loaded-module nil)
 ;;   (ghc-comp-init))
@@ -1431,7 +1431,7 @@ line options may be given in OPTIONS."
   (global-set-key (kbd "M-g i") 'idomenu))
 
 (defadvice idomenu
-  (after dhl-idomenu-recenter last () activate)
+    (after dhl-idomenu-recenter last () activate)
   "Recenter after invoking `idomenu'."
   (recenter-top-bottom))
 
@@ -1774,7 +1774,7 @@ using commands with prefix arguments."
             (ibuffer-auto-mode 1)))
 
 (defadvice ibuffer
-  (around dhl-ibuffer-point-to-most-recent first () activate)
+    (around dhl-ibuffer-point-to-most-recent first () activate)
   "Open `ibuffer' with cursor pointed to most recent buffer name."
   (let ((recent-buffer-name (buffer-name)))
     ad-do-it
@@ -1812,22 +1812,22 @@ using commands with prefix arguments."
             (local-set-key (kbd "p") 'previous-line)))
 
 (defadvice occur
-  (after dhl-switch-to-occur last () activate)
+    (after dhl-switch-to-occur last () activate)
   "Switch to `occur' window automatically."
   (other-window 1))
 
 (defadvice multi-occur
-  (after dhl-switch-to-multi-occur last () activate)
+    (after dhl-switch-to-multi-occur last () activate)
   "Switch to `occur' window automatically."
   (other-window 1))
 
 (defadvice multi-occur-in-matching-buffers
-  (after dhl-switch-to-multi-occur-in-matching-buffers last () activate)
+    (after dhl-switch-to-multi-occur-in-matching-buffers last () activate)
   "Switch to `occur' window automatically."
   (other-window 1))
 
 (defadvice ibuffer-do-occur
-  (after dhl-ibuffer-switch-to-occur last () activate)
+    (after dhl-ibuffer-switch-to-occur last () activate)
   "Switch to `occur' window automatically."
   (other-window 1))
 
@@ -2593,7 +2593,7 @@ the respective function."
 ;;;;
 
 (defadvice split-window
-  (after dhl-window-splitting-advice last () activate)
+    (after dhl-window-splitting-advice last () activate)
   "Open `other-buffer' in vertical split window."
   (set-window-buffer (next-window) (other-buffer)))
 
