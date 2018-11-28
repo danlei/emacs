@@ -1130,11 +1130,69 @@ line options may be given in OPTIONS."
   (save-buffer)
   (shell-command (concat dhl-xquery-command " " (buffer-file-name))))
 
+
 ;;;;
-;;;; html/css
+;;;; web
 ;;;;
 
+(mapc (apply-partially 'add-to-list 'load-path)
+      '("~/.emacs.d/elisp/web-mode/"
+        "~/.emacs.d/elisp/php-mode/"
+        "~/.emacs.d/elisp/rainbow-mode/"
+        "~/.emacs.d/elisp/restclient/"
+        "~/.emacs.d/elisp/psysh.el/"
+        "~/.emacs.d/elisp/s.el/"
+        "~/.emacs.d/elisp/f.el/"))
+
+(when (require 'php-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode)))
+
+(add-hook 'php-mode-hook
+          (lambda ()
+            (setq comment-start "# "
+                  comment-end ""
+                  comment-column 40)
+            (c-set-offset 'case-label '+)
+            (dhl-define-keys php-mode-map
+                             '(("C-c C-c" psysh-eval-region)
+                               (("C-c d" "C-c C-d") psysh-doc)))))
+
+(when (require 'psysh nil t)
+  (setq psysh-doc-buffer-color 'only-emacs))
+
+(add-hook 'psysh-mode-hook
+          (lambda ()
+            (setq comint-prompt-read-only t)))
+
+(when (require 'web-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+; (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+  )
+
+(setq web-mode-markup-indent-offset 2
+      web-mode-code-indent-offset 2
+      web-mode-css-indent-offset 2
+      web-mode-sql-indent-offset 2
+      web-mode-php-indent-offset 2
+      web-mode-enable-auto-closing nil
+      web-mode-enable-auto-pairing nil
+      web-mode-enable-auto-quoting nil
+      web-mode-script-padding 2
+      web-mode-style-padding 2
+      web-mode-block-padding 2)
+
 (setq-default css-indent-offset 2)
+
+(add-hook 'web-mode-hook
+          (lambda ()
+            (subword-mode 1)
+            (c-set-offset 'case-label '+)
+            (c-toggle-electric-state -1)))
+
+(require 'rainbow-mode nil t)
+
+(when (require 'restclient nil t)
+  (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode)))
 
 
 ;;;;
