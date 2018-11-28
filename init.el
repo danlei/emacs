@@ -659,7 +659,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (when (eq system-type 'windows-nt)
   (setq maxima-command "C:/Program Files/Maxima-5.25.0/bin/maxima.bat"))
 
-(add-to-list 'load-path "~/.emacs.d/elisp/maxima/")
+(add-to-list 'load-path "~/.emacs.d/elisp/maxima/emaxima/")
 
 (when (require 'maxima nil t)
   (add-to-list 'auto-mode-alist '("\\.max$" . maxima-mode))
@@ -671,9 +671,11 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (require 'maxima-font-lock nil t)
 
+(add-to-list 'load-path "~/.emacs.d/elisp/maxima/imaxima/")
+
 (autoload 'imaxima "imaxima" "Frontend for maxima with Image support" t)
 
-(with-eval-after-load "imaxima"
+(with-eval-after-load "imaxima"         ; TODO
   (defadvice imaxima
       (after dhl-imaxima-maybe-insert-semicolon activate)
     "Insert semicolon if needed."
