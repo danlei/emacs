@@ -392,15 +392,39 @@ in case that file does not provide any feature."
 ;;;; j-mode
 ;;;;
 
-(autoload 'j-mode "j-mode.el"  "Major mode for J." t)
-(autoload 'j-shell "j-mode.el" "Run J from emacs." t)
+;; TODO: messes up color themes and exhausts max-specpdl-size
 
-(add-to-list 'auto-mode-alist '("\\.ij[rstp]" . j-mode))
+(add-to-list 'load-path "~/.emacs.d/elisp/j-mode/")
 
-(setq j-path "/cygdrive/c/Dokumente und Einstellungen/danlei/j602/bin/")
-;(setq j-dictionary-url "http://www.jsoftware.com/help/dictionary/")
-(setq j-dictionary-url
-      "file:///C:/Dokumente und Einstellungen/danlei/j602/help/dictionary/")
+;; (autoload 'j-mode "j-mode.el" "Major mode for editing J files" t)
+;; (autoload 'j-console "j-console.el" "Inferior J" t)
+
+;; TODO: FIXME
+;; (when (and (require 'j-mode nil t)
+;;            (require 'j-console nil t))
+;;   (set-face-foreground 'j-verb-face (face-foreground 'default))
+;;   (set-face-foreground 'j-adverb-face (face-foreground 'default))
+;;   (set-face-foreground 'j-conjunction-face (face-foreground 'default))
+;;   (set-face-foreground 'j-other-face (face-foreground 'default)))
+
+;; (add-to-list 'auto-mode-alist '("\\.ij[rstp]" . j-mode))
+
+(setq j-console-cmd "~/build/j/j801/bin/jconsole"
+      j-help-local-dictionary-url
+      "file:///home/dhl/build/j/j801/addons/docs/help/dictionary/")
+
+;; (custom-set-faces
+;;  '(j-verb-face ((t (:foreground "Red"))))
+;;  '(j-adverb-face ((t (:foreground "Green"))))
+;;  '(j-conjunction-face ((t (:foreground "Blue"))))
+;;  '(j-other-face ((t (:foreground "Black")))))
+
+;; (put 'j-verb-face 'face-alias 'default)
+;; (put 'j-adverb-face 'face-alias 'default)
+;; (put 'j-conjuntion-face 'face-alias 'default)
+;; (put 'j-other-face 'face-alias 'default)
+
+
 ;;;;
 ;;;; apl
 ;;;;
