@@ -2752,7 +2752,11 @@ the respective function."
 ;;;
 
 (setq gnus-posting-styles
-      '((message-news-p (address "news@leidisch.net"))))
+      '((message-news-p (address "news@leidisch.net"))
+        ("gmane" (address "lists@leidisch.net"))
+        ("nnml:.*" (From (with-current-buffer gnus-article-buffer ; TODO
+                           (message-fetch-field "to"))))))
+
 
 ;;;
 ;;; gmail, gmane
