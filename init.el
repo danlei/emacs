@@ -1058,6 +1058,7 @@ line options may be given in OPTIONS."
 (define-derived-mode lpc-mode c-mode "LPC")
 
 (modify-syntax-entry ?' "'" lpc-mode-syntax-table)
+;(modify-syntax-entry ?# "' 14" lpc-mode-syntax-table) ;; TODO
 
 
 ;;;
