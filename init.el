@@ -979,19 +979,21 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (add-hook 'js2-mode-hook
           (lambda ()
-            (local-set-key (kbd "C-c C-b") 'dhl-nodejs-repl-eval-buffer)
-            (local-set-key (kbd "C-c C-c") 'dhl-nodejs-repl-eval-defun)
-            (local-set-key (kbd "C-M-x") 'dhl-nodejs-repl-eval-defun)
-            (local-set-key (kbd "C-c C-e") 'dhl-nodejs-repl-eval-last-sexp)
-            (local-set-key (kbd "C-c C-r") 'dhl-nodejs-repl-eval-last-sexp)))
+            (dhl-define-keys js2-mode-map
+                             '(("C-c C-b" 'dhl-nodejs-repl-eval-buffer)
+                               ("C-c C-c" 'dhl-nodejs-repl-eval-defun)
+                               ("C-M-x" 'dhl-nodejs-repl-eval-defun)
+                               ("C-c C-e" 'dhl-nodejs-repl-eval-last-sexp)
+                               ("C-c C-r" 'dhl-nodejs-repl-eval-last-sexp)))))
 
 (add-hook 'js-mode-hook
           (lambda ()
-            (local-set-key (kbd "C-c C-b") 'dhl-nodejs-repl-eval-buffer)
-            (local-set-key (kbd "C-c C-c") 'dhl-nodejs-repl-eval-defun)
-            (local-set-key (kbd "C-M-x") 'dhl-nodejs-repl-eval-defun)
-            (local-set-key (kbd "C-c C-e") 'dhl-nodejs-repl-eval-last-sexp)
-            (local-set-key (kbd "C-c C-r") 'dhl-nodejs-repl-eval-last-sexp)))
+            (dhl-define-keys js-mode-map
+                             '(("C-c C-b" 'dhl-nodejs-repl-eval-buffer)
+                               ("C-c C-c" 'dhl-nodejs-repl-eval-defun)
+                               ("C-M-x" 'dhl-nodejs-repl-eval-defun)
+                               ("C-c C-e" 'dhl-nodejs-repl-eval-last-sexp)
+                               ("C-c C-r" 'dhl-nodejs-repl-eval-last-sexp)))))
 
 (when (require 'js nil t)
   (modify-syntax-entry ?` "\"" js-mode-syntax-table)) ; for ES6 string templates
