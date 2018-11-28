@@ -977,9 +977,9 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (require 'nodejs-repl nil t)
 
-(setq nodejs-repl-command "/home/dhl/.nvm/versions/node/v6.4.0/bin/node")
-(setq nodejs-repl-options
-      '("--es_staging" "--use_strict"))
+(setq nodejs-repl-command "/home/dhl/.nvm/versions/node/v11.2.0/bin/node"
+      nodejs-repl-options '("--experimental-repl-await"
+                            "--use_strict"))
 
 (add-hook 'nodejs-repl-mode-hook
           (lambda ()
