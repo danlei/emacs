@@ -2280,9 +2280,9 @@ using commands with prefix arguments."
 (require 'reftex nil t)
 
 (defadvice reftex-TeX-master-file
-  (around dhl-reftex-Tex-master-file-fix last () activate)
+    (around dhl-reftex-Tex-master-file-fix last () activate)
   (flet ((tex-main-file ()
-           (buffer-file-name)))
+         (buffer-file-name)))
     ad-do-it))
 
 
