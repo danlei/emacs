@@ -1188,7 +1188,8 @@ line options may be given in OPTIONS."
                                (("C-c d" "C-c C-d") psysh-doc)))))
 
 (when (require 'psysh nil t)
-  (setq psysh-doc-buffer-color 'only-emacs))
+  (setq psysh-doc-buffer-color 'only-emacs
+        psysh-comint-buffer-process '("psysh" "psysh" nil "--no-color")))
 
 (add-hook 'psysh-mode-hook
           (lambda ()
