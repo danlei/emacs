@@ -1205,7 +1205,8 @@ line options may be given in OPTIONS."
       '("~/.emacs.d/elisp/php-mode/"
         "~/.emacs.d/elisp/psysh.el/"
         "~/.emacs.d/elisp/s.el/"
-        "~/.emacs.d/elisp/f.el/"))
+        "~/.emacs.d/elisp/f.el/"
+        "~/.emacs.d/elisp/php-eldoc/"))
 
 (when (require 'php-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode)))
@@ -1219,6 +1220,11 @@ line options may be given in OPTIONS."
             (dhl-define-keys php-mode-map
                              '(("C-c C-c" psysh-eval-region)
                                (("C-c d" "C-c C-d") psysh-doc)))))
+
+(when (require 'php-eldoc nil t)
+  (add-hook 'php-mode-hook
+            (lambda ()
+              (php-eldoc-enable))))
 
 (when (require 'psysh nil t)
   (setq psysh-doc-buffer-color 'only-emacs)
