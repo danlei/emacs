@@ -1167,40 +1167,7 @@ line options may be given in OPTIONS."
 
 (mapc (apply-partially 'add-to-list 'load-path)
       '("~/.emacs.d/elisp/web-mode/"
-        "~/.emacs.d/elisp/php-mode/"
-        "~/.emacs.d/elisp/rainbow-mode/"
-        "~/.emacs.d/elisp/restclient/"
-        "~/.emacs.d/elisp/psysh.el/"
-        "~/.emacs.d/elisp/s.el/"
-        "~/.emacs.d/elisp/f.el/"))
-
-(when (require 'php-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode)))
-
-(add-hook 'php-mode-hook
-          (lambda ()
-            (setq comment-start "# "
-                  comment-end ""
-                  comment-column 40)
-            (c-set-offset 'case-label '+)
-            (dhl-define-keys php-mode-map
-                             '(("C-c C-c" psysh-eval-region)
-                               (("C-c d" "C-c C-d") psysh-doc)))))
-
-(when (require 'psysh nil t)
-  (setq psysh-doc-buffer-color 'only-emacs
-        psysh-comint-buffer-process '("psysh" "psysh" nil "--no-color")))
-
-(add-hook 'psysh-mode-hook
-          (lambda ()
-            (setq comint-prompt-read-only t)))
-
-(defadvice psysh-eval-region
-    (after dhl-psysh-eval-region-advice last () activate)
-  "Show *psysh* buffer after eval-region invocation."
-  (let ((buf (psysh--make-process)))
-    (comint-send-string buf "\n"))
-  (pop-to-buffer "*psysh*"))
+        "~/.emacs.d/elisp/rainbow-mode/"))
 
 (when (require 'web-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
@@ -1228,6 +1195,52 @@ line options may be given in OPTIONS."
             (c-toggle-electric-state -1)))
 
 (require 'rainbow-mode nil t)
+
+
+;;;;
+;;;; php
+;;;;
+
+(mapc (apply-partially 'add-to-list 'load-path)
+      '("~/.emacs.d/elisp/php-mode/"
+        "~/.emacs.d/elisp/psysh.el/"
+        "~/.emacs.d/elisp/s.el/"
+        "~/.emacs.d/elisp/f.el/"))
+
+(when (require 'php-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode)))
+
+(add-hook 'php-mode-hook
+          (lambda ()
+            (setq comment-start "# "
+                  comment-end ""
+                  comment-column 40)
+            (c-set-offset 'case-label '+)
+            (dhl-define-keys php-mode-map
+                             '(("C-c C-c" psysh-eval-region)
+                               (("C-c d" "C-c C-d") psysh-doc)))))
+
+(when (require 'psysh nil t)
+  (setq psysh-doc-buffer-color 'only-emacs)
+  (setq-default psysh-comint-buffer-process '("psysh" "psysh" nil "--no-color")))
+
+(add-hook 'psysh-mode-hook
+          (lambda ()
+            (setq comint-prompt-read-only t)))
+
+(defadvice psysh-eval-region
+    (after dhl-psysh-eval-region-advice last () activate)
+  "Show *psysh* buffer after eval-region invocation."
+  (let ((buf (psysh--make-process)))
+    (comint-send-string buf "\n"))
+  (pop-to-buffer "*psysh*"))
+
+
+;;;;
+;;;; rest-client
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/restclient/")
 
 (when (require 'restclient nil t)
   (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode)))
