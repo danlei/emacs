@@ -1195,6 +1195,13 @@ line options may be given in OPTIONS."
           (lambda ()
             (setq comint-prompt-read-only t)))
 
+(defadvice psysh-eval-region
+    (after dhl-psysh-eval-region-advice last () activate)
+  "Show *psysh* buffer after eval-region invocation."
+  (let ((buf (psysh--make-process)))
+    (comint-send-string buf "\n"))
+  (pop-to-buffer "*psysh*"))
+
 (when (require 'web-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 ; (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
