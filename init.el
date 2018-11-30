@@ -1234,9 +1234,15 @@ line options may be given in OPTIONS."
           (lambda ()
             (setq comint-prompt-read-only t)))
 
+(defadvice php-send-region
+    (after dhl-php-send-region-advice last () activate)
+  "Show *PHP* buffer after `php-send-region' invocation."
+  (pop-to-buffer "*PHP*")
+  (view-mode 1))
+
 (defadvice psysh-eval-region
     (after dhl-psysh-eval-region-advice last () activate)
-  "Show *psysh* buffer after eval-region invocation."
+  "Show *psysh* buffer after `eval-region' invocation."
   (let ((buf (psysh--make-process)))
     (comint-send-string buf "\n"))
   (pop-to-buffer "*psysh*"))
