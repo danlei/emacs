@@ -1388,6 +1388,8 @@ line options may be given in OPTIONS."
 ;;;; ielm
 ;;;;
 
+;; TODO: fix indentation, C-j etc.
+
 (setq ielm-prompt "elisp> ")
 
 (add-hook 'ielm-mode-hook
