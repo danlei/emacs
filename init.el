@@ -408,7 +408,7 @@ in case that file does not provide any feature."
 ;;   (set-face-foreground 'j-conjunction-face (face-foreground 'default))
 ;;   (set-face-foreground 'j-other-face (face-foreground 'default)))
 
-;; (add-to-list 'auto-mode-alist '("\\.ij[rstp]" . j-mode))
+;; (add-to-list 'auto-mode-alist '("\\.ij[rstp]\\'" . j-mode))
 
 (setq j-console-cmd "~/build/j/j801/bin/jconsole"
       j-help-local-dictionary-url
@@ -450,7 +450,7 @@ in case that file does not provide any feature."
             (lambda () (view-mode 1)))
   (set-face-attribute 'gnu-apl-default nil
                       :family "DejaVu Sans Mono")
-  (add-to-list 'auto-mode-alist '("\\.apl$" . gnu-apl-mode)))
+  (add-to-list 'auto-mode-alist '("\\.apl\\'" . gnu-apl-mode)))
 
 (setq gnu-apl-show-keymap-on-startup nil
       gnu-apl-show-tips-on-start nil
@@ -602,7 +602,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (add-to-list 'load-path "~/.emacs.d/elisp/Sepia-0.992_01/")
 
 (when (require 'sepia nil t)
-  (add-to-list 'auto-mode-alist '("\\.pl$" . sepia-mode))
+  (add-to-list 'auto-mode-alist '("\\.pl\\'" . sepia-mode))
   (add-to-list 'interpreter-mode-alist '("perl" . sepia-mode))
   (add-to-list 'interpreter-mode-alist '("perl5" . sepia-mode))
   (add-to-list 'interpreter-mode-alist '("miniperl" . sepia-mode))
@@ -639,7 +639,9 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (add-to-list 'load-path "~/.emacs.d/elisp/perl6-mode/")
 (add-to-list 'load-path "~/.emacs.d/elisp/inferior-perl6/")
 
-(require 'perl6-mode nil t)
+(when (require 'perl6-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.p6\\'" . perl6-mode)))
+
 (require 'inferior-perl6 nil t)
 
 (setq inferior-perl6-program "~/build/rakudobrew/bin/perl6")
@@ -687,7 +689,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (add-to-list 'load-path "~/.emacs.d/elisp/maxima/emaxima/")
 
 (when (require 'maxima nil t)
-  (add-to-list 'auto-mode-alist '("\\.max$" . maxima-mode))
+  (add-to-list 'auto-mode-alist '("\\.max\\'" . maxima-mode))
   (defadvice maxima
       (after dhl-maxima-maybe-insert-semicolon activate)
     "Insert semicolon if needed."
@@ -726,7 +728,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;;; octave
 ;;;;
 
-(add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
+(add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
 (when (eq system-type 'windows-nt)
   (setq inferior-octave-program "C:/Octave/3.2.4_gcc-4.4.0/bin/octave.exe"))
@@ -757,8 +759,8 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (setq haskell-font-lock-symbols 'unicode)
 
-(add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
-(add-to-list 'auto-mode-alist '("\\.lhs$" . literal-haskell-mode))
+(add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
+(add-to-list 'auto-mode-alist '("\\.lhs\\'" . literal-haskell-mode))
 
 ;; TODO:
 ;; (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
@@ -860,7 +862,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
   (setq inferior-fsharp-program "fsi.exe --readline-"
         fsharp-compiler "fsc.exe"))
 
-(add-to-list 'auto-mode-alist '("\.fs$" . fsharp-mode))
+(add-to-list 'auto-mode-alist '("\\.fs\\'" . fsharp-mode))
 
 (add-hook
  'fsharp-mode-hook
@@ -907,8 +909,8 @@ CLASS-NAME is queried in the minibuffer, defaulting to
           (lambda ()
             (local-set-key (kbd "C-c C-l") 'prolog-consult-file)))
 
-;(add-to-list 'auto-mode-alist '("\.pl\\'" . prolog-mode))
-(add-to-list 'auto-mode-alist '(".pro\\'" . prolog-mode))
+;(add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
+(add-to-list 'auto-mode-alist '("\\.pro\\'" . prolog-mode))
 
 
 ;;;;
@@ -935,7 +937,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (setq-default js-indent-level 2)
 
 (when (require 'js2-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)))
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
 (setq-default js2-basic-offset 2)
 
@@ -1031,7 +1033,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (add-to-list 'load-path "~/.emacs.d/elisp/coffee-mode/")
 
 (when (require 'coffee-mode nil t)
-  (add-to-list 'auto-mode-alist '("\.coffee$" . coffee-mode))
+  (add-to-list 'auto-mode-alist '("\\.coffee\\'" . coffee-mode))
   (setq coffee-command "coffee")
   (add-to-list ; alternatively, set NODE_NO_READLINE=1
    'comint-preoutput-filter-functions
