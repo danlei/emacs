@@ -1226,7 +1226,8 @@ line options may be given in OPTIONS."
           (lambda ()
             (setq comment-start "# "
                   comment-end ""
-                  comment-column 40)
+                  comment-column 40
+                  tab-width 4)
             (c-set-offset 'case-label '+)
             (dhl-define-keys php-mode-map
                              '(("C-c C-c" psysh-eval-region)
