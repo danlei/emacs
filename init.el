@@ -45,7 +45,16 @@ in case that file does not provide any feature."
                       ";")))
   (gnu/linux
    (setenv "LC_MESSAGES" "C")
-   (setenv "MANWIDTH" "72")))
+   (setenv "MANWIDTH" "72"))
+  (darwin
+   (setenv "LC_MESSAGES" "C")
+   (setenv "PATH"
+           (mapconcat 'identity
+                      `(,(expand-file-name "~/bin")
+                        ,(getenv "PATH"))
+                      ":")
+           (mapc (apply-partially 'add-to-list 'exec-path)
+                 `(,(expand-file-name "~/bin"))))))
 
 (setenv "EDITOR" "emacsclient")
 
@@ -1604,7 +1613,8 @@ using commands with prefix arguments."
 (setq browse-url-generic-program
       (case system-type
         (windows-nt "~/AppData/Local/Google/Chrome/Application/Chrome.exe")
-        (gnu/linux "/usr/bin/firefox")))
+        (gnu/linux "/usr/bin/firefox")
+        (darwin "open")))
 
 (setq browse-url-browser-function 'browse-url-generic)
 
@@ -2538,14 +2548,18 @@ using commands with prefix arguments."
 (prefer-coding-system       'utf-8-unix)
 (set-default-coding-systems 'utf-8-unix)
 
+;; (when (eq system-type 'darwin)
+;;   (cua-mode 0)
+;;   (delete-selection-mode -1)
+;;   (set-face-font 'default
+;;                  "-xos4-terminus-medium-r-normal--14-140-72-72-c-80-utf-8")
+;;   (setq special-display-regexps
+;;         (remove "[ ]?\\*[hH]elp.*" special-display-regexps))
+;;   (setq special-display-regexps nil))
+
 (when (eq system-type 'darwin)
-  (cua-mode 0)
-  (delete-selection-mode -1)
-  (set-face-font 'default
-                 "-xos4-terminus-medium-r-normal--14-140-72-72-c-80-utf-8")
-  (setq special-display-regexps
-        (remove "[ ]?\\*[hH]elp.*" special-display-regexps))
-  (setq special-display-regexps nil))
+  (setq mac-right-option-modifier 'nil
+        mac-right-command-modifier 'control))
 
 (setq sql-sqlite-program "sqlite3"
       sql-sqlite-options '("-interactive"))
