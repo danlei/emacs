@@ -2496,6 +2496,7 @@ using commands with prefix arguments."
       gc-cons-threshold 20000000
       kill-ring-max 200
       split-width-threshold 200
+      enable-remote-dir-locals t
       user-full-name "Daniel H. Leidisch"
       user-mail-address "public@leidisch.net")
 
