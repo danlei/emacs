@@ -2307,8 +2307,8 @@ using commands with prefix arguments."
 
 (defadvice reftex-TeX-master-file
     (around dhl-reftex-Tex-master-file-fix last () activate)
-  (flet ((tex-main-file ()
-         (buffer-file-name)))
+  (cl-flet ((tex-main-file ()
+              (buffer-file-name)))
     ad-do-it))
 
 
