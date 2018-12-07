@@ -2662,7 +2662,7 @@ the respective function."
 (dhl-global-set-keys '(("C-c i d" dhl-insert-date)
                        ("C-x C-b" ibuffer)
                        ("M-/" hippie-expand)
-                       ("C-c C-s" slime-selector)
+;                      ("C-c C-s" slime-selector)
                        ("C-x r v" view-register)
                        ("M-X" dhl-invoke-smex)
                        (("C-^" "<C-dead-circumflex>") winner-undo)
