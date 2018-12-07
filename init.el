@@ -2567,7 +2567,8 @@ using commands with prefix arguments."
 (setq sql-sqlite-program "sqlite3"
       sql-sqlite-options '("-interactive"))
 
-(setq diff-switches "-u")
+(setq diff-switches "-u"
+      ediff-window-setup-function 'ediff-setup-windows-plain)
 
 ;; (when (eq system-type 'gnu/linux)
 ;;   (setenv "PATH"
