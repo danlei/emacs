@@ -2493,6 +2493,7 @@ using commands with prefix arguments."
       epa-file-select-keys 'no
       gc-cons-threshold 20000000
       kill-ring-max 200
+      split-width-threshold 200
       user-full-name "Daniel H. Leidisch"
       user-mail-address "public@leidisch.net")
 
