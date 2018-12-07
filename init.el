@@ -608,7 +608,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;;; perl
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/elisp/Sepia-0.992_01/")
+(add-to-list 'load-path "~/.emacs.d/elisp/sepia/")
 
 (when (require 'sepia nil t)
   (add-to-list 'auto-mode-alist '("\\.pl\\'" . sepia-mode))
@@ -617,7 +617,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
   (add-to-list 'interpreter-mode-alist '("miniperl" . sepia-mode))
 
   (setq sepia-perl5lib
-        (list (expand-file-name "~/.emacs.d/elisp/Sepia-0.992_01/lib")))
+        (list (expand-file-name "~/.emacs.d/elisp/sepia/lib")))
 ; (defalias 'perl-mode 'sepia-mode)
   (if (eq system-type 'windows-nt)
       (setq sepia-program-name "c:/Perl/bin/perl")))
