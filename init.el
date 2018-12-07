@@ -2675,6 +2675,7 @@ the respective function."
                        ("C-c a" org-agenda)
                        ("C-x RET i" set-input-method)
                        ("M-#" quick-calc)
+                       ("C-c j" dired-jump)
                        ("C-c s" magit-status)))
 
 (when (fboundp 'cycle-spacing)
