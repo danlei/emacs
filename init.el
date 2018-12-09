@@ -193,7 +193,7 @@ in case that file does not provide any feature."
 (setq Info-additional-directory-list
       (list (expand-file-name "~/.emacs.d/hyperspec/")))
 
-(require 'info-look)
+(require 'info-look nil t)
 
 (info-lookup-add-help
  :mode 'lisp-mode
@@ -245,7 +245,7 @@ in case that file does not provide any feature."
 (modify-syntax-entry ?[ "(]" lisp-mode-syntax-table)
 (modify-syntax-entry ?] ")[" lisp-mode-syntax-table)
 
-(require 'eldoc)                        ; TODO: why is this here?
+(require 'eldoc nil t)                   ; TODO: why is this here?
 
 (when (require 'paredit nil t)
   (mapc (lambda (hook) (add-hook hook (lambda () (paredit-mode 1))))
@@ -2406,7 +2406,7 @@ using commands with prefix arguments."
 ;;;; tramp
 ;;;;
 
-(require 'tramp)
+(require 'tramp nil t)
 
 (setq ange-ftp-try-passive-mode t)
 
