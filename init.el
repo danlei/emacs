@@ -100,10 +100,10 @@ in case that file does not provide any feature."
 ;;;; auto-complete
 ;;;;
 
-;; (add-to-list 'load-path "~/.emacs.d/elisp/auto-complete/")
-;; (add-to-list 'load-path "~/.emacs.d/elisp/popup-el/")
+(add-to-list 'load-path "~/.emacs.d/elisp/auto-complete/")
+(add-to-list 'load-path "~/.emacs.d/elisp/popup-el/")
 
-;; (require 'auto-complete nil t)
+(require 'auto-complete nil t)
 
 
 ;;;;
