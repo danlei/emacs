@@ -2341,6 +2341,18 @@ using commands with prefix arguments."
 
 
 ;;;;
+;;;; todotxt
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/todotxt/")
+
+(when (require 'todotxt nil t)
+  (add-to-list 'auto-mode-alist '("\\.todo\\'" . todotxt-mode)))
+
+(setq todotxt-use-creation-dates nil)
+
+
+;;;;
 ;;;; flashcard
 ;;;;
 
@@ -2693,6 +2705,7 @@ the respective function."
                        ("C-c l" org-store-link)
                        ("C-c c" org-capture)
                        ("C-c a" org-agenda)
+                       ("C-c t" todotxt)
                        ("C-x RET i" set-input-method)
                        ("M-#" quick-calc)
                        ("C-c j" dired-jump)
