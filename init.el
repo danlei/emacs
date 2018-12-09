@@ -2602,6 +2602,10 @@ using commands with prefix arguments."
 (setq sql-sqlite-program "sqlite3"
       sql-sqlite-options '("-interactive"))
 
+(add-hook 'sql-interactive-mode-hook
+          (lambda ()
+            (setq comint-prompt-read-only t)))
+
 (setq diff-switches "-u"
       ediff-window-setup-function 'ediff-setup-windows-plain)
 
