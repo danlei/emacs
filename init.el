@@ -2349,6 +2349,11 @@ using commands with prefix arguments."
 (when (require 'todotxt nil t)
   (add-to-list 'auto-mode-alist '("\\.todo\\'" . todotxt-mode)))
 
+(add-hook 'todotxt-mode-hook
+          (lambda ()
+            (local-set-key (kbd "M-p") 'todotxt-transpose-lines-up)
+            (local-set-key (kbd "M-n") 'todotxt-transpose-lines-down)))
+
 (setq todotxt-use-creation-dates nil)
 
 
