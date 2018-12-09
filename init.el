@@ -2506,6 +2506,7 @@ using commands with prefix arguments."
       ring-bell-function (lambda ())
       scroll-conservatively 101
       scroll-margin 5
+      isearch-allow-scroll t
       require-final-newline nil
       ispell-personal-dictionary "~/.emacs.d/ispell"
       ispell-dictionary "german"
