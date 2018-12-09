@@ -1398,8 +1398,6 @@ line options may be given in OPTIONS."
 ;;;; ielm
 ;;;;
 
-;; TODO: fix indentation, C-j etc.
-
 (setq ielm-prompt "elisp> ")
 
 (add-hook 'ielm-mode-hook
@@ -1414,6 +1412,10 @@ line options may be given in OPTIONS."
                          'lisp-complete-symbol
                        'completion-at-point)))))
 
+(setq comint-use-prompt-regexp t)       ; fixes strange comint-bol
+                                        ; behavior that messed up
+                                        ; indentation
+
 
 ;;;;
 ;;;; eshell
@@ -1427,22 +1429,40 @@ line options may be given in OPTIONS."
 (add-hook 'eshell-mode-hook
           (lambda ()
             (local-set-key (kbd "C-a") 'dhl-eshell-maybe-bol)
-            (local-set-key (kbd "<C-tab>") 'PC-lisp-complete-symbol)
+            (local-set-key (kbd "<tab>") 'dhl-eshell-tab)
+            (local-set-key (kbd "C-j") 'dhl-eshell-newline-and-indent)
             (eldoc-mode 1)))
 
-;; (require 'em-smart nil t)
-
-;; (setq eshell-where-to-jump 'begin)
-;; (setq eshell-review-quick-commands t)
-;; (setq eshell-smart-space-goes-to-end t)
+;; nice, but slow
+;; (when (require 'em-smart nil t)
+;;   (setq eshell-where-to-jump 'begin)
+;;   (setq eshell-review-quick-commands nil)
+;;   (setq eshell-smart-space-goes-to-end t)
+;;   (add-hook 'eshell-mode-hook
+;;             (lambda ()
+;;               (eshell-smart-initialize))))
 
 (defun dhl-eshell-maybe-bol ()
-  "Move point behind the eshell prompt, or at the beginning of line."
+  "Move point behind the eshell prompt, or to the beginning of line."
   (interactive)
   (let ((p (point)))
     (eshell-bol)
     (when (= p (point))
       (beginning-of-line))))
+
+(defun dhl-eshell-tab ()
+  "Indent or complete."
+  (interactive)
+  (if (or (eq (preceding-char) ?\n)
+          (eq (char-syntax (preceding-char)) ?\s))
+      (lisp-indent-line)
+    (eshell-pcomplete)))
+
+(defun dhl-eshell-newline-and-indent ()
+  (interactive "*")
+  (delete-horizontal-space t)
+  (newline nil t)
+  (lisp-indent-line))
 
 (defun eshell/clear ()
   "Clear the eshell buffer."
