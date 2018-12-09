@@ -2620,7 +2620,7 @@ using commands with prefix arguments."
 (dolist (mode-map (list special-mode-map
                         Man-mode-map
                         ibuffer-mode-map))
-  (define-key mode-map (kbd "z") 'kill-this-buffer))
+  (define-key mode-map (kbd "z") 'dhl-kill-this-buffer))
 
 (define-key 'help-command (kbd "C-f") 'find-function)
 (define-key 'help-command (kbd "C-l") 'find-library)
@@ -2681,6 +2681,14 @@ the respective function."
   (dolist (b (buffer-list))
     (when (string-match "RNC Input" (buffer-name b))
       (kill-buffer b))))
+
+(defun dhl-kill-this-buffer ()
+  "Kill the current buffer.
+
+`kill-this-buffer' is actually unsafe to use for this purpose, as
+it has been changed to be used from the menu bar specifically."
+  (interactive)
+  (kill-buffer (current-buffer)))
 
 
 ;;;;
