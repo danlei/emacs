@@ -2497,11 +2497,10 @@ using commands with prefix arguments."
 
 (if (< emacs-major-version 24)
     (partial-completion-mode 1)
-; messes up nrepl/cider completion
-; (setq completion-styles '(partial-completion initials)
-;       completion-pcm-complete-word-inserts-delimiters t
-;       completion-cycle-threshold 5)
-  )
+  ;; TODO: messes up nrepl/cider completion
+  (setq completion-styles '(partial-completion initials)
+        completion-pcm-complete-word-inserts-delimiters t
+        completion-cycle-threshold 5))
 
 ;; TODO: keep this?
 ;(add-to-list 'load-path "~/.emacs.d/elisp/gnugo/")
