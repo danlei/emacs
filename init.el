@@ -2716,6 +2716,7 @@ it has been changed to be used from the menu bar specifically."
                        ("M-s m o" multi-occur)
                        ("M-s m m" multi-occur-in-matching-buffers)
                        ("M-z" zap-up-to-char)
+                       ("C-x r a" set-rectangular-region-anchor)
                        ("C-c l" org-store-link)
                        ("C-c c" org-capture)
                        ("C-c a" org-agenda)
