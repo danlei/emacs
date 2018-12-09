@@ -2483,6 +2483,7 @@ using commands with prefix arguments."
 ;;;;
 
 (require 'misc nil t)
+(require 'subr-x nil t)
 
 (require 'iso-transl nil t)             ; fix dead-* is not defined (24.3)
 
