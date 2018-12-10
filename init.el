@@ -103,9 +103,25 @@ in case that file does not provide any feature."
 (add-to-list 'load-path "~/.emacs.d/elisp/auto-complete/")
 (add-to-list 'load-path "~/.emacs.d/elisp/popup-el/")
 
-(require 'auto-complete nil t)
+(when (require 'auto-complete nil t)
+  (ac-set-trigger-key "<C-tab>"))
 
-(setq ac-use-menu-map t)
+(setq ac-use-menu-map t
+      ac-auto-start nil                 ; was 2
+      ac-auto-show-menu nil             ; also try 0.8
+      )
+
+(setq-default ac-sources
+  '(ac-source-filename
+    ac-source-functions
+;   ac-source-yasnippet
+    ac-source-variables
+    ac-source-symbols
+    ac-source-features
+    ac-source-abbrev
+    ac-source-words-in-same-mode-buffers
+    ac-source-words-in-all-buffer
+    ac-source-dictionary))
 
 
 ;;;;
