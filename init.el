@@ -2502,7 +2502,7 @@ using commands with prefix arguments."
   ;; TODO: messes up nrepl/cider completion
   (setq completion-styles '(partial-completion initials)
         completion-pcm-complete-word-inserts-delimiters t
-        completion-cycle-threshold 5))
+        completion-cycle-threshold 8))
 
 ;; TODO: keep this?
 ;(add-to-list 'load-path "~/.emacs.d/elisp/gnugo/")
