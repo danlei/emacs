@@ -105,6 +105,8 @@ in case that file does not provide any feature."
 
 (require 'auto-complete nil t)
 
+(setq ac-use-menu-map t)
+
 
 ;;;;
 ;;;; common lisp
