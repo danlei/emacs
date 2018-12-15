@@ -2452,6 +2452,14 @@ using commands with prefix arguments."
 
 (require 'tramp nil t)
 
+;(setq explicit-shell-file-name "/bin/bash")
+
+(when (require 'tramp nil t)
+  ;; delete tramp-persistency-file-name after changes and restart
+  (mapcar (apply-partially 'add-to-list 'tramp-remote-path)
+          '("/home/dleidisch/"
+            'tramp-own-remote-path)))   ; doesn't work w/o sh -l
+
 (setq ange-ftp-try-passive-mode t)
 
 
