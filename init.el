@@ -1433,9 +1433,9 @@ line options may be given in OPTIONS."
                          'lisp-complete-symbol
                        'completion-at-point)))))
 
-(setq comint-use-prompt-regexp t)       ; fixes strange comint-bol
-                                        ; behavior that messed up
-                                        ; indentation
+(if (< emacs-major-version 25)            ; fixes strange comint-bol
+    (setq comint-use-prompt-regexp t))    ; behavior that messed up
+                                          ; indentation on 24
 
 
 ;;;;
