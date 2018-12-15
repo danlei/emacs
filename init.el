@@ -89,7 +89,7 @@ in case that file does not provide any feature."
         '("~/.emacs.d/themes/"
           "~/.emacs.d/themes/leuven-theme/"
           "~/.emacs.d/themes/white-theme/"
-          "~/.emacs.d/themes/tango-plus-theme/"
+          "~/.emacs.d/themes/tango-dhl-theme/"
           "~/.emacs.d/themes/zenburn-emacs/"))
 ; (when (and (locate-file "zenburn-theme"
 ;                         custom-theme-load-path
