@@ -48,13 +48,16 @@ in case that file does not provide any feature."
    (setenv "MANWIDTH" "72"))
   (darwin
    (setenv "LC_MESSAGES" "C")
+   (setenv "MANWIDTH" "72")
    (setenv "PATH"
            (mapconcat 'identity
                       `(,(expand-file-name "~/bin")
+                        "/usr/local/bin"
                         ,(getenv "PATH"))
                       ":")
            (mapc (apply-partially 'add-to-list 'exec-path)
-                 `(,(expand-file-name "~/bin"))))))
+                 `(,(expand-file-name "~/bin")
+                   "/usr/local/bin")))))
 
 (setenv "EDITOR" "emacsclient")
 
