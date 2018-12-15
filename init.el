@@ -1603,13 +1603,19 @@ using commands with prefix arguments."
 
 
 ;;;;
-;;;; git
+;;;; magit
 ;;;;
 
 (mapc (apply-partially 'add-to-list 'load-path)
-      '("~/.emacs.d/elisp/magit/contrib"
-        "~/.emacs.d/elisp/magit/"
-        "~/.emacs.d/elisp/git-modes/"))
+      '("~/.emacs.d/elisp/magit/"
+        "~/.emacs.d/elisp/magit/lisp/"
+        "~/.emacs.d/elisp/git-modes/"
+        "~/.emacs.d/elisp/magit-popup/"
+        "~/.emacs.d/elisp/with-editor/"
+        "~/.emacs.d/elisp/ghub/"
+        "~/.emacs.d/elisp/graphql.el/"
+        "~/.emacs.d/elisp/treepy.el/"
+        "~/.emacs.d/elisp/marshal.el/"))
 
 (and (executable-find "git")
      (require 'magit nil t)
@@ -1620,6 +1626,18 @@ using commands with prefix arguments."
       magit-last-seen-setup-instructions "1.4.2")
 
 (require 'rebase-mode nil t)
+
+(when (and (> emacs-major-version 24)
+           (require 'magit-popup nil t)
+           (require 'with-editor nil t)
+           (require 'ghub nil t)
+           (require 'magit-section nil t)
+           (require 'graphql nil t)
+           (require 'treepy nil t)
+           (require 'marshal nil t))
+  (add-hook 'magit-section-movement-hook
+            'magit-hunk-set-window-start)
+  (load "~/.emacs.d/elisp/magit/magit-autoloads"))
 
 (when (require 'vc-dir nil t)
   (define-key vc-dir-mode-map (kbd "d") 'vc-dir-delete-file))
