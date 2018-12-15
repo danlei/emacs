@@ -1647,8 +1647,8 @@ using commands with prefix arguments."
 ;;; gists
 ;;;
 
-(if (< emacs-major-version 24)
-    (add-to-list 'load-path "~/.emacs.d/elisp/tabulated-list.el/"))
+(when (< emacs-major-version 24)
+  (add-to-list 'load-path "~/.emacs.d/elisp/tabulated-list.el/"))
 
 (mapc (apply-partially 'add-to-list 'load-path)
       '("~/.emacs.d/elisp/logito/"
