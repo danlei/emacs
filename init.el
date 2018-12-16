@@ -1510,6 +1510,36 @@ line options may be given in OPTIONS."
   (let ((inhibit-read-only t))
     (erase-buffer)))
 
+;; adapted from the emacswiki
+(eval-after-load "em-ls"
+  '(progn
+     (defun dhl-eshell-ls-find-file-at-point (point)
+       "RET on Eshell's `ls' output to open files."
+       (interactive "d")
+       (find-file (buffer-substring-no-properties
+                   (previous-single-property-change point 'help-echo)
+                   (next-single-property-change point 'help-echo))))
+
+     (defun dhl-eshell-ls-find-file-at-mouse-click (event)
+       "Click on Eshell's `ls' output to open files."
+       (interactive "e")
+       (dhl-eshell-ls-find-file-at-point (posn-point (event-end event))))
+
+     (let ((map (make-sparse-keymap)))
+       (define-key map (kbd "RET") 'dhl-eshell-ls-find-file-at-point)
+       (define-key map (kbd "<return>") 'dhl-eshell-ls-find-file-at-point)
+       (define-key map (kbd "<mouse-1>") 'dhl-eshell-ls-find-file-at-mouse-click)
+       (defvar dhl-eshell-ls-keymap map))
+
+     (defadvice eshell-ls-decorated-name (after dhl-electrify-ls activate)
+       "Clickable and RETable `ls' file names in Eshell."
+       (add-text-properties 0 (length ad-return-value)
+                            (list 'help-echo "RET, mouse-1: visit this file"
+                                  'mouse-face 'highlight
+                                  'keymap dhl-eshell-ls-keymap)
+                            ad-return-value)
+       ad-return-value)))
+
 
 ;;;;
 ;;;; hippie-expansion
