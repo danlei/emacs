@@ -1416,6 +1416,25 @@ line options may be given in OPTIONS."
 
 
 ;;;;
+;;;; markdown-mode
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/markdown-mode/")
+
+(when (require 'markdown-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
+
+
+;;;;
+;;;; tf
+;;;;
+
+(when (require 'tinyfugue nil t)
+  (add-to-list 'auto-mode-alist '("\\.tf\\'" . tinyfugue-mode))
+  (add-to-list 'auto-mode-alist '("^\\.?tfrc\\'" . tinyfugue-mode)))
+
+
+;;;;
 ;;;; ielm
 ;;;;
 
@@ -1941,16 +1960,6 @@ using commands with prefix arguments."
 
 
 ;;;;
-;;;; markdown-mode
-;;;;
-
-(add-to-list 'load-path "~/.emacs.d/elisp/markdown-mode/")
-
-(when (require 'markdown-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
-
-
-;;;;
 ;;;; org-mode
 ;;;;
 
@@ -2436,14 +2445,13 @@ using commands with prefix arguments."
           (lambda ()
             (variable-pitch-mode 1)))
 
-
 ;;;;
-;;;; tf
+;;;; japanese
 ;;;;
 
-(when (require 'tinyfugue nil t)
-  (add-to-list 'auto-mode-alist '("\\.tf\\'" . tinyfugue-mode))
-  (add-to-list 'auto-mode-alist '("^\\.?tfrc\\'" . tinyfugue-mode)))
+(require 'mozc nil t)
+
+;(setq default-input-method "japanzese-mozc")
 
 
 ;;;;
@@ -2510,15 +2518,6 @@ using commands with prefix arguments."
   (global-set-key (kbd "C-M-y") 'kill-ring-search))
 
 (setq browse-kill-ring-highlight-current-entry t)
-
-
-;;;;
-;;;; japanese
-;;;;
-
-(require 'mozc nil t)
-
-;(setq default-input-method "japanzese-mozc")
 
 
 ;;;;
