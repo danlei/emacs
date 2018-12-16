@@ -1634,6 +1634,26 @@ using commands with prefix arguments."
 
 
 ;;;;
+;;;; backups
+;;;;
+
+(setq backup-directory-alist
+      `((".*" . "~/.emacs.d/bak/")
+;       (,tramp-file-name-regexp . nil) ; disables remote files
+        )
+      backup-by-copying t
+      version-control t
+      kept-new-versions 10
+      kept-old-versions 0
+      delete-old-versions t
+      auto-save-file-name-transforms '((".*" "~/.emacs.d/bak/" t))
+      tramp-backup-directory-alist backup-directory-alist)
+
+(add-hook 'before-save-hook (lambda ()
+                              (setq buffer-backed-up nil)))
+
+
+;;;;
 ;;;; whitespace-mode
 ;;;;
 
