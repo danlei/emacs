@@ -2479,6 +2479,17 @@ using commands with prefix arguments."
 
 
 ;;;;
+;;;; easy-kill
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/easy-kill/")
+
+(when (require 'easy-kill nil t)
+  (global-set-key (kbd "M-w") 'easy-kill)
+  (global-set-key (kbd "C-M-SPC") 'easy-mark))
+
+
+;;;;
 ;;;; kill ring
 ;;;;
 
