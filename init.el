@@ -2456,7 +2456,8 @@ using commands with prefix arguments."
             (local-set-key (kbd "M-p") 'todotxt-transpose-lines-up)
             (local-set-key (kbd "M-n") 'todotxt-transpose-lines-down)))
 
-(setq todotxt-use-creation-dates nil)
+(setq todotxt-use-creation-dates nil
+      todotxt-file "~/.todo/todo.txt")
 
 
 ;;;;
