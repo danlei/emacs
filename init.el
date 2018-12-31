@@ -2842,7 +2842,11 @@ it has been changed to be used from the menu bar specifically."
                        ("C-x RET i" set-input-method)
                        ("M-#" quick-calc)
                        ("C-c j" dired-jump)
-                       ("C-c s" magit-status)))
+                       ("C-c w" whitespace-mode)
+                       ("C-c W" delete-trailing-whitespace)
+                       ("C-c v" view-mode)
+                       ("C-c n" neotree)
+                       ("C-c r" revert-buffer)))
 
 (when (fboundp 'cycle-spacing)
   (global-set-key (kbd "M-SPC") 'cycle-spacing))
