@@ -1248,8 +1248,10 @@ line options may be given in OPTIONS."
             (setq comment-start "# "
                   comment-end ""
                   comment-column 40
-                  tab-width 4)
+                  tab-width 4
+                  php-lineup-cascaded-calls t)
             (c-set-offset 'case-label '+)
+;           (php-enable-default-coding-style)
             (dhl-define-keys php-mode-map
                              '(("C-c C-c" psysh-eval-region)
                                (("C-c d" "C-c C-d") psysh-doc)))))
@@ -1879,6 +1881,8 @@ using commands with prefix arguments."
          ("perl" (or (mode . cperl-mode)
                      (mode . sepia-mode)
                      (mode . perl6-mode)))
+         ("php" (or (mode . php-mode)
+                    (name . "\\.php$")))
          ("shell" (or (name . "\\.sh$")
                       (name . "^\\.zshrc$")
                       (name . "^\\.profile")
