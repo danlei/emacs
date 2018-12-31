@@ -2535,6 +2535,8 @@ using commands with prefix arguments."
 (when (require 'projectile nil t)
   (projectile-global-mode t))
 
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
 (defadvice projectile-grep
     (after dhl-projectile-grep-advice last () activate)
   "Switch to the grep window after invocation."
