@@ -2624,7 +2624,7 @@ using commands with prefix arguments."
       ring-bell-function (lambda ())
       scroll-conservatively 101
       scroll-margin 0
-      isearch-allow-scroll t
+      isearch-allow-scroll nil
       require-final-newline nil
       ispell-personal-dictionary "~/.emacs.d/ispell"
       ispell-dictionary "german"
