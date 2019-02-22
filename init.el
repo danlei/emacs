@@ -1292,6 +1292,26 @@ line options may be given in OPTIONS."
 (when (require 'restclient nil t)
   (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode)))
 
+;;;;
+;;;; sql
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/sql-indent")
+
+(setq sql-sqlite-program "sqlite3"
+      sql-sqlite-options '("-interactive")
+;      sql-mysql-options '("-n")
+      )
+
+(add-hook 'sql-interactive-mode-hook
+          (lambda ()
+            (setq comint-prompt-read-only t)))
+
+(when (require 'sql-indent nil t)
+  (add-hook 'sql-mode-hook
+            (lambda ()
+              (sqlind-minor-mode 1))))
+
 
 ;;;;
 ;;;; semantic web
@@ -2716,13 +2736,6 @@ using commands with prefix arguments."
 (when (eq system-type 'darwin)
   (setq mac-right-option-modifier 'nil
         mac-right-command-modifier 'control))
-
-(setq sql-sqlite-program "sqlite3"
-      sql-sqlite-options '("-interactive"))
-
-(add-hook 'sql-interactive-mode-hook
-          (lambda ()
-            (setq comint-prompt-read-only t)))
 
 (setq diff-switches "-u"
       ediff-window-setup-function 'ediff-setup-windows-plain)
