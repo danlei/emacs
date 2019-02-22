@@ -690,21 +690,27 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;;; tcl
 ;;;;
 
-;; TODO: make this work under linux
+;; TODO: linux, too
 
 (require 'tcl nil t)
+
+(setq tcl-application "tclsh8.6")
 
 (when (eq system-type 'cygwin)
   (setq tcl-application "/cygdrive/c/Tcl/bin/tclsh85.exe"))
 
-(when (eq system-type 'cygwin)
-  (add-hook 'inferior-tcl-mode-hook
-            (lambda ()
-              (tcl-send-string
-               (inferior-tcl-proc) "set ::tcl_interactive 1\n")
-              (tcl-send-string
-               (inferior-tcl-proc)
-               "namespace path {::tcl::mathop ::tcl::mathfunc}\n"))))
+(add-hook 'inferior-tcl-mode-hook
+          (lambda ()
+            (tcl-send-string
+             (inferior-tcl-proc) "set ::tcl_interactive 1\n")
+            (tcl-send-string
+             (inferior-tcl-proc)
+             "namespace path {::tcl::mathop ::tcl::mathfunc}\n")))
+
+(add-hook 'tcl-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c C-c") 'tcl-eval-defun)
+            (local-set-key (kbd "C-c C-r") 'tcl-eval-region)))
 
 
 ;;;;
@@ -919,10 +925,11 @@ CLASS-NAME is queried in the minibuffer, defaulting to
         (cygwin "/usr/bin/pl")
         (gnu/linux '((swi "/usr/bin/swipl")
                      (gnu "/usr/bin/gprolog")
-                     (yap "/usr/bin/yap")))))
+                     (yap "/usr/bin/yap")))
+        (darwin "/usr/local/bin/swipl")))
 
 (add-to-list 'prolog-program-switches
-             '(swi ("-tty" "--traditional" "--quiet")))
+             '(swi ("--no-tty" "--traditional" "--quiet")))
 (add-to-list 'prolog-program-switches
              '(yap ("-q")))
 
