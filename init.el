@@ -959,6 +959,16 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 
 ;;;;
+;;;; groovy
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/groovy-emacs-modes")
+
+(when (require 'groovy-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\`Jenkinsfile\\'" . groovy-mode)))
+
+
+;;;;
 ;;;; javascript
 ;;;;
 
