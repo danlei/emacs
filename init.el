@@ -1307,7 +1307,16 @@ line options may be given in OPTIONS."
 (add-to-list 'load-path "~/.emacs.d/elisp/restclient")
 
 (when (require 'restclient nil t)
-  (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode)))
+  (add-to-list 'auto-mode-alist '("\\.\\(http\\|rest\\)\\'" . restclient-mode)))
+
+(setq restclient-same-buffer-response nil)
+
+;; TODO: make this work even when delete-window etc. is called
+;;       i.e. quit view-mode automacially somehow
+;;       works with restclient-same-buffer-response set to nil
+(add-hook 'restclient-response-loaded-hook
+          (lambda ()
+            (view-mode 1)))
 
 ;;;;
 ;;;; sql
