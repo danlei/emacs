@@ -1627,7 +1627,8 @@ line options may be given in OPTIONS."
   (recenter-top-bottom))
 
 (setq ido-use-filename-at-point 'guess ; 'ffap-guesser
-      ido-use-url-at-point t)
+      ido-use-url-at-point t
+      ido-auto-merge-work-directories-length -1)
 
 
 ;; TODO: should I keep this? never use it.
