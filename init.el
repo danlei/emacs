@@ -2585,10 +2585,14 @@ using commands with prefix arguments."
 (when (require 'tramp nil t)
   ;; delete tramp-persistency-file-name after changes and restart
   (mapcar (apply-partially 'add-to-list 'tramp-remote-path)
-          '("/home/dleidisch/"
+          '("/home/dleidisch/bin"
             'tramp-own-remote-path)))   ; doesn't work w/o sh -l
 
-(setq ange-ftp-try-passive-mode t)
+(add-to-list 'tramp-remote-process-environment
+              (format "PATH=/home/dleidisch/bin:%s" (getenv "PATH")))
+
+(setq tramp-default-method "scp"    ; still uses ssh if <tramp-copy-file-limit
+      ange-ftp-try-passive-mode t)
 
 
 ;;;;
