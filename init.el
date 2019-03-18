@@ -2141,6 +2141,10 @@ using commands with prefix arguments."
       org-goto-max-level 10
       org-outline-path-complete-in-steps nil)
 
+(setq org-src-fontify-natively t
+      org-src-preserve-indentation t
+      org-src-tab-acts-natively t)
+
 ;; TODO: fix note template
 (setq org-capture-templates
       '(("n" "Note" entry (file+headline "" "Misc")
