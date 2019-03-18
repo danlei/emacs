@@ -977,6 +977,8 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (when (require 'groovy-mode nil t)
   (add-to-list 'auto-mode-alist '("\\`Jenkinsfile\\'" . groovy-mode)))
 
+(setq groovy-indent-offset 2)
+
 
 ;;;;
 ;;;; javascript
