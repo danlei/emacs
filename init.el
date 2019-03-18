@@ -957,7 +957,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;;; java
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/elisp/javarun/")
+(add-to-list 'load-path "~/.emacs.d/elisp/javarun")
 
 (when (require 'javarun nil t)
   (when (eq system-type 'windows-nt)
