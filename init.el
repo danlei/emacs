@@ -2667,6 +2667,53 @@ using commands with prefix arguments."
 
 
 ;;;;
+;;;; navigation
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/neotree")
+
+(require 'neotree nil t)
+
+(setq neo-smart-open t
+      neo-window-fixed-size nil
+      neo-window-width 30
+      projectile-switch-project-action 'neotree-projectile-action)
+
+(add-to-list 'load-path "~/.emacs.d/elisp/ggtags")
+
+(when (and (executable-find "global")
+           (require 'ggtags nil t))
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+                ;; TODO: make this work without listing servers explicitly
+                (when (or (not (file-remote-p default-directory))
+                          (string= (file-remote-p default-directory 'host) "noc-dev"))
+                  (ggtags-mode 1))))))
+
+(add-hook 'ggtags-mode-hook
+          (local-set-key (kbd "M-<") 'beginning-of-buffer)
+          (local-set-key (kbd "M->") 'end-of-buffer))
+
+(add-hook 'ggtags-global-mode-hook
+          (local-set-key (kbd "M-<") 'beginning-of-buffer)
+          (local-set-key (kbd "M->") 'end-of-buffer))
+
+;; TODO: can this be done better?
+(setq ggtags-completing-read-function
+      (lambda (&rest args)
+        (apply #'ido-completing-read
+               (car args)
+               (all-completions (let ((symbol-at-point (symbol-at-point)))
+                                  (if symbol-at-point
+                                      (symbol-name symbol-at-point)
+                                    "")) ggtags-completion-table)
+               (cddr args))))
+
+;(setq ggtags-auto-jump-to-match 'first) ; TODO: no effect?
+
+
+;;;;
 ;;;; misc
 ;;;;
 
