@@ -2955,7 +2955,8 @@ it has been changed to be used from the menu bar specifically."
                        ("C-c W" delete-trailing-whitespace)
                        ("C-c v" view-mode)
                        ("C-c n" neotree)
-                       ("C-c r" revert-buffer)))
+                       ("C-c r" revert-buffer)
+                       ("C-c g" find-grep-dired)))
 
 (when (fboundp 'cycle-spacing)
   (global-set-key (kbd "M-SPC") 'cycle-spacing))
