@@ -674,7 +674,10 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (require 'inferior-perl6 nil t)
 
-(setq inferior-perl6-program "~/build/rakudobrew/bin/perl6")
+(setq inferior-perl6-program
+      (case system-type
+        (gnu/linux "~/build/rakudobrew/bin/perl6")
+        (darwin "/usr/local/bin/perl6")))
 
 (add-hook 'perl6-mode-hook
 	  (lambda ()
