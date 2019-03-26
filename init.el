@@ -1702,16 +1702,18 @@ using commands with prefix arguments."
 ;;;;
 
 (setq backup-directory-alist
-      `((".*" . "~/.emacs.d/bak/")
-;       (,tramp-file-name-regexp . nil) ; disables remote files
+      `(("." . "~/.emacs.d/bak/")
+;       (,tramp-file-name-regexp . nil)               ; no remote file backups
+;       (,tramp-file-name-regexp . "~/.emacs.d/bak/") ; locally TODO: CDPATH error
         )
+      tramp-backup-directory-alist backup-directory-alist ; remotely
+      tramp-auto-save-directory "~/.emacs.d/bak/"
+      auto-save-file-name-transforms '((".*" "~/.emacs.d/bak/" t))
       backup-by-copying t
       version-control t
       kept-new-versions 10
       kept-old-versions 0
-      delete-old-versions t
-      auto-save-file-name-transforms '((".*" "~/.emacs.d/bak/" t))
-      tramp-backup-directory-alist backup-directory-alist)
+      delete-old-versions t)
 
 (add-hook 'before-save-hook (lambda ()
                               (setq buffer-backed-up nil)))
