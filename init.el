@@ -2957,7 +2957,8 @@ it has been changed to be used from the menu bar specifically."
 ;;;; global keybindings
 ;;;;
 
-(dhl-global-set-keys '(("C-c i d" dhl-insert-date)
+(dhl-global-set-keys '(("C-c i" indent-relative-first-indent-point)
+                       ("C-c d" dhl-insert-date)
                        ("C-x C-b" ibuffer)
                        ("M-/" hippie-expand)
 ;                      ("C-c C-s" slime-selector)
