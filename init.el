@@ -2595,7 +2595,7 @@ using commands with prefix arguments."
 
 (require 'mozc nil t)
 
-;(setq default-input-method "japanzese-mozc")
+;(setq default-input-method "japanese-mozc")
 
 
 ;;;;
