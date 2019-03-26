@@ -1679,7 +1679,9 @@ using commands with prefix arguments."
 
 (desktop-save-mode 1)
 
-(setq history-length 250)
+(setq history-length 250
+;     desktop-files-not-to-save "^$"    ; can slow down startup massively
+      )
 
 (mapc (apply-partially 'add-to-list 'desktop-globals-to-save)
       '(global-mark-ring
@@ -2095,6 +2097,9 @@ using commands with prefix arguments."
 (require 'org nil t)
 (require 'org-table nil t)
 (require 'ox-bibtex nil t)
+
+(add-to-list 'load-path "~/.emacs.d/elisp/htmlize")
+(require 'htmlize nil t)
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
