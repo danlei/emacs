@@ -977,7 +977,15 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (when (require 'groovy-mode nil t)
   (add-to-list 'auto-mode-alist '("\\`Jenkinsfile\\'" . groovy-mode)))
 
+(require 'inf-groovy nil t)
+
 (setq groovy-indent-offset 2)
+
+(add-hook 'inferior-groovy-mode-hook
+          (lambda ()
+            (setq comint-prompt-read-only t)
+            (local-set-key (kbd "C-a") 'comint-bol)
+            (setq comint-prompt-regexp "^groovy:[^>]*> ")))
 
 
 ;;;;
@@ -1961,6 +1969,8 @@ using commands with prefix arguments."
                     (mode . c++-mode)))
          ("java" (or (name . "\\.java$")
                      (mode . java-mode)))
+         ("groovy" (or (name . "\\.\\(groovy\\|gvy\\|gy\\|gsh$\\)")
+                       (mode . groovy-mode)))
          ("sql" (or (name . "\\.sql$")
                     (mode . sql-mode)))
          ("xml" (or (name . "\\.xml$")
