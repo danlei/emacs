@@ -2779,6 +2779,7 @@ using commands with prefix arguments."
       apropos-do-all 1
       extended-command-suggest-shorter nil
       line-move-visual nil
+      blink-cursor-blinks 100
       help-window-select t
       enable-recursive-minibuffers t
       comment-empty-lines nil
