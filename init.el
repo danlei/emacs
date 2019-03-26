@@ -2160,6 +2160,15 @@ using commands with prefix arguments."
       org-src-preserve-indentation t
       org-src-tab-acts-natively t)
 
+(setq org-babel-load-languages
+      '((emacs-lisp . t)
+        (C . t)
+        (python . t)
+        (sh . t)
+        (js . t)
+        (groovy . t)
+        (sql . t)))
+
 ;; TODO: fix note template
 (setq org-capture-templates
       '(("n" "Note" entry (file+headline "" "Misc")
