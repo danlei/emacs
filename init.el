@@ -1680,7 +1680,7 @@ using commands with prefix arguments."
 (desktop-save-mode 1)
 
 (setq history-length 250
-;     desktop-files-not-to-save "^$"    ; can slow down startup massively
+;     desktop-files-not-to-save "^$"    ; for tramp, slow
       )
 
 (mapc (apply-partially 'add-to-list 'desktop-globals-to-save)
