@@ -1888,6 +1888,7 @@ using commands with prefix arguments."
       wdired-allow-to-change-permissions t
       wdired-allow-to-redirect-links t
       dired-listing-switches "-lah"
+      find-ls-option '("-exec ls -lah {} \\;" . "-lah")
       dired-isearch-filenames 'dwim)
 
 (setq dired-garbage-files-regexp
@@ -2984,7 +2985,8 @@ it has been changed to be used from the menu bar specifically."
                        ("C-c v" view-mode)
                        ("C-c n" neotree)
                        ("C-c r" revert-buffer)
-                       ("C-c g" find-grep-dired)))
+                       ("C-c f" find-name-dired)
+                       ("C-c g" grep-find)))
 
 (when (fboundp 'cycle-spacing)
   (global-set-key (kbd "M-SPC") 'cycle-spacing))
