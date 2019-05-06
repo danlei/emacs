@@ -2111,7 +2111,8 @@ using commands with prefix arguments."
 
 (setq org-file-apps
       (append `(("\\.x?html?\\'" . ,(concat browse-url-generic-program " %s"))
-                ("\\.pdf\\'" . ,(concat browse-url-generic-program " %s")))
+                ("\\.pdf\\'" . ,(concat browse-url-generic-program " %s"))
+                (directory . emacs))
               org-file-apps))
 
 (add-hook 'org-mode-hook
