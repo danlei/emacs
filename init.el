@@ -2746,6 +2746,14 @@ using commands with prefix arguments."
 
 
 ;;;;
+;;;; elmacro
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/elmacro")
+(require 'elmacro nil t)
+
+
+;;;;
 ;;;; misc
 ;;;;
 
