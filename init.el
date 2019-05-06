@@ -2140,7 +2140,7 @@ using commands with prefix arguments."
       org-table-formula-evaluate-inline nil
       org-M-RET-may-split-line nil
       org-default-notes-file "~/notes/notes.org"
-      org-agenda-files (list org-default-notes-file "~/studium/master.org")
+      org-agenda-files (list org-default-notes-file)
       org-refile-use-outline-path t
       org-refile-allow-creating-parent-nodes t
       org-export-with-timestamps nil
