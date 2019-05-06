@@ -2115,6 +2115,9 @@ using commands with prefix arguments."
                 (directory . emacs))
               org-file-apps))
 
+(add-to-list 'load-path "~/.emacs.d/elisp/ox-jira")
+(require 'ox-jira nil t)
+
 (add-hook 'org-mode-hook
           (lambda ()
             (local-set-key (kbd "<C-up>") 'org-shiftmetaup)
