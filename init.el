@@ -2894,6 +2894,11 @@ using commands with prefix arguments."
 (define-key 'help-command (kbd "C-l") 'find-library)
 (define-key 'help-command (kbd "C-v") 'find-variable)
 
+(setq frame-title-format
+      '(:eval (if buffer-file-name
+                (abbreviate-file-name (buffer-file-name))
+                "%b")))
+
 
 ;;;;
 ;;;; utility functions/macros
