@@ -2619,8 +2619,9 @@ using commands with prefix arguments."
           '("/home/dleidisch/bin"
             'tramp-own-remote-path)))   ; doesn't work w/o sh -l
 
-(add-to-list 'tramp-remote-process-environment
-              (format "PATH=/home/dleidisch/bin:%s" (getenv "PATH")))
+(mapc (apply-partially 'add-to-list 'tramp-remote-process-environment)
+      `("SHELL=/bin/sh"
+        ,(format "PATH=/home/dleidisch/bin:%s" (getenv "PATH"))))
 
 (setq tramp-default-method "scp"    ; still uses ssh if <tramp-copy-file-limit
       ange-ftp-try-passive-mode t)
