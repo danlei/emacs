@@ -2999,6 +2999,7 @@ it has been changed to be used from the menu bar specifically."
                        ("C-c n" neotree)
                        ("C-c r" revert-buffer)
                        ("C-c f" find-name-dired)
+                       ("C-c F" find-dired)
                        ("C-c g" grep-find)))
 
 (when (fboundp 'cycle-spacing)
