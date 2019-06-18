@@ -2057,6 +2057,13 @@ using commands with prefix arguments."
 
 ;; (add-hook 'ibuffer-mode-hooks 'dhl-ibuffer-hook)
 
+(setq ibuffer-formats
+      '((mark modified read-only locked " "
+              (name 35 35 :left :elide) " " ; was 18 18
+              (size 9 -1 :right) " "
+              (mode 16 16 :left :elide) " "
+              filename-and-process)
+        (mark " " (name 16 -1) " " filename)))
 
 ;;;;
 ;;;; occur
