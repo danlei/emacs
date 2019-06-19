@@ -1284,7 +1284,8 @@ line options may be given in OPTIONS."
 ;           (php-enable-default-coding-style)
             (dhl-define-keys php-mode-map
                              '(("C-c C-c" psysh-eval-region)
-                               (("C-c d" "C-c C-d") psysh-doc)))))
+                               (("C-c d" "C-c C-d") psysh-doc)))
+            (flycheck-mode 1))) ; TODO: flycheck-global-modes should do this
 
 (when (require 'php-eldoc nil t)
   (add-hook 'php-mode-hook
@@ -1657,6 +1658,27 @@ using commands with prefix arguments."
   (if (= x 1)
       (smex)
     (smex-major-mode-commands)))
+
+;;;;
+;;;; flycheck
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/flycheck")
+
+(setq flycheck-global-modes '(php-mode)
+      flycheck-disabled-checkers '(php-phpcs)
+      flycheck-check-syntax-automatically
+      ;; TODO: including 'save hangs in tramp
+      '(idle-change new-line mode-enabled))
+
+(when (require 'flycheck nil t)
+  (global-flycheck-mode 1))
+
+(add-hook 'flycheck-mode-hook
+          (lambda ()
+            (dhl-define-keys flycheck-mode-map
+                             '(("M-n" next-error)
+                               ("M-p" previous-error)))))
 
 
 ;;;;
