@@ -3102,6 +3102,8 @@ it has been changed to be used from the menu bar specifically."
                        (("M-C-^" "<M-C-dead-circumflex>") winner-redo)
                        ("M-s m o" multi-occur)
                        ("M-s m m" multi-occur-in-matching-buffers)
+                       ("M-g d" xref-find-definitions)
+                       ("M-g r" xref-find-references)
                        ("M-z" zap-up-to-char)
                        ("C-x r a" set-rectangular-region-anchor)
                        ("C-c l" org-store-link)
@@ -3118,7 +3120,8 @@ it has been changed to be used from the menu bar specifically."
                        ("C-c r" revert-buffer)
                        ("C-c f" find-name-dired)
                        ("C-c F" find-dired)
-                       ("C-c g" grep-find)))
+                       ("C-c g" grep-find)
+                       ("C-c DEL" kill-whole-line)))
 
 (when (fboundp 'cycle-spacing)
   (global-set-key (kbd "M-SPC") 'cycle-spacing))
