@@ -1990,7 +1990,7 @@ using commands with prefix arguments."
       wdired-allow-to-change-permissions t
       wdired-allow-to-redirect-links t
       dired-listing-switches "-lah"
-      find-ls-option '("-exec ls -lah {} \\;" . "-lah")
+      find-ls-option '("-exec ls -lah {} \\;" . "")
       dired-isearch-filenames 'dwim)
 
 (setq dired-garbage-files-regexp
