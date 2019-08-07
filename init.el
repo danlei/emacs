@@ -2133,7 +2133,8 @@ using commands with prefix arguments."
 (add-hook 'ibuffer-mode-hook
           (lambda ()
             (ibuffer-switch-to-saved-filter-groups "default")
-            (ibuffer-auto-mode 1)))
+            (ibuffer-auto-mode 1)
+            (hl-line-mode 1)))
 
 (defadvice ibuffer
     (around dhl-ibuffer-point-to-most-recent first () activate)
