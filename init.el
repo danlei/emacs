@@ -954,6 +954,86 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 
 ;;;;
+;;;; erlang
+;;;;
+
+(eval-when (compile load eval)
+  (add-to-list 'load-path
+    (car (file-expand-wildcards "/usr/local/lib/erlang/lib/tools-*/emacs"))))
+
+(when (require 'erlang nil t)
+  (add-to-list 'auto-mode-alist '("\\.erl\\'" . erlang-mode)))
+
+(setq erlang-root-dir "/usr/local/lib/erlang"
+      erlang-electric-commands '()
+      inferior-erlang-machine-options '("-sname" "emacs")
+      erl-nodename-cache
+      (make-symbol
+       (concat "emacs@"
+               (car (split-string (shell-command-to-string "hostname"))))))
+
+;; make work if not on identifier
+(defun dhl-erlang-online-doc ()
+  "Look up Erlang identifiers in the online doc."
+  (interactive)
+  (browse-url
+   (concat "http://erlang.org/doc/search/?q="
+           (let* ((identifier (erlang-get-identifier-at-point))
+                  (default (if (eq (car identifier)
+                                   'qualified-function)
+                               (concat (nth 1 identifier)
+                                       ":"
+                                       (nth 2 identifier))
+                             (nth 2 identifier))))
+             (read-from-minibuffer "Identifier: " default)))))
+
+(defadvice erlang-compile
+    (after dhl-switch-to-erlang-buffer last () activate)
+  (other-window 1))
+
+(add-hook 'erlang-mode-hook
+	  (lambda ()
+	    (dhl-define-keys erlang-mode-map
+			     '(("M-a" erlang-beginning-of-clause)
+			       ("M-e" erlang-end-of-clause)
+			       ("C-M-a" erlang-beginning-of-function)
+			       ("C-M-e" erlang-end-of-function)
+			       ("M-h" erlang-mark-clause)
+			       ("C-M-h" erlang-mark-function)
+			       ("M-q" erlang-indent-function)
+			       ("C-M-q" erlang-fill-paragraph)
+             ("C-c C-d h" dhl-erlang-online-doc) ; TODO: overwritten at eshell startup
+             ("C-c C-d ?" dhl-erlang-online-doc)))))
+
+(define-key erlang-shell-mode-map (kbd "C-c C-d h") 'dhl-erlang-online-doc)
+
+(add-to-list 'load-path "~/.emacs.d/elisp/distel/elisp")
+
+(when (require 'distel nil t)
+  (distel-setup)
+  (define-key erlang-mode-map (kbd "<C-tab>") 'erl-complete)
+  (define-key erlang-mode-map (kbd "M-p") 'previous-error)
+  (define-key erlang-mode-map (kbd "M-n") 'next-error)
+  (define-key erlang-shell-mode-map (kbd "<C-tab>") 'erl-complete)
+  (define-key erlang-shell-mode-map (kbd "C-c C-d d") 'erl-fdoc-describe)
+  (define-key erl-process-list-mode-map (kbd "p") 'previous-line)
+  (define-key erl-process-list-mode-map (kbd "n") 'next-line))
+
+(add-hook 'distel-erlang-mode-hook
+	        (lambda ()
+            (local-set-key (kbd "C-c C-d h") 'dhl-erlang-online-doc)))
+
+(add-hook 'erl-process-list-mode-hook
+	  (lambda ()
+      (hl-line-mode 1)))
+
+(defadvice erl-show-fdoc-matches
+    (after dhl-switch-to-fdoc-buffer last () activate)
+  (other-window 1)
+  (view-mode 1))
+
+
+;;;;
 ;;;; java
 ;;;;
 
@@ -1986,6 +2066,9 @@ using commands with prefix arguments."
                        (mode . maxima-mode)))
          ("haskell" (or (name . "\\.hs$")
                         (mode . haskell-mode)))
+         ("erlang" (or (name . "\\.erl$")
+                       (name . "\\.hrl$")
+                       (mode . erlang-mode)))
          ("f#" (or (name . "\\.fs$")
                    (mode . fsharp-mode)))
          ("C" (or (name . "\\.c$")
