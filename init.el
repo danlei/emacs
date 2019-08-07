@@ -2906,7 +2906,7 @@ using commands with prefix arguments."
       default-major-mode 'text-mode
       undo-limit 100000
       apropos-do-all 1
-      extended-command-suggest-shorter nil
+      extended-command-suggest-shorter t
       line-move-visual nil
       blink-cursor-blinks 100
       help-window-select t
