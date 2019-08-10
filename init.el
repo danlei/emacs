@@ -962,7 +962,8 @@ CLASS-NAME is queried in the minibuffer, defaulting to
     (car (file-expand-wildcards "/usr/local/lib/erlang/lib/tools-*/emacs"))))
 
 (when (require 'erlang nil t)
-  (add-to-list 'auto-mode-alist '("\\.erl\\'" . erlang-mode)))
+  (add-to-list 'auto-mode-alist '("\\.erl\\'" . erlang-mode))
+  (define-key erlang-shell-mode-map (kbd "C-c C-d h") 'dhl-erlang-online-doc))
 
 (setq erlang-root-dir "/usr/local/lib/erlang"
       erlang-electric-commands '()
@@ -1004,8 +1005,6 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 			       ("C-M-q" erlang-fill-paragraph)
              ("C-c C-d h" dhl-erlang-online-doc) ; TODO: overwritten at eshell startup
              ("C-c C-d ?" dhl-erlang-online-doc)))))
-
-(define-key erlang-shell-mode-map (kbd "C-c C-d h") 'dhl-erlang-online-doc)
 
 (add-to-list 'load-path "~/.emacs.d/elisp/distel/elisp")
 
