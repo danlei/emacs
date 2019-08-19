@@ -2007,13 +2007,17 @@ using commands with prefix arguments."
 ;;;; dired
 ;;;;
 
+(require 'dired-x)
+
 (setq dired-recursive-deletes 'top
       dired-recursive-copies 'top
       wdired-allow-to-change-permissions t
       wdired-allow-to-redirect-links t
       dired-listing-switches "-lah"
       find-ls-option '("-exec ls -lah {} \\;" . "")
-      dired-isearch-filenames 'dwim)
+      dired-isearch-filenames 'dwim
+      dired-omit-files "^\\." ; exclude hidden; was: "^\\.?#\\|^\\.$\\|^\\.\\.$"
+      dired-omit-extensions (append '(".bak") dired-omit-extensions))
 
 (setq dired-garbage-files-regexp
       "\\(?:\\.\\(?:aux\\|bak\\|dvi\\|log\\|orig\\|rej\\|toc\\|pyc\\)\\)\\'")
