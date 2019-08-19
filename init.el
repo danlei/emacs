@@ -1070,6 +1070,26 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 
 ;;;;
+;;;; nim
+;;;;
+
+(mapc (lambda (library)
+        (add-to-list 'load-path (concat "~/.emacs.d/elisp/"
+                                        (symbol-name library))))
+      '(nim-mode emacs-buttercup emacs-deferred emacs-ctable
+        emacs-epc flycheck-nimsuggest inim-mode))
+
+(when (and (require 'nim-mode nil t)
+           (require 'nim-compile))
+  (add-to-list 'auto-mode-alist '("\\.nim\\'" . nim-mode))
+  (define-key nim-mode-map (kbd "M-p") 'previous-error)
+  (define-key nim-mode-map (kbd "M-n") 'next-error))
+
+(when (require 'inim nil t)
+  (define-key inferior-inim-mode-map (kbd "C-a") 'comint-bol))
+
+
+;;;;
 ;;;; javascript
 ;;;;
 
@@ -1189,7 +1209,8 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;(require 'cc-mode nil t)
 
 (setq compilation-window-height 10
-      compilation-read-command nil)
+;     compilation-read-command nil ;; TODO: breaks nim-compile
+      )                            ;;       (nim-compile--assert)
 
 (setq-default c-basic-offset 2)
 
