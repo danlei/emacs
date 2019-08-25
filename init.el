@@ -3064,6 +3064,7 @@ using commands with prefix arguments."
       blink-cursor-blinks 100
       help-window-select t
       enable-recursive-minibuffers t
+      resize-mini-windows t
       comment-empty-lines nil
       set-mark-command-repeat-pop t
       epa-file-cache-passphrase-for-symmetric-encryption t
