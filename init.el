@@ -3371,3 +3371,12 @@ it has been changed to be used from the menu bar specifically."
 
 
 (server-start)
+
+(when (and (locate-file "zenburn-theme"
+                        custom-theme-load-path
+                        '(".el" ".elc"))
+           (locate-file "tango-dhl-theme"
+                        custom-theme-load-path
+                        '(".el" ".elc")))
+  (global-set-key (kbd "C-c T") 'dhl-toggle-theme)
+  (dhl-toggle-theme))
