@@ -3276,6 +3276,13 @@ it has been changed to be used from the menu bar specifically."
   (interactive)
   (kill-buffer (current-buffer)))
 
+(defmacro time (&rest body)
+  (let ((start (gensym)))
+    `(let ((,start (float-time)))
+       (prog1
+           ,@body
+         (message "%f" (- (float-time) ,start))))))
+
 
 ;;;;
 ;;;; misc advice
