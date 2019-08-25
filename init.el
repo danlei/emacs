@@ -1204,7 +1204,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (require 'nodejs-repl nil t)
 
-(setq nodejs-repl-command "/home/dhl/.nvm/versions/node/v11.2.0/bin/node"
+(setq nodejs-repl-command "/usr/local/bin/node"
       nodejs-repl-options '("--experimental-repl-await"
                             "--use_strict"))
 
