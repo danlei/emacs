@@ -1789,6 +1789,36 @@ line options may be given in OPTIONS."
 
 
 ;;;;
+;;;; ivy
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/swiper")
+
+(when (and (require 'ivy nil t)
+           (require 'swiper nil t)
+           (require 'counsel nil t))
+  (setq projectile-completion-system 'ivy)
+  (loop for (key binding)
+        on '("s-f" swiper
+             "s-r" ivy-resume
+             "s-g" (lambda ()
+                     (interactive)
+                     (condition-case nil
+                         (counsel-git-grep)
+                       (error (counsel-grep))))
+             "s-i" counsel-semantic-or-imenu
+             "M-X" counsel-M-x
+             "C-h V" counsel-describe-variable
+             "C-h C-S-l" counsel-find-library)
+        by #'cddr
+        do (global-set-key (kbd key) binding))
+  (define-key ivy-minibuffer-map (kbd "C-c o") 'ivy-occur)
+  (define-key ivy-minibuffer-map (kbd "C-c r") 'ivy-rotate-preferred-builders)
+  (define-key ivy-occur-mode-map (kbd "e") 'ivy-wgrep-change-to-wgrep-mode)
+  (define-key ivy-occur-grep-mode-map (kbd "e") 'ivy-wgrep-change-to-wgrep-mode))
+
+
+;;;;
 ;;;; ido
 ;;;;
 
@@ -3260,7 +3290,7 @@ it has been changed to be used from the menu bar specifically."
                        ("M-/" hippie-expand)
 ;                      ("C-c C-s" slime-selector)
                        ("C-x r v" view-register)
-                       ("M-X" dhl-invoke-smex)
+;                      ("M-X" dhl-invoke-smex)
                        (("C-^" "<C-dead-circumflex>") winner-undo)
                        (("M-C-^" "<M-C-dead-circumflex>") winner-redo)
                        ("M-s m o" multi-occur)
