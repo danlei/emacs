@@ -1926,9 +1926,8 @@ using commands with prefix arguments."
 ;;; flx
 ;;;
 
-;; TODO: I'm not sure if I really like this better than vanilla
-
-;; (add-to-list 'load-path "~/.emacs.d/elisp/flx")
+(add-to-list 'load-path "~/.emacs.d/elisp/flx")
+(require 'flx nil t)
 
 ;; (when (require 'flx-ido nil t)
 ;;   (flx-ido-mode t)
