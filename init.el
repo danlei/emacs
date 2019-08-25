@@ -1812,6 +1812,11 @@ line options may be given in OPTIONS."
 ;; TODO: should I keep this? never use it.
 (add-to-list 'load-path "~/.emacs.d/elisp/smex")
 
+
+;;;
+;;; smex
+;;;
+
 (when (require 'smex nil t)
   (smex-initialize)
   (setq smex-save-file "~/.emacs.d/smex")
@@ -1827,6 +1832,73 @@ using commands with prefix arguments."
   (if (= x 1)
       (smex)
     (smex-major-mode-commands)))
+
+
+;;;
+;;; ido-grid
+;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/ido-grid.el")
+
+(defvar dhl-ido-grid-enabled nil)
+
+(when (require 'ido-grid nil t)
+  (setq ido-grid-bind-keys nil
+        ido-grid-rows 10
+        ido-grid-start-small nil)
+
+  (defun dhl-toggle-ido-grid ()
+    (interactive)
+    (if dhl-ido-grid-enabled
+        (ido-grid-disable)
+      (ido-grid-enable)))
+
+  (defadvice ido-grid-enable
+      (after dhl-ido-grid-enable-keybindings last () activate)
+    (setq dhl-ido-grid-enabled t
+          ido-setup-hook
+          (lambda ()
+            (ido-grid--setup)
+            (loop for (binding function)
+                  on '("C-f" ido-grid-right
+                       "C-b" ido-grid-left
+                       "C-s" ido-grid-right
+                       "C-r" ido-grid-left
+                       "C-p" ido-grid-up-or-expand
+                       "C-n" ido-grid-down-or-expand
+                       "C-c" ido-toggle-case)
+                  by #'cddr
+                  do (define-key ido-completion-map (kbd binding) function))))
+    (funcall ido-setup-hook))
+
+  (defadvice ido-grid-disable
+      (before dhl-ido-grid-disable-keybindings first () activate)
+    (setq dhl-ido-grid-enabled nil
+          ido-setup-hook
+          (lambda ()
+            (loop for (binding function)
+                  on '("C-f" ido-magic-forward-char
+                       "C-b" ido-magic-backward-char
+                       "C-s" ido-next-match
+                       "C-r" ido-prev-match)
+                  by #'cddr do (define-key ido-completion-map (kbd binding) function))))
+    (funcall ido-setup-hook))
+  (define-key ido-common-completion-map (kbd "C-t") 'dhl-toggle-ido-grid))
+
+
+;;;
+;;; flx
+;;;
+
+;; TODO: I'm not sure if I really like this better than vanilla
+
+;; (add-to-list 'load-path "~/.emacs.d/elisp/flx")
+
+;; (when (require 'flx-ido nil t)
+;;   (flx-ido-mode t)
+;;   (setq ido-enable-flex-matching t
+;;         ido-use-faces nil))
+
 
 ;;;;
 ;;;; flycheck
@@ -1848,20 +1920,6 @@ using commands with prefix arguments."
             (dhl-define-keys flycheck-mode-map
                              '(("M-n" next-error)
                                ("M-p" previous-error)))))
-
-
-;;;;
-;;;; flx
-;;;;
-
-;; TODO: I'm not sure if I really like this better than vanilla
-
-;; (add-to-list 'load-path "~/.emacs.d/elisp/flx")
-
-;; (when (require 'flx-ido nil t)
-;;   (flx-ido-mode t)
-;;   (setq ido-enable-flex-matching t
-;;         ido-use-faces nil))
 
 
 ;;;;
