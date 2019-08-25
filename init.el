@@ -265,6 +265,64 @@ in case that file does not provide any feature."
 
 
 ;;;;
+;;;; lsp
+;;;;
+
+(mapc (lambda (library)
+        (add-to-list 'load-path (concat "~/.emacs.d/elisp/"
+                                        (symbol-name library))))
+      '(ht.el dash.el f.el s.el spinner.el markdown-mode lsp-mode lsp-ui))
+
+(when (and (require 'ht nil t)
+           (require 'lsp-mode nil t)
+           (require 'lsp-ui nil t))
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+  (define-key lsp-mode-map (kbd "C-c C-d") 'lsp-describe-thing-at-point)
+  (define-key lsp-mode-map (kbd "<s-mouse-1>")
+    (lambda (event &optional promote-to-region)
+      (interactive "e\np")
+      (mouse-set-point event promote-to-region)
+      (lsp-find-definition)))
+  (define-key lsp-mode-map (kbd "<s-mouse-3>")
+    (lambda (event &optional promote-to-region)
+      (interactive "e\np")
+      (save-excursion
+        (mouse-set-point event promote-to-region)
+        (lsp-describe-thing-at-point)))))
+
+(setq lsp-enable-snippet nil
+      lsp-auto-configure t
+      lsp-signature-render-all nil
+      lsp-ui-doc-enable nil
+      lsp-ui-doc-use-childframe nil
+      lsp-ui-doc-position 'top
+      lsp-ui-doc-include-signature nil
+      lsp-ui-sideline-enable nil
+      lsp-ui-flycheck-enable t
+      lsp-ui-flycheck-list-position 'right
+      lsp-ui-flycheck-live-reporting t
+      lsp-ui-peek-enable t
+      lsp-ui-peek-list-width 60
+      lsp-ui-peek-peek-height 25)
+
+;; (lsp-register-client
+;;  (make-lsp-client :new-connection (lsp-stdio-connection '("php" "/home/dleidisch/.composer/vendor/felixfbecker/language-server/bin/php-language-server.php"))
+;;                   :major-modes '(php-mode)
+;;                   :priority 1
+;;                   :server-id 'tramp-lsp
+;;                   :remote? t))
+
+(when (require 'longlines nil t)
+  (defadvice lsp-describe-thing-at-point
+      (around dhl-wrap-lsp-description activate)
+    "Wrap `lsp-describe-thing-at-point' buffer."
+    (with-current-buffer (get-buffer-create "*lsp-help*")
+      (longlines-mode -1))
+    ad-do-it
+    (longlines-mode 1)))
+
+
+;;;;
 ;;;; paredit
 ;;;;
 
