@@ -90,13 +90,18 @@ in case that file does not provide any feature."
           "~/.emacs.d/themes/leuven-theme/"
           "~/.emacs.d/themes/white-theme/"
           "~/.emacs.d/themes/tango-dhl-theme/"
-          "~/.emacs.d/themes/zenburn-emacs/"))
-; (when (and (locate-file "zenburn-theme"
-;                         custom-theme-load-path
-;                         '(".el" ".elc"))
-;            (load-theme 'zenburn t t))
-;   (enable-theme 'zenburn))
-  )
+          "~/.emacs.d/themes/zenburn-emacs/")))
+
+(defun dhl-toggle-theme ()
+  (interactive)
+  (pcase custom-enabled-themes
+    ('(tango-dhl) (disable-theme 'tango-dhl)
+                  (load-theme 'zenburn))
+    ('(zenburn) (disable-theme 'zenburn)
+                (load-theme 'tango-dhl))
+    ('() (if (< 6 (string-to-number (format-time-string "%H")) 19)
+             (load-theme 'tango-dhl)
+           (load-theme 'zenburn)))))
 
 
 ;;;;
