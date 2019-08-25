@@ -1806,16 +1806,22 @@ line options may be given in OPTIONS."
                      (condition-case nil
                          (counsel-git-grep)
                        (error (counsel-grep))))
+             "s-G" counsel-ag
              "s-i" counsel-semantic-or-imenu
+             "C-<tab>" counsel-switch-buffer
+             "s-O" counsel-find-file
              "M-X" counsel-M-x
              "C-h V" counsel-describe-variable
-             "C-h C-S-l" counsel-find-library)
+             "C-h C-S-l" counsel-find-library
+             "C-h M" counsel-descbinds)
         by #'cddr
         do (global-set-key (kbd key) binding))
   (define-key ivy-minibuffer-map (kbd "C-c o") 'ivy-occur)
   (define-key ivy-minibuffer-map (kbd "C-c r") 'ivy-rotate-preferred-builders)
   (define-key ivy-occur-mode-map (kbd "e") 'ivy-wgrep-change-to-wgrep-mode)
-  (define-key ivy-occur-grep-mode-map (kbd "e") 'ivy-wgrep-change-to-wgrep-mode))
+  (define-key ivy-occur-grep-mode-map (kbd "e") 'ivy-wgrep-change-to-wgrep-mode)
+  (define-key ivy-switch-buffer-map (kbd "C-<tab>") 'ivy-next-line)
+  (define-key ivy-switch-buffer-map (kbd "C-M-<tab>") 'ivy-previous-line))
 
 
 ;;;;
@@ -2933,7 +2939,6 @@ using commands with prefix arguments."
         projectile-sort-order 'recentf    ; ignored when using alien
         shell-file-name "/bin/sh"         ; TODO: use connection-local vars?
         projectile-enable-caching t)
-  (global-set-key (kbd "s-o") 'projectile-find-file-dwim)
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map))
 
 (setq explicit-shell-file-name "/bin/zsh")
@@ -3331,6 +3336,18 @@ it has been changed to be used from the menu bar specifically."
 
 (when (fboundp 'cycle-spacing)
   (global-set-key (kbd "M-SPC") 'cycle-spacing))
+
+(global-set-key (kbd "s-o")
+  (lambda ()
+    (interactive)
+    (cond ((and (featurep 'projectile)
+                (projectile-project-p))
+           (projectile-find-file-dwim))
+          ((featurep 'counsel)
+           (counsel-find-file))
+          ((featurep 'ido)
+           (ido-find-file))
+          (t (find-file)))))
 
 
 ;;;;
