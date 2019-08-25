@@ -2909,6 +2909,15 @@ using commands with prefix arguments."
 
 
 ;;;;
+;;;; wgrep
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/wgrep")
+
+(require 'wgrep nil t)
+
+
+;;;;
 ;;;; easy-kill
 ;;;;
 
