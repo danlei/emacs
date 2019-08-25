@@ -1438,6 +1438,9 @@ line options may be given in OPTIONS."
 (when (require 'php-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode)))
 
+(when (featurep 'lsp-mode)
+  (add-hook 'php-mode-hook 'lsp))
+
 (add-hook 'php-mode-hook
           (lambda ()
             (setq comment-start "# "
@@ -1452,10 +1455,10 @@ line options may be given in OPTIONS."
                                (("C-c d" "C-c C-d") psysh-doc)))
             (flycheck-mode 1))) ; TODO: flycheck-global-modes should do this
 
-(when (require 'php-eldoc nil t)
-  (add-hook 'php-mode-hook
-            (lambda ()
-              (php-eldoc-enable))))
+;; (when (require 'php-eldoc nil t)
+;;   (add-hook 'php-mode-hook
+;;             (lambda ()
+;;               (php-eldoc-enable))))
 
 (when (require 'psysh nil t)
   (setq psysh-doc-buffer-color 'only-emacs)
@@ -2913,25 +2916,27 @@ using commands with prefix arguments."
       neo-window-width 30
       projectile-switch-project-action 'neotree-projectile-action)
 
-(add-to-list 'load-path "~/.emacs.d/elisp/ggtags")
+;; (add-to-list 'load-path "~/.emacs.d/elisp/ggtags")
 
-(when (and (executable-find "global")
-           (require 'ggtags nil t))
-  (add-hook 'c-mode-common-hook
-            (lambda ()
-              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-                ;; TODO: make this work without listing servers explicitly
-                (when (or (not (file-remote-p default-directory))
-                          (string= (file-remote-p default-directory 'host) "noc-dev"))
-                  (ggtags-mode 1))))))
+;; (when (and (executable-find "global")
+;;            (require 'ggtags nil t))
+;;   (add-hook 'c-mode-common-hook
+;;             (lambda ()
+;;               (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+;;                 ;; TODO: make this work without listing servers explicitly
+;;                 (when (or (not (file-remote-p default-directory))
+;;                           (string= (file-remote-p default-directory 'host) "noc-dev"))
+;;                   (ggtags-mode 1)))))
+;;   (define-key ggtags-navigation-map (kbd "M-<") 'beginning-of-buffer)
+;;   (define-key ggtags-navigation-map (kbd "M->") 'end-of-buffer))
 
-(add-hook 'ggtags-mode-hook
-          (local-set-key (kbd "M-<") 'beginning-of-buffer)
-          (local-set-key (kbd "M->") 'end-of-buffer))
+;; (add-hook 'ggtags-mode-hook
+;;           (local-set-key (kbd "M-<") 'beginning-of-buffer)
+;;           (local-set-key (kbd "M->") 'end-of-buffer))
 
-(add-hook 'ggtags-global-mode-hook
-          (local-set-key (kbd "M-<") 'beginning-of-buffer)
-          (local-set-key (kbd "M->") 'end-of-buffer))
+;; (add-hook 'ggtags-global-mode-hook
+;;           (local-set-key (kbd "M-<") 'beginning-of-buffer)
+;;           (local-set-key (kbd "M->") 'end-of-buffer))
 
 ;; TODO: can this be done better?
 (setq ggtags-completing-read-function
