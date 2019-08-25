@@ -1453,7 +1453,8 @@ line options may be given in OPTIONS."
             (dhl-define-keys php-mode-map
                              '(("C-c C-c" psysh-eval-region)
                                (("C-c d" "C-c C-d") psysh-doc)))
-            (flycheck-mode 1))) ; TODO: flycheck-global-modes should do this
+;           (flycheck-mode 1)  ; TODO: flycheck-global-modes should do this
+            ))
 
 ;; (when (require 'php-eldoc nil t)
 ;;   (add-hook 'php-mode-hook
@@ -1833,7 +1834,7 @@ using commands with prefix arguments."
 
 (add-to-list 'load-path "~/.emacs.d/elisp/flycheck")
 
-(setq flycheck-global-modes '(php-mode)
+(setq flycheck-global-modes '(php-mode js-mode)
       flycheck-disabled-checkers '(php-phpcs)
       flycheck-check-syntax-automatically
       ;; TODO: including 'save hangs in tramp
