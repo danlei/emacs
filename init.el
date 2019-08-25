@@ -2154,7 +2154,7 @@ using commands with prefix arguments."
       '("NICK" "MODE" "324" "329" "332" "333" "353" "477"))
 
 (setq erc-part-reason (lambda (x)
-                        (or x "Ein guter Abgang ziert die Übung."))
+                        (or x "去る者は追わず。"))
       erc-quit-reason erc-part-reason)
 
 
