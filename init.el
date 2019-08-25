@@ -2928,9 +2928,16 @@ using commands with prefix arguments."
 (add-to-list 'load-path "~/.emacs.d/elisp/projectile")
 
 (when (require 'projectile nil t)
-  (projectile-global-mode t))
+  (projectile-global-mode t)
+  (setq projectile-indexing-method 'hybrid
+        projectile-sort-order 'recentf    ; ignored when using alien
+        shell-file-name "/bin/sh"         ; TODO: use connection-local vars?
+        projectile-enable-caching t)
+  (global-set-key (kbd "s-o") 'projectile-find-file-dwim))
 
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(setq explicit-shell-file-name "/bin/zsh")
+
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
 
 (defadvice projectile-grep
     (after dhl-projectile-grep-advice last () activate)
