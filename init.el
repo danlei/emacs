@@ -1817,16 +1817,21 @@ line options may be given in OPTIONS."
              "s-G" counsel-ag
              "s-i" counsel-semantic-or-imenu
              "C-<tab>" counsel-switch-buffer
+             "C-x B" counsel-switch-buffer
              "s-O" counsel-find-file
              "M-X" counsel-M-x
              "C-h V" counsel-describe-variable
              "C-h C-S-l" counsel-find-library
-             "C-h M" counsel-descbinds)
+             "C-h M" counsel-descbinds
+             "C-x r B" counsel-bookmark
+             "C-x ESC ESC" counsel-command-history)
         by #'cddr
         do (global-set-key (kbd key) binding))
   (define-key ivy-minibuffer-map (kbd "C-c o") 'ivy-occur)
   (define-key ivy-minibuffer-map (kbd "C-c r") 'ivy-rotate-preferred-builders)
   (define-key ivy-occur-mode-map (kbd "e") 'ivy-wgrep-change-to-wgrep-mode)
+  (define-key ivy-occur-mode-map (kbd "z") 'dhl-kill-this-buffer)
+  (define-key ivy-occur-grep-mode-map (kbd "z") 'dhl-kill-this-buffer)
   (define-key ivy-occur-grep-mode-map (kbd "e") 'ivy-wgrep-change-to-wgrep-mode)
   (define-key ivy-switch-buffer-map (kbd "C-<tab>") 'ivy-next-line)
   (define-key ivy-switch-buffer-map (kbd "C-M-<tab>") 'ivy-previous-line))
@@ -1925,7 +1930,8 @@ using commands with prefix arguments."
                        "C-b" ido-magic-backward-char
                        "C-s" ido-next-match
                        "C-r" ido-prev-match)
-                  by #'cddr do (define-key ido-completion-map (kbd binding) function))))
+                  by #'cddr
+                  do (define-key ido-completion-map (kbd binding) function))))
     (funcall ido-setup-hook))
   (define-key ido-common-completion-map (kbd "C-t") 'dhl-toggle-ido-grid))
 
