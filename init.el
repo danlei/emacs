@@ -307,6 +307,8 @@ in case that file does not provide any feature."
       lsp-ui-peek-list-width 60
       lsp-ui-peek-peek-height 25)
 
+;(setf (lsp--client-priority (gethash 'php-ls lsp-clients)) 3)
+
 ;; (lsp-register-client
 ;;  (make-lsp-client :new-connection (lsp-stdio-connection '("php" "/home/dleidisch/.composer/vendor/felixfbecker/language-server/bin/php-language-server.php"))
 ;;                   :major-modes '(php-mode)
