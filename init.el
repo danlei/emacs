@@ -3125,11 +3125,12 @@ using commands with prefix arguments."
       user-full-name "Daniel H. Leidisch"
       user-mail-address "public@leidisch.net")
 
-(setq-default cursor-type 'bar
-              indent-tabs-mode nil
+(setq-default indent-tabs-mode nil
               tab-width 2)
 
+(setq-default cursor-type 'bar)
 (set-cursor-color "#ff7700")
+(global-hl-line-mode 1)
 
 ;; (setq default-frame-alist
 ;;       (append default-frame-alist '((width . 90) (height . 31))))
