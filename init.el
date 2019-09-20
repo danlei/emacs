@@ -135,6 +135,20 @@ in case that file does not provide any feature."
 
 
 ;;;;
+;;;; comint
+;;;;
+
+(setq comint-prompt-read-only t)
+
+(if (< emacs-major-version 25)            ; fixes strange comint-bol
+    (setq comint-use-prompt-regexp t))    ; behavior that messed up
+                                          ; indentation on 24
+
+(make-variable-buffer-local 'comint-use-prompt-regexp) ; prevent modes from
+                                                       ; messing with this
+
+
+;;;;
 ;;;; common lisp
 ;;;;
 
@@ -542,10 +556,6 @@ in case that file does not provide any feature."
                      (eldoc-mode)
                      (setq buffer-face-mode-face 'gnu-apl-default)
                      (buffer-face-mode))))
-  (add-hook 'gnu-apl-interactive-mode-hook
-            (lambda ()
-              (setq comint-prompt-read-only t)
-              (local-set-key (kbd "C-a") 'comint-bol)))
   (add-hook 'gnu-apl-documentation-mode-hook
             (lambda () (view-mode 1)))
   (set-face-attribute 'gnu-apl-default nil
@@ -636,10 +646,6 @@ CLASS-NAME is queried in the minibuffer, defaulting to
             (local-set-key (kbd "C-c d") 'dhl-pydoc)
 ;           (setq parens-require-spaces nil)
             (eldoc-mode 1)))
-
-(add-hook 'inferior-python-mode-hook
-          (lambda ()
-            (setq comint-prompt-read-only t)))
 
 (add-hook
  'python-mode-hook
@@ -842,9 +848,6 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (when (eq system-type 'windows-nt)
   (setq inferior-octave-program "C:/Octave/3.2.4_gcc-4.4.0/bin/octave.exe"))
 
-(add-hook 'inferior-octave-mode-hook
-          (lambda () (local-set-key (kbd "C-a") 'comint-bol)))
-
 
 ;;;;
 ;;;; haskell
@@ -1012,7 +1015,6 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (add-hook 'prolog-inferior-mode-hook
           (lambda ()
-            (setq comint-prompt-read-only t)
             (local-set-key (kbd "C-c C-d") 'comint-send-eof)))
 
 (add-hook 'prolog-mode-hook
@@ -1132,9 +1134,8 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (add-hook 'inferior-groovy-mode-hook
           (lambda ()
-            (setq comint-prompt-read-only t)
-            (local-set-key (kbd "C-a") 'comint-bol)
-            (setq comint-prompt-regexp "^groovy:[^>]*> ")))
+;           (setq comint-prompt-regexp "^groovy:[^>]*> ")
+            (local-set-key (kbd "C-a") 'comint-bol)))
 
 
 ;;;;
@@ -1212,10 +1213,6 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (setq nodejs-repl-command "/usr/local/bin/node"
       nodejs-repl-options '("--experimental-repl-await"
                             "--use_strict"))
-
-(add-hook 'nodejs-repl-mode-hook
-          (lambda ()
-            (setq comint-prompt-read-only t)))
 
 (defun dhl-nodejs-repl-eval-buffer ()
   (interactive)
@@ -1470,10 +1467,6 @@ line options may be given in OPTIONS."
   (setq psysh-doc-buffer-color 'only-emacs)
   (setq-default psysh-comint-buffer-process '("psysh" "psysh" nil "--no-color")))
 
-(add-hook 'psysh-mode-hook
-          (lambda ()
-            (setq comint-prompt-read-only t)))
-
 (defadvice php-send-region
     (after dhl-php-send-region-advice last () activate)
   "Show *PHP* buffer after `php-send-region' invocation."
@@ -1514,12 +1507,8 @@ line options may be given in OPTIONS."
 
 (setq sql-sqlite-program "sqlite3"
       sql-sqlite-options '("-interactive")
-;      sql-mysql-options '("-n")
+;     sql-mysql-options '("-n")
       )
-
-(add-hook 'sql-interactive-mode-hook
-          (lambda ()
-            (setq comint-prompt-read-only t)))
 
 (when (require 'sql-indent nil t)
   (add-hook 'sql-mode-hook
@@ -1687,10 +1676,6 @@ line options may be given in OPTIONS."
                     ,(if (< emacs-major-version 24)
                          'lisp-complete-symbol
                        'completion-at-point)))))
-
-(if (< emacs-major-version 25)            ; fixes strange comint-bol
-    (setq comint-use-prompt-regexp t))    ; behavior that messed up
-                                          ; indentation on 24
 
 
 ;;;;
