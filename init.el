@@ -1802,7 +1802,10 @@ line options may be given in OPTIONS."
 (when (and (require 'ivy nil t)
            (require 'swiper nil t)
            (require 'counsel nil t))
-  (setq projectile-completion-system 'ivy)
+  (setq projectile-completion-system 'ivy
+        ivy-height 15
+        ivy-use-virtual-buffers t
+        counsel-ag-base-command "ack -S --nocolor --nogroup %s")
   (loop for (key binding)
         on '("s-f" swiper
              "s-r" ivy-resume
