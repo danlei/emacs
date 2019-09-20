@@ -1789,6 +1789,7 @@ line options may be given in OPTIONS."
            (require 'counsel nil t))
   (setq projectile-completion-system 'ivy
         ivy-height 15
+        ivy-wrap t
         ivy-use-virtual-buffers t
         counsel-ag-base-command "ack -S --nocolor --nogroup %s")
   (loop for (key binding)
