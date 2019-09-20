@@ -44,9 +44,11 @@ in case that file does not provide any feature."
                         ,(getenv "PATH"))
                       ";")))
   (gnu/linux
+   (setenv "LANG" "de_DE.UTF-8")
    (setenv "LC_MESSAGES" "C")
    (setenv "MANWIDTH" "72"))
   (darwin
+   (setenv "LANG" "de_DE.UTF-8")
    (setenv "LC_MESSAGES" "C")
    (setenv "MANWIDTH" "72")
    (setenv "PATH"
