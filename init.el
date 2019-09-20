@@ -3202,8 +3202,9 @@ using commands with prefix arguments."
 ;;   (setq special-display-regexps nil))
 
 (when (eq system-type 'darwin)
-  (setq mac-right-option-modifier 'nil
-        mac-right-command-modifier 'control))
+  (setq mac-right-option-modifier 'option
+;       mac-right-command-modifier 'control
+        ))
 
 (setq diff-switches "-u"
       ediff-window-setup-function 'ediff-setup-windows-plain)
