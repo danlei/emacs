@@ -323,7 +323,8 @@ in case that file does not provide any feature."
     (with-current-buffer (get-buffer-create "*lsp-help*")
       (longlines-mode -1))
     ad-do-it
-    (longlines-mode 1)))
+    (with-current-buffer (get-buffer "*lsp-help*")
+      (longlines-mode 1))))
 
 
 ;;;;
