@@ -3006,8 +3006,27 @@ using commands with prefix arguments."
 
 
 ;;;;
-;;;; multiple cursors
+;;;; cursor
 ;;;;
+
+(setq-default cursor-type 'bar)
+(setq blink-cursor-blinks 100)
+(set-cursor-color "#ff7700")
+
+(add-to-list 'load-path "~/.emacs.d/elisp/beacon")
+
+(setq beacon-size 50
+      beacon-color "#ff7700")
+
+(if (not (require 'beacon nil t))
+    (global-hl-line-mode 1)
+  (beacon-mode 1)
+  (global-set-key (kbd "C-c b") 'beacon-blink))
+
+
+;;;
+;;; multiple-cursors
+;;;
 
 (add-to-list 'load-path "~/.emacs.d/elisp/multiple-cursors.el")
 
@@ -3114,7 +3133,6 @@ using commands with prefix arguments."
       apropos-do-all 1
       extended-command-suggest-shorter t
       line-move-visual nil
-      blink-cursor-blinks 100
       help-window-select t
       enable-recursive-minibuffers t
       resize-mini-windows t
@@ -3131,10 +3149,6 @@ using commands with prefix arguments."
 
 (setq-default indent-tabs-mode nil
               tab-width 2)
-
-(setq-default cursor-type 'bar)
-(set-cursor-color "#ff7700")
-(global-hl-line-mode 1)
 
 ;; (setq default-frame-alist
 ;;       (append default-frame-alist '((width . 90) (height . 31))))
