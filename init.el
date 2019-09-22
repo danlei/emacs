@@ -3351,6 +3351,7 @@ it has been changed to be used from the menu bar specifically."
                        ("C-c f" find-name-dired)
                        ("C-c F" find-dired)
                        ("C-c g" grep-find)
+                       ("C-c G" find-grep-dired)
                        ("C-c DEL" kill-whole-line)))
 
 (when (fboundp 'cycle-spacing)
