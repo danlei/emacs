@@ -114,7 +114,7 @@ in case that file does not provide any feature."
 (add-to-list 'load-path "~/.emacs.d/elisp/popup-el")
 
 (when (require 'auto-complete nil t)
-  (ac-set-trigger-key "<C-tab>"))
+  (ac-set-trigger-key "C-M-i"))
 
 (setq ac-use-menu-map t
       ac-auto-start nil                 ; was 2
@@ -2056,6 +2056,8 @@ using commands with prefix arguments."
            (require 'marshal nil t))
   (add-hook 'magit-section-movement-hook
             'magit-hunk-set-window-start)
+  (when (featurep 'counsel)
+    (define-key magit-mode-map (kbd "<C-tab>") 'counsel-switch-buffer))
   (load "~/.emacs.d/elisp/magit/magit-autoloads"))
 
 (when (require 'vc-dir nil t)
@@ -2424,7 +2426,9 @@ using commands with prefix arguments."
             (local-set-key (kbd "<C-right>") 'org-shiftmetaright)
             (local-set-key (kbd "<C-left>") 'org-shiftmetaleft)
             (local-set-key (kbd "M-n") 'outline-next-visible-heading)
-            (local-set-key (kbd "M-p") 'outline-previous-visible-heading)))
+            (local-set-key (kbd "M-p") 'outline-previous-visible-heading)
+            (if (featurep 'counsel)
+                (local-set-key (kbd "<C-tab>") 'counsel-switch-buffer))))
 
 (setq org-special-ctrl-a/e t
       org-special-ctrl-k t
