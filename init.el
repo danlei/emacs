@@ -1822,13 +1822,15 @@ line options may be given in OPTIONS."
 (setq hippie-expand-try-functions-list
       '(try-expand-dabbrev-visible
         try-expand-dabbrev
-        try-expand-dabbrev-all-buffers
         try-expand-dabbrev-from-kill
+        try-expand-dabbrev-all-buffers
         try-complete-lisp-symbol-partially
         try-complete-lisp-symbol
         try-complete-file-name-partially
         try-complete-file-name
-        try-expand-whole-kill))
+        try-expand-whole-kill
+        try-expand-line
+        try-expand-line-all-buffers))
 
 
 ;;;;
