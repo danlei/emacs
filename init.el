@@ -2530,16 +2530,18 @@ using commands with prefix arguments."
 
 (setq org-src-fontify-natively t
       org-src-preserve-indentation t
-      org-src-tab-acts-natively t)
+      org-src-tab-acts-natively t
+      org-confirm-babel-evaluate nil)
 
-(setq org-babel-load-languages
-      '((emacs-lisp . t)
-        (C . t)
-        (python . t)
-        (sh . t)
-        (js . t)
-        (groovy . t)
-        (sql . t)))
+(org-babel-do-load-languages 'org-babel-load-languages
+                             '((emacs-lisp . t)
+                               (C . t)
+                               (python . t)
+                               (shell . t)
+                               (js . t)
+                               (groovy . t)
+                               (sql . t)
+                               (php . t)))
 
 ;; TODO: fix note template
 (setq org-capture-templates
