@@ -1532,7 +1532,23 @@ line options may be given in OPTIONS."
 (setq sql-sqlite-program "sqlite3"
       sql-sqlite-options '("-interactive")
 ;     sql-mysql-options '("-n")
-      )
+      mysql-user (user-login-name))
+
+(add-hook 'sql-interactive-mode-hook
+          (lambda ()
+            (toggle-truncate-lines 1)
+            (setq comint-process-echoes 1)
+            (add-to-list 'comint-preoutput-filter-functions
+                         (lambda (output)
+                           (replace-regexp-in-string "" "" output)))
+            (dhl-turn-on-comint-input-history "~/.emacs.d/sql-input-history")))
+
+(when (require 'sql-completion nil t)
+  (add-hook 'sql-interactive-mode-hook
+            (lambda ()
+              (define-key sql-interactive-mode-map (kbd "TAB")
+                'comint-dynamic-complete)
+              (sql-mysql-completion-init))))
 
 (when (require 'sql-indent nil t)
   (add-hook 'sql-mode-hook
