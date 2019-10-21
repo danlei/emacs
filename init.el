@@ -148,6 +148,29 @@ in case that file does not provide any feature."
                                                        ; messing with this
 
 
+;;;
+;;; input history
+;;;
+
+;; cf. https://emacs.stackexchange.com/a/9952/20422
+
+(defun dhl-turn-on-comint-input-history (histfile)
+  "Allow saving comint input history to HISTFILE.
+
+Enable saving input history to HISTFILE when `comint-write-input-ring`
+is called. Intended for use in mode hooks."
+  (setq comint-input-ring-file-name histfile)
+  (comint-read-input-ring 'silent))
+
+(add-hook 'kill-buffer-hook 'comint-write-input-ring)
+(add-hook 'kill-emacs-hook
+          (lambda ()
+            (mapcar (lambda (buffer)
+                      (with-current-buffer buffer
+                        (comint-write-input-ring)))
+                    (buffer-list))))
+
+
 ;;;;
 ;;;; common lisp
 ;;;;
