@@ -912,7 +912,8 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (add-hook 'inferior-haskell-mode-hook
           (lambda ()
             (local-set-key (kbd "C-c h") 'haskell-hoogle)
-            (turn-on-haskell-doc-mode 1)))
+;           (turn-on-haskell-doc-mode 1)
+            ))
 
 (add-hook
  'haskell-mode-hook
