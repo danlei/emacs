@@ -46,11 +46,13 @@ in case that file does not provide any feature."
   (gnu/linux
    (setenv "LANG" "de_DE.UTF-8")
    (setenv "LC_MESSAGES" "C")
-   (setenv "MANWIDTH" "72"))
+   (setenv "MANWIDTH" "72")
+   (setenv "PERL5LIB" (expand-file-name "~/.perl5/lib/perl5")))
   (darwin
    (setenv "LANG" "de_DE.UTF-8")
    (setenv "LC_MESSAGES" "C")
    (setenv "MANWIDTH" "72")
+   (setenv "PERL5LIB" (expand-file-name "~/.perl5/lib/perl5"))
    (setenv "PATH"
            (mapconcat 'identity
                       `(,(expand-file-name "~/bin")
@@ -1554,6 +1556,17 @@ line options may be given in OPTIONS."
   (add-hook 'sql-mode-hook
             (lambda ()
               (sqlind-minor-mode 1))))
+
+
+;;;
+;;; emacs-edbi
+;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/emacs-edbi")
+
+(require 'edbi nil t)
+
+(setq edbi:query-result-fix-header nil)
 
 
 ;;;;
