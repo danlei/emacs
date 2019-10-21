@@ -3156,6 +3156,31 @@ using commands with prefix arguments."
 
 
 ;;;;
+;;;; keyfreq
+;;;;
+
+;; keybinding use statistics
+
+(add-to-list 'load-path "~/.emacs.d/elisp/keyfreq")
+
+(setq keyfreq-excluded-commands
+      '(self-insert-command
+        abort-recursive-edit
+        forward-char
+        backward-char
+        previous-line
+        next-line
+        mwheel-scroll
+        isearch-printing-char
+        org-self-insert-command)
+      keyfreq-file "~/.emacs.d/keyfreq")
+
+(when (require 'keyfreq nil t)
+  (keyfreq-mode 1)
+  (keyfreq-autosave-mode 1))
+
+
+;;;;
 ;;;; misc
 ;;;;
 
