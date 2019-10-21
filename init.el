@@ -342,7 +342,8 @@ is called. Intended for use in mode hooks."
       lsp-ui-flycheck-live-reporting t
       lsp-ui-peek-enable t
       lsp-ui-peek-list-width 60
-      lsp-ui-peek-peek-height 25)
+      lsp-ui-peek-peek-height 25
+      lsp-file-watch-threshold 20000)
 
 ;(setf (lsp--client-priority (gethash 'php-ls lsp-clients)) 3)
 
