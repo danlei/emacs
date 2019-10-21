@@ -2025,6 +2025,7 @@ using commands with prefix arguments."
 (desktop-save-mode 1)
 
 (setq history-length 250
+      history-delete-duplicates t
 ;     desktop-files-not-to-save "^$"    ; for tramp, slow
       )
 
