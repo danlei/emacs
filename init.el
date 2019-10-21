@@ -1594,10 +1594,7 @@ line options may be given in OPTIONS."
 (setq sparql-default-base-url "http://dbpedia.org/sparql"
       sparql-default-format "text/html")
 
-(define-key sparql-result-mode-map (kbd "z") ; TODO: set for view-mode-map?
-  'View-kill-and-leave)
-
-;; (define-key view-mode-map (kbd "z")          ; TODO: yes?
+;; (define-key sparql-result-mode-map (kbd "z")
 ;;   'View-kill-and-leave)
 
 (when (require 'dhl-sparql-output-html-prefix nil t)
@@ -1839,6 +1836,13 @@ line options may be given in OPTIONS."
 
 (add-to-list 'load-path "~/.emacs.d/elisp/swiper")
 
+(defun dhl-counsel-git-grep-or-ag ()
+  "Use `counsel-git-grep' if in a project, `counsel-ag' otherwise."
+  (interactive)
+  (condition-case nil
+      (counsel-git-grep)
+    (error (counsel-ag))))
+
 (when (and (require 'ivy nil t)
            (require 'swiper nil t)
            (require 'counsel nil t))
@@ -1849,18 +1853,19 @@ line options may be given in OPTIONS."
         counsel-ag-base-command "ack -S --nocolor --nogroup %s")
   (loop for (key binding)
         on '("s-f" swiper
+             "s-F" swiper-all
              "s-r" ivy-resume
-             "s-g" (lambda ()
-                     (interactive)
-                     (condition-case nil
-                         (counsel-git-grep)
-                       (error (counsel-grep))))
+             "s-g" dhl-counsel-git-grep-or-ag
              "s-G" counsel-ag
              "s-i" counsel-semantic-or-imenu
+             "s-O" counsel-file-jump
+             "s-j" counsel-bookmark
+             "s-J" counsel-org-goto-all
+             "s-U" counsel-unicode-char
+             "M-X" counsel-M-x
              "C-<tab>" counsel-switch-buffer
              "C-x B" counsel-switch-buffer
-             "s-O" counsel-find-file
-             "M-X" counsel-M-x
+             "C-h A" counsel-apropos
              "C-h V" counsel-describe-variable
              "C-h C-S-l" counsel-find-library
              "C-h M" counsel-descbinds
@@ -3281,6 +3286,9 @@ using commands with prefix arguments."
                         ibuffer-mode-map))
   (define-key mode-map (kbd "z") 'dhl-kill-this-buffer))
 
+(require 'view nil t)
+(define-key view-mode-map (kbd "z") 'View-kill-and-leave)
+
 (define-key 'help-command (kbd "C-f") 'find-function)
 (define-key 'help-command (kbd "C-l") 'find-library)
 (define-key 'help-command (kbd "C-v") 'find-variable)
@@ -3407,22 +3415,32 @@ it has been changed to be used from the menu bar specifically."
                        ("C-c F" find-dired)
                        ("C-c g" grep-find)
                        ("C-c G" find-grep-dired)
-                       ("C-c DEL" kill-whole-line)))
+                       ("C-c DEL" kill-whole-line)
+                       ("<wheel-right>" (lambda ()
+                                          (interactive)
+                                          (scroll-left 10)))
+                       ("<wheel-left>" (lambda ()
+                                         (interactive)
+                                         (scroll-right 10)))))
 
 (when (fboundp 'cycle-spacing)
   (global-set-key (kbd "M-SPC") 'cycle-spacing))
 
-(global-set-key (kbd "s-o")
-  (lambda ()
-    (interactive)
-    (cond ((and (featurep 'projectile)
-                (projectile-project-p))
-           (projectile-find-file-dwim))
-          ((featurep 'counsel)
-           (counsel-find-file))
-          ((featurep 'ido)
-           (ido-find-file))
-          (t (find-file)))))
+(defun dhl-open-file-maybe-project (prefix)
+  "Open project file, falling back to counsel, ido, or plain `find-file`."
+  (interactive "p")
+  (message (number-to-string prefix))
+  (cond ((and (= prefix 1)
+              (featurep 'projectile)
+              (projectile-project-p))
+         (projectile-find-file-dwim))
+        ((featurep 'counsel)
+         (counsel-find-file))
+        ((featurep 'ido)
+         (ido-find-file))
+        (t (find-file))))
+
+(global-set-key (kbd "s-o") 'dhl-open-file-maybe-project)
 
 
 ;;;;
