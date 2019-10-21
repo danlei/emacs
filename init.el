@@ -1520,7 +1520,7 @@ line options may be given in OPTIONS."
 (setq restclient-same-buffer-response nil)
 
 ;; TODO: make this work even when delete-window etc. is called
-;;       i.e. quit view-mode automacially somehow
+;;       i.e. quit view-mode automatically somehow
 ;;       works with restclient-same-buffer-response set to nil
 (add-hook 'restclient-response-loaded-hook
           (lambda ()
