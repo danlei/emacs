@@ -1539,7 +1539,7 @@ line options may be given in OPTIONS."
 ;;       works with restclient-same-buffer-response set to nil
 (add-hook 'restclient-response-loaded-hook
           (lambda ()
-            (view-mode 1)))
+            (local-set-key (kbd "z") 'dhl-kill-this-buffer)))
 
 
 ;;;;
