@@ -2354,6 +2354,7 @@ using commands with prefix arguments."
       ibuffer-expert t)
 
 (setq ibuffer-saved-filter-groups
+      ;; TODO: use ' instead of $
       '(("default"
          ("elisp" (or (name . "\\.el$")
                       (mode . emacs-lisp-mode)))
@@ -2572,6 +2573,7 @@ using commands with prefix arguments."
 (add-to-list 'load-path "~/.emacs.d/elisp/ox-jira")
 (require 'ox-jira nil t)
 
+;; TODO: right control binding
 (add-hook 'org-mode-hook
           (lambda ()
             (local-set-key (kbd "<C-up>") 'org-shiftmetaup)
@@ -3368,6 +3370,7 @@ using commands with prefix arguments."
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; TODO: use a loop
 (put 'eval-expression 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
