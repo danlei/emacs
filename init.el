@@ -1186,6 +1186,16 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 
 ;;;;
+;;;; go
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/go-mode.el")
+
+(when (require 'go-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode)))
+
+
+;;;;
 ;;;; javascript
 ;;;;
 
