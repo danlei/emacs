@@ -1570,14 +1570,45 @@ line options may be given in OPTIONS."
 
 
 ;;;
-;;; emacs-edbi
+;;; sql-workbench
 ;;;
+
+;; (loop for package in '("sql-workbench"
+;;                        "ov"
+;;                        "shut-up"
+;;                        "json-mode"
+;;                        "json-snatcher"
+;;                        "json-reformat")
+;;       do (add-to-list 'load-path (concat "~/.emacs.d/elisp/" package)))
+
+;; (and (require 'ov nil t)
+;;      (require 'shut-up nil t)
+;;      (require 'json-mode nil t)
+;;      (require 'json-snatcher nil t)
+;;      (require 'json-reformat nil t)
+;;      (require 'sql-workbench nil t))
+
+
+;;;
+;;; edbi
+;;;
+
+;; dbi:mysql:db:host:port
 
 (add-to-list 'load-path "~/.emacs.d/elisp/emacs-edbi")
 
 (require 'edbi nil t)
 
 (setq edbi:query-result-fix-header nil)
+
+
+;;;
+;;; ob-sql-mode (for org mode code blocks)
+;;;
+
+;; (add-to-list 'load-path "~/.emacs.d/elisp/ob-sql-mode")
+
+;; (require 'ob-sql-mode)
 
 
 ;;;;
@@ -2466,9 +2497,21 @@ using commands with prefix arguments."
 ;;;; org-mode
 ;;;;
 
+;; TODO:
+;;
+;; something in ob-sql-mode, sql-workbench, and the clojure config
+;; leads to problems when loading org-compat.el using the newest org
+;; version (as of 2019-10-20.) as a result,
+;; org-indent-initialize-agent doesn't work in the timer, because
+;; org-time-add isn't defined (use list-timers and c to fix)
+
 ;; (mapc (apply-partially 'add-to-list 'load-path)
 ;;       '("~/.emacs.d/elisp/org-mode/lisp"
 ;;         "~/.emacs.d/elisp/org-mode/contrib/lisp"))
+
+;; ;; just for testing with preceding configs commented out
+;; (setq browse-url-generic-program "open")
+;; (setq Info-additional-directory-list nil)
 
 (require 'org nil t)
 (require 'org-table nil t)
