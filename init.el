@@ -3175,12 +3175,16 @@ using commands with prefix arguments."
 
 (add-to-list 'load-path "~/.emacs.d/elisp/beacon")
 
-(setq beacon-size 50
-      beacon-color "#ff7700")
+(setq beacon-size 20
+      beacon-blink-delay 0.2
+      beacon-blink-duration 0.2
+      beacon-color "#ff7700"
+      beacon-blink-when-window-scrolls t)
 
 (if (not (require 'beacon nil t))
     (global-hl-line-mode 1)
   (beacon-mode 1)
+  (add-to-list 'beacon-dont-blink-commands 'mwheel-scroll)
   (global-set-key (kbd "C-c b") 'beacon-blink))
 
 
