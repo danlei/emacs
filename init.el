@@ -1895,14 +1895,16 @@ line options may be given in OPTIONS."
       (counsel-git-grep)
     (error (counsel-ag))))
 
-(when (and (require 'ivy nil t)
-           (require 'swiper nil t)
-           (require 'counsel nil t))
-  (setq projectile-completion-system 'ivy
+ (setq projectile-completion-system 'ivy
         ivy-height 15
         ivy-wrap t
         ivy-use-virtual-buffers t
-        counsel-ag-base-command "ack -S --nocolor --nogroup %s")
+        counsel-ack-base-command "ack -S --nocolor --nogroup %s")
+
+(when (and (require 'ivy nil t)
+           (require 'swiper nil t)
+           (require 'counsel nil t))
+  (setq projectile-completion-system 'ivy)
   (loop for (key binding)
         on '("s-f" swiper
              "s-F" swiper-all
@@ -1927,6 +1929,7 @@ line options may be given in OPTIONS."
         do (global-set-key (kbd key) binding))
   (define-key ivy-minibuffer-map (kbd "C-c o") 'ivy-occur)
   (define-key ivy-minibuffer-map (kbd "C-c r") 'ivy-rotate-preferred-builders)
+  (define-key ivy-minibuffer-map (kbd "s-.") 'ivy-avy)
   (define-key ivy-occur-mode-map (kbd "e") 'ivy-wgrep-change-to-wgrep-mode)
   (define-key ivy-occur-mode-map (kbd "z") 'dhl-kill-this-buffer)
   (define-key ivy-occur-grep-mode-map (kbd "z") 'dhl-kill-this-buffer)
