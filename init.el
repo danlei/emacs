@@ -1536,6 +1536,16 @@ line options may be given in OPTIONS."
           (lambda ()
             (view-mode 1)))
 
+
+;;;;
+;;;; request
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/emacs-request")
+
+(require 'request nil t)
+
+
 ;;;;
 ;;;; sql
 ;;;;
