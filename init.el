@@ -2619,6 +2619,9 @@ using commands with prefix arguments."
       org-src-tab-acts-natively t
       org-confirm-babel-evaluate nil)
 
+(add-to-list 'load-path "~/.emacs.d/elisp/ob-restclient.el")
+(require 'ob-restclient nil t)
+
 (org-babel-do-load-languages 'org-babel-load-languages
                              '((emacs-lisp . t)
                                (C . t)
@@ -2627,7 +2630,9 @@ using commands with prefix arguments."
                                (js . t)
                                (groovy . t)
                                (sql . t)
-                               (php . t)))
+                               (php . t)
+                               (restclient . t))) ; TODO: check if available
+
 
 ;; TODO: fix note template
 (setq org-capture-templates
