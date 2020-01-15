@@ -1936,6 +1936,26 @@ line options may be given in OPTIONS."
 
 
 ;;;;
+;;;; avy
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/avy")
+
+(when (require 'avy nil t)
+  (loop for (key binding)
+        on '("s-." avy-goto-word-or-subword-1
+             "s-l" avy-goto-line)
+        by #'cddr
+        do (global-set-key (kbd key) binding)))
+
+(setq avy-keys '(?j ?d ?k ?s ?l ?a ?g ?h ?e ?i ?w ?o ?r ?u ?v ?n ?f))
+
+(setq avy-orders-alist '((avy-goto-char . avy-order-closest)
+                         (avy-goto-word-1 . avy-order-closest)
+                         (avy-goto-subword-0 . avy-order-closest)))
+
+
+;;;;
 ;;;; ido
 ;;;;
 
