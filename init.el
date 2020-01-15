@@ -156,7 +156,7 @@ in case that file does not provide any feature."
 
 ;; cf. https://emacs.stackexchange.com/a/9952/20422
 
-(defun dhl-turn-on-comint-input-history (histfile)
+(defun dhl-enable-comint-history (histfile)
   "Allow saving comint input history to HISTFILE.
 
 Enable saving input history to HISTFILE when `comint-write-input-ring`
@@ -690,8 +690,13 @@ CLASS-NAME is queried in the minibuffer, defaulting to
                         ("C-M-a" python-nav-backward-defun)
                         ("C-M-e" python-nav-forward-defun)
 ;                       ("C-M-q" fill-paragraph)
-                        ("<C-tab>" python-shell-completion-complete-at-point)
+                        ("C-M-i" python-shell-completion-complete-at-point)
                         ("C-c d" dhl-pydoc))))))
+
+(add-hook
+ 'inferior-python-mode-hook
+ (lambda ()
+   (dhl-enable-comint-history "~/.emacs.d/python-input-history")))
 
 (setq dhl-python-command
       (if (eq system-type 'windows-nt)
@@ -1564,7 +1569,7 @@ line options may be given in OPTIONS."
             (add-to-list 'comint-preoutput-filter-functions
                          (lambda (output)
                            (replace-regexp-in-string "" "" output)))
-            (dhl-turn-on-comint-input-history "~/.emacs.d/sql-input-history")))
+            (dhl-enable-comint-history "~/.emacs.d/sql-input-history")))
 
 (when (require 'sql-completion nil t)
   (add-hook 'sql-interactive-mode-hook
