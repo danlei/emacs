@@ -3200,6 +3200,8 @@ using commands with prefix arguments."
   (global-set-key (kbd "C-,") 'mc/mark-next-like-this)
   (define-key org-mode-map (kbd "C-,") 'mc/mark-next-like-this))
 
+(setq mc/always-run-for-all t)
+
 
 ;;;;
 ;;;; navigation
