@@ -3197,7 +3197,8 @@ using commands with prefix arguments."
 (add-to-list 'load-path "~/.emacs.d/elisp/multiple-cursors.el")
 
 (when (require 'multiple-cursors nil t)
-  (global-set-key (kbd "C-,") 'mc/mark-next-like-this))
+  (global-set-key (kbd "C-,") 'mc/mark-next-like-this)
+  (define-key org-mode-map (kbd "C-,") 'mc/mark-next-like-this))
 
 
 ;;;;
