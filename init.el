@@ -1767,6 +1767,16 @@ line options may be given in OPTIONS."
 
 
 ;;;;
+;;;; docker
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/dockerfile-mode")
+
+(when (require 'dockerfile-mode)
+    (add-to-list 'auto-mode-alist '("\\`Dockerfile\\'" . dockerfile-mode)))
+
+
+;;;;
 ;;;; ielm
 ;;;;
 
