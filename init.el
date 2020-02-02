@@ -2676,28 +2676,24 @@ using commands with prefix arguments."
 (setq org-html-head "
 <style type=\"text/css\">
     html {
-      font-family: /*'Droid Sans',*/ Verdana, Arial, sans-serif;
+      font-family: Verdana, Arial, sans-serif;
       font-size: 11pt;
-      /*max-width: 360pt;*/
     }
 
     body {
       margin: 10%;
     }
 
-    h1,h2,h3,h4,h5,h6 {
+    h1, h2, h3, h4, h5, h6 {
       color: #505050;
     }
 
-    /* TODO */
-    h2 {
-      margin-top: 1em;
+    h2, h3, h4 {
+      margin-top: 1.8em;
     }
 
     .title  {
-      text-align: center;
-    /*font-family: 'Droid Serif';
-      font-size: 49px;*/
+      text-align: left;
     }
 
     .todo   { color: red; }
@@ -2708,16 +2704,17 @@ using commands with prefix arguments."
     .timestamp { color: #bebebe; }
     .timestamp-kwd { color: #5f9ea0; }
 
-    .right  { margin-left:auto; margin-right:0px;  text-align:right; }
-    .left   { margin-left:0px;  margin-right:auto; text-align:left; }
-    .center { margin-left:auto; margin-right:auto; text-align:center; }
+    .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+    .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+    .center { margin-left: auto; margin-right: auto; text-align: center; }
 
     p.verse { margin-left: 3%; }
 
     pre {
       border: 1pt solid #AEBDCC;
       background-color: #F3F5F7;
-      padding: 5pt;
+      padding: 1em;
+      padding-bottom: 0px;
       font-family: courier, monospace;
       font-size: 90%;
       overflow:auto;
@@ -2727,7 +2724,10 @@ using commands with prefix arguments."
       border-collapse: collapse;
       margin-left: auto;
       margin-right: auto;
+      margin-top: 1.7em;
+      margin-bottom: 1em;
     }
+
     th { background: #eee; padding: 0.3em; }
     td, th { vertical-align: top; }
     th.right { text-align:center; }
@@ -2759,11 +2759,11 @@ using commands with prefix arguments."
 
     textarea { overflow-x: auto; }
 
-     a {
-       color: #0099cc;
-       text-decoration: none;
-     }
-     a:visited { color: #005c7a; }
+    a {
+      color: #0099cc;
+      text-decoration: none;
+    }
+    a:visited { color: #005c7a; }
 
     .linenr { font-size:smaller; }
     .code-highlighted { background-color:#ffff00; }
