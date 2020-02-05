@@ -1772,7 +1772,7 @@ line options may be given in OPTIONS."
 
 (add-to-list 'load-path "~/.emacs.d/elisp/dockerfile-mode")
 
-(when (require 'dockerfile-mode)
+(when (require 'dockerfile-mode nil t)
     (add-to-list 'auto-mode-alist '("\\`Dockerfile\\'" . dockerfile-mode)))
 
 
