@@ -1062,8 +1062,10 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 ;;;;
 
 (eval-when (compile load eval)
-  (add-to-list 'load-path
-    (car (file-expand-wildcards "/usr/local/lib/erlang/lib/tools-*/emacs"))))
+  (let ((erlang-path (car (file-expand-wildcards
+                           "/usr/local/lib/erlang/lib/tools-*/emacs"))))
+    (when erlang-path
+      (add-to-list 'load-path erlang-path))))
 
 (when (require 'erlang nil t)
   (add-to-list 'auto-mode-alist '("\\.erl\\'" . erlang-mode))
