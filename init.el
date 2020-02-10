@@ -2113,6 +2113,17 @@ using commands with prefix arguments."
 ;;;; session management
 ;;;;
 
+(loop for parameter in '(foreground-color
+                         background-color
+                         cursor-color
+                         cursor-type
+                         mouse-color
+                         menu-color
+                         font
+                         background-mode
+                         ns-appearance)
+      do (push (cons parameter :never) frameset-filter-alist))
+
 (desktop-save-mode 1)
 
 (setq history-length 250
@@ -3804,6 +3815,11 @@ it has been changed to be used from the menu bar specifically."
 
 
 (server-start)
+
+(setq-default custom-safe-themes
+  '("e9f5c74f31fee49c7d592e2e8f1f02a15bdda3833c74acd5cba7b2ab2364b904"
+    "540abc7ca9ee1078994c596a38c8f73cf1f88b698a6f5053334ed9496e3b2f7e"
+    default))
 
 (when (and (locate-file "zenburn-theme"
                         custom-theme-load-path
