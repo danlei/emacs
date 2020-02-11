@@ -2735,8 +2735,10 @@ using commands with prefix arguments."
 
     table {
       border-collapse: collapse;
-      margin-left: auto;
-      margin-right: auto;
+      /*margin-left: auto;
+      margin-right: auto;*/
+      margin-left: 3%;
+      margin-right: 3%;
       margin-top: 1.7em;
       margin-bottom: 1em;
     }
