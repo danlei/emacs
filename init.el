@@ -155,14 +155,27 @@ in case that file does not provide any feature."
 ;;;
 
 ;; cf. https://emacs.stackexchange.com/a/9952/20422
+;;     https://emacs.stackexchange.com/a/14299/20422
 
 (defun dhl-enable-comint-history (histfile)
   "Allow saving comint input history to HISTFILE.
 
 Enable saving input history to HISTFILE when `comint-write-input-ring`
-is called. Intended for use in mode hooks."
+is called. Intended for use in mode hooks.
+
+Additionally, save history to HISTFILE on process status change.
+(E.g. when the process quits.)"
   (setq comint-input-ring-file-name histfile)
-  (comint-read-input-ring 'silent))
+  (comint-read-input-ring 'silent)
+  (let ((process (get-buffer-process (current-buffer))))
+    (when process
+      (set-process-sentinel process
+        (lambda (process event)
+          (comint-write-input-ring)
+          (let ((buf (process-buffer process)))
+            (when (buffer-live-p buf)
+              (with-current-buffer buf
+                (insert (format "\nProcess %s %s" process event))))))))))
 
 (add-hook 'kill-buffer-hook 'comint-write-input-ring)
 (add-hook 'kill-emacs-hook
