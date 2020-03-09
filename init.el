@@ -1232,6 +1232,8 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (setq-default js-indent-level 2)
 
+(add-to-list 'auto-mode-alist '("\\.jsonl?\\'" . javascript-mode))
+
 (when (require 'js2-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
 
@@ -2473,7 +2475,7 @@ using commands with prefix arguments."
                        (name . "\\.\\(ttl\\|rdf\\)$")
                        (mode . ttl-mode)))
          ("javascript" (or (name . "\\.js$")
-                           (name . "\\.json$")
+                           (name . "\\.jsonl?$")
                            (mode . javascript-mode)
                            (mode . js2-mode)))
          ("coffeescript" (or (name . "\\.coffee$")
