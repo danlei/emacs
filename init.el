@@ -187,6 +187,15 @@ Additionally, save history to HISTFILE on process status change.
 
 
 ;;;;
+;;;; quickrun
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/quickrun")
+(when (require 'quickrun nil t)
+  (global-set-key (kbd "<s-return>") 'quickrun))
+
+
+;;;;
 ;;;; common lisp
 ;;;;
 
