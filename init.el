@@ -1982,6 +1982,8 @@ line options may be given in OPTIONS."
   (define-key ivy-switch-buffer-map (kbd "C-<tab>") 'ivy-next-line)
   (define-key ivy-switch-buffer-map (kbd "C-M-<tab>") 'ivy-previous-line))
 
+(setq ivy-re-builders-alist '((t . ivy--regex-ignore-order)))
+
 
 ;;;;
 ;;;; avy
