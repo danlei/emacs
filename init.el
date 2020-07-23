@@ -1242,7 +1242,7 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 (add-to-list 'auto-mode-alist '("\\.jsonl?\\'" . javascript-mode))
 
 (when (require 'js2-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
+  (add-to-list 'auto-mode-alist '("\\.js\\|\\.ts\\'" . js2-mode)))
 
 (setq-default js2-basic-offset 2)
 
@@ -2489,6 +2489,8 @@ using commands with prefix arguments."
                            (mode . js2-mode)))
          ("coffeescript" (or (name . "\\.coffee$")
                              (mode . coffee-mode)))
+         ("typescript" (or (name . "\\.ts$")
+                           (mode . typescript-mode)))
          ("rst" (or (name . "\\.rst$")
                     (mode . rst-mode)))
          ("assembler" (or (name . "\\.asm$")
