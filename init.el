@@ -1810,6 +1810,16 @@ line options may be given in OPTIONS."
 
 
 ;;;;
+;;;; yaml
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/yaml-mode")
+
+(when (require 'yaml-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode)))
+
+
+;;;;
 ;;;; ielm
 ;;;;
 
