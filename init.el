@@ -72,8 +72,8 @@ in case that file does not provide any feature."
 
 (when (require 'package nil t)
   (mapc (apply-partially 'add-to-list 'package-archives)
-        '(("marmalade" . "http://marmalade-repo.org/packages/")
-          ("melpa" . "http://melpa.milkbox.net/packages/")))
+        '(;("marmalade" . "https://marmalade-repo.org/packages/")
+          ("melpa" . "https://melpa.org/packages/")))
   (package-initialize)
   (setq package-enable-at-startup nil))
 
