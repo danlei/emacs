@@ -1557,7 +1557,7 @@ line options may be given in OPTIONS."
 
 
 ;;;;
-;;;; rest-client
+;;;; restclient
 ;;;;
 
 (add-to-list 'load-path "~/.emacs.d/elisp/restclient")
