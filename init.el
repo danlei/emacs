@@ -3626,6 +3626,7 @@ it has been changed to be used from the menu bar specifically."
                        ("C-c g" grep-find)
                        ("C-c G" find-grep-dired)
                        ("C-c DEL" kill-whole-line)
+                       (("M-^" "<M-dead-circumflex>") delete-indentation)
                        ("<wheel-right>" (lambda ()
                                           (interactive)
                                           (scroll-left 10)))
