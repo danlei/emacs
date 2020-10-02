@@ -3405,8 +3405,9 @@ using commands with prefix arguments."
       resize-mini-windows t
       comment-empty-lines nil
       set-mark-command-repeat-pop t
-      epa-file-cache-passphrase-for-symmetric-encryption t
-      epa-file-select-keys 'no
+      epa-file-cache-passphrase-for-symmetric-encryption nil
+      epa-file-select-keys nil
+      epa-pinentry-mode 'loopback
       gc-cons-threshold 20000000
       kill-ring-max 200
       split-width-threshold 200
