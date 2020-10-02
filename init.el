@@ -140,6 +140,9 @@ in case that file does not provide any feature."
 ;;;; comint
 ;;;;
 
+(unless (fboundp 'comint-write-input-ring)
+  (require 'comint))
+
 (setq comint-prompt-read-only t)
 
 (if (< emacs-major-version 25)            ; fixes strange comint-bol
