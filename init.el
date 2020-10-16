@@ -2712,6 +2712,7 @@ using commands with prefix arguments."
                                (php . t)
                                (restclient . t))) ; TODO: check if available
 
+(setq org-babel-python-command "python3")
 
 ;; TODO: fix note template
 (setq org-capture-templates
