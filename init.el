@@ -1774,7 +1774,8 @@ line options may be given in OPTIONS."
               (local-set-key (kbd "RET") 'newline)))
   (add-hook 'julia-mode-hook
             (lambda ()
-              (setq julia-basic-offset 2))))
+              (setq julia-basic-offset 2)))
+  (define-key inferior-julia-mode-map (kbd "C-a") 'comint-bol))
 
 (when (eq system-type 'windows-nt)
   (setq inferior-R-program-name
