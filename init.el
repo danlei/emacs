@@ -3387,6 +3387,7 @@ using commands with prefix arguments."
       scroll-conservatively 101
       scroll-margin 0
       isearch-allow-scroll nil
+;     search-default-mode #'char-fold-to-regexp        ; affects swiper, too
       require-final-newline nil
       ispell-personal-dictionary "~/.emacs.d/ispell"
       ispell-dictionary "german"
