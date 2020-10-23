@@ -3484,7 +3484,8 @@ using commands with prefix arguments."
         ))
 
 (setq diff-switches "-u"
-      ediff-window-setup-function 'ediff-setup-windows-plain)
+      ediff-window-setup-function 'ediff-setup-windows-plain
+      ediff-split-window-function 'split-window-horizontally)
 
 ;; (when (eq system-type 'gnu/linux)
 ;;   (setenv "PATH"
