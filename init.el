@@ -2645,15 +2645,27 @@ using commands with prefix arguments."
 (add-to-list 'load-path "~/.emacs.d/elisp/ox-jira")
 (require 'ox-jira nil t)
 
+(defun dhl-org-toggle-markup ()
+  "Toggle link and emphasis markup display in org-mode."
+  (interactive)
+  (setq org-hide-emphasis-markers (not org-hide-emphasis-markers))
+  (org-toggle-link-display)
+  (save-buffer)
+  (revert-buffer nil t))
+
 ;; TODO: right control binding
 (add-hook 'org-mode-hook
           (lambda ()
-            (local-set-key (kbd "<C-up>") 'org-shiftmetaup)
-            (local-set-key (kbd "<C-down>") 'org-shiftmetadown)
-            (local-set-key (kbd "<C-right>") 'org-shiftmetaright)
-            (local-set-key (kbd "<C-left>") 'org-shiftmetaleft)
-            (local-set-key (kbd "M-n") 'outline-next-visible-heading)
-            (local-set-key (kbd "M-p") 'outline-previous-visible-heading)
+            (loop for (key binding)
+                  on '("<C-up>" org-shiftmetaup
+                       "<C-down>" org-shiftmetadown
+                       "<C-right>" org-shiftmetaright
+                       "<C-left>" org-shiftmetaleft
+                       "M-n" outline-next-visible-heading
+                       "M-p" outline-previous-visible-heading
+                       "C-c m" dhl-org-toggle-markup)
+                  by #'cddr
+                  do (local-set-key (kbd key) binding))
             (if (featurep 'counsel)
                 (local-set-key (kbd "<C-tab>") 'counsel-switch-buffer))))
 
@@ -2661,6 +2673,7 @@ using commands with prefix arguments."
       org-special-ctrl-k t
       org-startup-indented t
       org-startup-folded nil
+      org-hide-emphasis-markers t
       org-return-follows-link t
       org-use-extra-keys nil
       org-use-speed-commands t
