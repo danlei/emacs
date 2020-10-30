@@ -580,8 +580,6 @@ Additionally, save history to HISTFILE on process status change.
 ;;   (set-face-foreground 'j-conjunction-face (face-foreground 'default))
 ;;   (set-face-foreground 'j-other-face (face-foreground 'default)))
 
-;; (add-to-list 'auto-mode-alist '("\\.ij[rstp]\\'" . j-mode))
-
 (setq j-console-cmd "~/build/j/j801/bin/jconsole"
       j-help-local-dictionary-url
       "file:///home/dhl/build/j/j801/addons/docs/help/dictionary/")
@@ -2453,7 +2451,7 @@ using commands with prefix arguments."
          ("shell" (or (name . "\\.\\(sh\\|bash\\)$")
                       (name . "^\\.zshrc$")
                       (name . "^\\.profile")
-                      (mode . shell-script-mode)))
+                      (mode . sh-mode)))
          ("tcl" (or (mode . tcl-mode)
                     (name . "\\.tcl$")))
          ("octave" (or (name . "\\.m$")
@@ -2462,6 +2460,8 @@ using commands with prefix arguments."
          ("julia" (name . "\\.jl$"))
          ("apl" (or (name . "\\.apl$")
                     (mode . gnu-apl-mode)))
+         ("j" (or (name . "\\.ij[rstp]$")
+                  (mode . j-mode)))
          ("maxima" (or (name . "\\.max$")
                        (mode . maxima-mode)))
          ("haskell" (or (name . "\\.hs$")
@@ -2491,6 +2491,8 @@ using commands with prefix arguments."
                      (mode . html-mode)
                      (mode . web-mode)))
          ("sgml" (name . "\\.dtd$"))
+         ("http" (or (name . "\\.http$")
+                     (mode . restclient-mode)))
          ("css" (or (name . "\\.css$")
                     (mode . css-mode)))
          ("semweb" (or (name . "\\.omn$")
