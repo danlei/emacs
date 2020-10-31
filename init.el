@@ -2038,7 +2038,8 @@ line options may be given in OPTIONS."
 
 (setq ido-use-filename-at-point 'guess ; 'ffap-guesser
       ido-use-url-at-point t
-      ido-auto-merge-work-directories-length -1)
+      ido-auto-merge-work-directories-length -1
+      ido-use-virtual-buffers t)
 
 
 ;; TODO: should I keep this? never use it.
@@ -3415,6 +3416,7 @@ using commands with prefix arguments."
       make-backup-files 1
       default-major-mode 'text-mode
       undo-limit 100000
+      recentf-max-saved-items 1000
       apropos-do-all 1
       extended-command-suggest-shorter t
       line-move-visual nil
@@ -3460,6 +3462,7 @@ using commands with prefix arguments."
 (auto-compression-mode 1)
 (auto-image-file-mode 1)
 (winner-mode 1)
+(recentf-mode 1)
 
 (add-hook 'write-file-hooks #'time-stamp)
 
