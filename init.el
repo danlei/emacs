@@ -1925,6 +1925,19 @@ line options may be given in OPTIONS."
 
 
 ;;;;
+;;;; vterm
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/emacs-libvterm")
+
+(when module-file-suffix
+  (require 'vterm nil t))
+
+(setq vterm-shell (getenv "SHELL")
+      vterm-max-scrollback 10000)
+
+
+;;;;
 ;;;; hippie-expansion
 ;;;;
 
