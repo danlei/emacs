@@ -194,11 +194,15 @@ Additionally, save history to HISTFILE on process status change.
 ;;;;
 
 (add-to-list 'load-path "~/.emacs.d/elisp/quickrun")
+
 (when (require 'quickrun nil t)
-  (global-set-key (kbd "<s-return>") (lambda ()
-                                       (interactive)
-                                       (save-buffer)
-                                       (quickrun)))
+  (global-set-key (kbd "<s-return>")
+                  (lambda (arg)
+                    (interactive "p")
+                    (save-buffer)
+                    (if (> arg 1)
+                        (call-interactively 'quickrun-with-arg)
+                      (quickrun))))
   (quickrun-add-command "m4"
     '((:command . "m4")
       (:exec    . ("%c %s")))
