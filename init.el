@@ -1976,6 +1976,7 @@ line options may be given in OPTIONS."
        ivy-height 15
        ivy-wrap t
        ivy-use-virtual-buffers t
+       counsel-org-goto-all-outline-path-prefix 'buffer-name
        counsel-ack-base-command "ack -S --nocolor --nogroup %s")
 
 (when (and (require 'ivy nil t)
