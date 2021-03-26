@@ -346,13 +346,15 @@ Additionally, save history to HISTFILE on process status change.
 ;;;;
 
 (mapc (lambda (library)
-        (add-to-list 'load-path (concat "~/.emacs.d/elisp/"
-                                        (symbol-name library))))
-      '(ht.el dash.el f.el s.el spinner.el markdown-mode lsp-mode lsp-ui))
+        (add-to-list 'load-path (concat "~/.emacs.d/elisp/" library)))
+      '("ht.el" "dash.el" "f.el" "s.el" "spinner.el" "markdown-mode"
+        "lsp-mode" "lsp-mode/clients" "lsp-ui" "hydra"))
 
 (when (and (require 'ht nil t)
            (require 'lsp-mode nil t)
-           (require 'lsp-ui nil t))
+           (require 'lsp-ui nil t)
+           (require 'lsp-modeline nil t)
+           (require 'lsp-headerline nil t))
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   (define-key lsp-mode-map (kbd "C-c C-d") 'lsp-describe-thing-at-point)
   (define-key lsp-mode-map (kbd "<s-mouse-1>")
@@ -381,7 +383,9 @@ Additionally, save history to HISTFILE on process status change.
       lsp-ui-peek-enable t
       lsp-ui-peek-list-width 60
       lsp-ui-peek-peek-height 25
-      lsp-file-watch-threshold 20000)
+      lsp-file-watch-threshold 20000
+      lsp-headerline-breadcrumb-enable nil
+      lsp-completion-provider :none)
 
 ;(setf (lsp--client-priority (gethash 'php-ls lsp-clients)) 3)
 
@@ -1200,6 +1204,19 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (setq groovy-indent-offset 2)
 
+;(setq lsp-groovy-server-install-dir "~/.emacs.d/elisp/groovy-language-server/build/libs/")
+
+(when (featurep 'lsp-mode)
+  (require 'lsp-groovy)
+  (setq lsp-groovy-server-file
+          "~/.emacs.d/elisp/groovy-language-server/build/libs/groovy-language-server-all.jar"
+        lsp-groovy-classpath
+          ["/usr/local/opt/groovy/libexec/lib"
+;          "/Users/dleidisch/.emacs.d/elisp/groovy-language-server/jars/job-dsl-core-1.77.jar"
+           "/Users/dleidisch/.emacs.d/elisp/groovy-language-server/jars"])
+  (add-hook 'groovy-mode-hook 'lsp)
+  (add-hook 'groovy-mode-hook (lambda () (flycheck-mode 1))))
+
 (add-hook 'inferior-groovy-mode-hook
           (lambda ()
 ;           (setq comint-prompt-regexp "^groovy:[^>]*> ")
@@ -1521,6 +1538,7 @@ line options may be given in OPTIONS."
   (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode)))
 
 (when (featurep 'lsp-mode)
+; (require 'lsp-php)
   (add-hook 'php-mode-hook 'lsp))
 
 (add-hook 'php-mode-hook
