@@ -3240,6 +3240,15 @@ using commands with prefix arguments."
   "Switch to the grep window after invocation."
   (other-window 1))
 
+(when (require 'ansi-color nil t)
+  (add-hook 'compilation-filter-hook
+            (lambda ()
+              (when (eq major-mode 'compilation-mode)
+                (toggle-read-only)
+                (ansi-color-apply-on-region compilation-filter-start
+                                            (point-max))
+                (toggle-read-only)))))
+
 
 ;;;;
 ;;;; wgrep
