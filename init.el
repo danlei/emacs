@@ -385,7 +385,9 @@ Additionally, save history to HISTFILE on process status change.
       lsp-ui-peek-peek-height 25
       lsp-file-watch-threshold 20000
       lsp-headerline-breadcrumb-enable nil
-      lsp-completion-provider :none)
+      lsp-completion-provider :none
+      lsp-modeline-diagnostics-enable nil
+      lsp-modeline-code-actions-enable nil)
 
 ;(setf (lsp--client-priority (gethash 'php-ls lsp-clients)) 3)
 
@@ -1177,10 +1179,24 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 
 ;;;;
+;;;; request
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/emacs-request")
+
+(require 'request nil t)
+
+
+;;;;
 ;;;; java
 ;;;;
 
-(add-to-list 'load-path "~/.emacs.d/elisp/javarun")
+(mapc (apply-partially 'add-to-list 'load-path)
+      '("~/.emacs.d/elisp/javarun"
+        "~/.emacs.d/elisp/lsp-java"
+        "~/.emacs.d/elisp/lsp-treemacs"
+        "~/.emacs.d/elisp/treemacs/src/elisp"
+        "~/.emacs.d/elisp/pfuture"))
 
 (when (require 'javarun nil t)
   (when (eq system-type 'windows-nt)
@@ -1189,6 +1205,14 @@ CLASS-NAME is queried in the minibuffer, defaulting to
             (lambda ()
               (javarun-mode 1)
               (subword-mode 1))))
+
+(when (require 'lsp-java nil t)
+  (add-hook 'java-mode-hook
+            (lambda ()
+              (lsp)
+              (flymake-mode 1)
+	      (local-set-key (kbd "M-p") 'flymake-goto-prev-error)
+	      (local-set-key (kbd "M-n") 'flymake-goto-next-error))))
 
 
 ;;;;
@@ -1596,15 +1620,6 @@ line options may be given in OPTIONS."
 (add-hook 'restclient-response-loaded-hook
           (lambda ()
             (local-set-key (kbd "z") 'dhl-kill-this-buffer)))
-
-
-;;;;
-;;;; request
-;;;;
-
-(add-to-list 'load-path "~/.emacs.d/elisp/emacs-request")
-
-(require 'request nil t)
 
 
 ;;;;
