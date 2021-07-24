@@ -353,6 +353,8 @@ Additionally, save history to HISTFILE on process status change.
       '("ht.el" "dash.el" "f.el" "s.el" "spinner.el" "markdown-mode"
         "lsp-mode" "lsp-mode/clients" "lsp-ui" "hydra"))
 
+;(setq lsp-prefer-flymake nil)
+
 (when (and (require 'ht nil t)
            (require 'lsp-mode nil t)
            (require 'lsp-ui nil t)
@@ -386,9 +388,11 @@ Additionally, save history to HISTFILE on process status change.
       lsp-ui-peek-enable t
       lsp-ui-peek-list-width 60
       lsp-ui-peek-peek-height 25
+      lsp-enable-on-type-formatting nil
       lsp-file-watch-threshold 20000
       lsp-headerline-breadcrumb-enable nil
       lsp-completion-provider :none
+      lsp-completion-enable-additional-text-edit nil
       lsp-modeline-diagnostics-enable nil
       lsp-modeline-code-actions-enable nil)
 
@@ -1199,7 +1203,8 @@ CLASS-NAME is queried in the minibuffer, defaulting to
         "~/.emacs.d/elisp/lsp-java"
         "~/.emacs.d/elisp/lsp-treemacs"
         "~/.emacs.d/elisp/treemacs/src/elisp"
-        "~/.emacs.d/elisp/pfuture"))
+        "~/.emacs.d/elisp/pfuture"
+        "~/.emacs.d/elisp/flycheck-java"))
 
 (when (require 'javarun nil t)
   (when (eq system-type 'windows-nt)
@@ -1209,13 +1214,29 @@ CLASS-NAME is queried in the minibuffer, defaulting to
               (javarun-mode 1)
               (subword-mode 1))))
 
+(defun dhl-lsp-java-tab ()
+  "Indent or complete."
+  (interactive)
+  (if (or (eq (preceding-char) ?\n)
+          (member (char-syntax (preceding-char))
+                  '(?\s ?\( ?\) ?\$ ?\< ?\>)))
+      (c-indent-line-or-region)
+    (complete-symbol nil)))
+
 (when (require 'lsp-java nil t)
+  (require 'lsp-java-boot nil t)
   (add-hook 'java-mode-hook
             (lambda ()
               (lsp)
               (flymake-mode 1)
-	      (local-set-key (kbd "M-p") 'flymake-goto-prev-error)
-	      (local-set-key (kbd "M-n") 'flymake-goto-next-error))))
+              (lsp-modeline-diagnostics-mode -1)
+              (local-set-key (kbd "M-p") 'flymake-goto-prev-error)
+	            (local-set-key (kbd "M-n") 'flymake-goto-next-error)
+              (local-set-key (kbd "TAB") 'dhl-lsp-java-tab))))
+
+;; (when (require 'flycheck-java nil t)
+;;   (setq flycheck-java-ecj-jar-path (expand-file-name "~/.emacs.d/ecj-4.20.jar")
+;;         lsp-prefer-flymake nil))
 
 
 ;;;;
