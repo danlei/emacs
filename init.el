@@ -1877,7 +1877,13 @@ line options may be given in OPTIONS."
 (add-to-list 'load-path "~/.emacs.d/elisp/markdown-mode")
 
 (when (require 'markdown-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+  (setq markdown-fontify-code-blocks-natively t)
+  (define-key markdown-mode-map (kbd "C-c m")
+    (lambda ()
+      (interactive)
+      (markdown-toggle-inline-images)
+      (markdown-toggle-markup-hiding 'toggle))))
 
 
 ;;;;
