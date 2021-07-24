@@ -1571,6 +1571,7 @@ line options may be given in OPTIONS."
 (when (require 'web-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 ; (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
   )
 
 (setq web-mode-markup-indent-offset 2
@@ -1591,7 +1592,8 @@ line options may be given in OPTIONS."
           (lambda ()
             (subword-mode 1)
             (c-set-offset 'case-label '+)
-            (c-toggle-electric-state -1)))
+            (c-toggle-electric-state -1)
+            (local-set-key (kbd "C-c /") 'web-mode-element-close)))
 
 (require 'rainbow-mode nil t)
 
