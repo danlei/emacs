@@ -2062,8 +2062,7 @@ line options may be given in OPTIONS."
       (counsel-git-grep)
     (error (counsel-ag))))
 
- (setq projectile-completion-system 'ivy
-       ivy-height 15
+ (setq ivy-height 15
        ivy-wrap t
        ivy-use-virtual-buffers t
        counsel-org-goto-all-outline-path-prefix 'buffer-name
