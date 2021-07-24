@@ -3330,6 +3330,9 @@ using commands with prefix arguments."
                                             (point-max))
                 (toggle-read-only)))))
 
+(add-hook 'compilation-mode-hook (lambda () (toggle-truncate-lines 1)))
+
+
 
 ;;;;
 ;;;; wgrep
