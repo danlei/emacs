@@ -2261,6 +2261,16 @@ using commands with prefix arguments."
                              '(("M-n" next-error)
                                ("M-p" previous-error)))))
 
+;;;;
+;;;; flymake
+;;;;
+
+(setq flymake-no-changes-timeout nil
+      flymake-proc-compilation-prevents-syntax-check nil)
+
+;; fix tinyurl.com/bug-46203-28-0-50
+(setq temporary-file-directory (file-truename temporary-file-directory))
+
 
 ;;;;
 ;;;; session management
