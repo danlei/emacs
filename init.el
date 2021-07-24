@@ -206,7 +206,10 @@ Additionally, save history to HISTFILE on process status change.
   (quickrun-add-command "m4"
     '((:command . "m4")
       (:exec    . ("%c %s")))
-    :mode 'm4-mode))
+    :mode 'm4-mode)
+  (quickrun-add-command "scala"
+    '((:command . "scala")
+      (:description . "Run Scala file with scala command"))))
 
 
 ;;;;
@@ -1245,6 +1248,16 @@ CLASS-NAME is queried in the minibuffer, defaulting to
           (lambda ()
 ;           (setq comint-prompt-regexp "^groovy:[^>]*> ")
             (local-set-key (kbd "C-a") 'comint-bol)))
+
+
+;;;;
+;;;; scala
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/emacs-scala-mode")
+
+(when (require 'scala-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.scala\\'" . scala-mode)))
 
 
 ;;;;
