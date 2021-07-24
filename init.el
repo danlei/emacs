@@ -1272,6 +1272,21 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 
 ;;;;
+;;;; kotlin
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/kotlin-mode")
+
+(setq kotlin-tab-width 2)
+
+(when (require 'kotlin-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.kt\\'" . kotlin-mode))
+  (defadvice kotlin-repl
+      (after dhl-kotlin-buffer-process-echoes last () activate)
+    (setq comint-process-echoes t)))
+
+
+;;;;
 ;;;; scala
 ;;;;
 
