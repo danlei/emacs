@@ -3765,6 +3765,14 @@ it has been changed to be used from the menu bar specifically."
            ,@body
          (message "%f" (- (float-time) ,start))))))
 
+;; cf. https://emacs.stackexchange.com/a/47898/20422
+(defun dhl-expand-sexp ()
+  "Evaluate preceding sexp and replace it with the result."
+  (interactive)
+  (let ((value (eval (elisp--preceding-sexp))))
+    (backward-kill-sexp)
+    (insert (format "%S" value))))
+
 
 ;;;;
 ;;;; misc advice
