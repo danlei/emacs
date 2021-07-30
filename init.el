@@ -97,15 +97,27 @@ in case that file does not provide any feature."
           "~/.emacs.d/themes/zenburn-emacs/")))
 
 (defun dhl-toggle-theme ()
+  "Toggle between light and dark color theme."
   (interactive)
+  (when (eq system-type 'darwin)
+    (set-frame-parameter nil 'ns-transparent-titlebar nil))
   (pcase custom-enabled-themes
     ('(tango-dhl) (disable-theme 'tango-dhl)
-                  (load-theme 'zenburn))
+     (load-theme 'zenburn)
+     (when (eq system-type 'darwin)
+       (set-frame-parameter nil 'ns-appearance 'dark))                  )
     ('(zenburn) (disable-theme 'zenburn)
-                (load-theme 'tango-dhl))
+     (load-theme 'tango-dhl)
+     (when (eq system-type 'darwin)
+       (set-frame-parameter nil 'ns-appearance 'light)))
     ('() (if (< 6 (string-to-number (format-time-string "%H")) 19)
-             (load-theme 'tango-dhl)
-           (load-theme 'zenburn)))))
+             (progn
+               (load-theme 'tango-dhl)
+               (when (eq system-type 'darwin)
+                 (set-frame-parameter nil 'ns-appearance 'light)))
+           (load-theme 'zenburn)
+           (when (eq system-type 'darwin)
+             (set-frame-parameter nil 'ns-appearance 'dark))))))
 
 
 ;;;;
