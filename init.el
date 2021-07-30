@@ -2030,6 +2030,29 @@ line options may be given in OPTIONS."
 (setq vterm-shell (getenv "SHELL")
       vterm-max-scrollback 10000)
 
+(defun dhl-vterm-send-return ()
+  "Send `C-m' to the libvterm."
+  (interactive)
+  (process-send-string vterm--process "\C-m"))
+
+;; prevent C-j send and down-hist behavior
+(define-key vterm-mode-map (kbd "<return>") 'dhl-vterm-send-return)
+
+(defun dhl-vterm-send-M-RET ()
+  "Send `ESC RET' to the libvterm."
+  (interactive)
+  (process-send-string vterm--process ""))
+
+(define-key vterm-mode-map (kbd "M-RET") 'dhl-vterm-send-M-RET)
+
+(vterm-define-key "M-/")
+(define-key vterm-mode-map (kbd "M-/") 'vterm-send-M-/)
+
+(vterm-define-key "C-M-r")
+(define-key vterm-mode-map (kbd "C-M-r") 'vterm-send-C-M-r)
+
+(define-key vterm-mode-map (kbd "C-u") 'vterm-send-C-u)
+
 
 ;;;;
 ;;;; hippie-expansion
