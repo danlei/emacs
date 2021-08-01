@@ -945,101 +945,73 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 
 (add-to-list 'load-path "~/.emacs.d/elisp/haskell-mode")
 
-(and (require 'haskell-mode nil t)
-     (require 'inf-haskell nil t)
-     (require 'haskell-indent nil t))
+(when (every (lambda (mode) (require mode nil t))
+             '(haskell-mode
+               haskell-interactive-mode
+               haskell-decl-scan
+               haskell-indent
+               haskell-doc
+               haskell-hoogle))
+  (add-hook 'haskell-mode-hook
+            (lambda ()
+              (interactive-haskell-mode 1)
+              (haskell-decl-scan-mode 1)
+              (dhl-define-keys haskell-mode-map
+                '(("RET" newline)
+                  ("TAB" haskell-indent-cycle)
+                  ("C-c =" haskell-indent-insert-equal)
+                  ("C-c |" haskell-indent-insert-guard)
+                  ("C-c o" haskell-indent-insert-otherwise)
+                  ("C-c w" haskell-indent-insert-where)
+                  ("C-c ." haskell-indent-align-guards-and-rhs)
+                  ("C-c h" haskell-hoogle)
+                  ("C-c C-c" haskell-compile)
+                  ("M-p" previous-error)
+                  ("M-n" next-error)))))
+  (add-hook 'interactive-haskell-mode-hook
+            (lambda ()
+              (dhl-define-keys interactive-haskell-mode-map
+                '(("C-c h" haskell-hoogle)
+                  ("C-c C-c" haskell-compile)
+                  ("M-." haskell-mode-goto-loc)
+                  ("C-c C-t" haskell-mode-show-type-at)))
+              (haskell-doc-mode 1)))
+  (add-hook 'haskell-interactive-mode-hook
+            (lambda ()
+              (dhl-define-keys haskell-interactive-mode-map
+                '(("C-c h" haskell-hoogle)))
+              (haskell-doc-mode 1)))
+  (add-hook 'inferior-haskell-mode-hook
+            (lambda ()
+              (local-set-key (kbd "C-c h") 'haskell-hoogle)
+              (haskell-doc-mode 1))))
+
+(setq haskell-font-lock-symbols 'unicode
+      haskell-hoogle-command "hoogle"
+      haskell-process-suggest-hoogle-imports t
+      haskell-process-suggest-remove-import-lines t
+      haskell-process-auto-import-loaded-modules t)
 
 (require 'ghc-core nil t)
 
-(setq haskell-program-name (concat "ghci "
-;                                   "-fglasgow-exts "
-;                                   "-XNoMonomorphismRestriction "
-;                                   "-XTupleSections "
-                                   ))
+;; (setq haskell-process-args-ghci
+;;       (append haskell-process-args-ghci
+;;               '("-fglasgow-exts"
+;;                 "-XNoMonomorphismRestriction"
+;;                 "-XTupleSections")))
 
-;(setq inferior-haskell-find-project-root nil)
-
-(setq haskell-font-lock-symbols 'unicode)
-
-(add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
-(add-to-list 'auto-mode-alist '("\\.lhs\\'" . literal-haskell-mode))
-
-;; TODO:
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
-
-(setq haskell-hoogle-command "hoogle")
-
-(add-hook 'inferior-haskell-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c h") 'haskell-hoogle)
-;           (turn-on-haskell-doc-mode 1)
-            ))
-
-(add-hook
- 'haskell-mode-hook
- (lambda ()
-   (dhl-define-keys haskell-mode-map
-                    '(("RET" newline)
-                      ("TAB" haskell-indent-cycle)
-                      ("C-c =" haskell-indent-insert-equal)
-                      ("C-c |" haskell-indent-insert-guard)
-                      ("C-c o" haskell-indent-insert-otherwise)
-                      ("C-c w" haskell-indent-insert-where)
-                      ("C-c ." haskell-indent-align-guards-and-rhs)
-;                     ("C-c h" haskell-hoogle)
-;                     ("C-c t" inferior-haskell-type)
-                      ("C-c i" inferior-haskell-info)
-                      ("M-." inferior-haskell-find-definition)))))
-
-(when (eq system-type 'cygwin)
-  (defadvice inferior-haskell-load-file
-      (around dhl-inferior-haskell-load-file-cygwin-fix)
-    "Fix `inferior-haskell-load-file' for Win Haskell/Cygwin Emacs."
-    (save-buffer)
-    (let ((buffer-file-name (concat "c:/cygwin" buffer-file-name)))
-      ad-do-it))
-  (ad-activate 'inferior-haskell-load-file))
-
-
-;;;
-;;; ghc-mod
-;;;
-
-;; (add-to-list 'load-path "~/.emacs.d/elisp/ghc-mod")
-
-;; (setq ghc-completion-key (kbd "<C-tab>")
-;;       ghc-document-key (kbd "C-c d")
-;;       ghc-import-key (kbd "C-c m")
-;;       ghc-previous-key (kbd "M-p")
-;;       ghc-next-key (kbd "M-n")
-;;       ghc-help-key (kbd "C-c h")
-;;       ghc-insert-key (kbd "C-c t")
-;;       ghc-sort-key (kbd "C-c s")
-;;       ghc-check-key (kbd "C-x C-s")
-;;       ghc-toggle-key (kbd "C-c C-c"))
-
-;; (autoload 'ghc-init "ghc" nil t)
-
-;; (when (require 'ghc nil t)
+;; (when (require 'haskell-unicode-input-method nil t)
 ;;   (add-hook 'haskell-mode-hook
-;;             (lambda ()
-;;               (ghc-init))))
+;;             (lambda () (haskell-unicode-input-method-enable))))
 
-;; (defadvice ghc-init
-;;     (before dhl-ghc-mod-local-completion first () activate)
-;;   "Make `ghc-mod' completions buffer local."
-;;   (make-local-variable 'ghc-loaded-module)
-;;   (make-local-variable 'ghc-merged-keyword))
-
-;; (defadvice ghc-import-module
-;;     (before dhl-ghc-mod-reset-modules first () activate)
-;;   "Make `ghc-import-module' recognize dropped imports."
-;;   (setq ghc-loaded-module nil)
-;;   (ghc-comp-init))
+;; (when (eq system-type 'cygwin)
+;;   (defadvice inferior-haskell-load-file
+;;       (around dhl-inferior-haskell-load-file-cygwin-fix)
+;;     "Fix `inferior-haskell-load-file' for Win Haskell/Cygwin Emacs."
+;;     (save-buffer)
+;;     (let ((buffer-file-name (concat "c:/cygwin" buffer-file-name)))
+;;       ad-do-it))
+;;   (ad-activate 'inferior-haskell-load-file))
 
 
 ;;;;
