@@ -3780,6 +3780,7 @@ it has been changed to be used from the menu bar specifically."
                        ("C-c c" org-capture)
                        ("C-c a" org-agenda)
                        ("C-c t" todotxt)
+                       ("s-t" vterm)
                        ("C-x RET i" set-input-method)
                        ("M-#" quick-calc)
                        ("C-c j" dired-jump)
