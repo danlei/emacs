@@ -2098,7 +2098,8 @@ line options may be given in OPTIONS."
              "C-h C-S-l" counsel-find-library
              "C-h M" counsel-descbinds
              "C-x r B" counsel-bookmark
-             "C-x ESC ESC" counsel-command-history)
+             "C-x ESC ESC" counsel-command-history
+             "C-c e" dhl-expand-sexp)
         by #'cddr
         do (global-set-key (kbd key) binding))
   (define-key ivy-minibuffer-map (kbd "C-c o") 'ivy-occur)
