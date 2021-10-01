@@ -3415,7 +3415,12 @@ using commands with prefix arguments."
     (global-hl-line-mode 1)
   (beacon-mode 1)
   (add-to-list 'beacon-dont-blink-commands 'mwheel-scroll)
-  (global-set-key (kbd "C-c b") 'beacon-blink))
+  (global-set-key (kbd "C-c b") 'beacon-blink)
+  (global-set-key (kbd "s-b") 'beacon-blink))
+
+;; try to fix weird cursor issues on mac os
+;; (when (eq system-type 'darwin)
+;;   (add-to-list 'default-frame-alist '(inhibit-double-buffering . t)))
 
 
 ;;;
