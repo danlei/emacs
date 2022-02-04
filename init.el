@@ -2037,6 +2037,8 @@ line options may be given in OPTIONS."
 
 (define-key vterm-mode-map (kbd "C-u") 'vterm-send-C-u)
 
+(define-key vterm-mode-map (kbd "C-x g") 'magit-status)
+
 
 ;;;;
 ;;;; hippie-expansion
