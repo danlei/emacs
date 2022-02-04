@@ -2838,7 +2838,8 @@ using commands with prefix arguments."
       org-latex-table-caption-above nil
       org-goto-interface 'outline-path-completion ; 'outline
       org-goto-max-level 10
-      org-outline-path-complete-in-steps nil)
+      org-outline-path-complete-in-steps nil
+      org-image-actual-width nil)
 
 (setq org-src-fontify-natively t
       org-src-preserve-indentation t
