@@ -105,7 +105,7 @@ in case that file does not provide any feature."
     ('(tango-dhl) (disable-theme 'tango-dhl)
      (load-theme 'zenburn)
      (when (eq system-type 'darwin)
-       (set-frame-parameter nil 'ns-appearance 'dark))                  )
+       (set-frame-parameter nil 'ns-appearance 'dark)))
     ('(zenburn) (disable-theme 'zenburn)
      (load-theme 'tango-dhl)
      (when (eq system-type 'darwin)
