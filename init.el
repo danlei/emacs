@@ -2760,6 +2760,8 @@ using commands with prefix arguments."
 (require 'org-table nil t)
 (require 'ox-bibtex nil t)
 
+(require 'org-mouse nil t)
+
 (add-to-list 'load-path "~/.emacs.d/elisp/htmlize")
 (require 'htmlize nil t)
 
