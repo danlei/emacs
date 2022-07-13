@@ -1869,6 +1869,12 @@ line options may be given in OPTIONS."
       (markdown-toggle-inline-images)
       (markdown-toggle-markup-hiding 'toggle))))
 
+(setq markdown-css-paths
+  `(,(expand-file-name "~/.emacs.d/modest/css/modest.css")
+    "./index.css"))
+
+(setq markdown-command "pandoc")
+
 
 ;;;;
 ;;;; tf
