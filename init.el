@@ -1669,6 +1669,26 @@ line options may be given in OPTIONS."
 
 
 ;;;;
+;;;; chatgpt
+;;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/chatgpt-shell")
+
+(require 'chatgpt-shell nil t)
+(require 'dall-e-shell nil t)
+
+(setq chatgpt-shell-openai-key
+        (auth-source-pick-first-password :host "api.openai.com")
+      chatgpt-shell-model-version "gpt-3.5-turbo"
+      chatgpt-shell-transmitted-context-length 4000
+      chatgpt-shell-system-prompt
+        "Always show code snippets in markdown blocks with language labels."
+      dall-e-shell-openai-key chatgpt-shell-openai-key
+      dall-e-shell-image-size "512x512"
+      dall-e-shell-image-output-directory "~/Bilder/dall-e/")
+
+
+;;;;
 ;;;; sql
 ;;;;
 
