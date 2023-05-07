@@ -201,6 +201,16 @@ Additionally, save history to HISTFILE on process status change.
                     (buffer-list))))
 
 
+;;;
+;;; line breaks at fill-column
+;;;
+
+(add-to-list 'load-path "~/.emacs.d/elisp/visual-fill-column")
+
+(when (require 'visual-fill-column nil t)
+  (add-hook 'visual-line-mode-hook 'visual-fill-column-mode))
+
+
 ;;;;
 ;;;; quickrun
 ;;;;
