@@ -1228,9 +1228,10 @@ CLASS-NAME is queried in the minibuffer, defaulting to
 	            (local-set-key (kbd "M-n") 'flymake-goto-next-error)
               (local-set-key (kbd "TAB") 'dhl-lsp-java-tab))))
 
-;; (when (require 'flycheck-java nil t)
-;;   (setq flycheck-java-ecj-jar-path (expand-file-name "~/.emacs.d/ecj-4.20.jar")
-;;         lsp-prefer-flymake nil))
+(when (and (require 'flycheck-mode nil t)
+	         (require 'flycheck-java nil t))
+  (setq flycheck-java-ecj-jar-path (expand-file-name "~/.emacs.d/ecj-4.20.jar")
+        lsp-prefer-flymake nil))
 
 
 ;;;;
