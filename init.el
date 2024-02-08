@@ -2833,7 +2833,10 @@ using commands with prefix arguments."
                        "<C-right>" org-shiftmetaright
                        "<C-left>" org-shiftmetaleft
                        "M-n" outline-next-visible-heading
+                       "C-M-n" org-forward-heading-same-level
                        "M-p" outline-previous-visible-heading
+                       "C-M-p" org-backward-heading-same-level
+                       "C-M-u" outline-up-heading
                        "C-c m" dhl-org-toggle-markup)
                   by #'cddr
                   do (local-set-key (kbd key) binding))
